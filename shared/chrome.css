@@ -117,7 +117,7 @@ img { max-width: 100%; display: block; }
 .nav-toggle .x { display: none; }
 .nav.is-open .nav-toggle .ham { display: none; }
 .nav.is-open .nav-toggle .x { display: block; }
-.nav-mobile-aux { display: none; }
+a.nav-mobile-aux, .nav-item.nav-mobile-aux { display: none; }
 
 @media (max-width: 1024px) {
   .container { padding: 0 24px; }
@@ -134,7 +134,7 @@ img { max-width: 100%; display: block; }
   .nav.is-open .nav-center { display: flex; }
   .nav-cta { gap: 8px; margin-left: 0; }
   .nav-cta .btn-ghost { display: none; }
-  .nav-mobile-aux { display: block; width: 100%; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--border-subtle); }
+  a.nav-mobile-aux, .nav-item.nav-mobile-aux { display: block; width: 100%; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--border-subtle); }
   .nav-mobile-aux > button { width: 100%; text-align: left; padding: 12px 14px; font-size: 15px; border-radius: 8px; background: none; border: 0; color: var(--fg-2); font-family: inherit; cursor: pointer; }
   .nav-mobile-aux > button:hover { background: var(--ink-25); color: var(--fg-1); }
   .nav-item, a.nav-item { width: 100%; }
