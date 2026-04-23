@@ -71,6 +71,10 @@
   <div class="nav-cta">
     <a class="btn btn-ghost" href="${P}company/sign-in.html">Sign in</a>
     <a class="btn btn-brand btn-arrow" href="${P}company/contact.html">Talk to sales</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <svg class="ham" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+    </button>
   </div>
 </div></nav>`;
 
@@ -130,19 +134,64 @@
   </div>
 </div></footer>`;
 
-  // Inject
+  // Inject (only when an existing inline nav isn't already present)
   const navMount = document.querySelector('[data-nav-mount]');
   if (navMount) navMount.outerHTML = nav;
-  else document.body.insertAdjacentHTML('afterbegin', nav);
+  else if (!document.querySelector('.nav')) document.body.insertAdjacentHTML('afterbegin', nav);
 
   const footerMount = document.querySelector('[data-footer-mount]');
   if (footerMount) footerMount.outerHTML = footer;
-  else document.body.insertAdjacentHTML('beforeend', footer);
+  else if (!document.querySelector('.footer')) document.body.insertAdjacentHTML('beforeend', footer);
 
-  // Mega-menu hover behavior
+  // For inline navs (no data-nav-mount), inject a hamburger button if missing
+  document.querySelectorAll('.nav .nav-cta').forEach(cta => {
+    if (cta.querySelector('.nav-toggle')) return;
+    cta.insertAdjacentHTML('beforeend', `<button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <svg class="ham" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+    </button>`);
+  });
+
+  // Mega-menu: hover on desktop, tap on mobile
+  const isCoarse = () => window.matchMedia('(hover: none), (max-width: 1024px)').matches;
   document.querySelectorAll('.nav-item[data-mega]').forEach(i => {
     let t;
-    i.addEventListener('mouseenter', () => { clearTimeout(t); i.classList.add('open'); });
-    i.addEventListener('mouseleave', () => { t = setTimeout(() => i.classList.remove('open'), 120); });
+    i.addEventListener('mouseenter', () => { if (!isCoarse()) { clearTimeout(t); i.classList.add('open'); } });
+    i.addEventListener('mouseleave', () => { if (!isCoarse()) { t = setTimeout(() => i.classList.remove('open'), 120); } });
+    const btn = i.querySelector(':scope > button');
+    if (btn) btn.addEventListener('click', e => {
+      if (isCoarse()) {
+        e.preventDefault(); e.stopPropagation();
+        i.parentElement.querySelectorAll('.nav-item.open').forEach(o => { if (o !== i) o.classList.remove('open'); });
+        i.classList.toggle('open');
+      }
+    });
   });
+
+  // Mobile drawer toggle
+  const navEl = document.querySelector('.nav');
+  const tog = navEl && navEl.querySelector('.nav-toggle');
+  if (tog) {
+    tog.addEventListener('click', () => {
+      const open = navEl.classList.toggle('is-open');
+      tog.setAttribute('aria-expanded', String(open));
+      if (!open) navEl.querySelectorAll('.nav-item.open').forEach(o => o.classList.remove('open'));
+    });
+    // Close drawer when a leaf link is tapped
+    navEl.querySelectorAll('.nav-center a[href]').forEach(a => {
+      a.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 1024px)').matches) {
+          navEl.classList.remove('is-open');
+          tog.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+    // Close on resize back to desktop
+    window.addEventListener('resize', () => {
+      if (!window.matchMedia('(max-width: 1024px)').matches) {
+        navEl.classList.remove('is-open');
+        tog.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 })();

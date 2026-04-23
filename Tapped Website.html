@@ -408,15 +408,134 @@
 
   /* responsive */
   @media (max-width: 1024px) {
+    .container { padding: 0 24px; }
+    .hero { padding: 80px 0 64px; }
     .hero-grid, .how-grid, .econ-grid, .quote-grid, .faq-grid, .vert-panel.active { grid-template-columns: 1fr; gap: 40px; }
-    .hero h1 { font-size: 43px; }
-    .nav-center { display: none; }
+    .hero h1 { font-size: 44px; }
+    .hero p.sub { font-size: 17px; }
     .feat-grid, .why-grid, .price-grid, .cov-grid { grid-template-columns: 1fr 1fr; }
     .logos-row { flex-wrap: wrap; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     .cta-card { padding: 48px 28px; }
     .cta-card h2 { font-size: 36px; }
+    .verticals, .why, .onboard, .how, .products, .econ, .coverage, .quote, .pricing, .faq, .cta { padding: 80px 0; }
+    .vert-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .vp-stats, .quote-stats { grid-template-columns: 1fr 1fr; }
+    .price-card.feat { transform: none; }
+    .code-panel { position: static; }
+    .onboard-grid { grid-template-columns: 1fr; gap: 40px; }
+    .onboard-features { grid-template-columns: 1fr; }
+    .calc { padding: 24px; }
+    .footer { padding: 64px 0 28px; }
   }
+  @media (max-width: 640px) {
+    .container { padding: 0 16px; }
+    html { scroll-padding-top: 72px; }
+    .hero { padding: 56px 0 40px; }
+    .hero-eyebrow { font-size: 10px; padding: 5px 10px; }
+    .hero h1 { font-size: 32px; line-height: 1.08; }
+    .hero p.sub { font-size: 16px; margin-bottom: 28px; }
+    .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 28px; }
+    .hero-cta .btn { justify-content: center; width: 100%; }
+    .hero-meta { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .hero-card .hc-stat .v { font-size: 26px; }
+    .hero-card .hc-tape { max-height: 140px; }
+    .hero-card .hc-foot { font-size: 9px; }
+    .hc-head { padding: 14px 16px; }
+    .hc-body { padding: 16px; }
+    .verticals, .why, .onboard, .how, .products, .econ, .coverage, .quote, .pricing, .faq, .cta { padding: 64px 0; }
+    .section-head { margin-bottom: 36px; }
+    .section-head h2 { font-size: 28px; line-height: 1.12; }
+    .section-head p { font-size: 16px; }
+    .vert-tab { font-size: 12px; padding: 9px 12px; }
+    .vp-copy h3 { font-size: 24px; }
+    .vp-stats { grid-template-columns: 1fr; gap: 16px; padding: 16px 0; }
+    .vp-stat .vn { font-size: 22px; }
+    .vpm-bar .url { font-size: 10px; }
+    .why-grid, .feat-grid, .cov-grid { grid-template-columns: 1fr; }
+    .why-card { padding: 22px; }
+    .onboard-viz { padding: 22px; }
+    .ob-platform-row, .ob-engine-steps, .ob-profiles { grid-template-columns: 1fr 1fr; }
+    .ob-engine { padding: 14px; }
+    .step { padding: 16px; }
+    .step h4 { font-size: 17px; }
+    .step p { margin-left: 0; font-size: 13.5px; }
+    .step-head { gap: 10px; }
+    .code-panel pre { padding: 16px; font-size: 11.5px; min-height: auto; }
+    .code-tabs button { padding: 12px 12px; font-size: 10px; }
+    .product-card { padding: 22px 20px 20px; min-height: 0; }
+    .product-card h3 { font-size: 19px; }
+    .econ h2 { font-size: 30px; }
+    .econ p.lead { font-size: 16px; }
+    .calc { padding: 20px; }
+    .calc-line.big .vv { font-size: 24px; }
+    .quote { padding: 64px 0; }
+    .quote blockquote { font-size: 22px; }
+    .quote-stats { grid-template-columns: 1fr 1fr; padding: 22px; gap: 14px; }
+    .qs .vn { font-size: 26px; }
+    .price-grid { grid-template-columns: 1fr; gap: 16px; }
+    .price-card { padding: 26px 22px; }
+    .price-card.feat { transform: none; }
+    .price-num { font-size: 36px; }
+    .addon-strip { grid-template-columns: 1fr; text-align: left; gap: 14px; padding: 20px; }
+    .addon-price { align-items: flex-start; min-width: 0; }
+    .pf-hero-num { font-size: 32px; }
+    .faq-grid { grid-template-columns: 1fr; gap: 28px; }
+    .faq-q { font-size: 15px; padding: 16px 0; gap: 12px; }
+    .faq-q .plus { width: 22px; height: 22px; font-size: 14px; }
+    .cta { padding: 64px 0; }
+    .cta-card { padding: 40px 22px; border-radius: 18px; }
+    .cta-card h2 { font-size: 28px; }
+    .cta-card p { font-size: 16px; }
+    .cta-row { flex-direction: column; gap: 10px; }
+    .cta-row .btn { width: 100%; justify-content: center; }
+    .footer { padding: 48px 0 28px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .logos { padding: 36px 0; }
+    .logos-row { gap: 8px; }
+    .logo-cell { padding: 8px 12px; }
+  }
+</style>
+<style>
+/* ---- Mobile nav (injected for inline-nav pages) ---- */
+.nav-toggle { display: none; background: transparent; border: 1px solid var(--border); width: 40px; height: 40px; border-radius: 8px; color: var(--fg-1); align-items: center; justify-content: center; cursor: pointer; padding: 0; transition: background 140ms; }
+.nav-toggle:hover { background: var(--ink-25); }
+.nav-toggle svg { width: 20px; height: 20px; display: block; }
+.nav-toggle .x { display: none; }
+.nav.is-open .nav-toggle .ham { display: none; }
+.nav.is-open .nav-toggle .x { display: block; }
+@media (max-width: 1024px) {
+  .nav-inner { position: relative; flex-wrap: wrap; gap: 12px; }
+  .nav-toggle { display: inline-flex; }
+  .nav-center {
+    display: none; order: 3; flex-basis: 100%;
+    flex-direction: column; align-items: stretch; gap: 4px;
+    padding: 12px 0 16px; margin-top: 8px;
+    border-top: 1px solid var(--border-subtle);
+    max-height: calc(100vh - 140px); overflow-y: auto;
+  }
+  .nav.is-open .nav-center { display: flex; }
+  .nav-cta { gap: 8px; }
+  .nav-cta .btn-ghost { display: inline-flex; }
+  .nav-item, a.nav-item { width: 100%; }
+  .nav-item > button { width: 100%; justify-content: space-between; text-align: left; padding: 12px 14px; font-size: 15px; border-radius: 8px; }
+  .nav-item > button:hover { background: var(--ink-25); color: var(--fg-1); }
+  .nav-mega {
+    position: static; transform: none; min-width: 0; width: 100%;
+    box-shadow: none; border: none; background: var(--ink-25);
+    border-radius: 8px; padding: 6px; margin: 0 0 4px;
+    grid-template-columns: 1fr;
+    opacity: 0; visibility: hidden; max-height: 0; overflow: hidden;
+    transition: opacity 180ms, max-height 240ms;
+  }
+  .nav-item.open .nav-mega { opacity: 1; visibility: visible; max-height: 1000px; }
+}
+@media (max-width: 640px) {
+  .nav-cta .btn { font-size: 13px; padding: 8px 12px; }
+  .nav-cta .btn-brand { padding: 9px 14px; }
+}
+@media (max-width: 380px) { .nav-cta .btn-ghost { display: none; } }
 </style>
 </head>
 <body>
@@ -1331,12 +1450,8 @@
 
 <!-- =================== SCRIPTS =================== -->
 <script>
-/* ---------- Nav megamenus ---------- */
-document.querySelectorAll('.nav-item[data-mega]').forEach(item => {
-  let timer;
-  item.addEventListener('mouseenter', () => { clearTimeout(timer); item.classList.add('open'); });
-  item.addEventListener('mouseleave', () => { timer = setTimeout(() => item.classList.remove('open'), 120); });
-});
+/* Nav megamenu + mobile drawer behavior is handled by shared/chrome.js
+   (loaded at the bottom of this file) so it stays consistent with sub-pages. */
 
 /* ---------- Vertical tabs ---------- */
 document.querySelectorAll('.vert-tab').forEach(tab => {
@@ -1519,5 +1634,6 @@ setInterval(() => {
 })();
 </script>
 
+<script src="shared/chrome.js"></script>
 </body>
 </html>
