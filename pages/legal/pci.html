@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PCI Compliance — Tapped&rsquo;s scope, AoC, and responsibility matrix | Tapped</title>
+<meta name="description" content="Tapped is a PCI-DSS Level 1 service provider. This page explains our scope, how to obtain our Attestation of Compliance, and the shared-responsibility model for platforms that integrate our SDKs.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../shared/page.css">
+<style>
+.lg-hero { padding: 56px 0 40px; background: var(--paper); border-bottom: 1px solid var(--border-subtle); }
+.lg-hero .container { max-width: 1080px; }
+.lg-hero .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color: var(--brand-cyan-700); margin-bottom:14px; display:inline-block; }
+.lg-hero h1 { font-family:var(--font-display); font-size: clamp(34px, 5vw, 48px); font-weight:600; letter-spacing:-0.025em; line-height:1.06; margin:0 0 14px; }
+.lg-hero .lede { font-size: 17px; color: var(--fg-2); line-height: 1.6; max-width: 760px; margin: 0 0 20px; }
+.lg-meta { display: flex; gap: 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.02em; color: var(--fg-3); }
+.lg-meta b { color: var(--fg-1); font-weight: 600; }
+
+.lg-body { padding: 64px 0 64px; }
+.lg-body .container { max-width: 1080px; }
+.lg-intro { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 48px; }
+.lg-intro p { font-size: 16px; color: var(--fg-2); line-height: 1.7; margin: 0 0 14px; }
+.lg-intro p strong { color: var(--fg-1); }
+.lg-badge-card { background: linear-gradient(180deg, var(--paper) 0%, var(--ink-25) 100%); border: 1px solid var(--border); border-radius: 14px; padding: 24px; box-shadow: var(--shadow-sm); }
+.lg-badge-card .b { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--ink-950); color: white; border-radius: 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
+.lg-badge-card .b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #22D3EE; box-shadow: 0 0 8px #22D3EE; }
+.lg-badge-card dl { margin: 16px 0 0; display: flex; flex-direction: column; gap: 12px; }
+.lg-badge-card dt { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 600; margin: 0; }
+.lg-badge-card dd { font-size: 14px; color: var(--fg-1); margin: 2px 0 0; font-family: var(--font-mono); font-weight: 600; }
+
+.lg-scope { padding-bottom: 48px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 48px; }
+.lg-scope h2 { font-family: var(--font-display); font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px; }
+.lg-scope .sub { font-size: 14.5px; color: var(--fg-2); max-width: 720px; margin: 0 0 24px; line-height: 1.6; }
+.lg-scope table { width: 100%; border-collapse: collapse; background: var(--paper); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; font-size: 14px; }
+.lg-scope th, .lg-scope td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+.lg-scope th { background: var(--ink-25); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); font-weight: 600; }
+.lg-scope tr:last-child td { border-bottom: none; }
+.lg-scope td.row { font-weight: 600; color: var(--fg-1); width: 30%; }
+.lg-scope td.who { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.02em; }
+.lg-scope .pill { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-mono); }
+.pill-t { background: rgba(34,211,238,0.12); color: var(--brand-cyan-700); }
+.pill-p { background: rgba(225,29,116,0.08); color: var(--brand-magenta-600); }
+.pill-s { background: rgba(124,58,237,0.1); color: #6D28D9; }
+
+.lg-faq { padding-bottom: 48px; }
+.lg-faq h2 { font-family: var(--font-display); font-size: 26px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 20px; }
+.lg-faq details { background: var(--paper); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0; margin-bottom: 10px; overflow: hidden; transition: border-color 140ms; }
+.lg-faq details[open] { border-color: var(--border-strong); }
+.lg-faq summary { padding: 16px 20px; font-weight: 600; font-size: 15px; color: var(--fg-1); cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+.lg-faq summary::-webkit-details-marker { display: none; }
+.lg-faq summary::after { content: "+"; font-family: var(--font-mono); font-size: 20px; color: var(--fg-3); font-weight: 400; transition: transform 180ms; }
+.lg-faq details[open] summary::after { transform: rotate(45deg); }
+.lg-faq .ans { padding: 0 20px 18px; font-size: 14.5px; line-height: 1.65; color: var(--fg-2); }
+.lg-faq .ans p { margin: 0 0 10px; }
+.lg-faq .ans a { color: var(--brand-cyan-700); border-bottom: 1px solid rgba(34,211,238,0.3); }
+
+@media (max-width: 860px) {
+  .lg-intro { grid-template-columns: 1fr; }
+  .lg-scope td.row { width: auto; }
+}
+</style>
+</head><body data-current=""><div data-nav-mount></div><main id="main">
+
+<nav class="breadcrumb container" aria-label="Breadcrumb">
+  <ol><li><a href="../../index.html">Home</a></li><li><a href="../../Tapped Website.html">Legal</a></li><li aria-current="page">PCI Compliance</li></ol>
+</nav>
+
+<header class="lg-hero"><div class="container">
+  <span class="eyebrow">Legal · PCI-DSS</span>
+  <h1>PCI Compliance at Tapped</h1>
+  <p class="lede">Tapped holds PCI-DSS Level 1 service-provider attestation and carries the scheme-level PCI PIN, 3DS, CPoC, and SPoC certifications required to operate a tap-to-pay network. This page summarises the scope of our attestation, the responsibility split with our platform customers, and how to get our documents.</p>
+  <div class="lg-meta">
+    <div><b>Level</b> 1 Service Provider</div>
+    <div><b>Standard</b> PCI-DSS v4.0.1</div>
+    <div><b>QSA</b> Coalfire Asia Pacific</div>
+    <div><b>Last AoC</b> March 2026</div>
+  </div>
+</div></header>
+
+<section class="lg-body"><div class="container">
+  <div class="lg-intro">
+    <div>
+      <p><strong>Tapped is a PCI-DSS Level 1 service provider.</strong> That is the highest validation level for entities that store, process, or transmit cardholder data on behalf of others. An external Qualified Security Assessor (QSA) validates our compliance every year and issues an Attestation of Compliance (AoC). We also undergo quarterly external ASV scans.</p>
+      <p>As a tap-to-pay infrastructure provider we hold several <em>scheme-specific</em> certifications beyond the baseline. PCI PIN covers cardholder-PIN protection, PCI 3DS covers the authentication server and access control components, SPoC and CPoC cover software-based PIN entry and contactless acceptance on consumer devices. Each is audited separately and has its own evidence package.</p>
+      <p>You can <strong>shrink your PCI-DSS footprint to almost zero</strong> by integrating Tapped correctly. Our SDKs are designed so that no cardholder data passes through your servers; the card number, expiry, CVV, and PIN never leave the certified enclave on the device before travelling to Tapped over a TLS 1.3 channel. That reduces most platform integrations from the full <strong>SAQ D</strong> workload to <strong>SAQ A</strong>.</p>
+    </div>
+    <aside class="lg-badge-card">
+      <div class="b">Attestation of Compliance</div>
+      <dl>
+        <dt>Report type</dt>
+        <dd>Service provider AoC + RoC</dd>
+        <dt>Covers</dt>
+        <dd>All Tapped products, all markets</dd>
+        <dt>Valid through</dt>
+        <dd>04 March 2027</dd>
+        <dt>DESV</dt>
+        <dd>Included</dd>
+        <dt>ASV scan</dt>
+        <dd>Current · clean</dd>
+        <dt>Request</dt>
+        <dd><a href="mailto:security@tapped.co" style="color:var(--brand-cyan-700);">security@tapped.co</a></dd>
+      </dl>
+    </aside>
+  </div>
+
+  <div class="lg-scope">
+    <h2>Shared responsibility</h2>
+    <p class="sub">Who does what, by PCI-DSS requirement. This is the summarised view; the full matrix is delivered alongside our AoC under NDA. <strong class="pill pill-t">T</strong> = Tapped responsibility, <strong class="pill pill-p">P</strong> = Platform responsibility, <strong class="pill pill-s">S</strong> = Shared.</p>
+
+    <table>
+      <thead><tr><th>PCI-DSS domain</th><th>Scope</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td class="row">1. Firewall &amp; network segmentation</td><td>Between Tapped and the cardholder data environment</td><td class="who"><span class="pill pill-t">T</span></td></tr>
+        <tr><td class="row">2. Secure default configurations</td><td>Tapped-owned systems and SDKs</td><td class="who"><span class="pill pill-t">T</span></td></tr>
+        <tr><td class="row">3. Stored cardholder data</td><td>We don&rsquo;t pass it back; you don&rsquo;t store it</td><td class="who"><span class="pill pill-t">T</span></td></tr>
+        <tr><td class="row">4. Encryption in transit</td><td>TLS 1.3 from device &rarr; Tapped &rarr; scheme</td><td class="who"><span class="pill pill-t">T</span></td></tr>
+        <tr><td class="row">5. Anti-malware on your admin workstations</td><td>Your corporate IT</td><td class="who"><span class="pill pill-p">P</span></td></tr>
+        <tr><td class="row">6. Secure software development</td><td>Your integration code + our SDK</td><td class="who"><span class="pill pill-s">S</span></td></tr>
+        <tr><td class="row">7. Access control &mdash; need to know</td><td>Tapped Dashboard permissions you configure</td><td class="who"><span class="pill pill-s">S</span></td></tr>
+        <tr><td class="row">8. User identification &amp; auth</td><td>SSO, MFA, role-based access</td><td class="who"><span class="pill pill-s">S</span></td></tr>
+        <tr><td class="row">9. Physical security</td><td>Your offices / terminals if applicable</td><td class="who"><span class="pill pill-p">P</span></td></tr>
+        <tr><td class="row">10. Logging &amp; audit</td><td>Tapped side: covered. Your side: your access to our dashboard</td><td class="who"><span class="pill pill-s">S</span></td></tr>
+        <tr><td class="row">11. Security testing</td><td>Annual pentest of the combined solution</td><td class="who"><span class="pill pill-s">S</span></td></tr>
+        <tr><td class="row">12. Information security policy</td><td>Your own policy, referencing this responsibility matrix</td><td class="who"><span class="pill pill-p">P</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lg-faq">
+    <h2>Frequently asked</h2>
+
+    <details open><summary>What SAQ applies to my platform?</summary>
+      <div class="ans">
+        <p>If you integrate the Tap Terminal SDK as documented and do not surface raw card data in your own UI or servers, you almost always qualify for <strong>SAQ A</strong> as a merchant-initiated transaction with full outsourcing of the cardholder data environment. A handful of complex integrations (for example, custom PAN entry for card-on-file scenarios) stay at SAQ A-EP or D. Your acquiring bank makes the final call; we&rsquo;re happy to review your integration with your QSA.</p>
+      </div>
+    </details>
+    <details><summary>How do I get a copy of the Tapped AoC?</summary>
+      <div class="ans">
+        <p>Email <a href="mailto:security@tapped.co">security@tapped.co</a> with your company name, intended use, and the name of any QSA or auditor who will also receive it. We send the AoC and the responsibility matrix within one business day under a short confidentiality cover letter; paying customers can also download these from the dashboard.</p>
+      </div>
+    </details>
+    <details><summary>Is Tapped on the Visa Global Registry and the Mastercard SDP list?</summary>
+      <div class="ans">
+        <p>Yes &mdash; Tapped Pte Ltd is listed in both registries as a compliant service provider. Direct links are in the footer of our AoC and on the <a href="licences.html">Licences page</a> with the scheme registration IDs.</p>
+      </div>
+    </details>
+    <details><summary>Do you store full card numbers?</summary>
+      <div class="ans">
+        <p>Only where a merchant has a documented business reason (recurring billing, card-on-file, dispute handling) and the end customer has consented. Storage uses PCI-DSS requirement 3.5-compliant encryption with tokenisation available as the default, so your systems only see tokens. Merchants can opt out of storage entirely.</p>
+      </div>
+    </details>
+    <details><summary>What happens if you have a breach?</summary>
+      <div class="ans">
+        <p>We notify your designated security contact within 72 hours of confirming a breach that affects your cardholder data. We work with the schemes and affected regulators on any mandated notifications. Our DPA sets out the contractual obligations; our <a href="../company/security.html">security page</a> describes the incident-response operation.</p>
+      </div>
+    </details>
+    <details><summary>What does &ldquo;PIN-on-Glass&rdquo; actually mean for compliance?</summary>
+      <div class="ans">
+        <p>PIN entry happens inside a secure software keyboard that Tapped provides as a certified SDK &mdash; PCI SPoC v2 in most markets. The PIN never enters your app&rsquo;s memory space and is encrypted with a key that only the HSM downstream can unwrap. It is functionally equivalent to a PIN entered on a hardware terminal for liability purposes.</p>
+      </div>
+    </details>
+    <details><summary>How does Tapped support my own PCI audit?</summary>
+      <div class="ans">
+        <p>Customers on any plan get a shared-responsibility workbook, a sample RoC narrative for the Tapped dependency, and an assessor-to-assessor call with our QSA at no cost once per audit cycle. Enterprise plans include a named compliance engineer for the duration of your audit.</p>
+      </div>
+    </details>
+  </div>
+</div></section>
+
+<section class="sub-cta"><div class="container">
+  <div class="sub-cta-card">
+    <div>
+      <span class="eyebrow">Compliance &amp; trust</span>
+      <h2>Need our AoC, RoC, or pentest report?</h2>
+      <p>All three are available to prospects under a short NDA and to customers directly from the dashboard. Your audit will move faster when ours is already on the desk.</p>
+    </div>
+    <div class="sub-cta-actions">
+      <a class="btn btn-brand btn-arrow" href="mailto:security@tapped.co">Request documents</a>
+      <a class="btn btn-secondary" href="../company/security.html">Security program</a>
+    </div>
+  </div>
+</div></section>
+
+</main><div data-footer-mount></div><script src="../../shared/chrome.js"></script></body></html>

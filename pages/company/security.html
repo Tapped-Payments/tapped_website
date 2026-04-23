@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security at Tapped — Certifications, infrastructure &amp; disclosure | Tapped</title>
+<meta name="description" content="How Tapped protects platform and merchant data. PCI-DSS Level 1, SOC 2 Type II, ISO 27001, EMV Level 3, per-tenant encryption, and a published vulnerability-disclosure program.">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../shared/page.css">
+<style>
+.sc-hero { padding: 72px 0 56px; background: linear-gradient(180deg, #050914 0%, #0A0E1A 100%); color: white; position: relative; overflow: hidden; }
+.sc-hero::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 90% 10%, rgba(34,211,238,0.16), transparent 50%), radial-gradient(circle at 10% 90%, rgba(225,29,116,0.10), transparent 50%); pointer-events:none; }
+.sc-hero .container { position: relative; max-width: 1080px; }
+.sc-hero .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#67E8F9; margin-bottom:18px; display:inline-block; }
+.sc-hero h1 { font-family:var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight:600; letter-spacing:-0.025em; line-height:1.04; margin:0 0 20px; color: white; max-width: 860px; }
+.sc-hero h1 em { font-style: normal; background: linear-gradient(135deg, #22D3EE 0%, #E11D74 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sc-hero .lede { font-size: 18px; color: #C1C8DB; line-height: 1.6; max-width: 720px; margin: 0 0 24px; }
+.sc-hero .bar { display: inline-flex; flex-wrap: wrap; gap: 8px; }
+.sc-hero .bar span { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #67E8F9; background: rgba(34,211,238,0.10); border: 1px solid rgba(34,211,238,0.24); padding: 6px 10px; border-radius: 999px; font-weight: 600; }
+
+.sc-certs { padding: 72px 0; }
+.sc-certs h2 { font-family: var(--font-display); font-size: 30px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 8px; }
+.sc-certs .sub { font-size: 15px; color: var(--fg-2); max-width: 680px; margin: 0 0 40px; line-height: 1.6; }
+.sc-certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.cert { padding: 24px; background: var(--paper); border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; gap: 10px; }
+.cert .badge { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, rgba(34,211,238,0.12), rgba(225,29,116,0.10)); border: 1px solid rgba(34,211,238,0.25); display: grid; place-items: center; color: var(--brand-cyan-700); }
+.cert .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); font-weight: 600; }
+.cert h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin: 0; color: var(--fg-1); }
+.cert p { font-size: 13px; color: var(--fg-2); line-height: 1.6; margin: 0; }
+.cert .meta { display: flex; gap: 10px; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border-subtle); }
+.cert .meta .val { font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); font-weight: 600; }
+.cert .meta .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-4); }
+.cert a { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brand-cyan-700); }
+
+.sc-pillars { padding: 96px 0; background: var(--ink-25); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+.sc-pillars .container { max-width: 1080px; }
+.sc-pillars h2 { font-family: var(--font-display); font-size: 32px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 14px; max-width: 720px; }
+.sc-pillars h2 em { font-style: normal; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sc-pillars .sub { font-size: 16px; color: var(--fg-2); max-width: 700px; margin: 0 0 48px; line-height: 1.65; }
+.pillar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pillar { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+.pillar .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); font-weight: 600; margin-bottom: 10px; }
+.pillar h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 8px; }
+.pillar p { font-size: 14.5px; color: var(--fg-2); line-height: 1.6; margin: 0 0 14px; }
+.pillar ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.pillar li { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--fg-2); line-height: 1.55; }
+.pillar li::before { content: ""; flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--ink-50) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 24 24' fill='none' stroke='%230891B2' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") no-repeat center; margin-top: 3px; }
+
+.sc-infra { padding: 96px 0; }
+.sc-infra .container { max-width: 1080px; }
+.sc-infra h2 { font-family: var(--font-display); font-size: 32px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 16px; }
+.sc-infra .sub { font-size: 16px; color: var(--fg-2); max-width: 700px; margin: 0 0 40px; line-height: 1.65; }
+.sc-infra table { width: 100%; border-collapse: collapse; background: var(--paper); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.sc-infra th, .sc-infra td { padding: 14px 20px; text-align: left; border-bottom: 1px solid var(--border-subtle); font-size: 14px; vertical-align: top; }
+.sc-infra th { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); background: var(--ink-25); }
+.sc-infra td.area { font-family: var(--font-display); font-weight: 600; color: var(--fg-1); width: 240px; letter-spacing: -0.005em; }
+.sc-infra td.control { color: var(--fg-2); line-height: 1.55; }
+.sc-infra tr:last-child td { border-bottom: none; }
+
+.sc-disclosure { padding: 96px 0; background: linear-gradient(180deg, var(--paper) 0%, var(--ink-25) 100%); border-top: 1px solid var(--border-subtle); }
+.sc-disclosure .container { max-width: 840px; }
+.sc-disclosure h2 { font-family: var(--font-display); font-size: 32px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 14px; }
+.sc-disclosure p { font-size: 16px; color: var(--fg-2); line-height: 1.7; margin: 0 0 16px; }
+.sc-disclosure p strong { color: var(--fg-1); }
+.sc-disclosure .panel { margin-top: 28px; padding: 24px 28px; background: var(--paper); border: 1px solid var(--border); border-radius: 14px; }
+.sc-disclosure .panel h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.01em; }
+.sc-disclosure .panel dl { margin: 0; display: grid; grid-template-columns: 180px 1fr; gap: 10px 20px; }
+.sc-disclosure .panel dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 600; }
+.sc-disclosure .panel dd { font-size: 14px; color: var(--fg-1); margin: 0; font-family: var(--font-mono); }
+.sc-disclosure .panel dd a { color: var(--brand-cyan-700); }
+
+@media (max-width: 960px) {
+  .sc-certs-grid { grid-template-columns: 1fr 1fr; }
+  .pillar-grid { grid-template-columns: 1fr; }
+  .sc-infra td.area { width: auto; }
+  .sc-disclosure .panel dl { grid-template-columns: 1fr; gap: 4px 0; }
+  .sc-disclosure .panel dt { margin-top: 10px; }
+}
+</style>
+</head><body data-current="company"><div data-nav-mount></div><main id="main">
+
+<nav class="breadcrumb container" aria-label="Breadcrumb">
+  <ol><li><a href="../../index.html">Home</a></li><li><a href="../../Tapped Website.html">Company</a></li><li aria-current="page">Security</li></ol>
+</nav>
+
+<header class="sc-hero"><div class="container">
+  <span class="eyebrow">Company · Security</span>
+  <h1>We handle money. That buys us one excuse for a <em>security incident</em>: none.</h1>
+  <p class="lede">Tapped runs on certified kernels, per-tenant key isolation, and a pipeline of independent audits. This page is the long version &mdash; certifications, architecture, disclosure terms, and how to reach us if you find something.</p>
+  <div class="bar">
+    <span>PCI-DSS L1</span><span>SOC 2 Type II</span><span>ISO/IEC 27001</span><span>EMV L3</span><span>PCI PIN</span><span>PCI 3DS</span>
+  </div>
+</div></header>
+
+<section class="sc-certs"><div class="container">
+  <h2>Certifications &amp; attestations</h2>
+  <p class="sub">Every certification here is held by Tapped directly &mdash; not by an upstream processor we resell. AoCs are available to prospects and customers under NDA; ask your account team or email <a href="mailto:security@tapped.co" style="color:var(--brand-cyan-700);">security@tapped.co</a>.</p>
+
+  <div class="sc-certs-grid">
+    <div class="cert">
+      <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h3"/></svg></div>
+      <span class="tag">Card data</span>
+      <h3>PCI-DSS Level 1</h3>
+      <p>Full-scope merchant acquirer and service provider; validated by a Qualified Security Assessor annually.</p>
+      <div class="meta"><span class="lbl">Last audit</span><span class="val">Mar 2026</span></div>
+    </div>
+    <div class="cert">
+      <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <span class="tag">Controls</span>
+      <h3>SOC 2 Type II</h3>
+      <p>Security, Availability, Confidentiality, and Processing Integrity. 12-month observation window, no exceptions.</p>
+      <div class="meta"><span class="lbl">Last report</span><span class="val">Feb 2026</span></div>
+    </div>
+    <div class="cert">
+      <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+      <span class="tag">ISMS</span>
+      <h3>ISO/IEC 27001:2022</h3>
+      <p>Information security management system covering development, operations, and customer support across every office.</p>
+      <div class="meta"><span class="lbl">Certified</span><span class="val">Nov 2025</span></div>
+    </div>
+    <div class="cert">
+      <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+      <span class="tag">EMV</span>
+      <h3>EMV Level 3 (SPoC &amp; CPoC)</h3>
+      <p>Contactless kernels certified directly with Visa, Mastercard, JCB, UnionPay, and American Express.</p>
+      <div class="meta"><span class="lbl">Letters on file</span><span class="val">5 schemes</span></div>
+    </div>
+    <div class="cert">
+      <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="4"/></svg></div>
+      <span class="tag">Cardholder PIN</span>
+      <h3>PCI PIN Security</h3>
+      <p>PIN-on-Glass implementation on every supported iOS and Android device, assessed against PCI PIN v3.1.</p>
+      <div class="meta"><span class="lbl">Last audit</span><span class="val">Jan 2026</span></div>
+    </div>
+    <div class="cert">
+      <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10"/><path d="M2 17h20v4H2z"/></svg></div>
+      <span class="tag">Auth</span>
+      <h3>PCI 3DS Core</h3>
+      <p>3-D Secure 2.x server and ACS components are PCI 3DS Core assessed; frictionless flows tuned per scheme.</p>
+      <div class="meta"><span class="lbl">Certified</span><span class="val">Sep 2025</span></div>
+    </div>
+    <div class="cert">
+      <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+      <span class="tag">Privacy</span>
+      <h3>GDPR, PDPA, APPI</h3>
+      <p>DPAs available for all three frameworks. Standard Contractual Clauses in place for EU data transfers; APAC residency configurable per region.</p>
+      <div class="meta"><span class="lbl">DPA page</span><span class="val"><a href="../legal/privacy.html">Read →</a></span></div>
+    </div>
+    <div class="cert">
+      <div class="badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <span class="tag">Assurance</span>
+      <h3>Independent pentests</h3>
+      <p>Two external firms, annually, covering the platform API, dashboard, mobile kernels, and reconciliation pipelines. Executive summaries shared with customers on request.</p>
+      <div class="meta"><span class="lbl">Schedule</span><span class="val">Q2 · Q4</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sc-pillars"><div class="container">
+  <h2>The four pillars of how Tapped is <em>built</em>.</h2>
+  <p class="sub">A certification page tells you we passed. This one tells you why. The same four ideas appear in every architectural review, hire, and vendor contract we make.</p>
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="k">01 · Isolation</div>
+      <h3>Per-tenant keys, per-market residency.</h3>
+      <p>Platforms share infrastructure, not cryptographic keys. Enterprise plans add customer-managed keys (BYOK) with key rotation logged to your own CloudTrail-equivalent audit sink.</p>
+      <ul>
+        <li>AWS KMS + Google Cloud KMS dual-region envelopes</li>
+        <li>Per-platform HSM slots for PIN &amp; sensitive auth data</li>
+        <li>Data residency selectable in SG / JP / HK / SG-backup</li>
+        <li>Independent access control for each market&rsquo;s operations team</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="k">02 · Defence in depth</div>
+      <h3>Every path is authenticated, signed, and auditable.</h3>
+      <p>There is no internal network shortcut. Service-to-service calls use mTLS plus short-lived SPIFFE identities. Every database mutation is emitted to a tamper-evident audit log.</p>
+      <ul>
+        <li>Request signing on every platform API call (HMAC-SHA256)</li>
+        <li>Webhook signatures with rotating secrets + replay windows</li>
+        <li>Audit log stream exposed to customers via Tap Ledger export</li>
+        <li>Zero-standing-access posture for engineers &mdash; JIT elevation only</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="k">03 · Availability</div>
+      <h3>Multi-region by default. Quarterly game days.</h3>
+      <p>The auth path is active-active across two APAC regions. Settlement, reporting, and the dashboard degrade gracefully. We run regulator-witnessed DR exercises every quarter.</p>
+      <ul>
+        <li>99.995% target on card-present authorisation</li>
+        <li>Automated region failover in &lt; 90 seconds</li>
+        <li>Public status page at <a href="../developers/status.html" style="color:var(--brand-cyan-700);">status.tapped.co</a> with component granularity</li>
+        <li>Subscription to signed incident emails + RSS feed</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="k">04 · Secure development</div>
+      <h3>Shift left, but with teeth.</h3>
+      <p>Security is a product team, not a gatekeeper. Every pull request goes through static analysis, dependency scanning, and an automated threat-model diff for security-sensitive surfaces.</p>
+      <ul>
+        <li>Signed commits + reproducible builds on all kernel firmware</li>
+        <li>SBOMs published for every SDK release</li>
+        <li>Supply-chain monitoring with Sigstore + in-house vendor attestation</li>
+        <li>Weekly red-team exercise against a staging mirror of production</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section class="sc-infra"><div class="container">
+  <h2>Controls reference.</h2>
+  <p class="sub">The short version of what a security-review questionnaire will ask. Full control matrix is in the <strong>Tapped Trust Centre</strong> &mdash; available under NDA.</p>
+  <table>
+    <thead><tr><th>Control area</th><th>How Tapped implements it</th></tr></thead>
+    <tbody>
+      <tr><td class="area">Encryption at rest</td><td class="control">AES-256 GCM with per-tenant data-encryption keys wrapped by KMS. Customer-managed keys (BYOK) on Enterprise plans.</td></tr>
+      <tr><td class="area">Encryption in transit</td><td class="control">TLS 1.3 with modern ciphers; internal services use mutual TLS via SPIFFE workload identities. Certificate pinning on mobile SDKs.</td></tr>
+      <tr><td class="area">Key management</td><td class="control">FIPS 140-2 Level 3 HSMs for PIN and card cryptography. Automatic key rotation on a 90-day cadence; emergency rotation under 30 minutes.</td></tr>
+      <tr><td class="area">Identity &amp; access</td><td class="control">SSO (SAML 2.0, OIDC) for the dashboard; SCIM provisioning; hardware-token MFA enforced for all Tapped employees with production access.</td></tr>
+      <tr><td class="area">Network</td><td class="control">Private VPC per environment, no public service endpoints, WAF + L7 rate-limiting in front of every edge, quarterly firewall rule review.</td></tr>
+      <tr><td class="area">Monitoring &amp; detection</td><td class="control">Centralised log pipeline with a 13-month retention minimum; SIEM correlation rules tuned for card-data anomaly detection; on-call rotation answers within 5 minutes.</td></tr>
+      <tr><td class="area">Backup &amp; recovery</td><td class="control">Continuous backup with point-in-time recovery to 5-minute granularity. RPO &lt; 5 minutes, RTO &lt; 30 minutes, tested quarterly.</td></tr>
+      <tr><td class="area">Vendor security</td><td class="control">Tiered third-party review &mdash; Tier-1 vendors reviewed annually with SOC 2 / ISO 27001 required, sub-processor list published.</td></tr>
+      <tr><td class="area">Personnel security</td><td class="control">Pre-employment background checks (where legally permitted) and annual security training; separation of duties enforced via role-based access.</td></tr>
+      <tr><td class="area">Data deletion</td><td class="control">Customer-initiated deletion completes within 30 days across production and backups; tombstones prevent accidental re-creation.</td></tr>
+    </tbody>
+  </table>
+</div></section>
+
+<section class="sc-disclosure"><div class="container">
+  <h2>Report a vulnerability.</h2>
+  <p>We publish and practise a coordinated-disclosure policy. Security researchers who act in good faith &mdash; respecting user privacy, avoiding data destruction, and not monetising findings before we&rsquo;ve shipped a fix &mdash; will not face legal action from Tapped. We&rsquo;ll work with you on timing, credit, and where applicable a bounty.</p>
+  <p><strong>Scope:</strong> the Tapped platform API (<code>api.tapped.co</code>), the merchant dashboard (<code>dashboard.tapped.co</code>), developer documentation (<code>developers.tapped.co</code>), and the Tap Terminal SDK for iOS and Android. Out of scope: social-engineering attempts against staff, denial-of-service, physical attacks against offices, and testing against any other domain we operate.</p>
+  <p><strong>Default timeline:</strong> 90 days from the date of first valid report; we may request an extension for kernel-level issues that require scheme re-certification and will communicate a target publication date.</p>
+
+  <div class="panel">
+    <h3>How to reach us</h3>
+    <dl>
+      <dt>Email</dt><dd><a href="mailto:security@tapped.co">security@tapped.co</a></dd>
+      <dt>PGP key</dt><dd><a href="mailto:security@tapped.co">0xAB12 CD34 EF56 7890</a></dd>
+      <dt>security.txt</dt><dd><a href="mailto:security@tapped.co">/.well-known/security.txt</a></dd>
+      <dt>Response time</dt><dd>&lt; 24 hours, 7 days a week</dd>
+      <dt>Bounty programme</dt><dd>Invite-only; ask in first email</dd>
+    </dl>
+  </div>
+</div></section>
+
+<section class="sub-cta"><div class="container">
+  <div class="sub-cta-card">
+    <div>
+      <span class="eyebrow">Security &amp; trust</span>
+      <h2>Need a deeper dive?</h2>
+      <p>Architecture diagrams, penetration-test executive summaries, SOC 2 reports, and the control matrix are all available to prospects and customers under NDA &mdash; ask your account team or email security directly.</p>
+    </div>
+    <div class="sub-cta-actions">
+      <a class="btn btn-brand btn-arrow" href="contact.html">Talk to security</a>
+      <a class="btn btn-secondary" href="../legal/pci.html">PCI details</a>
+    </div>
+  </div>
+</div></section>
+
+</main><div data-footer-mount></div><script src="../../shared/chrome.js"></script></body></html>

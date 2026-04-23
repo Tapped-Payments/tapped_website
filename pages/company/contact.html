@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Tapped — Sales, support &amp; partnerships | Tapped</title>
+<meta name="description" content="Talk to Tapped. Sales, platform partnerships, merchant support, risk &amp; compliance, and press — routed to the right team in under an hour during local business hours.">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../shared/page.css">
+<style>
+.ct-hero { padding: 72px 0 56px; background: var(--paper); border-bottom: 1px solid var(--border-subtle); position: relative; overflow: hidden; }
+.ct-hero::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 85% 0%, rgba(34,211,238,0.10), transparent 45%), radial-gradient(circle at 10% 100%, rgba(225,29,116,0.06), transparent 45%); pointer-events:none; }
+.ct-hero .container { position: relative; max-width: 1080px; }
+.ct-hero .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color: var(--brand-cyan-700); margin-bottom:18px; display:inline-block; }
+.ct-hero h1 { font-family:var(--font-display); font-size: clamp(36px, 5vw, 54px); font-weight:600; letter-spacing:-0.025em; line-height:1.05; margin:0 0 18px; max-width: 820px; }
+.ct-hero h1 em { font-style:normal; background: var(--brand-gradient); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.ct-hero .lede { font-size: 18px; color: var(--fg-2); line-height: 1.6; max-width: 720px; margin: 0; }
+
+.ct-grid { padding: 64px 0 96px; }
+.ct-grid .inner { display: grid; grid-template-columns: 1.35fr 1fr; gap: 56px; align-items: start; max-width: 1080px; margin: 0 auto; }
+
+.ct-form { background: var(--paper); border: 1px solid var(--border); border-radius: 16px; padding: 36px; box-shadow: var(--shadow-sm); }
+.ct-form h2 { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 6px; }
+.ct-form .hint { font-size: 13.5px; color: var(--fg-3); line-height: 1.5; margin: 0 0 24px; }
+.ct-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.ct-form .row.one { grid-template-columns: 1fr; }
+.ct-form label { display: block; font-size: 12px; font-weight: 600; color: var(--fg-2); letter-spacing: 0.02em; margin-bottom: 6px; font-family: var(--font-mono); text-transform: uppercase; }
+.ct-form input, .ct-form select, .ct-form textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-sans); font-size: 14px; color: var(--fg-1); background: var(--paper); transition: border-color 140ms, box-shadow 140ms; }
+.ct-form input:focus, .ct-form select:focus, .ct-form textarea:focus { outline: none; border-color: var(--brand-cyan-700); box-shadow: var(--shadow-focus); }
+.ct-form textarea { resize: vertical; min-height: 120px; font-family: inherit; }
+.ct-form .actions { display: flex; align-items: center; gap: 14px; margin-top: 10px; }
+.ct-form .fineprint { font-size: 12px; color: var(--fg-3); line-height: 1.5; margin: 16px 0 0; }
+.ct-form .fineprint a { color: var(--brand-cyan-700); border-bottom: 1px solid rgba(34,211,238,0.3); }
+
+.ct-aside { display: flex; flex-direction: column; gap: 14px; }
+.ct-card { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 22px; transition: border-color 160ms, transform 160ms; }
+.ct-card:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+.ct-card .k { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); margin-bottom: 10px; }
+.ct-card h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 6px; color: var(--fg-1); }
+.ct-card p { font-size: 13.5px; color: var(--fg-2); line-height: 1.55; margin: 0 0 10px; }
+.ct-card a.line { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-1); font-weight: 600; }
+.ct-card a.line:hover { color: var(--brand-cyan-700); }
+.ct-card .sla { display: inline-block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--success-fg); background: var(--success-bg); padding: 3px 8px; border-radius: 999px; font-weight: 600; margin-top: 8px; }
+
+.ct-offices { padding: 88px 0; background: var(--ink-25); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+.ct-offices h2 { font-family: var(--font-display); font-size: 32px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 14px; }
+.ct-offices .sub { font-size: 15px; color: var(--fg-2); max-width: 620px; margin: 0 0 40px; line-height: 1.55; }
+.ct-offices-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.office { background: var(--paper); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+.office .flag { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--brand-cyan-700); text-transform: uppercase; margin-bottom: 10px; }
+.office h4 { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+.office p { font-size: 13px; color: var(--fg-2); line-height: 1.55; margin: 0 0 8px; }
+.office .hq { display: inline-block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); background: var(--ink-50); padding: 2px 7px; border-radius: 4px; font-weight: 600; }
+
+@media (max-width: 960px) {
+  .ct-grid .inner { grid-template-columns: 1fr; }
+  .ct-offices-grid { grid-template-columns: 1fr 1fr; }
+  .ct-form .row { grid-template-columns: 1fr; }
+}
+</style>
+</head><body data-current="company"><div data-nav-mount></div><main id="main">
+
+<nav class="breadcrumb container" aria-label="Breadcrumb">
+  <ol><li><a href="../../index.html">Home</a></li><li><a href="../../Tapped Website.html">Company</a></li><li aria-current="page">Contact</li></ol>
+</nav>
+
+<header class="ct-hero"><div class="container">
+  <span class="eyebrow">Company · Contact</span>
+  <h1>Talk to the people who will actually <em>ship your integration</em>.</h1>
+  <p class="lede">No gated demo queues, no junior SDR triage. Fill the form and you land in the inbox of a platform engineer plus the commercial lead for your region. One business-day response, guaranteed.</p>
+</div></header>
+
+<section class="ct-grid"><div class="container">
+  <div class="inner">
+    <form class="ct-form" onsubmit="event.preventDefault(); alert('Thanks — we\'ll be in touch within one business day.');">
+      <h2>Tell us what you&rsquo;re building.</h2>
+      <p class="hint">The more specific, the faster we can route you. If you&rsquo;d rather email, <a href="mailto:sales@tapped.co" style="color:var(--brand-cyan-700);border-bottom:1px solid rgba(34,211,238,0.3);">sales@tapped.co</a> is watched by the same people.</p>
+
+      <div class="row">
+        <div><label for="fn">First name</label><input id="fn" name="first_name" type="text" required autocomplete="given-name"></div>
+        <div><label for="ln">Last name</label><input id="ln" name="last_name" type="text" required autocomplete="family-name"></div>
+      </div>
+      <div class="row">
+        <div><label for="em">Work email</label><input id="em" name="email" type="email" required autocomplete="email" placeholder="you@company.com"></div>
+        <div><label for="co">Company</label><input id="co" name="company" type="text" required autocomplete="organization"></div>
+      </div>
+      <div class="row">
+        <div><label for="role">Your role</label>
+          <select id="role" name="role">
+            <option>Founder / CEO</option>
+            <option>Product / Engineering lead</option>
+            <option>Payments lead</option>
+            <option>Finance / Treasury</option>
+            <option>Partnerships / BD</option>
+            <option>Risk &amp; Compliance</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div><label for="region">Primary region</label>
+          <select id="region" name="region">
+            <option>Singapore</option>
+            <option>Philippines</option>
+            <option>Malaysia</option>
+            <option>Indonesia</option>
+            <option>Thailand</option>
+            <option>Vietnam</option>
+            <option>Hong Kong</option>
+            <option>Japan</option>
+            <option>South Korea</option>
+            <option>Multi-market / APAC-wide</option>
+            <option>Outside APAC</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div><label for="vol">Annual payment volume</label>
+          <select id="vol" name="volume">
+            <option>Pre-launch / not yet processing</option>
+            <option>Under USD 5M</option>
+            <option>USD 5M &ndash; 25M</option>
+            <option>USD 25M &ndash; 100M</option>
+            <option>USD 100M &ndash; 500M</option>
+            <option>USD 500M+</option>
+          </select>
+        </div>
+        <div><label for="need">What do you need first?</label>
+          <select id="need" name="need">
+            <option>Tap Core / Tap Terminal embedded in our platform</option>
+            <option>Tapped Onboard (PSP-agnostic KYB)</option>
+            <option>Tap Ledger (multi-currency settlement)</option>
+            <option>Tap Certify (scheme &amp; regulator filings)</option>
+            <option>A full-stack integration &mdash; all of the above</option>
+            <option>Something else</option>
+          </select>
+        </div>
+      </div>
+      <div class="row one">
+        <div><label for="msg">Context for the team</label><textarea id="msg" name="message" placeholder="What are you building? What&rsquo;s your launch window? Any constraints we should know about (existing PSP, regulator requirements, timing)?"></textarea></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-brand btn-arrow" type="submit">Send to the team</button>
+        <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:var(--fg-3); text-transform:uppercase;">&lt;24 hr response · Mon&ndash;Fri</span>
+      </div>
+      <p class="fineprint">By submitting you agree to our <a href="../legal/privacy.html">privacy notice</a>. We use your details to respond to this request and to contact you about Tapped products; we don&rsquo;t sell your data or add you to a marketing list without your consent.</p>
+    </form>
+
+    <aside class="ct-aside">
+      <div class="ct-card">
+        <div class="k">Platform sales</div>
+        <h3>Talk to the sales team</h3>
+        <p>For vertical SaaS platforms evaluating Tapped as an embedded-payments partner. Commercial terms, volume pricing, pilot scope.</p>
+        <a class="line" href="mailto:sales@tapped.co">sales@tapped.co →</a>
+        <div><span class="sla">&lt; 1 business day</span></div>
+      </div>
+      <div class="ct-card">
+        <div class="k">Technical &amp; developer</div>
+        <h3>Integration support</h3>
+        <p>SDK issues, sandbox credentials, webhook signatures, and production escalations. Paying customers get Slack Connect.</p>
+        <a class="line" href="mailto:developers@tapped.co">developers@tapped.co →</a>
+        <div><span class="sla">&lt; 2 hours · 24 × 7</span></div>
+      </div>
+      <div class="ct-card">
+        <div class="k">Merchant support</div>
+        <h3>Are you a merchant on a Tapped platform?</h3>
+        <p>If you took a payment through an app powered by Tapped and need help with a transaction, payout, or dispute &mdash; contact the app first; they&rsquo;ll loop us in.</p>
+        <a class="line" href="mailto:merchant-help@tapped.co">merchant-help@tapped.co →</a>
+      </div>
+      <div class="ct-card">
+        <div class="k">Security &amp; disclosure</div>
+        <h3>Report a vulnerability</h3>
+        <p>Coordinated disclosure with a 90-day default window. PGP key and full program details on the security page.</p>
+        <a class="line" href="mailto:security@tapped.co">security@tapped.co →</a>
+        <a class="line" href="security.html" style="margin-top:6px;">Security program details →</a>
+      </div>
+      <div class="ct-card">
+        <div class="k">Press &amp; analysts</div>
+        <h3>Media inquiries</h3>
+        <p>Announcements, executive commentary, analyst briefings.</p>
+        <a class="line" href="mailto:press@tapped.co">press@tapped.co →</a>
+        <a class="line" href="press.html" style="margin-top:6px;">Press resources →</a>
+      </div>
+    </aside>
+  </div>
+</div></section>
+
+<section class="ct-offices"><div class="container">
+  <h2>Where the team sits.</h2>
+  <p class="sub">Eight offices across APAC, plus a small London desk for European platform partners. The regulator relationship in each market is held locally &mdash; not through a New York holding company.</p>
+  <div class="ct-offices-grid">
+    <div class="office"><div class="flag">SG · Headquarters</div><h4>Singapore</h4><p>1 Raffles Place, Level 24<br>Singapore 048616</p><span class="hq">MAS MPI holder</span></div>
+    <div class="office"><div class="flag">PH</div><h4>Manila</h4><p>BGC, One Ayala Tower<br>Taguig 1634</p><span class="hq">BSP OPS holder</span></div>
+    <div class="office"><div class="flag">MY</div><h4>Kuala Lumpur</h4><p>The Exchange 106<br>KL 55188</p></div>
+    <div class="office"><div class="flag">ID</div><h4>Jakarta</h4><p>Sudirman Central<br>Jakarta 12190</p></div>
+    <div class="office"><div class="flag">TH</div><h4>Bangkok</h4><p>One Bangkok Tower 4<br>Bangkok 10330</p></div>
+    <div class="office"><div class="flag">VN</div><h4>Ho Chi Minh City</h4><p>Bitexco Tower<br>District 1, HCMC</p></div>
+    <div class="office"><div class="flag">HK</div><h4>Hong Kong</h4><p>Two IFC, Central<br>Hong Kong</p></div>
+    <div class="office"><div class="flag">JP · 2027 live</div><h4>Tokyo</h4><p>Otemachi Tower<br>Chiyoda-ku, Tokyo 100-0004</p></div>
+  </div>
+</div></section>
+
+<section class="sub-cta"><div class="container">
+  <div class="sub-cta-card">
+    <div>
+      <span class="eyebrow">Prefer to self-serve first?</span>
+      <h2>Read the docs. Spin up a sandbox. Call us when you&rsquo;re blocked.</h2>
+      <p>Every feature Tapped sells is documented and testable without talking to a human. Sandbox keys are issued instantly &mdash; production review takes under three weeks.</p>
+    </div>
+    <div class="sub-cta-actions">
+      <a class="btn btn-brand btn-arrow" href="../developers/documentation.html">Read the docs</a>
+      <a class="btn btn-secondary" href="../developers.html">Developer home</a>
+    </div>
+  </div>
+</div></section>
+
+</main><div data-footer-mount></div><script src="../../shared/chrome.js"></script></body></html>
