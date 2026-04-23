@@ -203,6 +203,7 @@
 .nav-toggle .x { display: none; }
 .nav.is-open .nav-toggle .ham { display: none; }
 .nav.is-open .nav-toggle .x { display: block; }
+.nav-mobile-aux { display: none; }
 @media (max-width: 1024px) {
   .nav-inner { position: relative; flex-wrap: wrap; gap: 12px; }
   .nav-toggle { display: inline-flex; }
@@ -215,7 +216,10 @@
   }
   .nav.is-open .nav-center { display: flex; }
   .nav-cta { gap: 8px; }
-  .nav-cta .btn-ghost { display: inline-flex; }
+  .nav-cta .btn-ghost { display: none; }
+  .nav-mobile-aux { display: block; width: 100%; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--border-subtle); }
+  .nav-mobile-aux > button { width: 100%; text-align: left; padding: 12px 14px; font-size: 15px; border-radius: 8px; background: none; border: 0; color: var(--fg-2); font-family: inherit; cursor: pointer; }
+  .nav-mobile-aux > button:hover { background: var(--ink-25); color: var(--fg-1); }
   .nav-item, a.nav-item { width: 100%; }
   .nav-item > button { width: 100%; justify-content: space-between; text-align: left; padding: 12px 14px; font-size: 15px; border-radius: 8px; }
   .nav-item > button:hover { background: var(--ink-25); color: var(--fg-1); }
@@ -233,7 +237,6 @@
   .nav-cta .btn { font-size: 13px; padding: 8px 12px; }
   .nav-cta .btn-brand { padding: 9px 14px; }
 }
-@media (max-width: 380px) { .nav-cta .btn-ghost { display: none; } }
 </style>
 </head>
 <body>

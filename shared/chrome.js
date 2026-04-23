@@ -152,6 +152,22 @@
     </button>`);
   });
 
+  // Mirror the Sign in (ghost) link into the bottom of the mobile drawer.
+  // CSS hides the original on mobile and the clone on desktop.
+  document.querySelectorAll('.nav').forEach(navEl => {
+    const ghost = navEl.querySelector('.nav-cta .btn-ghost');
+    const center = navEl.querySelector('.nav-center');
+    if (!ghost || !center || center.querySelector('.nav-mobile-aux')) return;
+    const a = document.createElement('a');
+    a.className = 'nav-item nav-mobile-aux';
+    a.href = ghost.getAttribute('href') || '#';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = ghost.textContent.trim();
+    a.appendChild(btn);
+    center.appendChild(a);
+  });
+
   // Mega-menu: hover on desktop, tap on mobile
   const isCoarse = () => window.matchMedia('(hover: none), (max-width: 1024px)').matches;
   document.querySelectorAll('.nav-item[data-mega]').forEach(i => {
