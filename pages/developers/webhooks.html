@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Webhooks | Tapped</title>
+<meta name="description" content="Every Tapped state transition as a signed, idempotent webhook — tap approved, dispute opened, payout settled, KYB completed. Exponential retries for 72h.">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../shared/page.css">
+<style>
+.wh-hero { padding: 56px 0 36px; background: linear-gradient(180deg, #0B1225 0%, #0E1530 100%); color:white; }
+.wh-hero .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#22D3EE; margin-bottom:14px; display:inline-block; }
+.wh-hero h1 { font-family:var(--font-display); font-size:46px; font-weight:600; letter-spacing:-0.02em; line-height:1.08; margin:0 0 14px; color:white; max-width:740px; }
+.wh-hero p { font-size:17px; color:#B8C0D8; line-height:1.55; margin:0; max-width: 640px; }
+
+.wh-grid { padding: 64px 0; display:grid; grid-template-columns: 260px 1fr; gap: 48px; align-items:start; }
+.wh-side { position:sticky; top:100px; padding-right:16px; border-right:1px solid var(--border-subtle); }
+.wh-side h4 { font-family:var(--font-mono); font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--fg-3); margin:20px 0 8px; }
+.wh-side h4:first-child { margin-top:0; }
+.wh-side a { display:block; padding:5px 0; font-size:13px; color:var(--fg-2); font-family:var(--font-mono); }
+.wh-side a:hover { color: var(--fg-1); }
+
+.wh-body section { margin-bottom: 48px; scroll-margin-top:100px; }
+.wh-body h2 { font-family:var(--font-display); font-size:26px; font-weight:600; letter-spacing:-0.015em; margin:0 0 14px; }
+.wh-body p { font-size:15.5px; color:var(--fg-2); line-height:1.65; margin:0 0 14px; }
+.wh-body pre { background:#0B1225; color:#E8ECF7; padding:20px; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:12.5px; line-height:1.65; }
+.wh-body pre .c { color:#6B7499; } .wh-body pre .k { color:#A78BFA; } .wh-body pre .s { color:#67E8F9; } .wh-body pre .n { color:#FBBF24; } .wh-body pre .f { color:#F472B6; }
+.wh-body table { width:100%; border-collapse:collapse; font-size:13.5px; margin-bottom:16px; }
+.wh-body th, .wh-body td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--border-subtle); vertical-align:top; }
+.wh-body th { font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-3); font-weight:600; }
+.wh-body td code { font-family:var(--font-mono); font-size:12px; background: var(--ink-50); padding:1px 5px; border-radius:3px; }
+
+.wh-callout { padding: 18px 22px; border-left: 3px solid var(--brand-cyan-700); background: var(--ink-50); border-radius: 0 8px 8px 0; margin: 18px 0; }
+.wh-callout h4 { font-family: var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color: var(--brand-cyan-700); margin:0 0 6px; font-weight:600; }
+.wh-callout p { font-size:14px; color: var(--fg-1); margin:0; }
+
+@media (max-width:900px) { .wh-grid { grid-template-columns: 1fr; } .wh-side { position:static; border-right:none; } .wh-hero h1 { font-size:34px; } }
+</style>
+</head><body data-current="developers"><div data-nav-mount></div><main id="main">
+<nav class="breadcrumb container" aria-label="Breadcrumb"><ol><li><a href="../../Tapped Website.html">Home</a></li><li><a href="../developers.html">Developers</a></li><li aria-current="page">Webhooks</li></ol></nav>
+
+<header class="wh-hero"><div class="container">
+  <span class="eyebrow">Webhooks</span>
+  <h1>Every state change, pushed to you. Signed, retried, idempotent.</h1>
+  <p>Tapped emits webhooks the moment a transaction transitions state. Sign them, verify them, act on them &mdash; or walk away and we'll retry for 72 hours. Replay any event from the dashboard.</p>
+</div></header>
+
+<section class="wh-grid container">
+  <aside class="wh-side">
+    <h4>Basics</h4>
+    <a href="#overview">How webhooks work</a>
+    <a href="#signing">Signature verification</a>
+    <a href="#retries">Retries &amp; deduplication</a>
+    <a href="#replay">Replaying events</a>
+    <h4>Event catalog</h4>
+    <a href="#ev-tap">tap.*</a>
+    <a href="#ev-charge">charge.*</a>
+    <a href="#ev-payout">payout.*</a>
+    <a href="#ev-dispute">dispute.*</a>
+    <a href="#ev-submerchant">submerchant.*</a>
+  </aside>
+
+  <div class="wh-body">
+    <section id="overview">
+      <h2>How webhooks work</h2>
+      <p>You register an endpoint URL in the dashboard (or via API). When a subscribed event fires, Tapped delivers a <code>POST</code> to your URL with a JSON body and a set of signing headers. Respond with <code>2xx</code> within 5 seconds to acknowledge. Any other response (or a timeout) triggers a retry.</p>
+      <div class="wh-callout"><h4>One event, one delivery</h4><p>Every event has a unique <code>id</code>. Use it to deduplicate &mdash; if your handler crashes mid-processing, retries may deliver the same event up to ~20 times.</p></div>
+    </section>
+
+    <section id="signing">
+      <h2>Signature verification</h2>
+      <p>Every delivery includes a <code>Tapped-Signature</code> header. The signature is an HMAC-SHA256 of the raw request body with your endpoint's signing secret. Use the SDK helper; if you're on REST, the verification is eight lines of code.</p>
+<pre><span class="c">// Node — manual verification</span>
+<span class="k">import</span> { createHmac } <span class="k">from</span> <span class="s">"crypto"</span>;
+
+<span class="k">function</span> <span class="f">verify</span>(rawBody, header, secret) {
+  <span class="k">const</span> [ts, sig] = header.split(<span class="s">","</span>).map(s => s.split(<span class="s">"="</span>)[<span class="n">1</span>]);
+  <span class="k">const</span> expected = createHmac(<span class="s">"sha256"</span>, secret)
+    .update(<span class="s">`${ts}.${rawBody}`</span>)
+    .digest(<span class="s">"hex"</span>);
+  <span class="k">return</span> expected === sig;
+}</pre>
+    </section>
+
+    <section id="retries">
+      <h2>Retries &amp; deduplication</h2>
+      <p>Failed deliveries retry on an exponential backoff: 10s, 1m, 5m, 30m, 2h, 6h, 12h, 24h, 48h, 72h. After 72 hours of failures we mark the event <code>failed</code> in the dashboard. You can replay any event &mdash; failed or succeeded &mdash; with one click.</p>
+      <p>Order is not guaranteed. Two events with adjacent timestamps may arrive in either order. Design your handler around <code>id</code>, not arrival time.</p>
+    </section>
+
+    <section id="replay">
+      <h2>Replaying events</h2>
+      <p>Any event in the last 30 days can be replayed from the dashboard or via <code>POST /v1/events/:id/redeliver</code>. Replays include a header <code>Tapped-Replayed: true</code> so your handler can log them separately if you wish.</p>
+    </section>
+
+    <section id="ev-tap">
+      <h2>tap.* events</h2>
+      <table><thead><tr><th>Event</th><th>When it fires</th></tr></thead><tbody>
+        <tr><td><code>tap.approved</code></td><td>Scheme authorised the tap.</td></tr>
+        <tr><td><code>tap.declined</code></td><td>Scheme declined; includes <code>decline_reason</code>.</td></tr>
+        <tr><td><code>tap.reversed</code></td><td>Tap reversed before settlement (customer re-presented card, partial).</td></tr>
+      </tbody></table>
+    </section>
+
+    <section id="ev-charge">
+      <h2>charge.* events</h2>
+      <table><thead><tr><th>Event</th><th>When it fires</th></tr></thead><tbody>
+        <tr><td><code>charge.captured</code></td><td>Authorisation captured; funds committed.</td></tr>
+        <tr><td><code>charge.refunded</code></td><td>Full or partial refund processed.</td></tr>
+        <tr><td><code>charge.failed</code></td><td>Capture failed (rare; usually scheme outage).</td></tr>
+      </tbody></table>
+    </section>
+
+    <section id="ev-payout">
+      <h2>payout.* events</h2>
+      <table><thead><tr><th>Event</th><th>When it fires</th></tr></thead><tbody>
+        <tr><td><code>payout.scheduled</code></td><td>Payout queued for disbursement; includes ETA.</td></tr>
+        <tr><td><code>payout.paid</code></td><td>Bank confirmed receipt; includes wire reference.</td></tr>
+        <tr><td><code>payout.failed</code></td><td>Bank rejected (wrong account, frozen). Actionable.</td></tr>
+      </tbody></table>
+    </section>
+
+    <section id="ev-dispute">
+      <h2>dispute.* events</h2>
+      <table><thead><tr><th>Event</th><th>When it fires</th></tr></thead><tbody>
+        <tr><td><code>dispute.opened</code></td><td>Chargeback received. Includes scheme deadline.</td></tr>
+        <tr><td><code>dispute.evidence_required</code></td><td>48h before scheme deadline &mdash; last call.</td></tr>
+        <tr><td><code>dispute.closed</code></td><td>Won, lost, or withdrawn. Final state.</td></tr>
+      </tbody></table>
+    </section>
+
+    <section id="ev-submerchant">
+      <h2>submerchant.* events</h2>
+      <table><thead><tr><th>Event</th><th>When it fires</th></tr></thead><tbody>
+        <tr><td><code>submerchant.kyb.approved</code></td><td>KYB complete, merchant live. Median ~35 min.</td></tr>
+        <tr><td><code>submerchant.kyb.rejected</code></td><td>KYB failed. Includes specific reason codes.</td></tr>
+        <tr><td><code>submerchant.risk_flagged</code></td><td>Ongoing monitoring surfaced a concern.</td></tr>
+      </tbody></table>
+    </section>
+  </div>
+</section>
+</main><div data-footer-mount></div><script src="../../shared/chrome.js"></script></body></html>

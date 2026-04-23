@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDKs & libraries | Tapped</title>
+<meta name="description" content="Tapped SDKs for Node, Swift, Kotlin, .NET, Ruby, and Go — plus a thin REST baseline for any language. Open-source, idempotent, and typed end to end.">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../shared/page.css">
+<style>
+.sdk-hero { padding: 56px 0 40px; background: linear-gradient(180deg, #0B1225 0%, #0E1530 100%); color:white; border-bottom:1px solid rgba(255,255,255,0.08); }
+.sdk-hero .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#22D3EE; margin-bottom:14px; display:inline-block; }
+.sdk-hero h1 { font-family:var(--font-display); font-size:48px; font-weight:600; letter-spacing:-0.02em; line-height:1.08; margin:0 0 14px; color:white; max-width:680px; }
+.sdk-hero p { font-size:17px; color:#B8C0D8; line-height:1.55; margin:0; max-width: 620px; }
+
+.sdk-grid { padding: 64px 0; display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.sdk-card { display:flex; flex-direction:column; background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 28px; transition: all 200ms; position:relative; overflow:hidden; }
+.sdk-card::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background: var(--brand-gradient); opacity:0; transition: opacity 200ms; }
+.sdk-card:hover { border-color: transparent; transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.sdk-card:hover::before { opacity:1; }
+.sdk-card .head { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.sdk-card .logo { width:44px; height:44px; border-radius:10px; display:grid; place-items:center; font-family:var(--font-mono); font-weight:700; color:white; font-size:13px; letter-spacing:0.02em; }
+.sdk-card .logo.node { background: linear-gradient(135deg, #539E43, #3B7F33); }
+.sdk-card .logo.swift { background: linear-gradient(135deg, #F05138, #C93A24); }
+.sdk-card .logo.kotlin { background: linear-gradient(135deg, #7F52FF, #5E3FCC); }
+.sdk-card .logo.dotnet { background: linear-gradient(135deg, #512BD4, #3A1F94); }
+.sdk-card .logo.ruby { background: linear-gradient(135deg, #CC342D, #8B1E19); }
+.sdk-card .logo.go { background: linear-gradient(135deg, #00ADD8, #007D9C); }
+.sdk-card .ver { font-family:var(--font-mono); font-size:10.5px; color: var(--fg-3); }
+.sdk-card h3 { font-family:var(--font-display); font-size:22px; letter-spacing:-0.015em; margin:0 0 6px; }
+.sdk-card .lang { font-family:var(--font-mono); font-size:11px; color: var(--fg-3); letter-spacing:0.06em; margin-bottom:14px; }
+.sdk-card p { font-size:14px; color: var(--fg-2); line-height:1.55; margin:0 0 16px; flex:1; }
+.sdk-card .install { font-family:var(--font-mono); font-size:12px; background:#0B1225; color:#E8ECF7; padding:10px 12px; border-radius:6px; margin-bottom:16px; overflow-x:auto; }
+.sdk-card .install .p { color:#67E8F9; }
+.sdk-card .footer { display:flex; gap:12px; padding-top:14px; border-top:1px solid var(--border-subtle); }
+.sdk-card .footer a { font-family:var(--font-mono); font-size:11.5px; color: var(--brand-cyan-700); font-weight:600; letter-spacing:0.02em; }
+.sdk-card .footer a:hover { color: var(--brand-magenta-500); }
+
+.sdk-common { padding: 72px 0 48px; background: var(--ink-50); }
+.sdk-common h2 { font-family:var(--font-display); font-size:32px; font-weight:600; letter-spacing:-0.02em; margin:0 0 40px; text-align:center; }
+.common-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.common-card { padding:20px; background: white; border-radius:10px; border:1px solid var(--border); }
+.common-card .n { font-family:var(--font-mono); font-size:10px; color: var(--fg-3); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-bottom:8px; }
+.common-card h4 { font-family:var(--font-display); font-size:16px; margin:0 0 8px; font-weight:600; letter-spacing:-0.01em; }
+.common-card p { font-size:13px; color: var(--fg-2); line-height:1.55; margin:0; }
+
+.sdk-rest { padding: 64px 0; }
+.sdk-rest .grid { display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items:center; }
+.sdk-rest h2 { font-family:var(--font-display); font-size:30px; font-weight:600; letter-spacing:-0.02em; margin:0 0 14px; }
+.sdk-rest p { font-size:16px; color:var(--fg-2); line-height:1.6; margin:0 0 14px; }
+.sdk-rest pre { background:#0B1225; color:#E8ECF7; padding:22px; border-radius:12px; font-family:var(--font-mono); font-size:12.5px; line-height:1.65; overflow-x:auto; }
+.sdk-rest pre .c { color:#6B7499; } .sdk-rest pre .k { color:#A78BFA; } .sdk-rest pre .s { color:#67E8F9; } .sdk-rest pre .n { color:#FBBF24; }
+
+@media (max-width: 960px) { .sdk-grid { grid-template-columns: 1fr 1fr; } .common-grid { grid-template-columns: 1fr 1fr; } .sdk-rest .grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .sdk-hero h1 { font-size:34px; } .sdk-grid { grid-template-columns: 1fr; } .common-grid { grid-template-columns: 1fr; } }
+</style>
+</head><body data-current="developers"><div data-nav-mount></div><main id="main">
+<nav class="breadcrumb container" aria-label="Breadcrumb"><ol><li><a href="../../Tapped Website.html">Home</a></li><li><a href="../developers.html">Developers</a></li><li aria-current="page">SDKs</li></ol></nav>
+
+<header class="sdk-hero"><div class="container">
+  <span class="eyebrow">SDKs &amp; libraries</span>
+  <h1>Six native SDKs. One REST baseline. All the same object model.</h1>
+  <p>Install with the package manager you already use. Every SDK is strongly typed, idempotent by default, and open-source on GitHub. If your language isn't listed, the REST API is the ground truth &mdash; every SDK wraps it.</p>
+</div></header>
+
+<section class="sdk-grid container">
+  <div class="sdk-card">
+    <div class="head"><div class="logo node">nd</div><span class="ver">v4.2.1 · MIT</span></div>
+    <h3>@tapped/node</h3><div class="lang">Node.js · TypeScript · 18+</div>
+    <p>Promise-based, isomorphic. Works in Cloudflare Workers, Vercel Edge, Deno, and vanilla Node. First-class TypeScript types &mdash; every field, every enum, every response shape.</p>
+    <div class="install"><span class="p">$</span> npm install @tapped/node</div>
+    <div class="footer"><a href="../developers/documentation.html#sdk-install">Docs →</a><a href="#">GitHub →</a><a href="#">Changelog →</a></div>
+  </div>
+
+  <div class="sdk-card">
+    <div class="head"><div class="logo swift">sw</div><span class="ver">v3.0.4 · MIT</span></div>
+    <h3>TappedSwift</h3><div class="lang">Swift · iOS 16+ · SPM</div>
+    <p>Swift Package Manager and CocoaPods. Ships with the Tap Core reader binding so your iOS app becomes a terminal with one import. async/await throughout.</p>
+    <div class="install"><span class="p">$</span> swift package add tapped-io/tapped-swift</div>
+    <div class="footer"><a href="../product/tap-core.html">Tap Core →</a><a href="#">GitHub →</a><a href="#">Changelog →</a></div>
+  </div>
+
+  <div class="sdk-card">
+    <div class="head"><div class="logo kotlin">kt</div><span class="ver">v3.1.0 · MIT</span></div>
+    <h3>tapped-android</h3><div class="lang">Kotlin · Android 10+ · Gradle</div>
+    <p>Published to Maven Central. Coroutine-native. Includes the Tap Core reader binding and a ready-to-drop Compose UI for the payment sheet if you want it.</p>
+    <div class="install"><span class="p">$</span> implementation("io.tapped:tapped-android:3.1.0")</div>
+    <div class="footer"><a href="../product/tap-core.html">Tap Core →</a><a href="#">GitHub →</a><a href="#">Changelog →</a></div>
+  </div>
+
+  <div class="sdk-card">
+    <div class="head"><div class="logo dotnet">.n</div><span class="ver">v2.4.0 · MIT</span></div>
+    <h3>Tapped.NET</h3><div class="lang">C# · .NET 6+ · NuGet</div>
+    <p>Targets netstandard2.1 and net6.0. Async/await end-to-end, with a synchronous wrapper for legacy. Integrates with IHttpClientFactory and the standard .NET logging stack.</p>
+    <div class="install"><span class="p">$</span> dotnet add package Tapped</div>
+    <div class="footer"><a href="../developers/api-reference.html">API ref →</a><a href="#">GitHub →</a><a href="#">Changelog →</a></div>
+  </div>
+
+  <div class="sdk-card">
+    <div class="head"><div class="logo ruby">rb</div><span class="ver">v2.2.3 · MIT</span></div>
+    <h3>tapped-ruby</h3><div class="lang">Ruby · 3.1+ · RubyGems</div>
+    <p>Rails-friendly. Ships ActiveSupport instrumenters, a Rack middleware for webhook signature verification, and a generator that scaffolds a working sub-merchant onboarding flow.</p>
+    <div class="install"><span class="p">$</span> gem install tapped</div>
+    <div class="footer"><a href="../developers/api-reference.html">API ref →</a><a href="#">GitHub →</a><a href="#">Changelog →</a></div>
+  </div>
+
+  <div class="sdk-card">
+    <div class="head"><div class="logo go">go</div><span class="ver">v2.0.1 · MIT</span></div>
+    <h3>tapped-go</h3><div class="lang">Go · 1.21+ · pkg.go.dev</div>
+    <p>Context-aware, zero-dependency (uses stdlib <code>net/http</code>). Typed errors for every scheme decline code. Structured logging hooks that drop straight into zap or slog.</p>
+    <div class="install"><span class="p">$</span> go get github.com/tapped-io/tapped-go</div>
+    <div class="footer"><a href="../developers/api-reference.html">API ref →</a><a href="#">GitHub →</a><a href="#">Changelog →</a></div>
+  </div>
+</section>
+
+<section class="sdk-common"><div class="container">
+  <h2>What every SDK gives you</h2>
+  <div class="common-grid">
+    <div class="common-card"><div class="n">01 — Idempotency</div><h4>Safe retries, always</h4><p>Every mutation accepts an <code>Idempotency-Key</code>. Retries never double-charge. Keys persist 24h.</p></div>
+    <div class="common-card"><div class="n">02 — Types</div><h4>Every field, every enum</h4><p>Strongly typed end to end. Autocomplete the entire API object graph, including error codes.</p></div>
+    <div class="common-card"><div class="n">03 — Observability</div><h4>Hooks &amp; logs</h4><p>Request/response hooks for tracing, structured logging, and on-failure diagnostics drop-in.</p></div>
+    <div class="common-card"><div class="n">04 — Webhooks</div><h4>Signature verification</h4><p>Built-in HMAC-SHA256 verification helpers. Raw-body access preserved across frameworks.</p></div>
+  </div>
+</div></section>
+
+<section class="sdk-rest container"><div class="grid">
+  <div>
+    <h2>No SDK in your stack? No problem.</h2>
+    <p>Every SDK is a wrapper around the REST API. Base URL <code style="font-family:var(--font-mono);font-size:0.9em;background:var(--ink-50);padding:1px 6px;border-radius:4px;">api.tapped.so</code>. TLS 1.3. Bearer-token auth. JSON in, JSON out. OpenAPI 3.1 spec published with every release.</p>
+    <p>If you're in Elixir, Rust, Python, PHP, Java &mdash; you're one HTTP client away from a working integration. Community SDKs for all of the above live on GitHub; they pass the same conformance suite we run against our first-party libraries.</p>
+    <div style="display:flex;gap:12px;margin-top:22px;"><a class="btn btn-primary" href="../developers/api-reference.html">Read the API reference</a><a class="btn btn-secondary" href="#">Download OpenAPI spec</a></div>
+  </div>
+  <div>
+<pre><span class="c"># curl, nothing else required</span>
+
+<span class="k">curl</span> https://api.tapped.so/v1/taps \
+  -H <span class="s">"Authorization: Bearer sk_live_3x9..."</span> \
+  -H <span class="s">"Idempotency-Key: $(uuidgen)"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "amount": 4850,
+    "currency": "SGD",
+    "submerchant": "sm_9T3xA...",
+    "device": "dev_ios_a81..."
+  }'</span>
+
+<span class="c"># → 200 OK
+# { "id": "tap_3K2...", "status": "approved", ... }</span></pre>
+  </div>
+</div></section>
+</main><div data-footer-mount></div><script src="../../shared/chrome.js"></script></body></html>

@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developers — SDKs, API reference &amp; quickstarts | Tapped</title>
+<meta name="description" content="Start building with Tapped in minutes. One SDK covers tap-to-pay, sub-merchant onboarding, and multi-currency settlement across 9 APAC markets. iOS, Android, Node, Go, Python.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://tapped.co/pages/developers.html">
+<meta property="og:title" content="Developers — Tapped">
+<meta property="og:description" content="SDKs, API reference, quickstarts. Sandbox in minutes.">
+<meta property="og:url" content="https://tapped.co/pages/developers.html">
+<meta property="og:image" content="https://tapped.co/assets/tapped-logo.png">
+<link rel="icon" href="../assets/tapped-logo.png">
+<link rel="stylesheet" href="../colors_and_type.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapped.co/"},{"@type":"ListItem","position":2,"name":"Developers","item":"https://tapped.co/pages/developers.html"}]}</script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { margin: 0; background: var(--bg); color: var(--fg-1); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  .btn { font-family: var(--font-sans); font-size: 14px; font-weight: 500; padding: 9px 16px; border-radius: 8px; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 8px; transition: all 160ms var(--ease-out); white-space: nowrap; cursor: pointer; }
+  .btn-primary { background: var(--ink-900); color: white; }
+  .btn-brand { background: var(--brand-gradient); color: white; box-shadow: var(--shadow-brand); padding: 11px 18px; font-weight: 600; }
+  .btn-brand:hover { transform: translateY(-1px); }
+  .btn-secondary { background: transparent; color: var(--fg-1); border-color: var(--border); }
+  .btn-secondary:hover { background: var(--ink-25); border-color: var(--border-strong); }
+  .btn-ghost { background: transparent; color: var(--fg-1); }
+  .btn-ghost:hover { background: var(--ink-50); }
+  .btn-arrow::after { content: "→"; font-family: var(--font-mono); transition: transform 160ms var(--ease-out); }
+  .btn-arrow:hover::after { transform: translateX(3px); }
+
+  .nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); background: rgba(255,255,255,0.85); border-bottom: 1px solid var(--border-subtle); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; }
+  .brand img.logo-img { height: 34px; width: auto; display: block; }
+  .nav-center { display: flex; gap: 4px; align-items: center; }
+  .nav-item > button { background: none; border: none; color: var(--fg-2); font-size: 14px; padding: 8px 14px; border-radius: 6px; cursor: pointer; transition: color 160ms; font-family: inherit; }
+  .nav-item > button:hover { color: var(--fg-1); }
+  a.nav-item > button { pointer-events: none; }
+  .nav-item[aria-current] > button { color: var(--fg-1); font-weight: 600; }
+  .nav-cta { display: flex; gap: 6px; align-items: center; }
+
+  .breadcrumb { padding: 24px 32px 0; }
+  .breadcrumb ol { list-style: none; display: flex; gap: 8px; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 500; }
+  .breadcrumb li { display: flex; align-items: center; gap: 8px; }
+  .breadcrumb li:not(:last-child)::after { content: "/"; color: var(--fg-4); }
+  .breadcrumb a { color: var(--fg-3); }
+  .breadcrumb a:hover { color: var(--fg-1); }
+  .breadcrumb [aria-current] { color: var(--fg-1); }
+
+  /* Hero — dark terminal feel */
+  .dv-hero { padding: 64px 0 48px; background: var(--ink-950); color: white; position: relative; overflow: hidden; }
+  .dv-hero::before { content: ""; position: absolute; inset: 0; background:
+    radial-gradient(circle at 12% 20%, rgba(34,211,238,0.12), transparent 45%),
+    radial-gradient(circle at 88% 70%, rgba(225,29,116,0.09), transparent 50%); pointer-events: none; }
+  .dv-hero .breadcrumb ol { color: #5A6486; }
+  .dv-hero .breadcrumb a { color: #8A94B0; }
+  .dv-hero .breadcrumb a:hover { color: white; }
+  .dv-hero .breadcrumb [aria-current] { color: white; }
+  .dv-hero-inner { position: relative; display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; padding-top: 28px; }
+  .dv-hero .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #67E8F9; margin-bottom: 18px; display: block; }
+  .dv-hero h1 { font-family: var(--font-display); font-size: 54px; font-weight: 600; letter-spacing: -0.024em; line-height: 1.04; margin: 0 0 18px; color: white; text-wrap: balance; }
+  .dv-hero h1 .hl { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .dv-hero .lede { font-size: 18px; line-height: 1.6; color: #B8C0D8; margin: 0 0 28px; max-width: 540px; }
+  .dv-hero .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .dv-hero .hero-ctas .btn-secondary { color: white; border-color: rgba(255,255,255,0.2); background: transparent; }
+  .dv-hero .hero-ctas .btn-secondary:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.35); }
+  .dv-hero .status-strip { display: inline-flex; gap: 14px; align-items: center; padding: 10px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; font-size: 13px; color: #B8C0D8; }
+  .dv-hero .status-strip .dot { width: 8px; height: 8px; border-radius: 50%; background: #22C55E; box-shadow: 0 0 0 4px rgba(34,197,94,0.18); }
+  .dv-hero .status-strip .sep { width: 1px; height: 12px; background: rgba(255,255,255,0.1); }
+  .dv-hero .status-strip a { color: #67E8F9; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* Terminal block */
+  .term { background: #050812; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.6); }
+  .term-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .term-lights { display: flex; gap: 6px; }
+  .term-lights span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+  .term-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: #8A94B0; }
+  .term-tabs { display: flex; gap: 2px; }
+  .term-tabs button { background: none; border: none; padding: 8px 12px; color: #5A6486; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; cursor: pointer; border-radius: 6px; transition: all 140ms; text-transform: uppercase; }
+  .term-tabs button.active { color: #22D3EE; background: rgba(34,211,238,0.08); }
+  .term-body { padding: 22px 24px; font-family: var(--font-mono); font-size: 13px; line-height: 1.75; color: #C1C8DB; min-height: 340px; white-space: pre; overflow-x: auto; }
+  .tok-k { color: #E11D74; font-weight: 600; }
+  .tok-s { color: #22D3EE; }
+  .tok-c { color: #5A6486; font-style: italic; }
+  .tok-f { color: #A78BFA; }
+  .tok-n { color: #F5F7FB; }
+  .tok-num { color: #FBBF24; }
+
+  /* Section heads */
+  .section-head { text-align: center; margin-bottom: 48px; max-width: 760px; margin-left: auto; margin-right: auto; }
+  .section-head.al { text-align: left; margin-left: 0; }
+  .section-head .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); margin-bottom: 14px; display: block; }
+  .section-head h2 { font-family: var(--font-display); font-size: 40px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 14px; color: var(--fg-1); }
+  .section-head p { font-size: 16px; color: var(--fg-2); line-height: 1.6; margin: 0; }
+
+  /* Quickstart */
+  .dv-quick { padding: 96px 0; background: var(--paper); }
+  .dv-qgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .dv-qcard { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; transition: all 180ms; position: relative; overflow: hidden; }
+  .dv-qcard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--brand-gradient); opacity: 0; transition: opacity 160ms; }
+  .dv-qcard:hover { border-color: var(--brand); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .dv-qcard:hover::before { opacity: 1; }
+  .dv-qnum { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--fg-3); margin-bottom: 14px; }
+  .dv-qcard h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.012em; color: var(--fg-1); margin: 0 0 8px; }
+  .dv-qcard p { font-size: 13.5px; color: var(--fg-2); line-height: 1.55; margin: 0 0 16px; flex: 1; }
+  .dv-qcard .pill { display: inline-flex; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand); font-weight: 600; }
+
+  /* SDK grid */
+  .dv-sdks { padding: 96px 0; background: var(--ink-25); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+  .dv-sdk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .dv-sdk { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; display: flex; gap: 16px; align-items: flex-start; transition: all 160ms; }
+  .dv-sdk:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+  .dv-sdk .sdk-ico { width: 46px; height: 46px; border-radius: 10px; display: grid; place-items: center; background: var(--ink-50); color: var(--fg-1); flex: none; font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+  .dv-sdk.ios .sdk-ico { background: #000; color: white; }
+  .dv-sdk.android .sdk-ico { background: #3DDC84; color: #0B1020; }
+  .dv-sdk.node .sdk-ico { background: #539E43; color: white; }
+  .dv-sdk.go .sdk-ico { background: #00ADD8; color: white; }
+  .dv-sdk.python .sdk-ico { background: #FFD43B; color: #2E5077; }
+  .dv-sdk.ruby .sdk-ico { background: #CC342D; color: white; }
+  .dv-sdk .sdk-meta { flex: 1; min-width: 0; }
+  .dv-sdk h4 { font-family: var(--font-display); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--fg-1); margin: 0 0 4px; }
+  .dv-sdk .ver { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--fg-3); margin-bottom: 10px; }
+  .dv-sdk code { display: block; font-family: var(--font-mono); font-size: 12px; background: #0B1020; color: #C1C8DB; padding: 10px 12px; border-radius: 6px; white-space: nowrap; overflow-x: auto; }
+  .dv-sdk code .tok-c { color: #5A6486; }
+  .dv-sdk code .tok-k { color: #E11D74; }
+
+  /* API surface */
+  .dv-api { padding: 96px 0; background: var(--paper); }
+  .dv-api-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .dv-api-card { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 28px; transition: all 160ms; }
+  .dv-api-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+  .dv-api-card .kicker { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 10px; }
+  .dv-api-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.012em; color: var(--fg-1); margin: 0 0 8px; }
+  .dv-api-card p { font-size: 14px; color: var(--fg-2); line-height: 1.6; margin: 0 0 16px; }
+  .dv-endpoints { display: flex; flex-direction: column; gap: 6px; }
+  .dv-endpoint { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--ink-25); border-radius: 8px; font-family: var(--font-mono); font-size: 12px; }
+  .dv-endpoint .method { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 7px; border-radius: 4px; flex: none; }
+  .dv-endpoint .method.get { background: rgba(34,211,238,0.12); color: #0891B2; }
+  .dv-endpoint .method.post { background: rgba(34,197,94,0.14); color: #0F8A4F; }
+  .dv-endpoint .method.delete { background: rgba(225,29,116,0.12); color: var(--brand-magenta-600); }
+  .dv-endpoint .path { color: var(--fg-1); font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dv-endpoint .label { font-size: 11px; color: var(--fg-3); font-family: var(--font-sans); }
+
+  /* Features strip */
+  .dv-features { padding: 96px 0; background: var(--ink-25); }
+  .dv-fgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .dv-fcard { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+  .dv-fcard .ico { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(34,211,238,0.08)); border: 1px solid rgba(124,58,237,0.18); color: var(--brand); display: grid; place-items: center; margin-bottom: 16px; }
+  .dv-fcard h4 { font-family: var(--font-display); font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: var(--fg-1); margin: 0 0 8px; }
+  .dv-fcard p { font-size: 13.5px; color: var(--fg-2); line-height: 1.6; margin: 0; }
+
+  /* CTA */
+  .dv-cta { padding: 40px 0 96px; background: var(--paper); }
+  .dv-cta-card { background: var(--ink-950); border-radius: 20px; padding: 56px; color: white; display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center; position: relative; overflow: hidden; }
+  .dv-cta-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(34,211,238,0.12), transparent 55%), radial-gradient(circle at 80% 80%, rgba(225,29,116,0.1), transparent 50%); pointer-events: none; }
+  .dv-cta-card > div { position: relative; }
+  .dv-cta-card .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #67E8F9; display: block; margin-bottom: 14px; }
+  .dv-cta-card h2 { font-family: var(--font-display); font-size: 36px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 14px; color: white; }
+  .dv-cta-card p { font-size: 16px; color: #B8C0D8; line-height: 1.55; margin: 0; max-width: 480px; }
+  .dv-cta-actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+  .dv-cta-card .btn-secondary { background: transparent; color: white; border-color: rgba(255,255,255,0.18); }
+  .dv-cta-card .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
+
+  /* Footer */
+  .footer { background: var(--ink-950); color: #97A2BF; padding: 80px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+  .footer-col h5 { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F7FB; margin: 0 0 18px; }
+  .footer-col a { display: block; color: #97A2BF; font-size: 14px; margin-bottom: 12px; transition: color 140ms; }
+  .footer-col a:hover { color: white; }
+  .footer-col p { font-size: 13px; color: #8A94B0; line-height: 1.6; max-width: 280px; margin: 16px 0 0; }
+  .footer-col img.logo-img { height: 26px; width: auto; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: #5A6486; }
+  .footer-bottom .lr { display: flex; gap: 24px; }
+  .footer-bottom .lr a { color: #5A6486; }
+  .footer-bottom .lr a:hover { color: white; }
+
+  @media (max-width: 1024px) {
+    .container { padding: 0 24px; }
+    .nav-center { display: none; }
+    .nav-cta .btn-ghost { display: none; }
+    .dv-hero-inner { grid-template-columns: 1fr; gap: 36px; }
+    .dv-hero h1 { font-size: 40px; }
+    .dv-qgrid { grid-template-columns: repeat(2, 1fr); }
+    .dv-sdk-grid { grid-template-columns: 1fr 1fr; }
+    .dv-api-grid { grid-template-columns: 1fr; }
+    .dv-fgrid { grid-template-columns: 1fr; }
+    .section-head h2 { font-size: 32px; }
+    .dv-cta-card { padding: 40px 32px; grid-template-columns: 1fr; }
+    .dv-cta-actions { justify-content: flex-start; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 16px; }
+    .nav-inner { padding: 12px 16px; }
+    .brand img.logo-img { height: 28px; }
+    .breadcrumb { padding: 18px 16px 0; }
+    .dv-hero h1 { font-size: 30px; }
+    .dv-hero .lede { font-size: 15px; }
+    .dv-qgrid { grid-template-columns: 1fr; }
+    .dv-sdk-grid { grid-template-columns: 1fr; }
+    .dv-cta-card { padding: 32px 20px; border-radius: 16px; }
+    .dv-cta-card h2 { font-size: 26px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== NAV =================== -->
+<nav class="nav" aria-label="Primary">
+  <div class="container nav-inner">
+    <a href="../Tapped Website.html" class="brand" aria-label="Tapped home"><img class="logo-img" src="../assets/tapped-logo.png" alt="Tapped"></a>
+    <div class="nav-center">
+      <a class="nav-item" href="../Tapped Website.html#verticals"><button>Solutions</button></a>
+      <a class="nav-item" href="../Tapped Website.html#onboard"><button>Product</button></a>
+      <a class="nav-item" href="markets.html"><button>Markets</button></a>
+      <a class="nav-item" href="developers.html" aria-current="page"><button>Developers</button></a>
+      <a class="nav-item" href="pricing.html"><button>Pricing</button></a>
+      <a class="nav-item" href="customers.html"><button>Customers</button></a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="developers/documentation.html">Docs</a>
+      <a class="btn btn-primary btn-arrow" href="company/contact.html">Talk to us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- =================== HERO =================== -->
+<header class="dv-hero">
+  <nav class="breadcrumb container" aria-label="Breadcrumb">
+    <ol><li><a href="../Tapped Website.html">Home</a></li><li aria-current="page">Developers</li></ol>
+  </nav>
+  <div class="container dv-hero-inner">
+    <div>
+      <span class="eyebrow">Developers · Build on Tapped</span>
+      <h1>One SDK. Tap-to-pay, onboarding, and payouts &mdash; <span class="hl">already certified.</span></h1>
+      <p class="lede">Skip the six months it takes to certify an EMV kernel, negotiate a sponsor bank, and write a sub-merchant KYB pipeline. Install the SDK, call <code style="font-family:var(--font-mono);font-size:14px;color:#67E8F9;">tapped.terminals.capture()</code>, ship.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-brand btn-arrow" href="developers/documentation.html">Read the docs</a>
+        <a class="btn btn-secondary" href="#quickstart">Quickstart in 5 min</a>
+      </div>
+      <div class="status-strip">
+        <span class="dot" aria-hidden="true"></span>
+        <span>All systems operational</span>
+        <span class="sep"></span>
+        <a href="developers/status.html">status.tapped.co →</a>
+      </div>
+    </div>
+
+    <!-- Terminal -->
+    <div class="term" id="term-root">
+      <div class="term-head">
+        <div class="term-lights"><span></span><span></span><span></span></div>
+        <div class="term-title">~/tapped-example · <span id="term-file">charge.js</span></div>
+        <div class="term-tabs" role="tablist">
+          <button class="active" data-lang="node">node</button>
+          <button data-lang="swift">swift</button>
+          <button data-lang="kotlin">kotlin</button>
+          <button data-lang="curl">curl</button>
+        </div>
+      </div>
+      <pre class="term-body" id="term-body"></pre>
+    </div>
+  </div>
+</header>
+
+<!-- =================== QUICKSTART =================== -->
+<section class="dv-quick" id="quickstart">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Quickstart · 5 minutes</span>
+      <h2>From zero to first live tap in four steps.</h2>
+      <p>Everything below works with a sandbox key. Flip a single flag to move to production once scheme certification is complete on your side.</p>
+    </div>
+    <div class="dv-qgrid">
+      <a class="dv-qcard" href="developers/documentation.html">
+        <div class="dv-qnum">Step 01</div>
+        <h3>Get sandbox keys</h3>
+        <p>One email, one workspace, two keys &mdash; publishable and secret. No sales call required for the Platform plan.</p>
+        <span class="pill">~30 seconds</span>
+      </a>
+      <a class="dv-qcard" href="developers/sdks.html">
+        <div class="dv-qnum">Step 02</div>
+        <h3>Install the SDK</h3>
+        <p>Pick a language. <code style="font-family:var(--font-mono);font-size:12.5px;">npm install @tapped/node</code>, <code style="font-family:var(--font-mono);font-size:12.5px;">pod 'TappedTerminal'</code>, or pull the Android AAR. Server + mobile share one API surface.</p>
+        <span class="pill">~2 minutes</span>
+      </a>
+      <a class="dv-qcard" href="developers/documentation.html#onboard">
+        <div class="dv-qnum">Step 03</div>
+        <h3>Onboard a sub-merchant</h3>
+        <p>POST to <code style="font-family:var(--font-mono);font-size:12.5px;">/v1/merchants</code>, follow the KYB link. Tapped Onboard returns a decision and funding-ready account.</p>
+        <span class="pill">~1 minute</span>
+      </a>
+      <a class="dv-qcard" href="developers/documentation.html#capture">
+        <div class="dv-qnum">Step 04</div>
+        <h3>Capture a tap</h3>
+        <p>Call <code style="font-family:var(--font-mono);font-size:12.5px;">terminals.capture({ amount })</code> from the phone. Customer taps. Webhook fires. You mark the order paid.</p>
+        <span class="pill">~2 minutes</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SDKS =================== -->
+<section class="dv-sdks">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">SDKs &amp; clients</span>
+      <h2>First-party SDKs for every stack you run.</h2>
+      <p>All SDKs share the same object model and error surface. Write against one, read the others.</p>
+    </div>
+    <div class="dv-sdk-grid">
+      <a class="dv-sdk ios" href="developers/sdks.html"><div class="sdk-ico">iOS</div><div class="sdk-meta"><h4>Tapped Terminal · iOS</h4><div class="ver">Swift · v3.4.1 · iOS 16+</div><code><span class="tok-c"># Podfile</span>
+pod <span class="tok-s">'TappedTerminal'</span>, <span class="tok-s">'~&gt; 3.4'</span></code></div></a>
+      <a class="dv-sdk android" href="developers/sdks.html"><div class="sdk-ico">AND</div><div class="sdk-meta"><h4>Tapped Terminal · Android</h4><div class="ver">Kotlin · v3.4.1 · API 24+</div><code><span class="tok-c">// build.gradle.kts</span>
+implementation(<span class="tok-s">"co.tapped:terminal:3.4.1"</span>)</code></div></a>
+      <a class="dv-sdk node" href="developers/sdks.html"><div class="sdk-ico">JS</div><div class="sdk-meta"><h4>Node.js</h4><div class="ver">TypeScript · v4.2.0</div><code><span class="tok-k">npm</span> install @tapped/node</code></div></a>
+      <a class="dv-sdk go" href="developers/sdks.html"><div class="sdk-ico">GO</div><div class="sdk-meta"><h4>Go</h4><div class="ver">v1.9.0 · go 1.21+</div><code><span class="tok-k">go</span> get tapped.co/go-tapped</code></div></a>
+      <a class="dv-sdk python" href="developers/sdks.html"><div class="sdk-ico">PY</div><div class="sdk-meta"><h4>Python</h4><div class="ver">v2.7.3 · py 3.10+</div><code><span class="tok-k">pip</span> install tapped</code></div></a>
+      <a class="dv-sdk ruby" href="developers/sdks.html"><div class="sdk-ico">RB</div><div class="sdk-meta"><h4>Ruby</h4><div class="ver">v1.5.2 · ruby 3.0+</div><code><span class="tok-k">gem</span> install tapped</code></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== API SURFACE =================== -->
+<section class="dv-api">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">API surface</span>
+      <h2>Four resource domains. Everything orthogonal.</h2>
+      <p>Terminals for taps. Merchants for sub-merchant onboarding. Payouts for settlement. Webhooks for everything else.</p>
+    </div>
+    <div class="dv-api-grid">
+      <div class="dv-api-card">
+        <div class="kicker">tap core · terminals</div>
+        <h3>Terminals</h3>
+        <p>Create a tap session, hand it to the phone SDK, capture the result. Idempotent with per-tap identity.</p>
+        <div class="dv-endpoints">
+          <div class="dv-endpoint"><span class="method post">POST</span><span class="path">/v1/terminals/sessions</span><span class="label">Create tap session</span></div>
+          <div class="dv-endpoint"><span class="method post">POST</span><span class="path">/v1/terminals/captures</span><span class="label">Capture authorisation</span></div>
+          <div class="dv-endpoint"><span class="method get">GET</span><span class="path">/v1/terminals/captures/:id</span><span class="label">Retrieve capture</span></div>
+          <div class="dv-endpoint"><span class="method post">POST</span><span class="path">/v1/refunds</span><span class="label">Refund a capture</span></div>
+        </div>
+      </div>
+      <div class="dv-api-card">
+        <div class="kicker">onboard · sub-merchants</div>
+        <h3>Merchants</h3>
+        <p>Create a sub-merchant, attach documents, receive a decision. KYB workflows are per-market; the API surface is unified.</p>
+        <div class="dv-endpoints">
+          <div class="dv-endpoint"><span class="method post">POST</span><span class="path">/v1/merchants</span><span class="label">Create sub-merchant</span></div>
+          <div class="dv-endpoint"><span class="method post">POST</span><span class="path">/v1/merchants/:id/documents</span><span class="label">Attach KYB evidence</span></div>
+          <div class="dv-endpoint"><span class="method get">GET</span><span class="path">/v1/merchants/:id</span><span class="label">Fetch status + decision</span></div>
+          <div class="dv-endpoint"><span class="method delete">DELETE</span><span class="path">/v1/merchants/:id</span><span class="label">Offboard sub-merchant</span></div>
+        </div>
+      </div>
+      <div class="dv-api-card">
+        <div class="kicker">ledger · payouts</div>
+        <h3>Payouts &amp; Balances</h3>
+        <p>Every tap lands in a Tapped balance per currency. Trigger payouts or schedule them; we handle T+1 across all live markets.</p>
+        <div class="dv-endpoints">
+          <div class="dv-endpoint"><span class="method get">GET</span><span class="path">/v1/balances</span><span class="label">All balances, per currency</span></div>
+          <div class="dv-endpoint"><span class="method post">POST</span><span class="path">/v1/payouts</span><span class="label">Trigger a payout</span></div>
+          <div class="dv-endpoint"><span class="method get">GET</span><span class="path">/v1/payouts/:id</span><span class="label">Payout + reconciliation</span></div>
+          <div class="dv-endpoint"><span class="method get">GET</span><span class="path">/v1/ledger/entries</span><span class="label">Stream ledger lines</span></div>
+        </div>
+      </div>
+      <div class="dv-api-card">
+        <div class="kicker">events · webhooks</div>
+        <h3>Webhooks</h3>
+        <p>60+ event types, signed with HMAC, retried with exponential backoff. All events are strictly ordered per-resource.</p>
+        <div class="dv-endpoints">
+          <div class="dv-endpoint"><span class="method post">POST</span><span class="path">/v1/webhook-endpoints</span><span class="label">Register endpoint</span></div>
+          <div class="dv-endpoint"><span class="method get">GET</span><span class="path">/v1/events</span><span class="label">List &amp; replay events</span></div>
+          <div class="dv-endpoint"><span class="method post">POST</span><span class="path">/v1/events/:id/replay</span><span class="label">Re-deliver single event</span></div>
+          <div class="dv-endpoint"><span class="method get">GET</span><span class="path">/v1/events/types</span><span class="label">Full event catalogue</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== BUILDER FEATURES =================== -->
+<section class="dv-features">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Built for builders</span>
+      <h2>The details that make integration actually enjoyable.</h2>
+    </div>
+    <div class="dv-fgrid">
+      <div class="dv-fcard"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div><h4>Idempotent by default</h4><p>Every mutating endpoint accepts an <code style="font-family:var(--font-mono);font-size:12px;">Idempotency-Key</code> header. Retry with the same key, get the same response &mdash; no double-charges at the till.</p></div>
+      <div class="dv-fcard"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h4>Versioned forever</h4><p>Pin an API version per workspace. We deprecate on a 24-month schedule &mdash; you upgrade when it's safe, not when it's convenient for us.</p></div>
+      <div class="dv-fcard"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 10h6M9 14h6"/></svg></div><h4>Signed webhook replay</h4><p>Every webhook is HMAC-signed. Replay any event for up to 30 days from the dashboard or via API &mdash; test integrations against real payloads.</p></div>
+      <div class="dv-fcard"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h4>Stage, sandbox, production</h4><p>Three isolated environments, each with its own key set. Sandbox accepts the full EMV test-card set; staging mirrors production at the scheme layer.</p></div>
+      <div class="dv-fcard"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div><h4>Multi-region endpoints</h4><p>SG, JP, and AU regional endpoints serve low-latency writes. PCI-scoped data stays in-region; control plane is globally consistent.</p></div>
+      <div class="dv-fcard"><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div><h4>On-call Slack with engineering</h4><p>Every Platform customer gets a shared Slack channel with named on-call engineers. No tier-1 deflection. 24/7 coverage across SG and UTC-5.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CTA =================== -->
+<section class="dv-cta">
+  <div class="container">
+    <div class="dv-cta-card">
+      <div>
+        <span class="eyebrow">Start building</span>
+        <h2>Sandbox is free and self-serve. Forever.</h2>
+        <p>Sandbox keys have no expiry and the full EMV test-card set attached. Build as much as you want before talking to us &mdash; or don't talk to us at all. The Platform plan is self-serve end-to-end.</p>
+      </div>
+      <div class="dv-cta-actions">
+        <a class="btn btn-brand btn-arrow" href="developers/documentation.html">Get sandbox keys</a>
+        <a class="btn btn-secondary" href="developers/api-reference.html">Read API reference</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><img class="logo-img" src="../assets/tapped-logo.png" alt="Tapped"><p>Embedded tap-to-pay infrastructure for vertical SaaS platforms across APAC.</p></div>
+      <div class="footer-col"><h5>Solutions</h5><a href="solutions/restaurant-pos.html">Restaurant POS</a><a href="solutions/salon-wellness.html">Salon &amp; Wellness</a><a href="solutions/field-services.html">Field Services</a><a href="solutions/healthcare.html">Healthcare</a><a href="solutions/hotels.html">Hotels</a></div>
+      <div class="footer-col"><h5>Product</h5><a href="product/tap-core.html">Tap Core</a><a href="product/tap-terminal.html">Tap Terminal</a><a href="product/tapped-onboard.html">Tapped Onboard</a><a href="product/tap-certify.html">Tap Certify</a><a href="product/tap-ledger.html">Tap Ledger</a></div>
+      <div class="footer-col"><h5>Developers</h5><a href="developers.html">Overview</a><a href="developers/documentation.html">Documentation</a><a href="developers/api-reference.html">API reference</a><a href="developers/sdks.html">SDKs</a><a href="developers/status.html">Status</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="company/about.html">About</a><a href="customers.html">Customers</a><a href="company/careers.html">Careers</a><a href="company/contact.html">Contact</a><a href="company/security.html">Security</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Tapped Pte Ltd &middot; 1 Raffles Place, Singapore</div>
+      <div class="lr"><a href="legal/privacy.html">Privacy</a><a href="legal/terms.html">Terms</a><a href="legal/pci.html">PCI</a><a href="legal/licences.html">Licences</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const snippets = {
+    node: {
+      file: 'charge.js',
+      html: `<span class="tok-c">// 1. sub-merchant has been onboarded</span>
+<span class="tok-k">import</span> Tapped <span class="tok-k">from</span> <span class="tok-s">'@tapped/node'</span>;
+<span class="tok-k">const</span> tapped = <span class="tok-k">new</span> <span class="tok-f">Tapped</span>(process.env.<span class="tok-n">TAPPED_KEY</span>);
+
+<span class="tok-c">// 2. create a tap session for an order</span>
+<span class="tok-k">const</span> session = <span class="tok-k">await</span> tapped.terminals.sessions.<span class="tok-f">create</span>({
+  merchant: <span class="tok-s">'mer_01HS...'</span>,
+  amount:   <span class="tok-num">3380</span>,        <span class="tok-c">// SGD 33.80</span>
+  currency: <span class="tok-s">'SGD'</span>,
+  reference:<span class="tok-s">'order_4019'</span>,
+});
+
+<span class="tok-c">// 3. hand session to phone SDK, await capture webhook</span>
+app.<span class="tok-f">post</span>(<span class="tok-s">'/webhooks/tapped'</span>, (req, res) =&gt; {
+  <span class="tok-k">if</span> (req.event === <span class="tok-s">'capture.succeeded'</span>) {
+    orders.<span class="tok-f">markPaid</span>(req.data.reference);
+  }
+  res.<span class="tok-f">sendStatus</span>(<span class="tok-num">200</span>);
+});`
+    },
+    swift: {
+      file: 'Checkout.swift',
+      html: `<span class="tok-k">import</span> TappedTerminal
+
+<span class="tok-c">// session comes from your backend</span>
+<span class="tok-k">let</span> session = <span class="tok-k">try await</span> api.<span class="tok-f">createTapSession</span>(orderId)
+
+<span class="tok-k">let</span> reader = <span class="tok-k">try await</span> Tapped.<span class="tok-f">terminal</span>(for: session)
+
+<span class="tok-k">let</span> result = <span class="tok-k">try await</span> reader.<span class="tok-f">capture</span>(
+    amount: .sgd(<span class="tok-num">33.80</span>),
+    onUpdate: { state <span class="tok-k">in</span>
+        ui.<span class="tok-f">show</span>(state)   <span class="tok-c">// .waitingForTap, .reading, .approved</span>
+    }
+)
+
+<span class="tok-k">switch</span> result {
+<span class="tok-k">case</span> .approved(<span class="tok-k">let</span> capture):
+    orders.<span class="tok-f">markPaid</span>(capture.reference)
+<span class="tok-k">case</span> .declined(<span class="tok-k">let</span> reason):
+    ui.<span class="tok-f">showError</span>(reason)
+}`
+    },
+    kotlin: {
+      file: 'Checkout.kt',
+      html: `<span class="tok-k">import</span> co.tapped.terminal.<span class="tok-n">TappedTerminal</span>
+
+<span class="tok-c">// session comes from your backend</span>
+<span class="tok-k">val</span> session = api.<span class="tok-f">createTapSession</span>(orderId)
+
+<span class="tok-k">val</span> reader  = TappedTerminal.<span class="tok-f">forSession</span>(<span class="tok-k">this</span>, session)
+
+<span class="tok-k">val</span> result = reader.<span class="tok-f">capture</span>(
+    amount   = Money(<span class="tok-num">33_80</span>, <span class="tok-s">"SGD"</span>),
+    onUpdate = { state -&gt; ui.<span class="tok-f">show</span>(state) }
+)
+
+<span class="tok-k">when</span> (result) {
+    <span class="tok-k">is</span> Approved -&gt; orders.<span class="tok-f">markPaid</span>(result.reference)
+    <span class="tok-k">is</span> Declined -&gt; ui.<span class="tok-f">showError</span>(result.reason)
+}`
+    },
+    curl: {
+      file: 'charge.sh',
+      html: `<span class="tok-c"># 1. create the sub-merchant session</span>
+<span class="tok-k">curl</span> https://api.tapped.co/v1/terminals/sessions \\
+  -u sk_live_<span class="tok-n">***</span>: \\
+  -H <span class="tok-s">'Idempotency-Key: order_4019'</span> \\
+  -d merchant=mer_01HS... \\
+  -d amount=<span class="tok-num">3380</span> \\
+  -d currency=SGD \\
+  -d reference=order_4019
+
+<span class="tok-c"># 2. return the session_token to the phone SDK</span>
+<span class="tok-c"># 3. webhook arrives when the customer taps</span>
+<span class="tok-k">POST</span> /webhooks/tapped
+<span class="tok-n">{</span>
+  <span class="tok-s">"type"</span>: <span class="tok-s">"capture.succeeded"</span>,
+  <span class="tok-s">"data"</span>: <span class="tok-n">{</span>
+    <span class="tok-s">"id"</span>: <span class="tok-s">"cap_01HS..."</span>,
+    <span class="tok-s">"amount"</span>: <span class="tok-num">3380</span>,
+    <span class="tok-s">"currency"</span>: <span class="tok-s">"SGD"</span>,
+    <span class="tok-s">"reference"</span>: <span class="tok-s">"order_4019"</span>
+  <span class="tok-n">}</span>
+<span class="tok-n">}</span>`
+    }
+  };
+
+  const body = document.getElementById('term-body');
+  const file = document.getElementById('term-file');
+  const tabs = document.querySelectorAll('.term-tabs button');
+  function show(lang){
+    tabs.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    body.innerHTML = snippets[lang].html;
+    file.textContent = snippets[lang].file;
+  }
+  tabs.forEach(b => b.addEventListener('click', () => show(b.dataset.lang)));
+  show('node');
+})();
+</script>
+
+</body>
+</html>

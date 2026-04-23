@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Press & News | Tapped</title>
+<meta name="description" content="Latest news, announcements, and coverage of Tapped.">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../shared/page.css">
+<style>
+.pr-hero { padding: 56px 0 36px; background: linear-gradient(180deg, #0B1225 0%, #0E1530 100%); color:white; }
+.pr-hero .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#22D3EE; margin-bottom:14px; display:inline-block; }
+.pr-hero h1 { font-family:var(--font-display); font-size:44px; font-weight:600; letter-spacing:-0.02em; line-height:1.08; margin:0 0 14px; color:white; }
+.pr-hero p { font-size:17px; color:#B8C0D8; line-height:1.55; margin:0 0 24px; max-width: 660px; }
+.pr-hero .links { display:flex; gap:24px; flex-wrap:wrap; font-family:var(--font-mono); font-size:12px; }
+.pr-hero .links a { color:#67E8F9; border-bottom:1px solid rgba(103,232,249,0.3); padding-bottom:2px; }
+.pr-hero .links a:hover { border-color:#67E8F9; }
+
+.pr-main { padding: 64px 0; }
+.pr-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 56px; align-items: start; }
+
+.pr-feature h2 { font-family:var(--font-mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--fg-3); font-weight:600; margin:0 0 20px; }
+.pr-feature .card { display: grid; grid-template-columns: 1.2fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: white; }
+.pr-feature .art { aspect-ratio: 4/3; background: linear-gradient(135deg, #6D28D9 0%, #E11D74 50%, #FB7185 100%); position: relative; overflow: hidden; }
+.pr-feature .art::before, .pr-feature .art::after { content: ""; position: absolute; border-radius: 50%; }
+.pr-feature .art::before { width: 280px; height: 280px; background: rgba(255,255,255,0.12); top: -80px; right: -60px; }
+.pr-feature .art::after { width: 180px; height: 180px; background: rgba(255,255,255,0.18); bottom: -40px; left: 40px; }
+.pr-feature .art .label { position: absolute; bottom: 24px; left: 24px; color: white; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+.pr-feature .txt { padding: 32px 28px; display: flex; flex-direction: column; }
+.pr-feature .tag { display: inline-block; align-self: flex-start; font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color: var(--brand-magenta-500); font-weight: 600; margin-bottom: 12px; }
+.pr-feature h3 { font-family:var(--font-display); font-size:26px; letter-spacing:-0.02em; line-height:1.2; margin:0 0 14px; font-weight:600; }
+.pr-feature p { font-size:15px; color:var(--fg-2); line-height:1.6; margin:0 0 18px; flex: 1; }
+.pr-feature .meta { font-family:var(--font-mono); font-size:11.5px; color:var(--fg-3); letter-spacing:0.04em; }
+
+.pr-list { margin-top: 48px; }
+.pr-list h2 { font-family:var(--font-mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--fg-3); font-weight:600; margin:0 0 20px; }
+.pr-item { display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-bottom: 1px solid var(--border-subtle); align-items: start; }
+.pr-item:last-child { border-bottom: none; }
+.pr-item .date { font-family:var(--font-mono); font-size:12px; color:var(--fg-3); padding-top:2px; }
+.pr-item .date b { display:block; color:var(--fg-1); font-size:14px; font-weight:600; margin-top:2px; }
+.pr-item h3 { font-family:var(--font-display); font-size:18px; letter-spacing:-0.015em; margin:0 0 6px; font-weight:600; }
+.pr-item h3 a { color: var(--fg-1); }
+.pr-item h3 a:hover { color: var(--brand-magenta-500); }
+.pr-item p { font-size:14px; color:var(--fg-2); line-height:1.55; margin:0 0 8px; }
+.pr-item .tag { font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--fg-3); font-weight:600; }
+.pr-item .tag b { color: var(--brand-cyan-700); font-weight:600; }
+
+.pr-side { position: sticky; top: 100px; display:flex; flex-direction:column; gap: 28px; }
+.pr-kit { padding: 24px; border: 1px solid var(--border); border-radius: 12px; background: white; }
+.pr-kit h3 { font-family:var(--font-display); font-size:18px; letter-spacing:-0.015em; margin:0 0 8px; font-weight:600; }
+.pr-kit p { font-size:13.5px; color:var(--fg-2); line-height:1.55; margin:0 0 16px; }
+.pr-kit .dl { display:block; padding:10px 14px; border:1px solid var(--border); border-radius:8px; font-family:var(--font-mono); font-size:11.5px; color:var(--fg-1); margin-bottom:8px; }
+.pr-kit .dl:hover { border-color: var(--brand-cyan-700); color: var(--brand-cyan-700); }
+.pr-kit .dl .sz { float:right; color: var(--fg-3); font-size:10px; }
+
+.pr-contact { padding: 24px; border: 1px solid var(--border); border-radius: 12px; background: var(--ink-50); }
+.pr-contact h3 { font-family:var(--font-display); font-size:18px; letter-spacing:-0.015em; margin:0 0 8px; font-weight:600; }
+.pr-contact p { font-size:13.5px; color:var(--fg-2); line-height:1.55; margin:0 0 14px; }
+.pr-contact .em { font-family:var(--font-mono); font-size:13px; color: var(--brand-magenta-500); font-weight:600; display:block; margin-bottom:10px; }
+
+.pr-coverage { padding: 72px 0; background: var(--ink-50); border-top: 1px solid var(--border-subtle); }
+.pr-coverage h2 { font-family:var(--font-display); font-size:24px; font-weight:600; letter-spacing:-0.015em; margin:0 0 28px; }
+.pr-coverage .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.pr-coverage .cov { padding: 20px; background: white; border: 1px solid var(--border); border-radius: 10px; transition: all 160ms; display:block; }
+.pr-coverage .cov:hover { border-color: var(--brand-cyan-700); transform: translateY(-2px); }
+.pr-coverage .cov .pub { font-family:var(--font-display); font-size:14px; font-weight:600; margin-bottom:8px; letter-spacing:-0.01em; }
+.pr-coverage .cov p { font-size:13px; color:var(--fg-2); line-height:1.5; margin:0 0 10px; }
+.pr-coverage .cov .meta { font-family:var(--font-mono); font-size:10.5px; color:var(--fg-3); letter-spacing:0.04em; }
+
+@media (max-width: 900px) {
+  .pr-layout { grid-template-columns: 1fr; }
+  .pr-feature .card { grid-template-columns: 1fr; }
+  .pr-coverage .grid { grid-template-columns: 1fr 1fr; }
+  .pr-item { grid-template-columns: 1fr; gap:8px; }
+}
+</style>
+</head><body data-current="company"><div data-nav-mount></div><main id="main">
+
+<header class="pr-hero"><div class="container">
+  <span class="eyebrow">Press &amp; News</span>
+  <h1>What's new at Tapped.</h1>
+  <p>Announcements, coverage, and press resources. For briefings, interviews, or executive quotes, reach our comms team directly.</p>
+  <div class="links">
+    <a href="#latest">Latest news</a>
+    <a href="#kit">Press kit</a>
+    <a href="#contact">Press contact</a>
+    <a href="#coverage">Coverage</a>
+  </div>
+</div></header>
+
+<section class="pr-main"><div class="container pr-layout">
+  <div>
+    <div class="pr-feature" id="latest">
+      <h2>Featured</h2>
+      <article class="card">
+        <div class="art"><span class="label">Announcement · 2026-03-14</span></div>
+        <div class="txt">
+          <span class="tag">Product announcement</span>
+          <h3>Tapped introduces split payouts &mdash; one tap, many merchants, atomic settlement.</h3>
+          <p>The new <code style="font-family:var(--font-mono);font-size:0.9em;background:var(--ink-50);padding:1px 5px;border-radius:3px;">splits</code> parameter lets platforms route portions of a single tap to multiple sub-merchants in one authorisation. Marketplace rent, rideshare driver splits, shared-commission retail. Available in all twelve markets on March 14.</p>
+          <div class="meta">March 14, 2026 · 3 min read · By Maya Tanaka, CEO</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="pr-list">
+      <h2>All announcements</h2>
+      
+  <article class="pr-item">
+    <div class="date">Mar<b>06, 2026</b></div>
+    <div>
+      <h3><a href="#">Tapped launches Vietnam with NAPAS domestic rails and VND settlement</a></h3>
+      <p>Platforms from HCMC to Hanoi can now accept cards and settle in local currency same-day, with scheme certifications already in place. Live in sandbox; general availability on March 23.</p>
+      <span class="tag">· <b>Product</b></span>
+    </div>
+  </article>
+  <article class="pr-item">
+    <div class="date">Feb<b>22, 2026</b></div>
+    <div>
+      <h3><a href="#">Tap Core 3.0 cuts median tap-to-auth latency by 40%</a></h3>
+      <p>New cryptographic pipeline takes median round-trip from 680 ms to 410 ms. Shipped to all iOS and Android SDKs with full backwards compatibility.</p>
+      <span class="tag">· <b>Product</b></span>
+    </div>
+  </article>
+  <article class="pr-item">
+    <div class="date">Feb<b>04, 2026</b></div>
+    <div>
+      <h3><a href="#">Tapped closes $85M Series C led by Gradient Ventures</a></h3>
+      <p>Capital funds Malaysia and Vietnam expansion, doubles the engineering team, and extends Tap Ledger to two additional currencies. Sequoia SEA and Openspace lead follow-on.</p>
+      <span class="tag">· <b>Funding</b></span>
+    </div>
+  </article>
+  <article class="pr-item">
+    <div class="date">Jan<b>18, 2026</b></div>
+    <div>
+      <h3><a href="#">Tap Ledger adds GraphQL API &mdash; reconcile any range, any shape, one request</a></h3>
+      <p>Platforms can now query their ledger with a single GraphQL call. Legacy REST ledger endpoints remain, fully supported.</p>
+      <span class="tag">· <b>Product</b></span>
+    </div>
+  </article>
+  <article class="pr-item">
+    <div class="date">Dec<b>09, 2025</b></div>
+    <div>
+      <h3><a href="#">Tapped partners with Kanpai.POS to power 4,200 F&amp;B merchants across PH and SG</a></h3>
+      <p>Kanpai switches off legacy card acquirer integrations in favour of Tapped end-to-end. Onboarding time drops from 23 days to under an hour.</p>
+      <span class="tag">· <b>Partnership</b></span>
+    </div>
+  </article>
+  <article class="pr-item">
+    <div class="date">Nov<b>11, 2025</b></div>
+    <div>
+      <h3><a href="#">Tapped granted MAS Major Payment Institution licence in Singapore</a></h3>
+      <p>Upgrade from Standard Payment Institution; unlocks higher transaction ceilings and cross-border payment services under the Payment Services Act.</p>
+      <span class="tag">· <b>Regulatory</b></span>
+    </div>
+  </article>
+  <article class="pr-item">
+    <div class="date">Oct<b>22, 2025</b></div>
+    <div>
+      <h3><a href="#">Tapped hits 150,000 sub-merchants across APAC &mdash; 85% phone-based acceptance</a></h3>
+      <p>Platform-onboarded merchants now process over seven billion dollars a year, with phone-based Tap-to-Pay outpacing fixed terminal acceptance for the first time.</p>
+      <span class="tag">· <b>Milestone</b></span>
+    </div>
+  </article>
+    </div>
+  </div>
+
+  <aside class="pr-side">
+    <div class="pr-kit" id="kit">
+      <h3>Press kit</h3>
+      <p>Logos, executive photos, product screenshots, and brand guidelines in one download. Use without permission provided attribution is accurate.</p>
+      <a class="dl" href="#">Tapped wordmark (SVG + PNG) <span class="sz">2.1 MB</span></a>
+      <a class="dl" href="#">Brand guidelines PDF <span class="sz">4.8 MB</span></a>
+      <a class="dl" href="#">Leadership photos (ZIP) <span class="sz">18.4 MB</span></a>
+      <a class="dl" href="#">Product screenshots (ZIP) <span class="sz">24.2 MB</span></a>
+      <a class="dl" href="#">Full press kit (ZIP) <span class="sz">54.6 MB</span></a>
+    </div>
+
+    <div class="pr-contact" id="contact">
+      <h3>Press contact</h3>
+      <p>For media enquiries, briefings, interviews, and exclusive-access requests. We'll respond within one business day, usually within four hours.</p>
+      <span class="em">press@tapped.so</span>
+      <p style="font-size:12.5px; color:var(--fg-3); margin:0;">For investor and analyst enquiries: <span style="font-family:var(--font-mono);color:var(--brand-cyan-700);">ir@tapped.so</span></p>
+    </div>
+  </aside>
+</div></section>
+
+<section class="pr-coverage" id="coverage"><div class="container">
+  <h2>Selected coverage</h2>
+  <div class="grid">
+  <a class="cov" href="#">
+    <div class="pub">TechCrunch</div>
+    <p>"The payments network quietly becoming essential to APAC SaaS."</p>
+    <div class="meta">March 2026</div>
+  </a>
+  <a class="cov" href="#">
+    <div class="pub">DealStreetAsia</div>
+    <p>Tapped raises $85M Series C; Gradient leads amid regional fintech correction.</p>
+    <div class="meta">February 2026</div>
+  </a>
+  <a class="cov" href="#">
+    <div class="pub">The Ken</div>
+    <p>How Tapped solved sub-merchant onboarding &mdash; and what it means for the next wave.</p>
+    <div class="meta">January 2026</div>
+  </a>
+  <a class="cov" href="#">
+    <div class="pub">Nikkei Asia</div>
+    <p>Inside the startup making every iPhone in Manila a card terminal.</p>
+    <div class="meta">December 2025</div>
+  </a>
+  <a class="cov" href="#">
+    <div class="pub">Tech in Asia</div>
+    <p>Tapped hits 150,000 sub-merchants; phone-acceptance outpaces traditional terminals.</p>
+    <div class="meta">October 2025</div>
+  </a>
+  <a class="cov" href="#">
+    <div class="pub">Business Times SG</div>
+    <p>MAS grants Major Payment Institution licence to APAC-native fintech.</p>
+    <div class="meta">November 2025</div>
+  </a>
+  <a class="cov" href="#">
+    <div class="pub">Rest of World</div>
+    <p>The quiet infrastructure powering Southeast Asia vertical-SaaS boom.</p>
+    <div class="meta">September 2025</div>
+  </a>
+  <a class="cov" href="#">
+    <div class="pub">The Low-Down</div>
+    <p>Why Tapped matters more than the next BNPL.</p>
+    <div class="meta">August 2025</div>
+  </a></div>
+</div></section>
+
+</main><div data-footer-mount></div><script src="../../shared/chrome.js"></script></body></html>

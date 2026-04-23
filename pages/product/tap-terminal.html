@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tap Terminal — PIN-on-Glass SDK for any phone | Tapped</title>
+<meta name="description" content="Turn any NFC-capable Android or iPhone into a certified card terminal. PCI MPoC-certified SDK with PIN-on-Glass, no hardware, no leases.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://tapped.co/pages/product/tap-terminal.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Tapped"><meta property="og:title" content="Tap Terminal — PIN-on-Glass SDK for any phone | Tapped"><meta property="og:description" content="Turn any NFC-capable Android or iPhone into a certified card terminal. PCI MPoC-certified SDK with PIN-on-Glass, no hardware, no leases."><meta property="og:url" content="https://tapped.co/pages/product/tap-terminal.html"><meta property="og:image" content="https://tapped.co/assets/tapped-logo.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Tap Terminal — PIN-on-Glass SDK for any phone | Tapped">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css"><link rel="stylesheet" href="../../shared/page.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Tapped","legalName":"Tapped Pte Ltd","url":"https://tapped.co/","logo":"https://tapped.co/assets/tapped-logo.png","areaServed":["SG","JP","HK","MY","TH","ID","PH","VN","KR"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tap Terminal","description":"PCI MPoC-certified PIN-on-Glass SDK for NFC-capable Android and iPhone.","url":"https://tapped.co/pages/product/tap-terminal.html","inLanguage":"en","datePublished":"2026-04-18","dateModified":"2026-04-18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapped.co/"},{"@type":"ListItem","position":2,"name":"Product","item":"https://tapped.co/pages/product/"},{"@type":"ListItem","position":3,"name":"Tap Terminal","item":"https://tapped.co/pages/product/tap-terminal.html"}]}</script>
+<style>
+  .tt-hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 960px) { .tt-hero-grid { grid-template-columns: 1fr; } }
+  .tt-phone-wrap { position: relative; display: flex; justify-content: center; padding: 20px 0; }
+  .tt-phone { position: relative; width: 300px; height: 600px; background: #0B1225; border-radius: 42px; border: 1px solid rgba(124,58,237,0.25); box-shadow: 0 40px 80px -20px rgba(10, 15, 40, 0.5), inset 0 0 0 2px rgba(255,255,255,0.04); overflow: hidden; }
+  .tt-phone::before { content: ""; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 90px; height: 24px; background: #000; border-radius: 14px; z-index: 3; }
+  .tt-screen { position: absolute; inset: 8px; border-radius: 36px; background: linear-gradient(180deg, #0E1530 0%, #131A3B 50%, #0B1225 100%); overflow: hidden; padding: 52px 22px 28px; display: flex; flex-direction: column; }
+  .tt-status { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.55); margin-bottom: 18px; padding: 0 4px; }
+  .tt-brand { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .tt-amt { font-family: var(--font-display); font-size: 48px; font-weight: 600; color: white; letter-spacing: -0.02em; line-height: 1; margin-bottom: 4px; }
+  .tt-to { font-size: 12px; color: rgba(255,255,255,0.55); margin-bottom: 22px; }
+  .tt-ring { position: relative; margin: 10px auto 22px; width: 178px; height: 178px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .tt-ring::before, .tt-ring::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid rgba(34,211,238,0.4); animation: tt-ping 2.4s ease-out infinite; }
+  .tt-ring::after { animation-delay: 1.2s; }
+  @keyframes tt-ping { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(1.4); opacity: 0; } }
+  .tt-ring-inner { position: relative; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle, rgba(34,211,238,0.2), rgba(124,58,237,0.15) 60%, transparent); display: flex; align-items: center; justify-content: center; z-index: 2; border: 1px solid rgba(34,211,238,0.35); }
+  .tt-ring-inner svg { color: #22D3EE; }
+  .tt-instr { text-align: center; font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+  .tt-sub { text-align: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(34,211,238,0.9); margin-bottom: 18px; }
+  .tt-meta-row { display: flex; justify-content: space-between; padding: 10px 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; margin-top: auto; font-family: var(--font-mono); font-size: 10.5px; color: rgba(255,255,255,0.6); }
+  .tt-meta-row .v { color: #22D3EE; }
+  .tt-card { position: absolute; right: -50px; top: 250px; width: 200px; height: 124px; background: linear-gradient(135deg, #1F2547, #2D1E47); border-radius: 10px; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6); transform: rotate(-8deg); border: 1px solid rgba(255,255,255,0.1); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; z-index: 4; animation: tt-cardfloat 3.6s ease-in-out infinite; }
+  @keyframes tt-cardfloat { 0%, 100% { transform: rotate(-8deg) translateY(0); } 50% { transform: rotate(-8deg) translateY(-6px); } }
+  .tt-card .chip { width: 26px; height: 20px; background: linear-gradient(135deg, #D4AF37, #A88A2A); border-radius: 4px; }
+  .tt-card .brand { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); align-self: flex-end; }
+  .tt-card .num { font-family: var(--font-mono); font-size: 12px; color: white; letter-spacing: 0.1em; }
+  .tt-card .wifi { position: absolute; top: 12px; right: 12px; color: rgba(255,255,255,0.55); transform: rotate(90deg); }
+
+  .tt-specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 8px 0 28px; }
+  .tt-spec { padding: 18px 18px; background: var(--paper); border: 1px solid var(--border); border-radius: 12px; }
+  .tt-spec .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 8px; }
+  .tt-spec .v { font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--fg-1); letter-spacing: -0.01em; }
+  .tt-spec .v small { font-size: 13px; color: var(--fg-3); font-weight: 400; font-family: var(--font-sans); }
+  @media (max-width: 780px) { .tt-specs { grid-template-columns: 1fr 1fr; } }
+</style>
+</head><body>
+<nav class="nav" aria-label="Primary"><div class="container nav-inner">
+    <a href="../../Tapped Website.html" class="brand" aria-label="Tapped home"><img class="logo-img" src="../../assets/tapped-logo.png" alt="Tapped" width="34" height="34"></a>
+    <div class="nav-center">
+      <div class="nav-item" data-mega="solutions"><button aria-haspopup="true">Solutions <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-mega" style="min-width:560px;">
+        <a href="../solutions/restaurant-pos.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div><div><span class="nm">Restaurant POS</span><span class="nd">Tap at the table or counter</span></div></a>
+        <a href="../solutions/salon-wellness.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0 1 18 0"/></svg></div><div><span class="nm">Salon &amp; Wellness</span><span class="nd">Embed into booking flows</span></div></a>
+        <a href="../solutions/field-services.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7"/></svg></div><div><span class="nm">Field Services</span><span class="nd">Pay at the customer's door</span></div></a>
+        <a href="../solutions/healthcare.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19v-6m-3 3h6"/></svg></div><div><span class="nm">Healthcare</span><span class="nd">Clinic copay collections</span></div></a>
+        <a href="../solutions/hotels.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20M3 20V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12"/></svg></div><div><span class="nm">Hotels</span><span class="nd">PMS folio checkout</span></div></a>
+      </div></div>
+      <div class="nav-item" data-mega="product"><button aria-haspopup="true">Product <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-mega" style="min-width:620px;">
+        <a href="tap-core.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div><div><span class="nm">Tap Core</span><span class="nd">Certified EMV kernels &amp; rails</span></div></a>
+        <a href="tap-terminal.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="14" height="20" x="5" y="2" rx="2"/></svg></div><div><span class="nm">Tap Terminal</span><span class="nd">PIN-on-Glass SDK</span></div></a>
+        <a href="tapped-onboard.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div><div><span class="nm">Tapped Onboard</span><span class="nd">PSP-agnostic KYB</span></div></a>
+        <a href="tap-certify.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1"/></svg></div><div><span class="nm">Tap Certify</span><span class="nd">Scheme &amp; regulator filings</span></div></a>
+        <a href="tap-ledger.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v4H3zM3 11h12v10H3zM18 11h3v10h-3z"/></svg></div><div><span class="nm">Tap Ledger</span><span class="nd">Multi-currency payouts</span></div></a>
+      </div></div>
+      <a class="nav-item" href="../markets.html"><button>Markets</button></a>
+      <a class="nav-item" href="../developers/documentation.html"><button>Developers</button></a>
+      <a class="nav-item" href="../../Tapped Website.html#pricing"><button>Pricing</button></a>
+    </div>
+    <div class="nav-cta"><a class="btn btn-ghost" href="../developers/documentation.html">Docs</a><a class="btn btn-brand btn-arrow" href="../company/contact.html">Talk to sales</a></div>
+  </div></nav>
+
+<main id="main">
+<nav class="breadcrumb container" aria-label="Breadcrumb"><ol><li><a href="../../Tapped Website.html">Home</a></li><li><a href="../../Tapped Website.html#how">Product</a></li><li aria-current="page">Tap Terminal</li></ol></nav>
+
+<header class="sub-hero"><div class="container"><div class="tt-hero-grid">
+  <div>
+    <span class="eyebrow">Product · Tap Terminal</span>
+    <h1>Every phone your merchants already own, <span class="portable">now a certified card terminal.</span></h1>
+    <p class="lede">Tap Terminal is our PCI MPoC-certified SDK for Android 9+ and iPhone XS+. Drop in three lines of code and your merchants accept contactless Visa, Mastercard, JCB, AmEx, and UnionPay &mdash; including PIN-on-Glass for high-value transactions &mdash; on the device they already use to take orders. No readers. No couriers. No leasing contracts.</p>
+    <div class="sub-hero-cta">
+      <a class="btn btn-brand btn-arrow" href="../company/contact.html">Talk to sales</a>
+      <a class="btn btn-secondary" href="../developers/documentation.html">Read the docs</a>
+    </div>
+  </div>
+  <div class="tt-phone-wrap" aria-label="Illustration: a phone prompting a contactless tap with an incoming card">
+    <div class="tt-phone">
+      <div class="tt-screen">
+        <div class="tt-status"><span>9:41</span><span>●●● 5G</span></div>
+        <div class="tt-brand">Your POS</div>
+        <div class="tt-amt">SGD 33.80</div>
+        <div class="tt-to">Table A12 &middot; order #4019</div>
+        <div class="tt-ring">
+          <div class="tt-ring-inner"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12a7 7 0 0 1 14 0M8.5 12a3.5 3.5 0 0 1 7 0M12 12h.01"/></svg></div>
+        </div>
+        <div class="tt-instr">Hold card to the back of phone</div>
+        <div class="tt-sub">Powered by Tap Terminal</div>
+        <div class="tt-meta-row"><span>rt <span class="v">612 ms</span></span><span>MPoC <span class="v">v1.1</span></span></div>
+      </div>
+      <div class="tt-card">
+        <svg class="wifi" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+        <div class="chip"></div>
+        <div class="num">4242 •••• 9017</div>
+        <div class="brand">VISA</div>
+      </div>
+    </div>
+  </div>
+</div></div></header>
+
+<article class="sub-article container"><div class="sub-article-grid"><div class="sub-article-body">
+
+<section aria-labelledby="s0"><h2 id="s0">Three lines, one tap, zero hardware</h2>
+<p>Tap Terminal is installed as a native module in your existing mobile app &mdash; the one your merchants already use for orders, bookings, or dispatch. When it&rsquo;s time to take payment, your app calls <code>tapTerminal.present(intent)</code> and the SDK takes over: renders the tap UI, drives the NFC radio, runs the EMV kernel, captures PIN if the cardholder-verification method requires it, and returns a signed transaction result.</p>
+<pre><code><span class="c">// React Native &mdash; same shape for Swift and Kotlin</span>
+<span class="k">import</span> <span class="n">{ TapTerminal }</span> <span class="k">from</span> <span class="s">'@tapped/terminal-rn'</span>;
+
+<span class="k">const</span> <span class="n">result</span> = <span class="k">await</span> <span class="n">TapTerminal</span>.<span class="f">present</span>({
+  amount: <span class="s">3380</span>,         <span class="c">// minor units</span>
+  currency: <span class="s">'SGD'</span>,
+  merchantId: <span class="s">'mer_8Q2'</span>,
+  reference: <span class="s">'ord_4019'</span>
+});
+<span class="c">// → { status: 'approved', tx: 'tx_01HNZ9...', cryptogram: '9F26...' }</span></code></pre>
+<p>That&rsquo;s the whole integration. Sandbox is a mock kernel; production is the real one. No compile flags to flip.</p>
+</section>
+
+<section aria-labelledby="s1"><h2 id="s1">The specs that matter</h2>
+<div class="tt-specs">
+  <div class="tt-spec"><div class="k">Android min</div><div class="v">9.0<small> · API 28</small></div></div>
+  <div class="tt-spec"><div class="k">iPhone min</div><div class="v">XS<small> · iOS 16+</small></div></div>
+  <div class="tt-spec"><div class="k">Median tap</div><div class="v">612<small> ms</small></div></div>
+  <div class="tt-spec"><div class="k">SDK size</div><div class="v">2.4<small> MB</small></div></div>
+</div>
+<ul>
+  <li><strong>PIN-on-Glass</strong> certified to PCI MPoC v1.1 for transactions above the local CVM limit. No separate build.</li>
+  <li><strong>Offline queue</strong> for up to 2,000 taps &mdash; auto-submits when connectivity returns, with scheme-approved force-post handling.</li>
+  <li><strong>Device attestation</strong> on every tap &mdash; SafetyNet / Play Integrity on Android, DeviceCheck on iOS. Rooted and jailbroken devices are rejected at SDK init.</li>
+  <li><strong>Theme-aware</strong> UI &mdash; the tap surface uses your app&rsquo;s colour tokens by default; opt into a fully-custom presentation for flagship flows.</li>
+  <li><strong>Accessibility built in</strong> &mdash; VoiceOver / TalkBack, dynamic type, high-contrast PIN pad, haptic feedback on success and failure.</li>
+</ul>
+</section>
+
+<section aria-labelledby="s2"><h2 id="s2">Tipping, split checks, refunds, voids</h2>
+<p>Tap Terminal is more than a card reader replacement. The SDK exposes higher-level primitives for the flows that actually happen at the table, the front desk, and the customer&rsquo;s driveway.</p>
+<ul>
+  <li><strong>Pre-auth + capture.</strong> Authorise on check-in, post incidentals to a folio, capture on check-out. Used by every hotel integration.</li>
+  <li><strong>Tip prompt.</strong> Server-driven, scheme-compliant, rendered pre-auth so the tip is captured inside the cryptogram. No two-step signature workflow.</li>
+  <li><strong>Split checks.</strong> One tap per payer; Tapped reconciles the group into a single order in the webhook.</li>
+  <li><strong>Partial refunds.</strong> Refund the original transaction up to 180 days later &mdash; routes via the same scheme path, same signed cryptogram chain.</li>
+  <li><strong>Void before batch cut-off.</strong> Reverse mistakes in the same business day with no scheme dispute ever opening.</li>
+</ul>
+</section>
+
+<section aria-labelledby="s3"><h2 id="s3">Why not use Apple&rsquo;s Tap to Pay on iPhone or Android&rsquo;s Tap to Pay?</h2>
+<p>You can &mdash; and in markets where Apple and Google offer their own first-party tap-to-pay, Tap Terminal routes through those APIs transparently. But the first-party options come with limits: Apple&rsquo;s Tap to Pay is US-and-select-markets only, typically gated to specific PSPs, and forces a Stripe/Adyen-shaped integration on your merchant of record. Tap Terminal works in every APAC market we serve, with or without Apple&rsquo;s API, and keeps the merchant relationship on your contract.</p>
+<p>For the same reason, we don&rsquo;t depend on any specific phone manufacturer&rsquo;s SE &mdash; the MPoC model allows a secure element in software, audited by PCI, which is how we support mid-range Android devices where hardware SE isn&rsquo;t available.</p>
+</section>
+
+<section aria-labelledby="s4"><h2 id="s4">Fallback when the phone is uncooperative</h2>
+<p>Not every phone &mdash; and not every card &mdash; taps cleanly on the first try. Tap Terminal ships with a graded fallback chain: contactless first, magstripe mode for cards that require it, manual PAN entry for the rare card-not-present fallback, and a QR-to-pay handoff in markets where QR rails are dominant (Thailand PromptPay, Indonesia QRIS, Malaysia DuitNow, Vietnam VietQR). Your merchant never has to apologise to the customer.</p>
+</section>
+
+<section class="page-faq"><h2>Frequently asked questions</h2>
+<div class="faq-list">
+  <details class="faq-item" open><summary class="faq-q">Do I need to ship a separate app?<span class="plus">+</span></summary><div class="faq-a-inner"><p>No. Tap Terminal is a native module inside your existing app. The merchant already has your app; you&rsquo;re adding a screen, not asking them to install something.</p></div></details>
+  <details class="faq-item"><summary class="faq-q">Can I use it alongside a physical terminal I already sell?<span class="plus">+</span></summary><div class="faq-a-inner"><p>Yes. Many platforms run Tap Terminal on phones for mobile staff and ship a Tapped-certified physical reader for the fixed counter. Both route through Tap Core; both land in the same Tap Ledger.</p></div></details>
+  <details class="faq-item"><summary class="faq-q">What&rsquo;s the minimum Android hardware?<span class="plus">+</span></summary><div class="faq-a-inner"><p>Any Android 9+ device with NFC host-card-emulation. That covers essentially every phone sold in APAC since 2019 at the USD 150+ price point &mdash; including the Xiaomi, Vivo, Oppo, and Samsung models most F&amp;B and field-service staff actually use.</p></div></details>
+  <details class="faq-item"><summary class="faq-q">Is PIN-on-Glass secure enough for my customers&rsquo; banks?<span class="plus">+</span></summary><div class="faq-a-inner"><p>PIN-on-Glass is the framework the card schemes themselves designed to replace hardware PIN pads on commodity phones. It&rsquo;s audited under PCI MPoC v1.1, the successor standard to PCI SPoC, and accepted by every scheme we hold membership with.</p></div></details>
+  <details class="faq-item"><summary class="faq-q">What happens if the phone dies mid-transaction?<span class="plus">+</span></summary><div class="faq-a-inner"><p>Nothing is charged unless the cryptogram makes it to the issuer. If the phone loses power before the SDK receives the issuer response, the transaction is automatically retried on next SDK boot or reversed if the retry window expires. The merchant sees a &ldquo;retry&rdquo; status in your app, not a phantom charge.</p></div></details>
+</div>
+</section>
+
+</div></div></article>
+
+<section class="sub-cta"><div class="container"><div class="sub-cta-card">
+  <div><span class="eyebrow">Ship tap-to-pay this sprint</span><h2>Three lines of code. Every card your merchants see.</h2><p>Sandbox is live the moment you install the package. Production flips on when you want it to.</p></div>
+  <div class="sub-cta-actions"><a class="btn btn-brand btn-arrow" href="../company/contact.html">Talk to sales</a><a class="btn btn-secondary" href="../developers/documentation.html">Explore docs</a></div>
+</div></div></section>
+</main>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-col"><img class="logo-img" src="../../assets/tapped-logo.png" alt="Tapped"><p>Embedded tap-to-pay infrastructure for vertical SaaS platforms across APAC.</p></div>
+  <div class="footer-col"><h5>Solutions</h5><a href="../solutions/restaurant-pos.html">Restaurant POS</a><a href="../solutions/salon-wellness.html">Salon &amp; Wellness</a><a href="../solutions/field-services.html">Field Services</a><a href="../solutions/healthcare.html">Healthcare</a><a href="../solutions/hotels.html">Hotels</a><a href="../solutions/fitness.html">Fitness</a><a href="../solutions/auto-repair.html">Auto &amp; Repair</a></div>
+  <div class="footer-col"><h5>Product</h5><a href="tap-core.html">Tap Core</a><a href="tap-terminal.html">Tap Terminal</a><a href="tapped-onboard.html">Tapped Onboard</a><a href="tap-certify.html">Tap Certify</a><a href="tap-ledger.html">Tap Ledger</a><a href="../markets.html">Markets</a></div>
+  <div class="footer-col"><h5>Developers</h5><a href="../developers/documentation.html">Documentation</a><a href="../developers/api-reference.html">API reference</a><a href="../developers/sdks.html">SDKs</a><a href="../developers/webhooks.html">Webhooks</a><a href="../developers/status.html">Status</a><a href="../developers/changelog.html">Changelog</a></div>
+  <div class="footer-col"><h5>Company</h5><a href="../company/about.html">About</a><a href="../customers.html">Customers</a><a href="../company/press.html">Press</a><a href="../company/careers.html">Careers</a><a href="../company/contact.html">Contact</a><a href="../company/security.html">Security</a></div>
+</div><div class="footer-bottom"><div>&copy; 2026 Tapped Pte Ltd &middot; 1 Raffles Place, Singapore</div><div class="lr"><a href="../legal/privacy.html">Privacy</a><a href="../legal/terms.html">Terms</a><a href="../legal/pci.html">PCI</a><a href="../legal/licences.html">Licences</a></div></div></div></footer>
+<script>document.querySelectorAll('.nav-item[data-mega]').forEach(i=>{let t;i.addEventListener('mouseenter',()=>{clearTimeout(t);i.classList.add('open');});i.addEventListener('mouseleave',()=>{t=setTimeout(()=>i.classList.remove('open'),120);});});</script>
+</body></html>

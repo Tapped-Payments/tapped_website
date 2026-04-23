@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Usage-based, no contract lock-in | Tapped</title>
+<meta name="description" content="One flat rate — 2.99% + $0.07 per tap — across all nine APAC markets. No monthly SaaS fees, no contract lock-in. Premium Support available on any plan.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://tapped.co/pages/pricing.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tapped">
+<meta property="og:title" content="Pricing — Usage-based, no lock-in | Tapped">
+<meta property="og:description" content="2.99% + $0.07 per tap across every market. No SaaS fees. Month-to-month. Premium Support is an add-on on any plan.">
+<meta property="og:url" content="https://tapped.co/pages/pricing.html">
+<meta property="og:image" content="https://tapped.co/assets/tapped-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pricing — Tapped">
+<meta name="twitter:description" content="2.99% + $0.07 per tap. One rate, every market. No SaaS fees, no lock-in.">
+<link rel="icon" href="../assets/tapped-logo.png">
+<link rel="stylesheet" href="../colors_and_type.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Tapped","legalName":"Tapped Pte Ltd","url":"https://tapped.co/","logo":"https://tapped.co/assets/tapped-logo.png","description":"Embedded tap-to-pay infrastructure for vertical SaaS platforms across APAC.","address":{"@type":"PostalAddress","streetAddress":"1 Raffles Place","addressCountry":"SG"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapped.co/"},{"@type":"ListItem","position":2,"name":"Pricing","item":"https://tapped.co/pages/pricing.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Tapped Platform","description":"Self-serve embedded tap-to-pay across 9 APAC markets. Flat 2.99% + $0.07 per tap.","brand":{"@type":"Brand","name":"Tapped"},"offers":{"@type":"Offer","priceCurrency":"USD","price":"2.99","description":"Per-transaction rate. No monthly SaaS fees. No contract lock-in."}}</script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { margin: 0; background: var(--bg); color: var(--fg-1); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  /* Buttons */
+  .btn { font-family: var(--font-sans); font-size: 14px; font-weight: 500; padding: 9px 16px; border-radius: 8px; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 8px; transition: all 160ms var(--ease-out); white-space: nowrap; cursor: pointer; }
+  .btn-primary { background: var(--ink-900); color: white; }
+  .btn-brand { background: var(--brand-gradient); color: white; box-shadow: var(--shadow-brand); padding: 11px 18px; font-weight: 600; }
+  .btn-brand:hover { transform: translateY(-1px); }
+  .btn-secondary { background: transparent; color: var(--fg-1); border-color: var(--border); }
+  .btn-secondary:hover { background: var(--ink-25); border-color: var(--border-strong); }
+  .btn-ghost { background: transparent; color: var(--fg-1); }
+  .btn-ghost:hover { background: var(--ink-50); }
+  .btn-arrow::after { content: "→"; font-family: var(--font-mono); transition: transform 160ms var(--ease-out); }
+  .btn-arrow:hover::after { transform: translateX(3px); }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); background: rgba(255,255,255,0.85); border-bottom: 1px solid var(--border-subtle); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; }
+  .brand img.logo-img { height: 34px; width: auto; display: block; }
+  .nav-center { display: flex; gap: 4px; align-items: center; }
+  .nav-item > button { background: none; border: none; color: var(--fg-2); font-size: 14px; padding: 8px 14px; border-radius: 6px; cursor: pointer; transition: color 160ms; font-family: inherit; }
+  .nav-item > button:hover { color: var(--fg-1); }
+  a.nav-item > button { pointer-events: none; }
+  .nav-item[aria-current] > button { color: var(--fg-1); font-weight: 600; }
+  .nav-cta { display: flex; gap: 6px; align-items: center; }
+
+  /* Breadcrumb */
+  .breadcrumb { padding: 24px 32px 0; }
+  .breadcrumb ol { list-style: none; display: flex; gap: 8px; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 500; }
+  .breadcrumb li { display: flex; align-items: center; gap: 8px; }
+  .breadcrumb li:not(:last-child)::after { content: "/"; color: var(--fg-4); }
+  .breadcrumb a { color: var(--fg-3); transition: color 140ms; }
+  .breadcrumb a:hover { color: var(--fg-1); }
+  .breadcrumb [aria-current] { color: var(--fg-1); }
+
+  /* Hero */
+  .px-hero { padding: 64px 0 48px; background: var(--paper); position: relative; overflow: hidden; }
+  .px-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 100% 0%, rgba(34,211,238,0.06), transparent 40%), radial-gradient(circle at 0% 100%, rgba(225,29,116,0.04), transparent 40%); pointer-events: none; }
+  .px-hero-inner { position: relative; max-width: 900px; }
+  .px-hero .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); margin-bottom: 18px; display: block; }
+  .px-hero h1 { font-family: var(--font-display); font-size: 56px; font-weight: 600; letter-spacing: -0.024em; line-height: 1.04; margin: 0 0 20px; color: var(--fg-1); text-wrap: balance; }
+  .px-hero h1 .hl { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .px-hero .lede { font-size: 19px; line-height: 1.55; color: var(--fg-2); margin: 0; max-width: 760px; }
+
+  /* Plan toggle */
+  .px-plans-wrap { padding: 40px 0 80px; }
+  .px-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+  .px-plan { background: var(--paper); border: 1px solid var(--border); border-radius: 20px; padding: 36px; display: flex; flex-direction: column; position: relative; transition: all 200ms var(--ease-out); }
+  .px-plan:hover { border-color: var(--border-strong); }
+  .px-plan.feat { background: linear-gradient(var(--paper), var(--paper)) padding-box, var(--brand-gradient) border-box; border: 2px solid transparent; box-shadow: var(--shadow-lg); }
+  .px-plan .px-badge { position: absolute; top: -12px; right: 28px; background: var(--brand-gradient); color: white; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 12px; border-radius: 20px; }
+  .px-plan .px-kicker { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 10px; }
+  .px-plan.feat .px-kicker { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .px-plan h2 { font-family: var(--font-display); font-size: 32px; font-weight: 600; letter-spacing: -0.018em; line-height: 1.15; margin: 0 0 6px; color: var(--fg-1); }
+  .px-plan .px-sub { font-size: 14.5px; color: var(--fg-3); margin: 0 0 24px; line-height: 1.5; }
+  .px-plan .px-rate { font-family: var(--font-display); font-size: 54px; font-weight: 700; letter-spacing: -0.025em; line-height: 1; color: var(--fg-1); font-variant-numeric: tabular-nums; }
+  .px-plan .px-rate small { font-family: var(--font-sans); font-size: 15px; color: var(--fg-3); font-weight: 400; margin-left: 6px; }
+  .px-plan .px-rate-note { font-size: 12px; color: var(--fg-4); margin-top: 8px; font-style: italic; }
+
+  /* Country selector on the platform plan */
+  .px-country-box { margin-top: 22px; padding: 20px; background: rgba(34,211,238,0.05); border: 1px solid rgba(34,211,238,0.18); border-radius: 12px; }
+  .px-country-box > label { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 10px; }
+  .px-select-wrap { position: relative; margin-bottom: 16px; }
+  .px-select-wrap select { width: 100%; appearance: none; -webkit-appearance: none; padding: 11px 36px 11px 14px; border: 1px solid var(--border); background: white; border-radius: 8px; font-family: var(--font-sans); font-size: 14px; font-weight: 500; color: var(--fg-1); cursor: pointer; transition: border-color 140ms; }
+  .px-select-wrap select:hover, .px-select-wrap select:focus { border-color: var(--brand-cyan-700); outline: none; }
+  .px-chev { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--fg-3); pointer-events: none; }
+  .px-breakdown { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+  .px-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+  .px-row .k { color: var(--fg-3); }
+  .px-row .v { font-family: var(--font-mono); color: var(--fg-1); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .px-row.total { padding-top: 10px; border-top: 1px dashed rgba(0,0,0,0.12); }
+  .px-row.total .k { color: var(--fg-1); font-weight: 600; }
+  .px-row.total .v { font-size: 15px; color: var(--fg-1); }
+  .px-row.mark .v { color: var(--brand-magenta-600); }
+  .px-row.merch .k { font-size: 11.5px; color: var(--fg-4); font-style: italic; }
+  .px-row.merch .v { font-size: 12px; color: var(--fg-3); }
+
+  .px-actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+  .px-actions .btn { flex: 1; justify-content: center; min-width: 140px; }
+
+  .px-plan .px-includes { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-subtle); }
+  .px-plan .px-includes h4 { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 12px; }
+  .px-plan .px-includes ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--fg-1); }
+  .px-plan .px-includes li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.45; }
+  .px-plan .px-includes li::before { content: ""; flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--ink-50) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%230891B2' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/10px no-repeat; margin-top: 2px; }
+
+  /* Callout row above the grid */
+  .px-signal { background: var(--ink-25); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 20px 24px; margin-bottom: 32px; display: flex; gap: 20px; align-items: center; }
+  .px-signal-ico { width: 40px; height: 40px; border-radius: 10px; background: var(--brand-gradient); display: grid; place-items: center; color: white; flex: none; }
+  .px-signal .t { font-size: 14px; color: var(--fg-2); line-height: 1.5; }
+  .px-signal .t strong { color: var(--fg-1); font-weight: 600; }
+
+  /* Compare table */
+  .px-compare { padding: 80px 0 40px; background: var(--ink-25); border-top: 1px solid var(--border-subtle); }
+  .px-section-head { text-align: center; margin-bottom: 48px; }
+  .px-section-head .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); margin-bottom: 14px; display: block; }
+  .px-section-head h2 { font-family: var(--font-display); font-size: 40px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 14px; color: var(--fg-1); }
+  .px-section-head p { font-size: 16px; color: var(--fg-2); line-height: 1.6; max-width: 620px; margin: 0 auto; }
+
+  .px-table-wrap { background: var(--paper); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .px-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .px-table thead th { background: var(--ink-50); text-align: left; padding: 18px 20px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-2); border-bottom: 1px solid var(--border); }
+  .px-table thead th:first-child { background: white; }
+  .px-table thead th.pf { background: linear-gradient(180deg, rgba(34,211,238,0.08) 0%, rgba(34,211,238,0.02) 100%); color: var(--brand-cyan-700); }
+  .px-table tbody td { padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; color: var(--fg-2); line-height: 1.5; }
+  .px-table tbody tr:last-child td { border-bottom: none; }
+  .px-table tbody td:first-child { color: var(--fg-1); font-weight: 500; }
+  .px-table tbody tr.grp td { background: var(--ink-25); padding: 10px 20px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); }
+  .px-table td .chk { color: #22C55E; font-weight: 700; }
+  .px-table td .dash { color: var(--fg-4); }
+  .px-table td .qual { font-size: 12px; color: var(--fg-3); }
+
+  /* Markets grid */
+  .px-markets { padding: 60px 0 80px; background: var(--ink-25); }
+  .px-markets-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .px-market-card { background: var(--paper); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; display: flex; align-items: center; gap: 16px; transition: all 160ms; }
+  .px-market-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+  .px-market-card .flag { font-size: 28px; flex: none; }
+  .px-market-card .meta { flex: 1; min-width: 0; }
+  .px-market-card .meta .nm { font-size: 15px; font-weight: 600; color: var(--fg-1); }
+  .px-market-card .meta .rg { font-size: 12px; color: var(--fg-4); font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .px-market-card .rate { font-family: var(--font-mono); font-size: 15px; font-weight: 600; color: var(--brand-cyan-700); font-variant-numeric: tabular-nums; }
+
+  /* FAQ */
+  .px-faq { padding: 80px 0; }
+  .px-faq-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+  .px-faq-grid h2 { font-family: var(--font-display); font-size: 36px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 16px; }
+  .px-faq-grid .intro { font-size: 16px; color: var(--fg-2); line-height: 1.6; margin: 0 0 24px; }
+  .px-faq-list { display: flex; flex-direction: column; gap: 10px; }
+  .px-faq-item { border: 1px solid var(--border-subtle); border-radius: 10px; background: var(--paper); overflow: hidden; }
+  .px-faq-item[open] { border-color: var(--border-strong); }
+  .px-faq-q { padding: 18px 22px; font-weight: 600; font-size: 15px; color: var(--fg-1); cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+  .px-faq-q::-webkit-details-marker { display: none; }
+  .px-faq-q .plus { font-family: var(--font-mono); font-size: 18px; color: var(--fg-3); font-weight: 400; transition: transform 180ms; flex: none; margin-left: 12px; }
+  .px-faq-item[open] .px-faq-q .plus { transform: rotate(45deg); }
+  .px-faq-a { padding: 0 22px 20px; font-size: 15px; line-height: 1.65; color: var(--fg-2); }
+
+  /* CTA */
+  .px-cta { padding: 40px 0 96px; }
+  .px-cta-card { background: var(--ink-950); border-radius: 20px; padding: 56px; color: white; display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center; position: relative; overflow: hidden; }
+  .px-cta-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(34,211,238,0.12), transparent 55%), radial-gradient(circle at 80% 80%, rgba(225,29,116,0.1), transparent 50%); pointer-events: none; }
+  .px-cta-card > div { position: relative; }
+  .px-cta-card .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #67E8F9; display: block; margin-bottom: 14px; }
+  .px-cta-card h2 { font-family: var(--font-display); font-size: 36px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 14px; color: white; }
+  .px-cta-card p { font-size: 16px; color: #B8C0D8; line-height: 1.55; margin: 0; max-width: 480px; }
+  .px-cta-actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+  .px-cta-card .btn-secondary { background: transparent; color: white; border-color: rgba(255,255,255,0.18); }
+  .px-cta-card .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
+
+  /* Footer */
+  .footer { background: var(--ink-950); color: #97A2BF; padding: 80px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+  .footer-col h5 { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F7FB; margin: 0 0 18px; }
+  .footer-col a { display: block; color: #97A2BF; font-size: 14px; margin-bottom: 12px; transition: color 140ms; }
+  .footer-col a:hover { color: white; }
+  .footer-col p { font-size: 13px; color: #8A94B0; line-height: 1.6; max-width: 280px; margin: 16px 0 0; }
+  .footer-col img.logo-img { height: 26px; width: auto; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: #5A6486; }
+  .footer-bottom .lr { display: flex; gap: 24px; }
+  .footer-bottom .lr a { color: #5A6486; transition: color 140ms; }
+  .footer-bottom .lr a:hover { color: white; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .container { padding: 0 24px; }
+    .nav-center { display: none; }
+    .nav-cta .btn-ghost { display: none; }
+    .px-hero { padding: 48px 0 36px; }
+    .px-hero h1 { font-size: 42px; }
+    .px-plans { grid-template-columns: 1fr; }
+    .px-compare { padding: 60px 0 32px; }
+    .px-section-head h2 { font-size: 32px; }
+    .px-markets-grid { grid-template-columns: repeat(2, 1fr); }
+    .px-faq-grid { grid-template-columns: 1fr; gap: 32px; }
+    .px-cta-card { padding: 40px 32px; grid-template-columns: 1fr; }
+    .px-cta-actions { justify-content: flex-start; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .px-table-wrap { overflow-x: auto; }
+    .px-table { min-width: 640px; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 16px; }
+    .nav-inner { padding: 12px 16px; }
+    .brand img.logo-img { height: 28px; }
+    .breadcrumb { padding: 18px 16px 0; }
+    .px-hero h1 { font-size: 32px; }
+    .px-hero .lede { font-size: 16px; }
+    .px-plan { padding: 28px 24px; }
+    .px-plan h2 { font-size: 26px; }
+    .px-plan .px-rate { font-size: 44px; }
+    .px-markets-grid { grid-template-columns: 1fr; }
+    .px-cta-card { padding: 32px 20px; border-radius: 16px; }
+    .px-cta-card h2 { font-size: 26px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== NAV =================== -->
+<nav class="nav" aria-label="Primary">
+  <div class="container nav-inner">
+    <a href="../Tapped Website.html" class="brand" aria-label="Tapped home"><img class="logo-img" src="../assets/tapped-logo.png" alt="Tapped"></a>
+    <div class="nav-center">
+      <a class="nav-item" href="../Tapped Website.html#verticals"><button>Solutions</button></a>
+      <a class="nav-item" href="../Tapped Website.html#onboard"><button>Product</button></a>
+      <a class="nav-item" href="../Tapped Website.html#markets"><button>Markets</button></a>
+      <a class="nav-item" href="developers/documentation.html"><button>Developers</button></a>
+      <a class="nav-item" href="pricing.html" aria-current="page"><button>Pricing</button></a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="company/sign-in.html">Sign in</a>
+      <a class="btn btn-primary btn-arrow" href="company/contact.html">Talk to us</a>
+    </div>
+  </div>
+</nav>
+
+<nav class="breadcrumb container" aria-label="Breadcrumb">
+  <ol><li><a href="../Tapped Website.html">Home</a></li><li aria-current="page">Pricing</li></ol>
+</nav>
+
+<!-- =================== HERO =================== -->
+<header class="px-hero">
+  <div class="container px-hero-inner">
+    <span class="eyebrow">Pricing · Usage-based, no lock-in</span>
+    <h1>One flat rate. Every market. <span class="hl">No SaaS fees.</span></h1>
+    <p class="lede">2.99% + $0.07 per tap &mdash; the same rate across all nine APAC markets. No monthly platform fee, no user seats, no setup cost, no contract lock-in. You only pay when a tap settles. If you don't process, you don't pay.</p>
+    <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+      <div style="padding:8px 14px; background:var(--ink-25); border:1px solid var(--border); border-radius: 999px; font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-2); letter-spacing: 0.04em;">$0 / month SaaS fee</div>
+      <div style="padding:8px 14px; background:var(--ink-25); border:1px solid var(--border); border-radius: 999px; font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-2); letter-spacing: 0.04em;">$0 setup</div>
+      <div style="padding:8px 14px; background:var(--ink-25); border:1px solid var(--border); border-radius: 999px; font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-2); letter-spacing: 0.04em;">Month-to-month &middot; cancel any time</div>
+      <div style="padding:8px 14px; background:var(--ink-25); border:1px solid var(--border); border-radius: 999px; font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-2); letter-spacing: 0.04em;">Same rate, every market</div>
+    </div>
+  </div>
+</header>
+
+<!-- =================== PLANS =================== -->
+<section class="px-plans-wrap">
+  <div class="container">
+    <div class="px-signal">
+      <div class="px-signal-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div class="t"><strong>How you make money.</strong> Your platform pays Tapped 2.99% + $0.07 per tap, then charges your sub-merchants 0.5&ndash;1% on top. The spread is yours. We publish the rate; you keep the margin; the sub-merchant sees one clean price. No monthly SaaS fees on either side.</div>
+    </div>
+
+    <div class="px-plans">
+      <!-- PLATFORM (self-serve, featured) -->
+      <div class="px-plan feat">
+        <span class="px-badge">Self-serve</span>
+        <span class="px-kicker">Platform</span>
+        <h2>Platform</h2>
+        <p class="px-sub">For vertical SaaS products embedding tap-to-pay into their core flow. Ship in days; scale to a billion in GMV without renegotiating.</p>
+        <div class="px-rate">2.99<small>% + $0.07 per tap</small></div>
+        <div class="px-rate-note">Same rate across every live APAC market.</div>
+
+        <div class="px-country-box">
+          <label>Your margin, every transaction</label>
+          <div class="px-breakdown">
+            <div class="px-row total"><span class="k">You pay Tapped</span><span class="v">2.99% + $0.07</span></div>
+            <div class="px-row mark"><span class="k">Your suggested markup</span><span class="v">+0.50% to +1.00%</span></div>
+            <div class="px-row merch"><span class="k">What your sub-merchant sees</span><span class="v">3.49% – 3.99%</span></div>
+          </div>
+          <div style="margin-top:16px; padding-top:14px; border-top: 1px dashed rgba(0,0,0,0.1); font-size: 12.5px; color: var(--fg-3); line-height:1.55;">
+            Usage-based only. No monthly SaaS fee, no per-seat charge, no setup cost. If a tap doesn't happen, you don't pay for it.
+          </div>
+        </div>
+
+        <div class="px-actions">
+          <a class="btn btn-brand btn-arrow" href="developers/documentation.html">Start self-serve</a>
+          <a class="btn btn-secondary" href="company/contact.html?plan=platform-sales">Talk to sales</a>
+        </div>
+
+        <div class="px-includes">
+          <h4>Everything included</h4>
+          <ul>
+            <li>Production EMV kernels across all nine APAC markets</li>
+            <li>Tap Terminal SDK &mdash; iOS, Android, PIN-on-Glass</li>
+            <li>Tapped Onboard &mdash; PSP-agnostic sub-merchant KYB</li>
+            <li>Tap Ledger &mdash; multi-currency T+1 payouts</li>
+            <li>Scheme filings handled &mdash; Visa, Mastercard, JCB, UnionPay</li>
+            <li>24/7 engineering Slack &amp; &lt;1h P1 response</li>
+            <li>Sandbox, staging, and production environments</li>
+            <li>No minimum volume &middot; No setup fee &middot; No SaaS subscription</li>
+          </ul>
+          <div style="margin-top:18px; padding:14px 16px; background: rgba(225,29,116,0.05); border: 1px solid rgba(225,29,116,0.18); border-radius:10px; display:flex; gap:10px; align-items:flex-start;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none; color: var(--brand-magenta-600); margin-top:2px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <div style="font-size:12.5px; color: var(--fg-2); line-height:1.55;"><b style="color:var(--fg-1);">Add Premium Support</b> for +0.05% per tap &mdash; named TAM, 15-minute P1 response, quarterly business reviews.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENTERPRISE (talk-to-sales) -->
+      <div class="px-plan">
+        <span class="px-kicker">Enterprise</span>
+        <h2>Enterprise</h2>
+        <p class="px-sub">For platforms processing above USD 250M annually, or with custom licensing, BIN, or scheme requirements. Priced to your volume profile.</p>
+        <div class="px-rate">Custom<small>pricing</small></div>
+        <div class="px-rate-note">Volume-tiered. Lower as you grow.</div>
+
+        <div class="px-country-box" style="background: var(--ink-25); border-color: var(--border-subtle);">
+          <label>What changes at enterprise</label>
+          <div class="px-breakdown">
+            <div class="px-row"><span class="k">Volume-tiered blended rate</span><span class="v">down to ~1.10%</span></div>
+            <div class="px-row"><span class="k">Dedicated BIN sponsorship</span><span class="v" style="color:#22C55E;">✓</span></div>
+            <div class="px-row"><span class="k">Private kernel fork + HSM</span><span class="v" style="color:#22C55E;">✓</span></div>
+            <div class="px-row"><span class="k">Named SLA engineer</span><span class="v" style="color:#22C55E;">✓</span></div>
+            <div class="px-row"><span class="k">Custom scheme filings</span><span class="v" style="color:#22C55E;">✓</span></div>
+          </div>
+          <div style="margin-top:16px; padding-top:14px; border-top: 1px dashed rgba(0,0,0,0.1); font-size: 12.5px; color: var(--fg-3); line-height:1.55;">
+            Still usage-based. Annual commitment instead of month-to-month, but no SaaS subscription layered on top of the processing rate.
+          </div>
+        </div>
+
+        <div class="px-actions">
+          <a class="btn btn-primary btn-arrow" href="company/contact.html?plan=enterprise" style="width:100%;">Talk to sales</a>
+        </div>
+
+        <div class="px-includes">
+          <h4>Everything in Platform, plus</h4>
+          <ul>
+            <li>Volume-tiered infrastructure fee (lower rate at scale)</li>
+            <li>Dedicated BIN sponsorship through Tapped bank relationships</li>
+            <li>Private kernel forks with hardware-backed keys</li>
+            <li>Custom scheme &amp; regulator filings (CAFIS, FPX, DragonPay, etc.)</li>
+            <li>99.995% uptime SLA with credits</li>
+            <li>Annual contract &middot; invoice billing</li>
+            <li>Data residency options (SG, JP, AU)</li>
+          </ul>
+          <div style="margin-top:18px; padding:14px 16px; background: rgba(225,29,116,0.05); border: 1px solid rgba(225,29,116,0.18); border-radius:10px; display:flex; gap:10px; align-items:flex-start;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none; color: var(--brand-magenta-600); margin-top:2px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <div style="font-size:12.5px; color: var(--fg-2); line-height:1.55;"><b style="color:var(--fg-1);">Add Premium Support</b> for white-glove onboarding, named TAM + on-call engineer, and 5-minute P1 response. Priced into your contract.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MARKETS =================== -->
+<section class="px-markets">
+  <div class="container">
+    <div class="px-section-head">
+      <span class="eyebrow">Rates by market</span>
+      <h2>One rate. Nine live markets. No surprises.</h2>
+      <p>We charge the same flat 2.99% + $0.07 per tap in every market. You don't have to run different unit economics for Jakarta versus Tokyo &mdash; and neither do your sub-merchants. Every market below is live, certified, and ready to receive production traffic.</p>
+    </div>
+    <div class="px-markets-grid" id="px-markets-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- =================== NO-SAAS =================== -->
+<section style="padding: 72px 0; background: var(--paper); border-top: 1px solid var(--border-subtle);">
+  <div class="container">
+    <div class="px-section-head" style="margin-bottom: 40px;">
+      <span class="eyebrow">No SaaS Fees</span>
+      <h2>Usage-based. Only.</h2>
+      <p>Payments infrastructure has gotten used to double-dipping &mdash; a processing rate <em>and</em> a SaaS subscription on top. We don't. If your platform doesn't process a tap this month, you don't owe us anything. Ever.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 920px; margin: 0 auto;">
+      <div style="padding: 24px 20px; background: var(--ink-25); border: 1px solid var(--border); border-radius: 12px; text-align: center;">
+        <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--fg-1); margin-bottom: 6px;">$0</div>
+        <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 600;">Monthly platform fee</div>
+      </div>
+      <div style="padding: 24px 20px; background: var(--ink-25); border: 1px solid var(--border); border-radius: 12px; text-align: center;">
+        <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--fg-1); margin-bottom: 6px;">$0</div>
+        <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 600;">Setup &amp; onboarding</div>
+      </div>
+      <div style="padding: 24px 20px; background: var(--ink-25); border: 1px solid var(--border); border-radius: 12px; text-align: center;">
+        <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--fg-1); margin-bottom: 6px;">$0</div>
+        <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 600;">Per-seat / per-user</div>
+      </div>
+      <div style="padding: 24px 20px; background: var(--ink-25); border: 1px solid var(--border); border-radius: 12px; text-align: center;">
+        <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--fg-1); margin-bottom: 6px;">0 mo</div>
+        <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 600;">Contract lock-in</div>
+      </div>
+    </div>
+    <p style="max-width: 720px; margin: 32px auto 0; text-align: center; font-size: 14.5px; color: var(--fg-2); line-height: 1.65;">
+      The Platform plan is month-to-month &mdash; cancel any time, for any reason, without fees or penalty. Enterprise is an annual commitment because the work we do (dedicated BINs, private kernels, custom filings) takes months to set up; the economics are still pay-as-you-go on volume.
+    </p>
+  </div>
+</section>
+
+<!-- =================== PREMIUM SUPPORT ADD-ON =================== -->
+<section style="padding: 72px 0; background: var(--ink-25);">
+  <div class="container">
+    <div class="px-section-head" style="margin-bottom: 40px;">
+      <span class="eyebrow">Add-on · Available on any plan</span>
+      <h2>Premium Support.</h2>
+      <p>An optional upgrade to the support tier on either the Platform plan or Enterprise. Same team that shipped the product, now assigned to your account with faster response times and a standing relationship.</p>
+    </div>
+    <div style="max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div style="padding: 32px; background: var(--paper); border: 1px solid var(--border); border-radius: 16px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 20px;">
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-cyan-700); font-weight: 600;">Add to Platform</div>
+          <div style="font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--fg-1);">+0.05%<span style="font-family: var(--font-sans); font-size: 12px; color: var(--fg-3); font-weight: 400; margin-left: 4px;">per tap</span></div>
+        </div>
+        <h3 style="font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 12px;">Premium Support for Platform</h3>
+        <p style="font-size: 14px; color: var(--fg-2); line-height: 1.6; margin: 0 0 20px;">Upgrade from the standard 1-hour P1 response to something closer to an embedded team. Stays usage-based; add or remove by changing a flag in your dashboard.</p>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--fg-1);">
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%230891B2' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>Named technical account manager</li>
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%230891B2' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>15-minute P1 response (vs 1h standard)</li>
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%230891B2' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>Quarterly business reviews with engineering leadership</li>
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%230891B2' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>Annual on-site workshop (up to 2 engineers, your office)</li>
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%230891B2' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>Priority feature request queue</li>
+        </ul>
+      </div>
+      <div style="padding: 32px; background: var(--paper); border: 1px solid var(--border); border-radius: 16px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 20px;">
+          <div style="font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-magenta-600); font-weight: 600;">Add to Enterprise</div>
+          <div style="font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--fg-1);">Quoted<span style="font-family: var(--font-sans); font-size: 12px; color: var(--fg-3); font-weight: 400; margin-left: 4px;">in contract</span></div>
+        </div>
+        <h3 style="font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 12px;">Premium Support for Enterprise</h3>
+        <p style="font-size: 14px; color: var(--fg-2); line-height: 1.6; margin: 0 0 20px;">Everything in the Platform tier, deepened. For platforms with 24/7 production-critical flows, regulated environments, or cross-jurisdiction operations.</p>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--fg-1);">
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23E11D74' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>Named TAM + dedicated on-call engineer</li>
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23E11D74' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>5-minute P1 response, 24/7, with escalation pager</li>
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23E11D74' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>White-glove launch &mdash; dedicated implementation team</li>
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23E11D74' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>Quarterly on-site reviews (your office, every major HQ)</li>
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23E11D74' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>Direct escalation to product &amp; engineering leadership</li>
+          <li style="display:flex; gap:10px; align-items:flex-start; line-height:1.45;"><span style="flex:none; width:16px; height:16px; border-radius:50%; background: var(--ink-50) url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23E11D74' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E&quot;) center/10px no-repeat; margin-top:2px;"></span>Regulatory liaison for MAS, BI, BSP, BNM filings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== COMPARE =================== -->
+<section class="px-compare">
+  <div class="container">
+    <div class="px-section-head">
+      <span class="eyebrow">Compare plans</span>
+      <h2>Every feature, side by side.</h2>
+      <p>Platform is the right fit for almost every platform launching with Tapped. Enterprise makes sense when your volume, custom risk profile, or data-residency needs justify a dedicated arrangement.</p>
+    </div>
+    <div class="px-table-wrap">
+      <table class="px-table">
+        <thead><tr><th>&nbsp;</th><th class="pf">Platform · self-serve</th><th>Enterprise · talk-to-sales</th></tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="3">Commercial</td></tr>
+          <tr><td>Pricing model</td><td>Flat 2.99% + $0.07 per tap (every market)</td><td>Volume-tiered &middot; interchange++ available on request</td></tr>
+          <tr><td>Monthly SaaS / platform fee</td><td><span class="chk">$0 &middot; ever</span></td><td><span class="chk">$0 &middot; ever</span></td></tr>
+          <tr><td>Setup fee</td><td><span class="chk">$0</span></td><td><span class="chk">$0</span></td></tr>
+          <tr><td>Monthly minimum</td><td><span class="chk">None</span></td><td>Negotiated</td></tr>
+          <tr><td>Your platform markup</td><td>Suggested 0.5%&ndash;1.0% &middot; you set it</td><td>Uncapped &middot; you set it</td></tr>
+          <tr><td>Billing</td><td>Monthly card &middot; auto-debit on usage only</td><td>Monthly invoice &middot; net-30 &middot; usage-based</td></tr>
+          <tr><td>Contract</td><td>Month-to-month &middot; cancel any time</td><td>Annual commitment</td></tr>
+          <tr><td>Enterprise-grade Premium Support</td><td>Optional add-on &middot; +0.05% per tap</td><td>Optional add-on &middot; priced into contract</td></tr>
+
+          <tr class="grp"><td colspan="3">Rails &amp; coverage</td></tr>
+          <tr><td>Live markets</td><td>9 APAC (SG, JP, HK, MY, TH, ID, PH, VN, KR)</td><td>9 APAC + custom expansion on request</td></tr>
+          <tr><td>Card schemes</td><td>Visa, Mastercard, JCB, UnionPay, Amex (SG/JP)</td><td>All of Platform + Discover, Diners, RuPay routing</td></tr>
+          <tr><td>Local rails</td><td>PayNow, PromptPay, QRIS, DuitNow, InstaPay</td><td>All of Platform + FPX, CAFIS, DragonPay direct</td></tr>
+          <tr><td>BIN sponsorship</td><td>Shared via Tapped partner banks</td><td>Dedicated BIN in your name</td></tr>
+
+          <tr class="grp"><td colspan="3">Product</td></tr>
+          <tr><td>Tap Core &mdash; EMV kernels</td><td><span class="chk">Production</span></td><td><span class="chk">Private fork + HSM</span></td></tr>
+          <tr><td>Tap Terminal &mdash; PIN-on-Glass SDK</td><td><span class="chk">iOS &amp; Android</span></td><td><span class="chk">+ custom OEM support</span></td></tr>
+          <tr><td>Tapped Onboard &mdash; PSP-agnostic KYB</td><td><span class="chk">All destinations</span></td><td><span class="chk">+ bring-your-own PSP templates</span></td></tr>
+          <tr><td>Tap Certify &mdash; scheme filings</td><td><span class="chk">Standard filings</span></td><td><span class="chk">Custom central-bank filings</span></td></tr>
+          <tr><td>Tap Ledger &mdash; payouts</td><td>T+1 default &middot; T+0 in 4 markets</td><td>T+0 every market &middot; real-time option</td></tr>
+
+          <tr class="grp"><td colspan="3">Compliance &amp; security</td></tr>
+          <tr><td>PCI DSS Level 1</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
+          <tr><td>Data residency</td><td>Singapore (default)</td><td>SG, JP, AU &middot; customer-managed keys</td></tr>
+          <tr><td>Audit log retention</td><td>7 years</td><td>7 years &middot; customer-exportable</td></tr>
+          <tr><td>SSO / SAML</td><td>Google &amp; Microsoft</td><td>Any SAML 2.0 / OIDC IdP</td></tr>
+
+          <tr class="grp"><td colspan="3">Support &amp; SLA</td></tr>
+          <tr><td>Uptime SLA</td><td>99.95%</td><td>99.995% &middot; service credits</td></tr>
+          <tr><td>Standard support</td><td>24/7 engineering Slack</td><td>Named TAM &middot; dedicated on-call</td></tr>
+          <tr><td>Standard P1 response</td><td>&lt; 1h P1 &middot; &lt; 4h P2</td><td>&lt; 15m P1 &middot; &lt; 1h P2</td></tr>
+          <tr><td>With Premium Support add-on</td><td>&lt; 15m P1 &middot; named TAM &middot; QBRs</td><td>&lt; 5m P1 &middot; on-site QBRs &middot; regulatory liaison</td></tr>
+          <tr><td>Onboarding</td><td>Self-serve docs &amp; sandbox</td><td>Dedicated launch team &middot; on-site option</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FAQ =================== -->
+<section class="px-faq">
+  <div class="container">
+    <div class="px-faq-grid">
+      <div>
+        <h2>Pricing questions, answered.</h2>
+        <p class="intro">Most of what founders ask us in the first call is about economics &mdash; how you make money, what we take, what happens at scale. If yours isn't here, email <a href="mailto:solutions@tapped.dev" style="color:var(--brand-cyan-700);">solutions@tapped.dev</a>.</p>
+      </div>
+      <div class="px-faq-list">
+        <details class="px-faq-item" open><summary class="px-faq-q">Are there any monthly SaaS fees?<span class="plus">+</span></summary><div class="px-faq-a"><strong>No.</strong> Not a platform fee, not a seat fee, not a setup fee. We only charge when a tap settles. Payments infrastructure that double-dips with a processing rate <em>and</em> a SaaS subscription is an industry habit we chose not to adopt &mdash; if you don't process this month, you owe us nothing.</div></details>
+        <details class="px-faq-item"><summary class="px-faq-q">Is there a contract lock-in?<span class="plus">+</span></summary><div class="px-faq-a">The Platform plan is strictly month-to-month &mdash; cancel any time, for any reason, without fees or penalty. Enterprise is annual, because dedicated BINs, private kernels, and custom regulator filings take months to set up and we can't run those at-cost on a 30-day commitment. The economics remain usage-based either way.</div></details>
+        <details class="px-faq-item"><summary class="px-faq-q">Why one flat rate across all nine markets?<span class="plus">+</span></summary><div class="px-faq-a">Because platforms want predictable unit economics, not nine different rate cards to reconcile. We absorb the regional cost variance on our side so your pricing page can quote one number to every sub-merchant, everywhere. Interchange++ leaks complexity into your finance team, your statements, and your support queue. We'd rather carry that.</div></details>
+        <details class="px-faq-item"><summary class="px-faq-q">How much of the rate is Tapped's margin?<span class="plus">+</span></summary><div class="px-faq-a">Enough to run a regulated payments business and keep investing in coverage, and small enough that you have real room to mark up on top. We don't publish the exact split because merchants don't pay margins, they pay rates &mdash; and a published margin invites negotiations that eat into your own room to price. At Enterprise volume, we'll share the breakdown under NDA.</div></details>
+        <details class="px-faq-item"><summary class="px-faq-q">Can I mark up more than 1%?<span class="plus">+</span></summary><div class="px-faq-a">Yes. Our 0.5&ndash;1% suggestion is the sweet spot where your platform is profitable and your sub-merchants still see a competitive all-in rate versus Stripe / Adyen. Some platforms in underserved verticals (field services, auto repair) charge 1.5% and still win on convenience. Your call.</div></details>
+        <details class="px-faq-item"><summary class="px-faq-q">Is the $0.07 per-tap fee passed through or margin?<span class="plus">+</span></summary><div class="px-faq-a">It's a mix: the scheme and authorisation networks charge a per-transaction fee that we cover within that $0.07. At Enterprise volume it often drops or becomes pure pass-through.</div></details>
+        <details class="px-faq-item"><summary class="px-faq-q">Is Premium Support a separate plan?<span class="plus">+</span></summary><div class="px-faq-a">No &mdash; it's an optional add-on available on either the Platform or Enterprise plan. On Platform it's +0.05% per tap and you can add or remove it from the dashboard; on Enterprise it's priced into your contract. Both keep the same usage-based logic as the rest of the product.</div></details>
+        <details class="px-faq-item"><summary class="px-faq-q">When does it make sense to move to Enterprise?<span class="plus">+</span></summary><div class="px-faq-a">When your annualised processed volume clears USD 250M, or when you need a dedicated BIN in your name, private kernel forks, customer-managed keys, or data residency outside Singapore. Most platforms happily stay on Platform until the first condition.</div></details>
+        <details class="px-faq-item"><summary class="px-faq-q">What if a market isn't yet live?<span class="plus">+</span></summary><div class="px-faq-a">You can start with an adjacent PSP via Tapped Onboard (Stripe, Adyen, Airwallex) using the same sub-merchant record, and route to Tapped when we go live in that market. Zero merchant re-onboarding. See <a href="product/tapped-onboard.html" style="color:var(--brand-cyan-700);">Tapped Onboard</a> for the details.</div></details>
+        <details class="px-faq-item"><summary class="px-faq-q">Can we invoice sub-merchants directly?<span class="plus">+</span></summary><div class="px-faq-a">Yes. Platforms on Tapped keep the merchant relationship, the merchant statement, and the branded experience. Tapped is invisible to the end merchant unless you want it surfaced.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CTA =================== -->
+<section class="px-cta">
+  <div class="container">
+    <div class="px-cta-card">
+      <div>
+        <span class="eyebrow">Start today</span>
+        <h2>Sandbox is free. Production in under three weeks.</h2>
+        <p>The Platform plan is self-serve &mdash; spin up sandbox credentials, integrate Tap Core and Tapped Onboard, and flip to production once you're ready. Talk to us only when you want to.</p>
+      </div>
+      <div class="px-cta-actions">
+        <a class="btn btn-brand btn-arrow" href="developers/documentation.html">Start self-serve</a>
+        <a class="btn btn-secondary" href="company/contact.html">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><img class="logo-img" src="../assets/tapped-logo.png" alt="Tapped"><p>Embedded tap-to-pay infrastructure for vertical SaaS platforms across APAC.</p></div>
+      <div class="footer-col"><h5>Solutions</h5><a href="solutions/restaurant-pos.html">Restaurant POS</a><a href="solutions/salon-wellness.html">Salon &amp; Wellness</a><a href="solutions/field-services.html">Field Services</a><a href="solutions/healthcare.html">Healthcare</a><a href="solutions/hotels.html">Hotels</a></div>
+      <div class="footer-col"><h5>Product</h5><a href="product/tap-core.html">Tap Core</a><a href="product/tap-terminal.html">Tap Terminal</a><a href="product/tapped-onboard.html">Tapped Onboard</a><a href="product/tap-certify.html">Tap Certify</a><a href="product/tap-ledger.html">Tap Ledger</a></div>
+      <div class="footer-col"><h5>Developers</h5><a href="developers/documentation.html">Documentation</a><a href="developers/api-reference.html">API reference</a><a href="developers/sdks.html">SDKs</a><a href="developers/webhooks.html">Webhooks</a><a href="developers/status.html">Status</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="company/about.html">About</a><a href="company/customers.html">Customers</a><a href="company/careers.html">Careers</a><a href="company/contact.html">Contact</a><a href="company/security.html">Security</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Tapped Pte Ltd &middot; 1 Raffles Place, Singapore</div>
+      <div class="lr"><a href="legal/privacy.html">Privacy</a><a href="legal/terms.html">Terms</a><a href="legal/pci.html">PCI</a><a href="legal/licences.html">Licences</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const markets = [
+    {code:'SG', flag:'🇸🇬', name:'Singapore',   rg:'SGD · PayNow'},
+    {code:'JP', flag:'🇯🇵', name:'Japan',       rg:'JPY · CAFIS'},
+    {code:'HK', flag:'🇭🇰', name:'Hong Kong',   rg:'HKD · FPS'},
+    {code:'MY', flag:'🇲🇾', name:'Malaysia',    rg:'MYR · DuitNow'},
+    {code:'TH', flag:'🇹🇭', name:'Thailand',    rg:'THB · PromptPay'},
+    {code:'ID', flag:'🇮🇩', name:'Indonesia',   rg:'IDR · QRIS'},
+    {code:'PH', flag:'🇵🇭', name:'Philippines', rg:'PHP · InstaPay'},
+    {code:'VN', flag:'🇻🇳', name:'Vietnam',     rg:'VND · NAPAS'},
+    {code:'KR', flag:'🇰🇷', name:'South Korea', rg:'KRW · KFTC'},
+  ];
+  const grid = document.getElementById('px-markets-grid');
+  if (grid) {
+    grid.innerHTML = markets.map(m =>
+      `<div class="px-market-card"><div class="flag">${m.flag}</div><div class="meta"><div class="nm">${m.name}</div><div class="rg">${m.rg}</div></div><div class="rate">2.99%</div></div>`
+    ).join('');
+  }
+})();
+</script>
+
+</body>
+</html>

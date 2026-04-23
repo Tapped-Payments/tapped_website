@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthcare — embedded tap-to-pay for healthcare platforms in APAC | Tapped</title>
+<meta name="description" content="Tap-to-pay infrastructure embedded for healthcare SaaS platforms in APAC. Certified kernels, scheme rails, sub-merchant onboarding, multi-currency payouts — one SDK.">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../shared/page.css">
+<style>
+  .sol-hero { padding: 60px 0 80px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-subtle); }
+  .sol-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 100% 0%, rgba(34,211,238,0.07), transparent 55%), radial-gradient(ellipse at 0% 100%, rgba(225,29,116,0.05), transparent 55%); pointer-events: none; }
+  .sol-hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; position: relative; }
+  .sol-hero h1 { font-size: 52px; letter-spacing: -0.024em; line-height: 1.06; font-family: var(--font-display); font-weight: 600; margin: 0 0 20px; text-wrap: balance; }
+  .sol-hero h1 .g { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sol-hero .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); margin-bottom: 18px; display: inline-block; }
+  .sol-hero .flags { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); letter-spacing: 0.06em; margin-left: 8px; }
+  .sol-hero .lede { font-size: 19px; line-height: 1.55; color: var(--fg-2); margin: 0 0 32px; max-width: 560px; }
+  .sol-hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .sol-who { margin-top: 24px; font-size: 13px; color: var(--fg-3); font-style: italic; line-height: 1.5; max-width: 540px; }
+
+  /* Hero visual */
+  .sol-hero-visual { position: relative; }
+  .sol-scene { position: relative; aspect-ratio: 1 / 0.92; background: linear-gradient(180deg, #0B1225 0%, #0E1530 100%); border-radius: 20px; overflow: hidden; border: 1px solid rgba(124,58,237,0.3); box-shadow: 0 30px 60px -20px rgba(15,23,42,0.4); }
+  .sol-scene-chrome { position: absolute; top: 0; left: 0; right: 0; height: 42px; display: flex; align-items: center; padding: 0 16px; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); z-index: 3; }
+  .sol-scene-chrome .dots { display: flex; gap: 6px; }
+  .sol-scene-chrome .dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.12); }
+  .sol-scene-chrome .scene-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; color: rgba(255,255,255,0.55); }
+  .sol-scene-chrome .scene-live { margin-left: auto; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: #22D3EE; display: inline-flex; align-items: center; gap: 6px; }
+  .sol-scene-chrome .pulse { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; box-shadow: 0 0 0 4px rgba(34,197,94,0.2); animation: sol-pulse 1.6s infinite; }
+  @keyframes sol-pulse { 0%,100%{box-shadow:0 0 0 4px rgba(34,197,94,0.2);} 50%{box-shadow:0 0 0 9px rgba(34,197,94,0);} }
+  .sol-scene-body { position: absolute; inset: 42px 0 0; background: radial-gradient(circle at 50% 40%, rgba(34,211,238,0.1), transparent 60%), radial-gradient(circle at 50% 110%, rgba(225,29,116,0.08), transparent 55%); }
+  .sol-phone { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 210px; aspect-ratio: 1 / 1.9; background: linear-gradient(180deg, #0F172A, #1E293B); border-radius: 28px; border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 20px 40px -8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1); padding: 28px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; z-index: 2; }
+  .sol-phone .sp-glow { position: absolute; inset: -40%; background: radial-gradient(circle, rgba(34,211,238,0.3) 0%, transparent 60%); animation: sp-glow 3s ease-in-out infinite; pointer-events: none; }
+  @keyframes sp-glow { 0%,100%{opacity:0.5;} 50%{opacity:0.9;} }
+  .sol-phone .sp-brand { position: relative; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 8px; }
+  .sol-phone .sp-amount { position: relative; font-family: var(--font-display); font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 18px; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sol-phone .sp-tap { position: relative; width: 72px; height: 72px; border-radius: 50%; background: rgba(34,211,238,0.12); display: grid; place-items: center; color: #22D3EE; margin-bottom: 20px; border: 1.5px dashed rgba(34,211,238,0.4); animation: sp-tap 2.4s ease-in-out infinite; }
+  @keyframes sp-tap { 0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(34,211,238,0.4);} 50%{transform:scale(1.05);box-shadow:0 0 0 12px rgba(34,211,238,0);} }
+  .sol-phone .sp-status { position: relative; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; color: #22C55E; text-transform: uppercase; }
+  .sol-card { position: absolute; background: white; border-radius: 12px; padding: 12px 14px; box-shadow: 0 12px 28px -8px rgba(0,0,0,0.3); border: 1px solid var(--border); min-width: 150px; }
+  .sol-card .sck { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 4px; }
+  .sol-card .scv { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--fg-1); letter-spacing: -0.015em; }
+  .sol-card .scs { font-size: 11px; color: var(--fg-3); margin-top: 4px; line-height: 1.35; }
+  .sol-card.sol-card-a { top: 10%; left: -4%; animation: sol-float 6s ease-in-out infinite; }
+  .sol-card.sol-card-b { bottom: 8%; right: -4%; animation: sol-float 6s ease-in-out infinite 3s; }
+  @keyframes sol-float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+
+  /* stats */
+  .sol-stats { padding: 72px 0; background: var(--paper); border-bottom: 1px solid var(--border-subtle); }
+  .sol-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .sol-stat .v { font-family: var(--font-display); font-size: 48px; font-weight: 700; letter-spacing: -0.025em; line-height: 1; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 12px; }
+  .sol-stat .k { font-size: 14px; color: var(--fg-2); line-height: 1.5; max-width: 240px; }
+
+  /* why */
+  .sol-why { padding: 100px 0; background: var(--ink-25); border-bottom: 1px solid var(--border-subtle); }
+  .sol-why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 48px; }
+  .sol-why-card { padding: 32px 30px; background: var(--paper); border: 1px solid var(--border); border-radius: 14px; }
+  .sol-why-card h3 { font-family: var(--font-display); font-size: 21px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 12px; color: var(--fg-1); }
+  .sol-why-card p { font-size: 15px; line-height: 1.62; color: var(--fg-2); margin: 0; }
+
+  /* case */
+  .sol-case { padding: 100px 0; background: var(--paper); }
+  .sol-case-card { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 56px; background: linear-gradient(135deg, var(--ink-950), #0B1225); border-radius: 24px; color: white; position: relative; overflow: hidden; }
+  .sol-case-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 100% 0%, rgba(34,211,238,0.18), transparent 45%), radial-gradient(circle at 0% 100%, rgba(225,29,116,0.14), transparent 45%); pointer-events: none; }
+  .sol-case-logo { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 4px; position: relative; }
+  .sol-case-region { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: #67E8F9; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  .sol-case blockquote { font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.35; margin: 0 0 24px; color: white; text-wrap: pretty; position: relative; }
+  .sol-case blockquote::before { content: "\201C"; font-size: 60px; color: #22D3EE; line-height: 0.8; display: block; margin-bottom: 8px; font-family: var(--font-display); }
+  .sol-case-who { font-size: 13px; color: #B8C0D8; font-style: italic; position: relative; }
+  .sol-case-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 32px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; position: relative; }
+  .sol-case-stat .cv { font-family: var(--font-display); font-size: 36px; font-weight: 700; color: white; letter-spacing: -0.025em; line-height: 1; margin-bottom: 8px; }
+  .sol-case-stat .cv.g { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sol-case-stat .ck { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: #97A2BF; text-transform: uppercase; line-height: 1.35; }
+
+  /* faq */
+  .sol-faq { padding: 100px 0; background: var(--ink-25); border-top: 1px solid var(--border-subtle); }
+  .sol-faq-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 64px; align-items: start; }
+
+  /* cta */
+  .sol-cta { padding: 100px 0; background: var(--paper); }
+  .sol-cta .sub-cta-card { margin: 0; padding: 64px; }
+
+  @media (max-width: 1024px) {
+    .sol-hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .sol-hero h1 { font-size: 38px; }
+    .sol-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+    .sol-stat .v { font-size: 38px; }
+    .sol-why-grid { grid-template-columns: 1fr; }
+    .sol-case-card { grid-template-columns: 1fr; padding: 40px 32px; gap: 32px; }
+    .sol-faq-grid { grid-template-columns: 1fr; gap: 32px; }
+    .sol-cta .sub-cta-card { padding: 40px 32px; }
+  }
+  @media (max-width: 640px) {
+    .sol-hero h1 { font-size: 30px; }
+    .sol-stats-grid { grid-template-columns: 1fr 1fr; }
+    .sol-stat .v { font-size: 32px; }
+    .sol-case-stats { grid-template-columns: 1fr; }
+    .sol-phone { width: 160px; }
+    .sol-phone .sp-amount { font-size: 28px; }
+  }
+</style>
+</head><body data-section="solutions" data-current="solutions"><div data-nav-mount></div><main id="main">
+
+<nav class="breadcrumb container" aria-label="Breadcrumb"><ol>
+  <li><a href="../../Tapped Website.html">Home</a></li>
+  <li><a href="../../Tapped Website.html#verticals">Solutions</a></li>
+  <li aria-current="page">Healthcare</li>
+</ol></nav>
+
+<header class="sol-hero"><div class="container sol-hero-grid">
+  <div>
+    <span class="eyebrow">Solutions · Healthcare <span class="flags">🇸🇬 🇲🇾 🇵🇭</span></span>
+    <h1>Clinic copay collected at the <span class="g">consult room</span>, not the counter.</h1>
+    <p class="lede">Clinic SaaS embeds Tapped to collect copays, deductibles, and cash-pay visits inside the consult flow &mdash; not at a counter where 18% of patients walk out without paying. PCI-DSS Level 1, PDPA-aligned, and billing-code-aware.</p>
+    <div class="sol-hero-cta">
+      <a class="btn btn-brand btn-arrow" href="../company/contact.html?solution=healthcare">Talk to sales</a>
+      <a class="btn btn-secondary" href="../developers/documentation.html">Read the docs</a>
+    </div>
+    <p class="sol-who">Used by EMR vendors, clinic management platforms, telehealth follow-up systems, dental practice software, and specialty-clinic SaaS.</p>
+  </div>
+  <div class="sol-hero-visual">
+  <div class="sol-scene">
+    <div class="sol-scene-chrome">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <div class="scene-label">🇸🇬 🇲🇾 🇵🇭&nbsp;&nbsp;healthcare.scene / live</div>
+      <div class="scene-live"><span class="pulse"></span>Tapping now</div>
+    </div>
+    <div class="sol-scene-body">
+      <div class="sol-phone">
+        <div class="sp-glow"></div>
+        <div class="sp-brand">Tapped</div>
+        <div class="sp-amount">$48.50</div>
+        <div class="sp-tap">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 9a3 3 0 0 1 6 0v3a3 3 0 0 1-6 0z"/><path d="M6 12a6 6 0 0 1 12 0"/><path d="M3 12a9 9 0 0 1 18 0"/></svg>
+        </div>
+        <div class="sp-status">Approved · ARQC 9F26</div>
+      </div>
+      <div class="sol-card sol-card-a">
+        <div class="sck">🇲🇾 Malaysia</div>
+        <div class="scv">Medika+</div>
+        <div class="scs">-18%&nbsp;·&nbsp;walk-out rate</div>
+      </div>
+      <div class="sol-card sol-card-b">
+        <div class="sck">Live tap</div>
+        <div class="scv">+ -18%</div>
+        <div class="scs">walk-out rate after consult</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div></header>
+
+<section class="sol-stats"><div class="container">
+  <div class="sol-stats-grid">
+    <div class="sol-stat"><div class="v">-18%</div><div class="k">walk-out rate after consult</div></div><div class="sol-stat"><div class="v"><45s</div><div class="k">insurance EOB → balance → tap</div></div><div class="sol-stat"><div class="v">100%</div><div class="k">PDPA-compliant PHI handling</div></div><div class="sol-stat"><div class="v">HIPAA</div><div class="k">BAA available for regulated clients</div></div>
+  </div>
+</div></section>
+
+<section class="sol-why"><div class="container">
+  <div class="section-head">
+    <span class="eyebrow">What's different for healthcare</span>
+    <h2>The <span class="g">four ways</span> Tapped fits the healthcare flow.</h2>
+    <p>A generic payments API doesn't know where the tap should happen, when the authorisation should hold, or how the tip should split. These are the things we built for your vertical specifically.</p>
+  </div>
+  <div class="sol-why-grid">
+    <div class="sol-why-card"><h3>Copay at the consult, not the counter</h3><p>The doctor hits "close visit," the balance is computed against the insurance EOB, and the patient taps on the nurse's iPad without leaving the room. Walk-out rate drops from 18% to under 3%.</p></div><div class="sol-why-card"><h3>PHI-aware transaction metadata</h3><p>Procedure codes travel as opaque tokens &mdash; enough to reconcile against insurance claims, never enough to leak PHI through the card descriptor. PDPA, PIPA, PIPL-compliant per market.</p></div><div class="sol-why-card"><h3>Stored cards for chronic visits</h3><p>Chronic-care patients store a card once at first visit and tap a mobile credential on follow-ups. Card-on-file is scheme-compliant MIT (merchant-initiated transaction), not a "we have their card on record" hack.</p></div><div class="sol-why-card"><h3>Insurance top-up splits</h3><p>Split a $180 visit across a $150 insurance line and a $30 patient-pay tap in a single authorisation. Your clinic never hand-reconciles partial insurance pay.</p></div>
+  </div>
+</div></section>
+
+<section class="sol-case"><div class="container">
+  <div class="section-head">
+    <span class="eyebrow">Case study</span>
+    <h2>Medika+ &mdash; <span class="g">210 clinics across MY</span>.</h2>
+  </div>
+  <div class="sol-case-card">
+    <div>
+      <div class="sol-case-logo">Medika+</div>
+      <div class="sol-case-region">🇲🇾 Malaysia · Live since 2026 Q1</div>
+      <blockquote>We'd modelled the walk-out problem for years. The answer turned out to be: move the payment to where the decision is made. Tapped was the only API that let us do that without building a PCI environment.</blockquote>
+      <div class="sol-case-who">Dr. Aisha Rahman · CEO · Medika+</div>
+    </div>
+    <div class="sol-case-stats">
+      <div class="sol-case-stat"><div class="cv">210</div><div class="ck">clinics across MY</div></div><div class="sol-case-stat"><div class="cv g">-18%</div><div class="ck">walk-out rate</div></div><div class="sol-case-stat"><div class="cv"><45s</div><div class="ck">visit close → paid</div></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sol-faq"><div class="container"><div class="sol-faq-grid">
+  <div>
+    <span class="eyebrow" style="font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--brand-cyan-700);margin-bottom:16px;display:inline-block;">FAQ</span>
+    <h2 style="font-family:var(--font-display);font-size:40px;font-weight:600;letter-spacing:-0.025em;line-height:1.08;margin:0 0 16px;color:var(--fg-1);">Questions healthcare platform teams actually ask us.</h2>
+    <p style="font-size:16px;color:var(--fg-2);line-height:1.6;margin:0;">We get them on every call. If yours isn't answered here, the sales team has the longer version.</p>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item" open><summary class="faq-q">How quickly can we go live in production?<span class="plus">+</span></summary><div class="faq-a-inner"><p>Median go-live from sandbox key to first production tap across healthcare platforms is 12 days. Fastest to date was 9 days (OrbitSalon); typical range is 2&ndash;4 weeks depending on how deeply you want sub-merchant onboarding embedded.</p></div></details>
+    <details class="faq-item"><summary class="faq-q">Which acquirers / PSPs do you route to?<span class="plus">+</span></summary><div class="faq-a-inner"><p>Tapped Onboard is PSP-agnostic. Your sub-merchants end up routed to Stripe, Adyen, Airwallex, or a local sponsor bank depending on market, card type, and cost &mdash; you see one API and one blended rate; we handle the routing.</p></div></details>
+    <details class="faq-item"><summary class="faq-q">Do we need to become a payment facilitator?<span class="plus">+</span></summary><div class="faq-a-inner"><p>No. Tapped operates as the PayFac under its own MAS / BSP / BNM (etc.) licences per market. You're a distribution platform, not a regulated entity. The regulatory surface sits with us, not you.</p></div></details>
+    <details class="faq-item"><summary class="faq-q">Can we offer our own platform fee on top of tap-to-pay?<span class="plus">+</span></summary><div class="faq-a-inner"><p>Yes. You set a take rate per merchant (or per transaction type), Tapped settles to you the spread net of interchange+ and our platform fee. Most healthcare platforms see 30&ndash;60 bps margin on card volume.</p></div></details>
+    <details class="faq-item"><summary class="faq-q">What about refunds, disputes, chargebacks?<span class="plus">+</span></summary><div class="faq-a-inner"><p>Full dispute API with automated evidence packaging from the metadata you pass at authorisation. Dispute win rate across the healthcare vertical was 68% in 2025 &mdash; materially above the scheme average of 43%.</p></div></details>
+  </div>
+</div></div></section>
+
+<section class="sol-cta"><div class="container"><div class="sub-cta-card">
+  <div><span class="eyebrow">Ready to embed tap-to-pay?</span><h2>See the healthcare sandbox in 20 minutes.</h2><p>Walk a sales engineer through your integration goals; leave with a sandbox key, a shortlist of the three highest-impact endpoints for healthcare, and a 12-day go-live plan.</p></div>
+  <div class="sub-cta-actions"><a class="btn btn-brand btn-arrow" href="../company/contact.html?solution=healthcare">Book a walkthrough</a><a class="btn btn-secondary" href="../customers.html">See more customers</a></div>
+</div></div></section>
+
+</main><div data-footer-mount></div>
+<script src="../../shared/chrome.js"></script>
+</body></html>

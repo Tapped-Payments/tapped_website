@@ -1,0 +1,1524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tapped — Embedded tap-to-pay for vertical SaaS in APAC</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { background: var(--bg); color: var(--fg-1); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+
+  /* ---------- BUTTONS ---------- */
+  .btn { font-family: var(--font-sans); font-size: 14px; font-weight: 500; padding: 9px 16px; border-radius: 8px; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 8px; transition: all 160ms var(--ease-out); white-space: nowrap; }
+  .btn-primary { background: var(--ink-900); color: white; }
+  .btn-primary:hover { background: var(--ink-800); }
+  .btn-brand { background: var(--brand-gradient); color: white; box-shadow: var(--shadow-brand); padding: 11px 18px; font-weight: 600; }
+  .btn-brand:hover { transform: translateY(-1px); }
+  .btn-secondary { background: transparent; color: var(--fg-1); border-color: var(--border); }
+  .btn-secondary:hover { background: var(--ink-25); border-color: var(--border-strong); }
+  .btn-ghost { background: transparent; color: var(--fg-1); }
+  .btn-ghost:hover { background: var(--ink-50); }
+  .btn-ink { background: rgba(255,255,255,0.10); color: white; border: 1px solid rgba(255,255,255,0.16); }
+  .btn-ink:hover { background: rgba(255,255,255,0.15); }
+  .btn-arrow::after { content: "→"; font-family: var(--font-mono); transition: transform 160ms var(--ease-out); }
+  .btn-arrow:hover::after { transform: translateX(3px); }
+
+  /* ---------- NAV ---------- */
+  .nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); background: rgba(255,255,255,0.78); border-bottom: 1px solid var(--border-subtle); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; }
+  .brand img.logo-img { height: 34px; width: auto; display: block; }
+  .nav-center { display: flex; gap: 4px; align-items: center; }
+  .nav-item { position: relative; }
+  .nav-item > button { background: none; border: none; color: var(--fg-2); font-size: 14px; padding: 8px 14px; border-radius: 6px; display: inline-flex; gap: 6px; align-items: center; cursor: pointer; transition: color 160ms; }
+  .nav-item > button:hover { color: var(--fg-1); }
+  .nav-item > button .chev { width: 10px; height: 10px; transition: transform 160ms; opacity: 0.6; }
+  .nav-item.open > button { color: var(--fg-1); }
+  .nav-item.open > button .chev { transform: rotate(180deg); }
+  .nav-mega { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-4px); min-width: 540px; background: white; border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-xl); padding: 20px; opacity: 0; visibility: hidden; transition: all 180ms var(--ease-out); display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .nav-item.open .nav-mega { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+  .nav-mega a { display: flex; gap: 12px; padding: 12px; border-radius: 8px; align-items: flex-start; cursor: pointer; transition: background 140ms; }
+  .nav-mega a:hover { background: var(--ink-25); }
+  .nav-mega .ico { width: 32px; height: 32px; flex: none; border-radius: 8px; background: var(--ink-50); display: grid; place-items: center; color: var(--brand-cyan-700); }
+  .nav-mega .nm { display: block; font-size: 14px; font-weight: 600; color: var(--fg-1); margin-bottom: 2px; }
+  .nav-mega .nd { display: block; font-size: 12px; color: var(--fg-3); line-height: 1.4; }
+  .nav-cta { display: flex; gap: 6px; align-items: center; }
+  a.nav-item { display: inline-block; text-decoration: none; }
+  a.nav-item > button { pointer-events: none; }
+  .btn { cursor: pointer; }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; overflow: hidden; padding: 112px 0 88px; border-bottom: 1px solid var(--border-subtle); background: var(--paper); }
+  .hero-glow { position: absolute; width: 560px; height: 560px; border-radius: 50%; filter: blur(140px); opacity: 0.20; pointer-events: none; }
+  .hero-glow.a { background: #22D3EE; top: -240px; left: -80px; }
+  .hero-glow.b { background: #E11D74; bottom: -260px; right: -60px; opacity: 0.16; }
+  .hero-circuit { position: absolute; inset: 0; color: rgba(10,14,26,0.08); pointer-events: none; }
+  .hero-circuit svg { width: 100%; height: 100%; }
+  .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--paper); border: 1px solid var(--border); border-radius: 999px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-2); margin-bottom: 28px; }
+  .hero-eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #22D3EE; box-shadow: 0 0 8px #22D3EE; animation: pulse 2s var(--ease-in-out) infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .hero h1 { font-family: var(--font-display); font-size: 58px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.04; margin: 0 0 24px; color: var(--fg-1); }
+  .hero h1 .g { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p.sub { font-size: 18px; color: var(--fg-2); line-height: 1.6; margin: 0 0 36px; max-width: 540px; }
+  .hero-cta { display: flex; gap: 12px; align-items: center; margin-bottom: 36px; }
+  .hero-meta { display: flex; gap: 28px; align-items: center; }
+  .hero-meta-item { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--fg-2); }
+  .hero-meta-item svg { color: var(--brand-cyan-700); flex: none; }
+
+  /* hero visual: revenue chart card */
+  .hero-card { background: var(--paper); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lg); overflow: hidden; }
+  .hc-head { padding: 16px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; }
+  .hc-title { display: flex; align-items: center; gap: 10px; }
+  .hc-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 8px rgba(14,159,110,0.5); }
+  .hc-title .name { font-weight: 600; font-size: 14px; color: var(--fg-1); }
+  .hc-title .who { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; }
+  .hc-head .pill { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--success-fg); background: var(--success-bg); padding: 4px 8px; border-radius: 999px; }
+  .hc-body { padding: 20px; }
+  .hc-stat { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .hc-stat .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 32px; font-weight: 600; letter-spacing: -0.02em; color: var(--fg-1); }
+  .hc-stat .c { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+  .hc-stat .delta { margin-left: auto; font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--success-fg); background: var(--success-bg); padding: 3px 8px; border-radius: 4px; }
+  .hc-sub { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 18px; }
+  .hc-chart { position: relative; height: 130px; }
+  .hc-chart svg { width: 100%; height: 100%; overflow: visible; }
+  .hc-foot { display: flex; justify-content: space-between; padding-top: 12px; font-family: var(--font-mono); font-size: 10px; color: var(--fg-4); letter-spacing: 0.04em; text-transform: uppercase; }
+  .hc-tape { background: var(--ink-25); border-top: 1px solid var(--border-subtle); padding: 12px 20px; display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow: hidden; position: relative; }
+  .hc-tape::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40px; background: linear-gradient(to bottom, transparent, var(--ink-25)); pointer-events: none; }
+  .tape-row { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11px; }
+  .tape-row .tk { color: var(--fg-3); flex: none; width: 78px; letter-spacing: 0.02em; }
+  .tape-row .tid { color: var(--fg-2); flex: 1; }
+  .tape-row .ta { color: var(--fg-1); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tape-row .tdot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); flex: none; }
+
+  /* ---------- LOGO STRIP ---------- */
+  .logos { padding: 48px 0; border-bottom: 1px solid var(--border-subtle); background: var(--ink-25); }
+  .logos-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); text-align: center; margin-bottom: 28px; font-weight: 500; }
+  .logos-row { display: flex; flex-wrap: nowrap; gap: 10px; align-items: center; justify-content: center; }
+  .logo-cell { flex: 0 0 auto; padding: 10px 16px; border: 1px solid var(--border-subtle); border-radius: 999px; background: var(--paper); white-space: nowrap; }
+  .logo-cell .lk { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-2); font-weight: 500; }
+
+  /* ---------- VERTICAL TABS ---------- */
+  .verticals { padding: 120px 0; background: var(--paper); position: relative; }
+  .section-head { max-width: 720px; margin-bottom: 56px; }
+  .section-head .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); margin-bottom: 16px; display: block; font-weight: 600; }
+  .section-head h2 { font-family: var(--font-display); font-size: 44px; font-weight: 600; letter-spacing: -0.022em; line-height: 1.08; margin: 0 0 16px; color: var(--fg-1); text-wrap: balance; }
+  .section-head p { font-size: 18px; color: var(--fg-2); line-height: 1.6; margin: 0; max-width: 600px; }
+
+  .vert-tabs { display: flex; gap: 4px; padding: 4px; background: var(--ink-50); border-radius: 12px; margin-bottom: 32px; overflow-x: auto; }
+  .vert-tab { background: transparent; border: 0; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--fg-2); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; transition: all 160ms; }
+  .vert-tab:hover { color: var(--fg-1); }
+  .vert-tab.active { background: var(--paper); color: var(--fg-1); box-shadow: var(--shadow-sm); }
+  .vert-tab svg { color: currentColor; opacity: 0.8; }
+
+  .vert-panel { display: none; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: stretch; min-height: 460px; }
+  .vert-panel.active { display: grid; animation: fadeUp 320ms var(--ease-out); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .vp-copy h3 { font-family: var(--font-display); font-size: 32px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin: 24px 0 16px; color: var(--fg-1); text-wrap: balance; }
+  .vp-copy .who { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); }
+  .vp-copy p { font-size: 16px; color: var(--fg-2); line-height: 1.6; margin: 0 0 24px; }
+  .vp-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); margin-bottom: 24px; }
+  .vp-stat .vn { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 28px; font-weight: 600; color: var(--fg-1); letter-spacing: -0.02em; line-height: 1; }
+  .vp-stat .vn .grad { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .vp-stat .vl { font-size: 13px; color: var(--fg-3); margin-top: 8px; line-height: 1.4; }
+
+  /* mock product card per vertical */
+  .vp-mock { background: var(--paper); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-md); overflow: hidden; display: flex; flex-direction: column; }
+  .vpm-bar { padding: 12px 16px; background: var(--ink-25); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; gap: 10px; }
+  .vpm-bar .lights { display: flex; gap: 6px; }
+  .vpm-bar .lights span { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-150); }
+  .vpm-bar .url { flex: 1; padding: 4px 12px; background: var(--paper); border: 1px solid var(--border-subtle); border-radius: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+  .vpm-bar .url .urlb { color: var(--fg-1); }
+  .vpm-body { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+
+  /* shared mini elements */
+  .mini-row { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--border-subtle); border-radius: 10px; background: var(--paper); }
+  .mini-ico { width: 36px; height: 36px; border-radius: 8px; background: var(--ink-50); display: grid; place-items: center; color: var(--fg-2); flex: none; }
+  .mini-meta { flex: 1; min-width: 0; }
+  .mini-name { font-size: 13px; font-weight: 600; color: var(--fg-1); }
+  .mini-sub { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 2px; }
+  .mini-amt { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 14px; font-weight: 600; color: var(--fg-1); }
+  .mini-pill { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; }
+  .mp-paid { background: var(--success-bg); color: var(--success-fg); }
+  .mp-pending { background: var(--warning-bg); color: var(--warning-fg); }
+  .tap-cta { margin-top: auto; padding: 16px; border-radius: 10px; background: linear-gradient(135deg, rgba(34,211,238,0.08), rgba(225,29,116,0.08)); border: 1px dashed var(--border); display: flex; align-items: center; gap: 12px; }
+  .tap-cta .tc-ico { width: 40px; height: 40px; border-radius: 10px; background: var(--brand-gradient); display: grid; place-items: center; color: white; flex: none; }
+  .tap-cta .tc-text { font-size: 13px; color: var(--fg-1); font-weight: 500; }
+  .tap-cta .tc-text small { display: block; color: var(--fg-3); font-size: 11px; font-weight: 400; margin-top: 2px; font-family: var(--font-mono); }
+  .tap-cta .tc-amt { margin-left: auto; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 600; font-size: 16px; color: var(--fg-1); }
+
+  /* ---------- WHY EMBED ---------- */
+  .why { padding: 120px 0; background: var(--ink-25); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .why-card { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+  .why-card .ic { width: 40px; height: 40px; border-radius: 10px; background: var(--ink-50); display: grid; place-items: center; color: var(--brand-cyan-700); margin-bottom: 16px; }
+  .why-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 8px; color: var(--fg-1); }
+  .why-card p { font-size: 14px; color: var(--fg-2); line-height: 1.6; margin: 0; }
+  .why-card .strong { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--fg-1); font-weight: 600; }
+
+  /* ---------- ONBOARD (Tapped Onboard) ---------- */
+  .onboard { padding: 120px 0; background: var(--paper); position: relative; overflow: hidden; }
+  .onboard-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; margin-top: 32px; }
+  .onboard-copy h2 .hl { background: linear-gradient(135deg, var(--brand-cyan-700) 0%, var(--brand-magenta-600) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .onboard-features { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 32px; margin-top: 28px; }
+  .onboard-features li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; font-size: 14px; color: var(--fg-2); border-bottom: 1px solid var(--border-subtle); }
+  .onboard-features li svg { color: var(--brand-cyan-700); flex: none; margin-top: 2px; }
+  .onboard-features li .f-name { color: var(--fg-1); font-weight: 500; }
+
+  /* Onboard visual — interface contract diagram */
+  .onboard-viz { position: relative; background: var(--ink-950); border-radius: 16px; padding: 32px; box-shadow: var(--shadow-xl); overflow: hidden; }
+  .onboard-viz::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(34,211,238,0.08), transparent 60%), radial-gradient(circle at 80% 90%, rgba(225,29,116,0.06), transparent 55%); pointer-events: none; }
+  .ob-label { position: relative; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A94B0; margin-bottom: 10px; font-weight: 600; }
+  .ob-platform-row { position: relative; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  .ob-platform { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 10px 12px; color: #F5F7FB; font-size: 12px; font-weight: 500; text-align: center; backdrop-filter: blur(4px); }
+  .ob-api { position: relative; margin: 18px 0; padding: 18px 20px; background: linear-gradient(135deg, rgba(34,211,238,0.12), rgba(225,29,116,0.10)); border: 1px solid rgba(34,211,238,0.35); border-radius: 12px; }
+  .ob-api .ob-endpoint { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; color: #F5F7FB; }
+  .ob-api .ob-endpoint .m { color: #22D3EE; font-weight: 700; letter-spacing: 0.04em; }
+  .ob-api .ob-endpoint + .ob-endpoint { margin-top: 6px; }
+  .ob-api .ob-endpoint .c { color: #5A6486; margin-left: auto; }
+  .ob-engine { position: relative; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; margin: 14px 0; }
+  .ob-engine-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .ob-engine-dot { width: 8px; height: 8px; border-radius: 50%; background: #22D3EE; box-shadow: 0 0 0 3px rgba(34,211,238,0.18); }
+  .ob-engine-title { font-family: var(--font-display); font-size: 14px; font-weight: 600; color: #F5F7FB; letter-spacing: -0.01em; }
+  .ob-engine-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+  .ob-engine-steps div { font-family: var(--font-mono); font-size: 10.5px; color: #C1C8DB; display: flex; gap: 6px; align-items: center; }
+  .ob-engine-steps div::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: #E11D74; flex: none; }
+  .ob-profiles { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 12px; }
+  .ob-profile { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 10px; font-size: 11px; color: #C1C8DB; text-align: center; font-family: var(--font-mono); letter-spacing: 0.02em; transition: all 200ms; }
+  .ob-profile.live { background: rgba(34,211,238,0.10); border-color: rgba(34,211,238,0.35); color: #F5F7FB; }
+  .ob-profile.live::before { content: "●"; color: #22D3EE; margin-right: 6px; font-size: 9px; }
+  .ob-profile.soon { opacity: 0.5; }
+  .ob-profile .tag { display: block; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #5A6486; margin-top: 2px; font-weight: 600; }
+
+  /* connector lines between layers */
+  .ob-connector { position: relative; height: 18px; }
+  .ob-connector::before, .ob-connector::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.18), transparent); }
+  .ob-connector::before { left: 20%; }
+  .ob-connector::after { right: 20%; }
+
+  .onboard-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .onboard-tags span { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; padding: 6px 12px; border-radius: 20px; background: var(--ink-50); color: var(--fg-2); border: 1px solid var(--border); }
+  .onboard-tags span.hi { background: var(--brand-cyan-50); color: var(--brand-cyan-700); border-color: rgba(6,182,212,0.25); }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how { padding: 120px 0; background: var(--paper); }
+  .how-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: flex-start; }
+  .steps { display: flex; flex-direction: column; gap: 4px; }
+  .step { padding: 20px; border-radius: 12px; border: 1px solid transparent; cursor: pointer; transition: all 180ms; }
+  .step:hover { background: var(--ink-25); }
+  .step.active { background: var(--paper); border-color: var(--border); box-shadow: var(--shadow-sm); }
+  .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .step-num { width: 28px; height: 28px; border-radius: 8px; background: var(--ink-50); color: var(--fg-3); display: grid; place-items: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; transition: all 180ms; }
+  .step.active .step-num { background: var(--brand-gradient); color: white; }
+  .step h4 { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin: 0; color: var(--fg-1); letter-spacing: -0.01em; }
+  .step p { font-size: 14px; color: var(--fg-2); margin: 0 0 0 42px; line-height: 1.5; }
+  .step.active p { color: var(--fg-2); }
+
+  /* code panel */
+  .code-panel { background: var(--ink-950); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-xl); position: sticky; top: 96px; }
+  .code-tabs { display: flex; padding: 0 8px; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .code-tabs button { background: none; border: none; padding: 14px 16px; color: #8A94B0; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 160ms; cursor: pointer; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; }
+  .code-tabs button.active { color: #22D3EE; border-bottom-color: #22D3EE; }
+  .code-panel pre { padding: 24px; margin: 0; font-family: var(--font-mono); font-size: 13px; line-height: 1.75; color: #C1C8DB; white-space: pre; overflow-x: auto; min-height: 360px; }
+  .tok-k { color: #E11D74; font-weight: 600; }
+  .tok-s { color: #22D3EE; }
+  .tok-c { color: #5A6486; font-style: italic; }
+  .tok-n { color: #F5F7FB; }
+  .tok-f { color: #A78BFA; }
+
+  /* ---------- ONBOARD DEEPER LINK ---------- */
+  .onboard-deeper { margin-top: 22px; }
+  .deeper-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brand); font-weight: 600; padding: 10px 14px; background: rgba(124, 58, 237, 0.06); border: 1px solid rgba(124, 58, 237, 0.22); border-radius: 8px; transition: all 0.15s ease; }
+  .deeper-link:hover { background: rgba(124, 58, 237, 0.1); border-color: rgba(124, 58, 237, 0.4); transform: translateX(2px); }
+  .deeper-link svg { transition: transform 0.15s ease; }
+  .deeper-link:hover svg { transform: translateX(3px); }
+
+  /* ---------- PRODUCTS ROW ---------- */
+  .products { padding: 110px 0 120px; background: var(--paper); border-top: 1px solid var(--border-subtle); position: relative; }
+  .products .section-head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+  .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .product-card { display: flex; flex-direction: column; padding: 28px 24px 24px; background: white; border: 1px solid var(--border); border-radius: 14px; transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease; position: relative; overflow: hidden; min-height: 280px; }
+  .product-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--brand); opacity: 0; transition: opacity 0.15s ease; }
+  .product-card:hover { border-color: var(--brand); transform: translateY(-2px); box-shadow: 0 16px 32px -14px rgba(124, 58, 237, 0.18); }
+  .product-card:hover::before { opacity: 1; }
+  .product-card .pc-ico { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(34, 211, 238, 0.08)); border: 1px solid rgba(124, 58, 237, 0.18); border-radius: 10px; color: var(--brand); margin-bottom: 18px; }
+  .product-card .pc-kicker { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 6px; }
+  .product-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.012em; color: var(--fg-1); margin: 0 0 10px; line-height: 1.15; }
+  .product-card p { font-size: 13.5px; line-height: 1.55; color: var(--fg-2); margin: 0 0 20px; flex: 1; }
+  .product-card .pc-cta { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--brand); margin-top: auto; }
+  .product-card .pc-cta svg { transition: transform 0.15s ease; }
+  .product-card:hover .pc-cta svg { transform: translateX(4px); }
+  @media (max-width: 980px) { .products-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .products-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- ECONOMICS ---------- */
+  .econ { padding: 120px 0; background: var(--ink-950); color: white; position: relative; overflow: hidden; }
+  .econ .hero-circuit { color: rgba(255,255,255,0.08); }
+  .econ-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: center; }
+  .econ .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #22D3EE; font-weight: 600; margin-bottom: 16px; display: block; }
+  .econ h2 { font-family: var(--font-display); font-size: 44px; font-weight: 600; letter-spacing: -0.022em; line-height: 1.08; margin: 0 0 16px; color: white; }
+  .econ p.lead { font-size: 18px; color: #C1C8DB; line-height: 1.6; margin: 0 0 32px; }
+  .econ .checklist { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+  .econ .checklist li { display: flex; gap: 12px; align-items: flex-start; color: #F5F7FB; font-size: 15px; }
+  .econ .checklist li svg { color: #22D3EE; flex: none; margin-top: 2px; }
+
+  /* economics calculator */
+  .calc { background: var(--ink-900); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px; }
+  .calc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .calc-head .ct { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8A94B0; }
+  .calc-head .pill { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #22D3EE; background: rgba(34,211,238,0.10); padding: 4px 8px; border-radius: 999px; border: 1px solid rgba(34,211,238,0.2); }
+  .calc-row { margin-bottom: 18px; }
+  .calc-row label { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: #C1C8DB; margin-bottom: 8px; }
+  .calc-row label .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: white; font-weight: 600; font-size: 14px; }
+  .calc-row input[type=range] { width: 100%; height: 4px; -webkit-appearance: none; appearance: none; background: rgba(255,255,255,0.10); border-radius: 999px; outline: none; }
+  .calc-row input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: white; cursor: pointer; box-shadow: 0 0 0 3px rgba(34,211,238,0.4); transition: box-shadow 160ms; }
+  .calc-row input[type=range]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 5px rgba(34,211,238,0.5); }
+  .calc-row input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: white; cursor: pointer; border: 0; box-shadow: 0 0 0 3px rgba(34,211,238,0.4); }
+  .calc-result { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .calc-line { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; font-size: 13px; color: #C1C8DB; }
+  .calc-line.big { padding-top: 16px; margin-top: 8px; border-top: 1px dashed rgba(255,255,255,0.12); }
+  .calc-line .vv { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: white; font-weight: 600; }
+  .calc-line.big .lbl { font-size: 14px; color: white; font-weight: 500; }
+  .calc-line.big .vv { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: -0.02em; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .calc-foot { margin-top: 16px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; color: #5A6486; }
+
+  /* ---------- COVERAGE ---------- */
+  .coverage { padding: 120px 0; background: var(--paper); }
+  .cov-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .cov-card { padding: 20px; background: var(--paper); border: 1px solid var(--border); border-radius: 12px; transition: all 180ms; }
+  .cov-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+  .cov-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+  .cov-name { font-weight: 600; color: var(--fg-1); font-size: 15px; }
+  .cov-code { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; margin-top: 2px; }
+  .cov-status { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+  .s-live { background: var(--success-bg); color: var(--success-fg); }
+  .s-beta { background: var(--info-bg); color: var(--info-fg); }
+  .s-soon { background: var(--ink-50); color: var(--fg-3); }
+  .cov-rails { display: flex; gap: 6px; flex-wrap: wrap; }
+  .cov-rail { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; color: var(--fg-3); padding: 3px 7px; border: 1px solid var(--border-subtle); border-radius: 4px; background: var(--ink-25); }
+
+  /* ---------- TESTIMONIAL ---------- */
+  .quote { padding: 120px 0; background: var(--ink-25); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+  .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .quote blockquote { font-family: var(--font-display); font-size: 28px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; color: var(--fg-1); margin: 0 0 28px; text-wrap: balance; }
+  .quote blockquote::before { content: "\201C"; font-size: 80px; line-height: 0.8; color: var(--brand-cyan); display: block; margin-bottom: 12px; font-family: var(--font-display); }
+  .quote-author { display: flex; align-items: center; gap: 14px; }
+  .qa-pic { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #22D3EE, #7C3AED); display: grid; place-items: center; color: white; font-weight: 700; font-family: var(--font-display); font-size: 18px; }
+  .qa-name { font-weight: 600; color: var(--fg-1); }
+  .qa-role { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; margin-top: 2px; text-transform: uppercase; }
+  .quote-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 32px; background: var(--paper); border: 1px solid var(--border); border-radius: 16px; }
+  .qs { padding: 8px 0; }
+  .qs .vn { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 32px; font-weight: 600; color: var(--fg-1); letter-spacing: -0.02em; line-height: 1; }
+  .qs .vl { font-size: 12px; color: var(--fg-3); margin-top: 8px; line-height: 1.4; }
+
+  /* ---------- PRICING ---------- */
+  .pricing { padding: 120px 0; background: var(--paper); }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; align-items: stretch; }
+  .price-card { padding: 32px 28px; background: var(--paper); border: 1px solid var(--border); border-radius: 16px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+  .price-card.feat { border: 1px solid transparent; background: linear-gradient(var(--paper), var(--paper)) padding-box, var(--brand-gradient) border-box; box-shadow: 0 20px 60px -20px rgba(8,145,178,0.25); transform: translateY(-8px); }
+  .price-card.feat::before { content: "Most popular"; position: absolute; top: -10px; right: 28px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: white; background: var(--brand-gradient); padding: 4px 10px; border-radius: 999px; }
+  .price-name { font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-2); }
+  .price-card.feat .price-name { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .price-num { font-family: var(--font-display); font-size: 44px; font-weight: 700; letter-spacing: -0.02em; color: var(--fg-1); line-height: 1; }
+  .price-num small { font-family: var(--font-sans); font-size: 14px; color: var(--fg-3); font-weight: 400; margin-left: 4px; }
+  .price-desc { font-size: 14px; color: var(--fg-2); line-height: 1.55; min-height: 42px; }
+  .price-list { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px; }
+  .price-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--fg-1); line-height: 1.4; }
+  .price-list li::before { content: ""; flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--ink-50) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%230891B2' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") no-repeat center; margin-top: 2px; }
+
+  /* Platform card hero: what your merchants see */
+  .pf-hero { display: flex; flex-direction: column; gap: 4px; padding: 16px 0 4px; }
+  .pf-hero-label { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); }
+  .pf-hero-num { font-family: var(--font-display); font-size: 40px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: var(--fg-1); font-variant-numeric: tabular-nums; }
+  .pf-hero-num .dash { color: var(--fg-4); margin: 0 4px; font-weight: 400; }
+  .pf-hero-sub { font-size: 13px; color: var(--fg-2); line-height: 1.5; }
+  .pf-hero-sub b { color: var(--brand-cyan-700); font-weight: 600; }
+
+  /* Per-country pricing widget (now the small-print footer) */
+  .pf-country { margin-top: auto; padding: 14px 16px; background: rgba(34,211,238,0.05); border: 1px solid rgba(34,211,238,0.18); border-radius: 10px; }
+  .pf-country > label { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 8px; }
+  .pf-select-wrap { position: relative; margin-bottom: 10px; }
+  .pf-select-wrap select { width: 100%; appearance: none; -webkit-appearance: none; padding: 8px 32px 8px 12px; border: 1px solid var(--border); background: white; border-radius: 8px; font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--fg-1); cursor: pointer; transition: border-color 140ms; }
+  .pf-select-wrap select:hover, .pf-select-wrap select:focus { border-color: var(--brand-cyan-700); outline: none; }
+  .pf-chev { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--fg-3); pointer-events: none; }
+  .pf-breakdown { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+  .pf-row { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; }
+  .pf-row .pf-k { color: var(--fg-3); }
+  .pf-row .pf-v { font-family: var(--font-mono); color: var(--fg-2); font-weight: 600; font-variant-numeric: tabular-nums; font-size: 12px; }
+
+  /* Add-on strip */
+  .addon-strip { margin-top: 32px; padding: 24px 28px; background: var(--ink-25); border: 1px solid var(--border-subtle); border-radius: 16px; display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 24px; }
+  .addon-tag { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); padding: 4px 10px; background: rgba(34,211,238,0.1); border-radius: 999px; white-space: nowrap; }
+  .addon-body h4 { font-family: var(--font-display); font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4px; color: var(--fg-1); }
+  .addon-body p { font-size: 13.5px; color: var(--fg-2); line-height: 1.5; margin: 0; }
+  .addon-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; min-width: 140px; }
+  .addon-price-num { font-family: var(--font-display); font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: var(--fg-1); font-variant-numeric: tabular-nums; }
+  .addon-price-num small { font-family: var(--font-sans); font-size: 12px; color: var(--fg-3); font-weight: 400; margin-left: 2px; }
+  .addon-price-cur { position: relative; }
+  .addon-price-cur select { appearance: none; -webkit-appearance: none; padding: 4px 22px 4px 8px; border: 1px solid var(--border); background: white; border-radius: 6px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--fg-2); cursor: pointer; letter-spacing: 0.04em; }
+  .addon-price-cur svg { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); color: var(--fg-3); pointer-events: none; }
+  @media (max-width: 900px) {
+    .price-grid { grid-template-columns: 1fr; }
+    .price-card.feat { transform: none; }
+    .addon-strip { grid-template-columns: 1fr; text-align: left; }
+    .addon-price { align-items: flex-start; }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq { padding: 120px 0; background: var(--ink-25); border-top: 1px solid var(--border-subtle); }
+  .faq-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 64px; }
+  .faq-list { display: flex; flex-direction: column; gap: 4px; }
+  .faq-item { border-bottom: 1px solid var(--border-subtle); }
+  .faq-q { width: 100%; background: none; border: 0; text-align: left; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 17px; font-weight: 600; color: var(--fg-1); cursor: pointer; font-family: inherit; }
+  .faq-q .plus { width: 24px; height: 24px; border-radius: 50%; background: var(--ink-50); display: grid; place-items: center; color: var(--fg-2); font-size: 16px; transition: all 180ms; flex: none; }
+  .faq-item.open .faq-q .plus { background: var(--brand-gradient); color: white; transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 280ms var(--ease-out); }
+  .faq-item.open .faq-a { max-height: 240px; }
+  .faq-a-inner { padding: 0 0 20px; font-size: 15px; color: var(--fg-2); line-height: 1.65; max-width: 620px; }
+
+  /* ---------- CTA ---------- */
+  .cta { padding: 120px 0; background: var(--paper); position: relative; overflow: hidden; }
+  .cta-card { position: relative; background: var(--ink-950); border-radius: 24px; padding: 80px 64px; text-align: center; overflow: hidden; }
+  .cta-card .hero-circuit { color: rgba(255,255,255,0.10); }
+  .cta-card .hero-glow { width: 600px; height: 600px; opacity: 0.20; }
+  .cta-card .hero-glow.a { background: #22D3EE; top: -300px; left: -100px; }
+  .cta-card .hero-glow.b { background: #E11D74; bottom: -300px; right: -100px; }
+  .cta-card-inner { position: relative; z-index: 2; }
+  .cta-card .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #22D3EE; margin-bottom: 20px; display: block; }
+  .cta-card h2 { font-family: var(--font-display); font-size: 56px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 20px; color: white; text-wrap: balance; }
+  .cta-card h2 .g { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .cta-card p { font-size: 18px; color: #C1C8DB; line-height: 1.6; margin: 0 0 36px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .cta-row { display: flex; gap: 12px; justify-content: center; }
+
+  /* ---------- FOOTER ---------- */
+  .footer { background: var(--ink-950); color: #97A2BF; padding: 80px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+  .footer-col h5 { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F7FB; margin: 0 0 18px; }
+  .footer-col a { display: block; color: #97A2BF; font-size: 14px; margin-bottom: 12px; transition: color 140ms; }
+  .footer-col a:hover { color: white; }
+  .footer-col p { font-size: 13px; color: #8A94B0; line-height: 1.6; max-width: 280px; margin: 16px 0 0; }
+  .footer-col img.logo-img { height: 26px; width: auto; filter: brightness(1.05); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: #5A6486; }
+  .footer-bottom .lr { display: flex; gap: 24px; }
+
+  /* responsive */
+  @media (max-width: 1024px) {
+    .hero-grid, .how-grid, .econ-grid, .quote-grid, .faq-grid, .vert-panel.active { grid-template-columns: 1fr; gap: 40px; }
+    .hero h1 { font-size: 43px; }
+    .nav-center { display: none; }
+    .feat-grid, .why-grid, .price-grid, .cov-grid { grid-template-columns: 1fr 1fr; }
+    .logos-row { flex-wrap: wrap; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .cta-card { padding: 48px 28px; }
+    .cta-card h2 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== NAV =================== -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="brand">
+      <img class="logo-img" src="assets/tapped-logo.png" alt="Tapped">
+    </div>
+    <div class="nav-center">
+      <div class="nav-item" data-mega="solutions">
+        <button>Solutions <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-mega" style="min-width:560px;grid-template-columns:1fr 1fr;">
+          <a href="pages/solutions/restaurant-pos.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div><div><span class="nm">Restaurant POS</span><span class="nd">Tap-to-pay at the table, kiosk, or counter</span></div></a>
+          <a href="pages/solutions/salon-wellness.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0 1 18 0"/></svg></div><div><span class="nm">Salon &amp; Wellness</span><span class="nd">Embed checkout in booking flows</span></div></a>
+          <a href="pages/solutions/field-services.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7"/></svg></div><div><span class="nm">Field Services</span><span class="nd">Take payment at the customer's door</span></div></a>
+          <a href="pages/solutions/healthcare.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 14c1.5 0 3-1.5 3-3s-1.5-3-3-3-3 1.5-3 3M5 14c-1.5 0-3-1.5-3-3s1.5-3 3-3 3 1.5 3 3M12 19v-6m-3 3h6"/></svg></div><div><span class="nm">Healthcare</span><span class="nd">Clinic copay &amp; consult collections</span></div></a>
+          <a href="pages/solutions/hotels.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20M3 20V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12"/></svg></div><div><span class="nm">Hotels</span><span class="nd">PMS platforms — folio to check-out tap</span></div></a>
+        </div>
+      </div>
+      <div class="nav-item" data-mega="product">
+        <button>Product <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-mega" style="min-width:620px;grid-template-columns:1fr 1fr;">
+          <a href="pages/product/tap-core.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div><div><span class="nm">Tap Core</span><span class="nd">Certified EMV kernels &amp; rails</span></div></a>
+          <a href="pages/product/tap-terminal.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg></div><div><span class="nm">Tap Terminal</span><span class="nd">PIN-on-Glass SDK for any phone</span></div></a>
+          <a href="pages/product/tapped-onboard.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div><div><span class="nm">Tapped Onboard</span><span class="nd">One API for sub-merchant KYB across every acquirer</span></div></a>
+          <a href="pages/product/tap-certify.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div><div><span class="nm">Tap Certify</span><span class="nd">Scheme &amp; central-bank filings</span></div></a>
+          <a href="pages/product/tap-ledger.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v4H3zM3 11h12v10H3zM18 11h3v10h-3z"/></svg></div><div><span class="nm">Tap Ledger</span><span class="nd">Multi-currency payouts &amp; reporting</span></div></a>
+        </div>
+      </div>
+      <a class="nav-item" href="pages/markets.html"><button>Markets</button></a>
+      <a class="nav-item" href="pages/developers.html"><button>Developers</button></a>
+      <a class="nav-item" href="pages/pricing.html"><button>Pricing</button></a>
+      <a class="nav-item" href="pages/customers.html"><button>Customers</button></a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#">Sign in</a>
+      <a class="btn btn-primary btn-arrow" href="#">Talk to us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- =================== HERO =================== -->
+<section class="hero">
+  <div class="hero-glow a"></div>
+  <div class="hero-glow b"></div>
+  <div class="hero-circuit">
+    <svg viewBox="0 0 1600 700" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+      <path d="M0 140 L240 140 L300 80 L600 80 L660 140 L960 140 L1020 200 L1600 200"/>
+      <path d="M0 320 L180 320 L240 260 L540 260 L600 320 L900 320 L960 380 L1260 380 L1320 320 L1600 320" opacity=".55"/>
+      <path d="M0 500 L320 500 L380 440 L680 440 L740 500 L1040 500 L1100 560 L1600 560" opacity=".4"/>
+      <circle cx="240" cy="140" r="3" fill="#22D3EE" stroke="none"/>
+      <circle cx="660" cy="140" r="3" fill="#E11D74" stroke="none"/>
+      <circle cx="1020" cy="200" r="3" fill="#7C3AED" stroke="none"/>
+      <circle cx="600" cy="320" r="3" fill="#22D3EE" stroke="none"/>
+      <circle cx="960" cy="380" r="3" fill="#E11D74" stroke="none"/>
+      <circle cx="1320" cy="320" r="3" fill="#7C3AED" stroke="none"/>
+    </svg>
+  </div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">Embedded payments · for vertical SaaS</div>
+      <h1>Tap-to-pay infrastructure for platforms <span class="g">expanding to APAC</span>.</h1>
+      <p class="sub">Tapped is the embedded tap-to-pay infrastructure for vertical SaaS platforms in APAC. One SDK, certified kernels, scheme filings handled — your customers accept contactless on the device they already own. You earn the spread.</p>
+      <div class="hero-cta">
+        <button class="btn btn-brand btn-arrow">Start building</button>
+        <button class="btn btn-secondary">Book a 30-min walkthrough</button>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          PCI &amp; EMV L3, handled
+        </div>
+        <div class="hero-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          Live in PH · 8 markets rolling out through ’27
+        </div>
+        <div class="hero-meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          12-day avg go-live
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hc-head">
+          <div class="hc-title">
+            <div class="dot"></div>
+            <div>
+              <div class="name">Live revenue</div>
+              <div class="who">acct_live &middot; Sample POS platform &middot; SG</div>
+            </div>
+          </div>
+          <span class="pill">Streaming</span>
+        </div>
+        <div class="hc-body">
+          <div class="hc-stat">
+            <span class="v" id="rev-live">SGD 18,420.65</span>
+            <span class="delta">+24.1%</span>
+          </div>
+          <div class="hc-sub">Today · all merchants · interchange++</div>
+          <div class="hc-chart">
+            <svg viewBox="0 0 400 130" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="cgrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.35"/>
+                  <stop offset="60%" stop-color="#7C3AED" stop-opacity="0.10"/>
+                  <stop offset="100%" stop-color="#E11D74" stop-opacity="0.0"/>
+                </linearGradient>
+                <linearGradient id="cline" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0%" stop-color="#22D3EE"/>
+                  <stop offset="55%" stop-color="#7C3AED"/>
+                  <stop offset="100%" stop-color="#E11D74"/>
+                </linearGradient>
+              </defs>
+              <path d="M0 100 C 40 90, 60 70, 90 75 S 140 95, 170 70 S 220 30, 260 45 S 320 60, 360 28 L 400 18 L 400 130 L 0 130 Z" fill="url(#cgrad)"/>
+              <path d="M0 100 C 40 90, 60 70, 90 75 S 140 95, 170 70 S 220 30, 260 45 S 320 60, 360 28 L 400 18" fill="none" stroke="url(#cline)" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="400" cy="18" r="4" fill="#E11D74"/>
+              <circle cx="400" cy="18" r="9" fill="#E11D74" opacity="0.18"/>
+            </svg>
+          </div>
+          <div class="hc-foot">
+            <span>00:00</span><span>06:00</span><span>12:00</span><span>now</span>
+          </div>
+        </div>
+        <div class="hc-tape">
+          <div class="tape-row"><span class="tdot"></span><span class="tk">14:32:18</span><span class="tid">tx_01HNZ9K4M7G3</span><span class="ta">SGD 14.80</span></div>
+          <div class="tape-row"><span class="tdot"></span><span class="tk">14:32:14</span><span class="tid">tx_01HNZ9K4LX0Q</span><span class="ta">SGD 86.40</span></div>
+          <div class="tape-row"><span class="tdot"></span><span class="tk">14:32:11</span><span class="tid">tx_01HNZ9K4LP21</span><span class="ta">SGD 7.20</span></div>
+          <div class="tape-row"><span class="tdot"></span><span class="tk">14:32:09</span><span class="tid">tx_01HNZ9K4LF9R</span><span class="ta">SGD 142.00</span></div>
+          <div class="tape-row"><span class="tdot"></span><span class="tk">14:32:05</span><span class="tid">tx_01HNZ9K4L82V</span><span class="ta">SGD 23.50</span></div>
+          <div class="tape-row"><span class="tdot"></span><span class="tk">14:32:01</span><span class="tid">tx_01HNZ9K4KV7C</span><span class="ta">SGD 64.90</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== LOGOS =================== -->
+<section class="logos">
+  <div class="container">
+    <div class="logos-label">Powering in-person payments for vertical SaaS across APAC</div>
+    <div class="logos-row">
+      <div class="logo-cell"><div class="lk">Hotel PMS</div></div>
+      <div class="logo-cell"><div class="lk">F&amp;B POS</div></div>
+      <div class="logo-cell"><div class="lk">Booking</div></div>
+      <div class="logo-cell"><div class="lk">Field Services</div></div>
+      <div class="logo-cell"><div class="lk">Healthcare</div></div>
+      <div class="logo-cell"><div class="lk">Auto Repair</div></div>
+      <div class="logo-cell"><div class="lk">Fitness</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== VERTICALS (TABS) =================== -->
+<section class="verticals" id="verticals">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Built for vertical SaaS</span>
+      <h2>You know your industry. We know payments. Together we expand your TAM.</h2>
+      <p>Every vertical we serve has the same arc: software-only at first, then payments take over as the most important revenue line. Tapped gets you there in weeks, not the 18 months it takes to build it yourself.</p>
+    </div>
+
+    <div class="vert-tabs" role="tablist">
+      <button class="vert-tab active" data-tab="fnb">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg>
+        Restaurant &amp; F&amp;B
+      </button>
+      <button class="vert-tab" data-tab="salon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0 1 18 0"/></svg>
+        Salon &amp; Wellness
+      </button>
+      <button class="vert-tab" data-tab="field">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 11a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/><path d="M17.66 17.66A8 8 0 1 1 19 12"/></svg>
+        Field Services
+      </button>
+      <button class="vert-tab" data-tab="health">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v6m0 0V2m0 6h6m-6 0H6m6 6v6m0-6v6m0-6h6m-6 0H6"/></svg>
+        Healthcare
+      </button>
+      <button class="vert-tab" data-tab="fit">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6.5 6.5 11 11M21 21l-1-1M3 3l1 1M18 22l4-4M2 6l4-4M3 10l7-7M14 21l7-7"/></svg>
+        Fitness &amp; Gyms
+      </button>
+      <button class="vert-tab" data-tab="auto">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
+        Auto &amp; Repair
+      </button>
+      <button class="vert-tab" data-tab="hotel">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 20h20M3 20V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01"/></svg>
+        Hotels
+      </button>
+    </div>
+
+    <!-- F&B -->
+    <div class="vert-panel active" data-panel="fnb">
+      <div class="vp-copy">
+        <span class="who">For F&amp;B SaaS · Restaurant POS &amp; ordering platforms</span>
+        <h3>Every server's phone is now a card reader.</h3>
+        <p>Leading restaurant POS platforms across APAC use Tapped to skip terminal hardware entirely. PIN-on-Glass on the staff's existing Android lets your merchants accept tap-to-pay at the table the day they sign up. No 6-week courier delay. No leasing contracts. No reconciliation across two vendors.</p>
+        <div class="vp-stats">
+          <div class="vp-stat"><div class="vn"><span class="grad">3.2×</span></div><div class="vl">ARPU lift after enabling Tapped Terminal</div></div>
+          <div class="vp-stat"><div class="vn">42<small style="font-size:18px;font-family:var(--font-sans);font-weight:400;color:var(--fg-3);"> sec</small></div><div class="vl">Server-tap to receipt, table-side</div></div>
+        </div>
+        <a class="btn btn-secondary btn-arrow">See the F&amp;B integration guide</a>
+      </div>
+      <div class="vp-mock">
+        <div class="vpm-bar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <div class="url">app.yourpos.io / <span class="urlb">order/A12 / pay</span></div>
+        </div>
+        <div class="vpm-body">
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-3);">Table A12 · Order #4019</div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div><div class="mini-meta"><div class="mini-name">Hainan chicken set ×2</div><div class="mini-sub">+ kopi · + barley</div></div><div class="mini-amt">SGD 28.40</div></div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div><div class="mini-meta"><div class="mini-name">Service charge 10%</div><div class="mini-sub">GST 9% applied</div></div><div class="mini-amt">SGD 5.40</div></div>
+          <div class="tap-cta">
+            <div class="tc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 9V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M2 12h20"/></svg></div>
+            <div class="tc-text">Tap to pay<small>Powered by Tapped Terminal</small></div>
+            <div class="tc-amt">SGD 33.80</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SALON -->
+    <div class="vert-panel" data-panel="salon">
+      <div class="vp-copy">
+        <span class="who">For salon, spa &amp; wellness booking platforms</span>
+        <h3>Booking, service, payment — one flow, one app.</h3>
+        <p>Salon, spa &amp; wellness booking platforms: your stylist taps "Complete service" and the customer taps their card. No separate reader to misplace. No "the EFTPOS machine is down again" ticket on Sunday morning. Tipping, gratuity splits, and per-stylist commission settlements run on the same Tapped Ledger.</p>
+        <div class="vp-stats">
+          <div class="vp-stat"><div class="vn"><span class="grad">+18%</span></div><div class="vl">Avg tip captured at terminal vs. cash-out</div></div>
+          <div class="vp-stat"><div class="vn">96<small style="font-size:18px;font-family:var(--font-sans);font-weight:400;color:var(--fg-3);">%</small></div><div class="vl">Same-day attach rate to existing bookings</div></div>
+        </div>
+        <a class="btn btn-secondary btn-arrow">See the wellness integration guide</a>
+      </div>
+      <div class="vp-mock">
+        <div class="vpm-bar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <div class="url">app.yoursalon.co / <span class="urlb">booking/8842 / checkout</span></div>
+        </div>
+        <div class="vpm-body">
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-3);">Aiko M. · 14:00 · Stylist Mei</div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0 1 18 0"/></svg></div><div class="mini-meta"><div class="mini-name">Cut + colour balayage</div><div class="mini-sub">90 min · Mei (senior)</div></div><div class="mini-amt">SGD 215.00</div></div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="mini-meta"><div class="mini-name">Suggested tip · 15%</div><div class="mini-sub">Auto-split to Mei</div></div><div class="mini-amt">SGD 32.25</div></div>
+          <div class="tap-cta">
+            <div class="tc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 9V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M2 12h20"/></svg></div>
+            <div class="tc-text">Hand to client &middot; tap to pay<small>Tip captured pre-auth</small></div>
+            <div class="tc-amt">SGD 247.25</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIELD -->
+    <div class="vert-panel" data-panel="field">
+      <div class="vp-copy">
+        <span class="who">For field service &amp; dispatch platforms</span>
+        <h3>Get paid at the door. Not 30 days later, in a chase email.</h3>
+        <p>Dispatch &amp; field-service platforms: the technician closes the job ticket and the customer taps before they leave the driveway. Receivables collapse from DSO 38 to same-day. We've seen plumbing &amp; HVAC platforms cut bad debt by 70% in the first quarter.</p>
+        <div class="vp-stats">
+          <div class="vp-stat"><div class="vn"><span class="grad">−72%</span></div><div class="vl">Bad-debt write-offs, first 90 days post-launch</div></div>
+          <div class="vp-stat"><div class="vn">T+1<small style="font-size:18px;font-family:var(--font-sans);font-weight:400;color:var(--fg-3);"></small></div><div class="vl">Payouts to your contractor's bank</div></div>
+        </div>
+        <a class="btn btn-secondary btn-arrow">See the field-services guide</a>
+      </div>
+      <div class="vp-mock">
+        <div class="vpm-bar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <div class="url">app.yourfieldops.work / <span class="urlb">job/JK-3041 / close</span></div>
+        </div>
+        <div class="vpm-body">
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-3);">Job JK-3041 · Tan Residence · Bukit Timah</div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m14.7 6.3-1 1c-.4.4-.4 1 0 1.4l4.6 4.6c.4.4 1 .4 1.4 0l1-1c.4-.4.4-1 0-1.4l-4.6-4.6c-.4-.4-1-.4-1.4 0Z"/></svg></div><div class="mini-meta"><div class="mini-name">Aircon servicing · 2 units</div><div class="mini-sub">Gas top-up · filter clean</div></div><div class="mini-amt">SGD 280.00</div></div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div><div class="mini-meta"><div class="mini-name">Call-out fee</div><div class="mini-sub">After-hours surcharge</div></div><div class="mini-amt">SGD 60.00</div></div>
+          <div class="tap-cta">
+            <div class="tc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 9V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M2 12h20"/></svg></div>
+            <div class="tc-text">Customer tap to confirm<small>Receipt sent via SMS &amp; WhatsApp</small></div>
+            <div class="tc-amt">SGD 340.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEALTH -->
+    <div class="vert-panel" data-panel="health">
+      <div class="vp-copy">
+        <span class="who">For clinic, dental &amp; allied-health platforms</span>
+        <h3>Copays at the front desk. Reconciled to the EMR by lunch.</h3>
+        <p>Clinic, dental &amp; allied-health EMR platforms: collect patient copay at check-in or at-discharge, post the journal entry to the patient's chart, and net out the insurer share against the practice's payout. Tapped is on the SingHealth, BPJS, and PhilHealth scheme integration roadmap.</p>
+        <div class="vp-stats">
+          <div class="vp-stat"><div class="vn"><span class="grad">99.4%</span></div><div class="vl">Auto-reconciliation to patient charts</div></div>
+          <div class="vp-stat"><div class="vn">SOC 2<small style="font-size:14px;font-family:var(--font-sans);font-weight:400;color:var(--fg-3);"> · HIPAA-aligned</small></div><div class="vl">PHI handled separately from PAN data</div></div>
+        </div>
+        <a class="btn btn-secondary btn-arrow">See the healthcare guide</a>
+      </div>
+      <div class="vp-mock">
+        <div class="vpm-bar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <div class="url">emr.yourclinic.health / <span class="urlb">visit/V-9012 / discharge</span></div>
+        </div>
+        <div class="vpm-body">
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-3);">Patient · Lim S. · MRN 4498211</div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div><div class="mini-meta"><div class="mini-name">Consultation · Dr. Wong</div><div class="mini-sub">GP visit · 20 min</div></div><div class="mini-amt">SGD 95.00</div></div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20"/></svg></div><div class="mini-meta"><div class="mini-name">Insurance share · AIA</div><div class="mini-sub">Net of patient copay</div></div><div class="mini-amt">−SGD 65.00</div></div>
+          <div class="tap-cta">
+            <div class="tc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 9V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M2 12h20"/></svg></div>
+            <div class="tc-text">Patient copay<small>Posts to chart on success</small></div>
+            <div class="tc-amt">SGD 30.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIT -->
+    <div class="vert-panel" data-panel="fit">
+      <div class="vp-copy">
+        <span class="who">For gym, studio &amp; fitness management platforms</span>
+        <h3>Memberships on file. Drop-ins on tap.</h3>
+        <p>Gym, studio &amp; fitness management platforms: stored credentials for monthly recurring + Tapped Terminal for the walk-in cyclist who forgot their membership card. Both run through the same Tapped balance. One settlement. One ledger. One tax line.</p>
+        <div class="vp-stats">
+          <div class="vp-stat"><div class="vn"><span class="grad">+11%</span></div><div class="vl">Class-pack revenue from drop-in capture</div></div>
+          <div class="vp-stat"><div class="vn">0.2<small style="font-size:14px;font-family:var(--font-sans);font-weight:400;color:var(--fg-3);"> %</small></div><div class="vl">Card-on-file decline rate vs. industry 1.8%</div></div>
+        </div>
+        <a class="btn btn-secondary btn-arrow">See the fitness guide</a>
+      </div>
+      <div class="vp-mock">
+        <div class="vpm-bar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <div class="url">studio.gymform.app / <span class="urlb">checkin/walkin</span></div>
+        </div>
+        <div class="vpm-body">
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-3);">Walk-in · Spin Class 18:30 · Loft Studio Tg.Pagar</div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div class="mini-meta"><div class="mini-name">Drop-in · 60 min spin</div><div class="mini-sub">Includes towel + shower</div></div><div class="mini-amt">SGD 38.00</div></div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M16 19h6m-3-3v6"/></svg></div><div class="mini-meta"><div class="mini-name">Convert to class pack?</div><div class="mini-sub">5-pack · save 22%</div></div><div class="mini-amt">SGD 148.00</div></div>
+          <div class="tap-cta">
+            <div class="tc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 9V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M2 12h20"/></svg></div>
+            <div class="tc-text">Tap to check in<small>Auto-tokenise card for next visit</small></div>
+            <div class="tc-amt">SGD 38.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUTO -->
+    <div class="vert-panel" data-panel="auto">
+      <div class="vp-copy">
+        <span class="who">For workshop, automotive &amp; repair platforms</span>
+        <h3>The estimate, the work order, the payment — one flow.</h3>
+        <p>Workshop, automotive &amp; repair platforms: the customer approves the quote on their phone, the service advisor adds parts mid-job, and the final invoice is taken on tap when the keys come back. Deposit, top-up, and refund — same flow.</p>
+        <div class="vp-stats">
+          <div class="vp-stat"><div class="vn"><span class="grad">−4 days</span></div><div class="vl">DSO improvement vs. invoice-and-chase</div></div>
+          <div class="vp-stat"><div class="vn">2.4<small style="font-size:14px;font-family:var(--font-sans);font-weight:400;color:var(--fg-3);">×</small></div><div class="vl">Cards on file after first transaction</div></div>
+        </div>
+        <a class="btn btn-secondary btn-arrow">See the workshop guide</a>
+      </div>
+      <div class="vp-mock">
+        <div class="vpm-bar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <div class="url">shop.yourworkshop.app / <span class="urlb">ro/RO-7741 / handover</span></div>
+        </div>
+        <div class="vpm-body">
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-3);">RO-7741 · Toyota Vios · SLT2231Z</div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg></div><div class="mini-meta"><div class="mini-name">Major service · 60k km</div><div class="mini-sub">Oil + filter + brake check</div></div><div class="mini-amt">SGD 480.00</div></div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v6M2 12h6m12 0h-6M12 22v-6"/></svg></div><div class="mini-meta"><div class="mini-name">Deposit captured online</div><div class="mini-sub">Net of pre-auth on Mar 14</div></div><div class="mini-amt">−SGD 100.00</div></div>
+          <div class="tap-cta">
+            <div class="tc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 9V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M2 12h20"/></svg></div>
+            <div class="tc-text">Tap to settle balance<small>Save card for future jobs</small></div>
+            <div class="tc-amt">SGD 380.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- HOTEL -->
+    <div class="vert-panel" data-panel="hotel">
+      <div class="vp-copy">
+        <span class="who">For hotel PMS &amp; hospitality platforms</span>
+        <h3>From reservation to folio to final tap — one rail.</h3>
+        <p>Hotel PMS &amp; hospitality platforms: authorise on check-in, incidentals and F&amp;B post straight to the folio, and the guest taps once on check-out. Deposits, partial refunds, split folios, and group masters all settle through the same Tapped Ledger — in the guest's card currency and the hotel's payout currency.</p>
+        <div class="vp-stats">
+          <div class="vp-stat"><div class="vn"><span class="grad">−63%</span></div><div class="vl">Chargebacks vs. MOTO &amp; key-in</div></div>
+          <div class="vp-stat"><div class="vn">11<small style="font-size:18px;font-family:var(--font-sans);font-weight:400;color:var(--fg-3);"> markets</small></div><div class="vl">DCC-ready on day one, one payout</div></div>
+        </div>
+        <a class="btn btn-secondary btn-arrow">See the hospitality guide</a>
+      </div>
+      <div class="vp-mock">
+        <div class="vpm-bar">
+          <div class="lights"><span></span><span></span><span></span></div>
+          <div class="url">app.yourpms.local / <span class="urlb">reservations/RSV-8812 / checkout</span></div>
+        </div>
+        <div class="vpm-body">
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-3);">RSV-8812 · Deluxe King · 3 nights · 2 guests</div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20M3 20V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12"/></svg></div><div class="mini-meta"><div class="mini-name">Room &amp; tax · 3 nights</div><div class="mini-sub">Deluxe King · 1204</div></div><div class="mini-amt">SGD 1,140.00</div></div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v6a6 6 0 0 0 12 0V2M6 8h12M8 22h8"/></svg></div><div class="mini-meta"><div class="mini-name">F&amp;B &amp; minibar</div><div class="mini-sub">4 posts from outlet &amp; IRD</div></div><div class="mini-amt">SGD 186.40</div></div>
+          <div class="mini-row"><div class="mini-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></div><div class="mini-meta"><div class="mini-name">Pre-auth on check-in</div><div class="mini-sub">Visa · 4242 · Mar 14</div></div><div class="mini-amt">−SGD 500.00</div></div>
+          <div class="tap-cta">
+            <div class="tc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 9V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M2 12h20"/></svg></div>
+            <div class="tc-text">Tap to check out<small>Folio closes · receipt emailed</small></div>
+            <div class="tc-amt">SGD 826.40</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== WHY EMBED =================== -->
+<section class="why">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The economics</span>
+      <h2>Why every vertical SaaS founder is moving toward payments.</h2>
+      <p>The math is the same in every category. Software margin is healthy but capped. Payments adds a uncapped, usage-aligned revenue line — and your competitors are about to ship it whether you do or not.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Payments often outgrows your SaaS revenue.</h3>
+        <p>Within 18 months of launch, embedded payments typically reaches <span class="strong">2–4×</span> the SaaS subscription revenue per customer for the verticals we serve.</p>
+      </div>
+      <div class="why-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h3>Stickier customers, lower churn.</h3>
+        <p>SaaS+payments customers churn at roughly <span class="strong">⅓ the rate</span> of SaaS-only customers. Once their money flows through you, they don't leave for the next prettier UI.</p>
+      </div>
+      <div class="why-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>One vendor instead of three.</h3>
+        <p>You replace your merchant's separate gateway, terminal lease, and reconciliation tool. Tapped is the only payments line on their P&amp;L — and the only one on yours.</p>
+      </div>
+      <div class="why-card">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>Built for years 2–18, not weeks 1–6.</h3>
+        <p>You stay focused on the vertical. We do the kernel updates, scheme audits, central-bank filings, dispute logistics — every business day for the next decade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== TAPPED ONBOARD =================== -->
+<section class="onboard" id="onboard">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Tapped Onboard</span>
+      <h2>Onboard any sub-merchant, on <span class="hl">any Asian acquirer</span>, through one API.</h2>
+      <p>Every acquirer in every market wants different documents, different risk rules, different submission formats. Tapped Onboard makes that disappear. Your platform calls one endpoint; we determine the acquirer, collect the right data, run KYB and sanctions, apply their underwriting, and return an approval. No per-market compliance stacks. No acquirer-specific code.</p>
+    </div>
+
+    <div class="onboard-grid">
+      <div class="onboard-copy">
+        <ul class="onboard-features">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><span class="f-name">Acquirer profile engine.</span> Documents, field rules, risk appetite, submission format — versioned per acquirer, per market. Profiles are data, not code.</div>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><span class="f-name">Identity &amp; KYB orchestration.</span> Sumsub or Persona behind a single interface. Vendor routed per acquirer, results normalised to pass / review / fail.</div>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><span class="f-name">Rules-based risk scoring.</span> MCC, volume estimate, geography, adverse signals. Maps to auto-approve, review, or reject — thresholds set per profile.</div>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><span class="f-name">Sanctions &amp; PEP screening.</span> Every merchant and beneficial owner, at onboarding and on a schedule thereafter. Positive matches routed to manual review.</div>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><span class="f-name">Stateful, resumable.</span> A full state machine with webhooks on every transition. Merchants can leave and resume without starting over.</div>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><span class="f-name">Ongoing monitoring.</span> Adverse media, sanctions updates, re-verification triggers, volume anomalies — surfaced in the ops console.</div>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><span class="f-name">White-label by default.</span> The Tapped Onboard name never appears to the end merchant unless you want it to.</div>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><span class="f-name">Full decision audit trail.</span> Every approve, reject, and review is logged with the checks, scores, and rules behind it — ready for acquirers and regulators.</div>
+          </li>
+        </ul>
+
+        <div class="onboard-tags">
+          <span class="hi">Standalone product</span>
+          <span>Architecturally decoupled from orchestration</span>
+          <span>Licensable by acquirers &amp; PSPs directly</span>
+        </div>
+
+        <div class="onboard-deeper">
+          <a class="deeper-link" href="pages/product/tapped-onboard.html">
+            <span>See the full Tapped Onboard spec</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- right side: interface contract diagram -->
+      <div class="onboard-viz">
+        <div class="ob-label">Platforms</div>
+        <div class="ob-platform-row">
+          <div class="ob-platform">POS SaaS</div>
+          <div class="ob-platform">Marketplace</div>
+          <div class="ob-platform">Booking app</div>
+        </div>
+
+        <div class="ob-api">
+          <div class="ob-label" style="margin-bottom:8px; color:#22D3EE;">Upward interface — v1</div>
+          <div class="ob-endpoint"><span class="m">POST</span> /v1/merchants <span class="c">// initiate</span></div>
+          <div class="ob-endpoint"><span class="m">POST</span> /v1/merchants/{id}/documents</div>
+          <div class="ob-endpoint"><span class="m">GET</span>&nbsp;&nbsp;/v1/merchants/{id}/decision</div>
+          <div class="ob-endpoint"><span class="m" style="color:#E11D74;">HOOK</span> merchant.approved · review · rejected</div>
+        </div>
+
+        <div class="ob-engine">
+          <div class="ob-engine-head">
+            <span class="ob-engine-dot"></span>
+            <span class="ob-engine-title">Tapped Onboard engine</span>
+          </div>
+          <div class="ob-engine-steps">
+            <div>identity verification</div>
+            <div>KYB document collection</div>
+            <div>sanctions &amp; PEP screen</div>
+            <div>risk score &amp; thresholds</div>
+            <div>acquirer profile match</div>
+            <div>format translation</div>
+            <div>submission + retry</div>
+            <div>state machine + webhooks</div>
+          </div>
+        </div>
+
+        <div class="ob-label" style="margin-top:14px;">Downward interface — acquirer adapters</div>
+        <div class="ob-profiles">
+          <div class="ob-profile live">RCBC <span class="tag">PH · Q1 '27</span></div>
+          <div class="ob-profile soon">Japan <span class="tag">JP · Q2 '27</span></div>
+          <div class="ob-profile soon">Thailand <span class="tag">TH · Q2 '27</span></div>
+          <div class="ob-profile soon">Singapore <span class="tag">SG · Q3 '27</span></div>
+          <div class="ob-profile soon">Malaysia <span class="tag">MY · Q3 '27</span></div>
+          <div class="ob-profile soon">Hong Kong <span class="tag">HK · Q3 '27</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== HOW IT WORKS (sticky-ish steps) =================== -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>From SDK install to first live tap in under 30 lines of code.</h2>
+      <p>Tapped exposes one client SDK and one server SDK. Everything — kernel selection, PIN fallback, scheme routing, dispute notifications — happens behind the same five primitives.</p>
+    </div>
+    <div class="how-grid">
+      <div class="steps" id="steps">
+        <div class="step active" data-step="0">
+          <div class="step-head"><div class="step-num">01</div><h4>Install the SDK</h4></div>
+          <p>One package on your server, one on your mobile client. Sandbox keys auto-issued.</p>
+        </div>
+        <div class="step" data-step="1">
+          <div class="step-head"><div class="step-num">02</div><h4>Onboard a sub-merchant</h4></div>
+          <p>Tapped Onboard picks the right acquirer profile (RCBC, DBS, whichever), collects the right docs, runs ID + sanctions + PEP, and returns an approve / review / reject. One endpoint, every market.</p>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-head"><div class="step-num">03</div><h4>Create an intent</h4></div>
+          <p>Pass amount, currency, and merchant ID. Tapped resolves the cheapest available rail.</p>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-head"><div class="step-num">04</div><h4>Take the tap</h4></div>
+          <p>SDK presents the contactless reader UI on the merchant's phone. PIN-on-Glass when needed.</p>
+        </div>
+        <div class="step" data-step="4">
+          <div class="step-head"><div class="step-num">05</div><h4>Listen to webhooks</h4></div>
+          <p>Settled, refunded, disputed — every state change posted to your endpoint with idempotent IDs.</p>
+        </div>
+      </div>
+      <div>
+        <div class="code-panel">
+          <div class="code-tabs">
+            <button class="active" data-lang="ts">TypeScript</button>
+            <button data-lang="swift">Swift</button>
+            <button data-lang="kotlin">Kotlin</button>
+            <button data-lang="curl">cURL</button>
+          </div>
+          <pre id="code-display"><span class="tok-c">// 01 — install &amp; init the server SDK</span>
+<span class="tok-k">import</span> <span class="tok-n">{ Tapped }</span> <span class="tok-k">from</span> <span class="tok-s">'@tapped/server'</span>;
+
+<span class="tok-k">const</span> <span class="tok-n">tapped</span> = <span class="tok-k">new</span> <span class="tok-n">Tapped</span>({
+  <span class="tok-n">apiKey</span>: process.env.<span class="tok-n">TAPPED_KEY</span>,
+  <span class="tok-n">platform</span>: <span class="tok-s">'your_platform'</span>,
+});
+
+<span class="tok-c">// Sandbox is live the moment you `npm i`.</span>
+<span class="tok-c">// 9 markets on the roadmap, 1 SDK, no waitlist.</span>
+</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PRODUCTS ROW =================== -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Product surface</span>
+      <h2>Five products. One platform. Licensable individually.</h2>
+      <p>Every Tapped customer uses a different subset. Pick the ones you need, skip the ones you’ve already built.</p>
+    </div>
+    <div class="products-grid">
+      <a class="product-card" href="pages/product/tap-core.html">
+        <div class="pc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div>
+        <div class="pc-kicker">Engine</div>
+        <h3>Tap Core</h3>
+        <p>EMV L1/L2/L3-certified kernels, scheme direct rails across APAC, HSM-backed cryptography. The engine every Tapped product runs on.</p>
+        <span class="pc-cta">Explore Tap Core <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="product-card" href="pages/product/tap-terminal.html">
+        <div class="pc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg></div>
+        <div class="pc-kicker">Client SDK</div>
+        <h3>Tap Terminal</h3>
+        <p>PCI MPoC-certified PIN-on-Glass SDK for Android 9+ and iPhone XS+. Turn every phone your merchants own into a certified card terminal.</p>
+        <span class="pc-cta">Explore Tap Terminal <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="product-card" href="pages/product/tap-certify.html">
+        <div class="pc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="pc-kicker">Compliance</div>
+        <h3>Tap Certify</h3>
+        <p>Every EMVCo, PCI, scheme bulletin, and central-bank filing your payment product needs — prepared, submitted, and maintained by specialists who do nothing else.</p>
+        <span class="pc-cta">Explore Tap Certify <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="product-card" href="pages/product/tap-ledger.html">
+        <div class="pc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 3h18v4H3zM3 11h12v10H3zM18 11h3v10h-3z"/></svg></div>
+        <div class="pc-kicker">Money movement</div>
+        <h3>Tap Ledger</h3>
+        <p>Settlement, netting, FX, and payout engine that turns nine APAC acquirers into one clean money-in, money-out ledger. T+2 default, T+0 optional.</p>
+        <span class="pc-cta">Explore Tap Ledger <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ECONOMICS / CALCULATOR =================== -->
+<section class="econ ink">
+  <div class="hero-circuit">
+    <svg viewBox="0 0 1600 500" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 100 L400 100 L460 40 L900 40 L960 100 L1600 100"/><path d="M0 280 L300 280 L360 220 L800 220 L860 280 L1600 280" opacity=".5"/><path d="M0 420 L500 420 L560 360 L1100 360 L1160 420 L1600 420" opacity=".3"/></svg>
+  </div>
+  <div class="container econ-grid">
+    <div>
+      <span class="eyebrow">Your economics, your model</span>
+      <h2>Set your spread. Keep your spread.</h2>
+      <p class="lead">Tapped charges you interchange + 0.15%. You set the price your merchants pay. Whatever sits in between is yours — billed to the merchant, paid to you, every time a card taps.</p>
+      <ul class="checklist">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>No revenue split with us. We take a flat fee, never a take rate.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Per-merchant pricing controls. Charge a hair salon differently than a steakhouse.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Real-time payouts available. T+1 default, T+0 in 4 markets.</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Tax invoices, statements, and 1099-equivalents per market — auto-generated.</li>
+      </ul>
+    </div>
+    <div class="calc">
+      <div class="calc-head">
+        <span class="ct">Revenue calculator · per merchant · per year</span>
+        <span class="pill">Live</span>
+      </div>
+      <div class="calc-row">
+        <label>Avg transaction value <span class="v" id="atv-v">SGD 42</span></label>
+        <input type="range" min="5" max="500" step="1" value="42" id="atv">
+      </div>
+      <div class="calc-row">
+        <label>Daily transactions per merchant <span class="v" id="tpd-v">85</span></label>
+        <input type="range" min="5" max="600" step="5" value="85" id="tpd">
+      </div>
+      <div class="calc-row">
+        <label>Your spread (over interchange + 0.15%) <span class="v" id="spr-v">0.65%</span></label>
+        <input type="range" min="0.1" max="2.5" step="0.05" value="0.65" id="spr">
+      </div>
+      <div class="calc-row">
+        <label>Active merchants <span class="v" id="mer-v">120</span></label>
+        <input type="range" min="10" max="2000" step="10" value="120" id="mer">
+      </div>
+      <div class="calc-result">
+        <div class="calc-line"><span>Annual platform GMV</span><span class="vv" id="gmv">SGD 156.4M</span></div>
+        <div class="calc-line"><span>Tapped infrastructure cost</span><span class="vv" id="cost">SGD 234.6K</span></div>
+        <div class="calc-line big"><span class="lbl">Your annual payments revenue</span><span class="vv" id="rev">SGD 1.02M</span></div>
+        <div class="calc-foot">Excludes interchange (passes through). Assumes 365 active days. Indicative — your scheme mix and market routing will vary.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== COVERAGE =================== -->
+<section class="coverage" id="markets">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Coverage</span>
+      <h2>One rail today. Nine by end of ’27. One contract, one settlement.</h2>
+      <p>Certified rails, local scheme partnerships, and in-country payout networks — all behind a single Tapped account. Philippines is live on RCBC; eight more markets roll out quarter by quarter through 2027. Add a market with a flag flip; we handle the central-bank filing.</p>
+    </div>
+    <div class="cov-grid">
+      <div class="cov-card"><div class="cov-head"><div><div class="cov-name">Philippines</div><div class="cov-code">PH · PHP</div></div><span class="cov-status s-live">Live</span></div><div class="cov-rails"><span class="cov-rail">Visa</span><span class="cov-rail">Mastercard</span><span class="cov-rail">BancNet</span><span class="cov-rail">InstaPay</span></div></div>
+      <div class="cov-card"><div class="cov-head"><div><div class="cov-name">Japan</div><div class="cov-code">JP · JPY</div></div><span class="cov-status s-beta">Q2 ’27</span></div><div class="cov-rails"><span class="cov-rail">Visa</span><span class="cov-rail">Mastercard</span><span class="cov-rail">JCB</span><span class="cov-rail">iD</span><span class="cov-rail">QUICPay</span></div></div>
+      <div class="cov-card"><div class="cov-head"><div><div class="cov-name">Thailand</div><div class="cov-code">TH · THB</div></div><span class="cov-status s-beta">Q2 ’27</span></div><div class="cov-rails"><span class="cov-rail">Visa</span><span class="cov-rail">Mastercard</span><span class="cov-rail">PromptPay</span><span class="cov-rail">JCB</span></div></div>
+      <div class="cov-card"><div class="cov-head"><div><div class="cov-name">Singapore</div><div class="cov-code">SG · SGD</div></div><span class="cov-status s-soon">Q3 ’27</span></div><div class="cov-rails"><span class="cov-rail">Visa</span><span class="cov-rail">Mastercard</span><span class="cov-rail">NETS</span><span class="cov-rail">JCB</span><span class="cov-rail">UPI</span></div></div>
+      <div class="cov-card"><div class="cov-head"><div><div class="cov-name">Malaysia</div><div class="cov-code">MY · MYR</div></div><span class="cov-status s-soon">Q3 ’27</span></div><div class="cov-rails"><span class="cov-rail">Visa</span><span class="cov-rail">Mastercard</span><span class="cov-rail">MyDebit</span><span class="cov-rail">DuitNow</span></div></div>
+      <div class="cov-card"><div class="cov-head"><div><div class="cov-name">Hong Kong</div><div class="cov-code">HK · HKD</div></div><span class="cov-status s-soon">Q3 ’27</span></div><div class="cov-rails"><span class="cov-rail">Visa</span><span class="cov-rail">Mastercard</span><span class="cov-rail">UnionPay</span><span class="cov-rail">FPS</span></div></div>
+      <div class="cov-card"><div class="cov-head"><div><div class="cov-name">Indonesia</div><div class="cov-code">ID · IDR</div></div><span class="cov-status s-soon">Q4 ’27</span></div><div class="cov-rails"><span class="cov-rail">Visa</span><span class="cov-rail">Mastercard</span><span class="cov-rail">QRIS</span><span class="cov-rail">GPN</span></div></div>
+      <div class="cov-card"><div class="cov-head"><div><div class="cov-name">Vietnam</div><div class="cov-code">VN · VND</div></div><span class="cov-status s-soon">Q4 ’27</span></div><div class="cov-rails"><span class="cov-rail">Visa</span><span class="cov-rail">Mastercard</span><span class="cov-rail">NAPAS</span></div></div>
+      <div class="cov-card"><div class="cov-head"><div><div class="cov-name">South Korea</div><div class="cov-code">KR · KRW</div></div><span class="cov-status s-soon">Q4 ’27</span></div><div class="cov-rails"><span class="cov-rail">Visa</span><span class="cov-rail">Mastercard</span><span class="cov-rail">BC Card</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== TESTIMONIAL =================== -->
+<section class="quote" id="customers">
+  <div class="container quote-grid">
+    <div>
+      <blockquote>We were quoted 14 months and a six-figure compliance budget to add tap-to-pay ourselves. Tapped had us live in the Philippines in 19 days, with Thailand and Japan pre-booked for Q2. It's already our second-largest revenue line.</blockquote>
+      <div class="quote-author">
+        <div class="qa-pic">SK</div>
+        <div>
+          <div class="qa-name">Shu Kuan</div>
+          <div class="qa-role">CTO · Vertical SaaS platform · Singapore</div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-stats">
+      <div class="qs"><div class="vn">19<small style="font-size:18px;font-family:var(--font-sans);font-weight:400;color:var(--fg-3);"> days</small></div><div class="vl">From SDK install to first live merchant</div></div>
+      <div class="qs"><div class="vn">3</div><div class="vl">Markets activated at launch</div></div>
+      <div class="qs"><div class="vn">SGD 38M</div><div class="vl">Annualised GMV in 9 months</div></div>
+      <div class="qs"><div class="vn">#2</div><div class="vl">Revenue line on their P&amp;L</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PRICING =================== -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Pricing</span>
+      <h2>One blended rate per market. You keep 100% of your markup.</h2>
+      <p>Whatever spread you charge your sub-merchants, it lands in your revenue — never ours. No take-rate, no revenue share, no surprises.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <span class="price-name">Sandbox</span>
+        <div class="price-num">Free</div>
+        <div class="price-desc">Build and certify against the full API before touching production.</div>
+        <ul class="price-list"><li>All 9 markets in sandbox</li><li>Mock kernels &amp; webhooks</li><li>Community Slack</li><li>Single test merchant</li></ul>
+        <a class="btn btn-secondary" style="margin-top:auto; justify-content:center;" href="pages/developers/documentation.html">Start free</a>
+      </div>
+      <div class="price-card feat">
+        <span class="price-name">Platform</span>
+
+        <div class="pf-hero">
+          <span class="pf-hero-label">Your sub-merchants see</span>
+          <div class="pf-hero-num" id="pf-hero-num">2.95<span class="dash">–</span>3.45<small style="font-family:var(--font-sans);font-size:18px;color:var(--fg-3);font-weight:400;margin-left:4px;">%</small></div>
+          <div class="pf-hero-sub">You keep <b id="pf-hero-spread">0.50–1.00%</b> on every transaction. Set it per merchant via the Pricing API.</div>
+        </div>
+
+        <ul class="price-list"><li>Production kernels · all live markets</li><li>Tap Terminal SDK (PIN-on-Glass)</li><li>Tapped Onboard (PSP-agnostic)</li><li>T+2 multi-currency payouts</li><li>Standard support · business hours</li></ul>
+
+        <div class="pf-country">
+          <label for="pf-country-select">Your cost, by market</label>
+          <div class="pf-select-wrap">
+            <select id="pf-country-select" aria-describedby="pf-breakdown">
+              <option value="SG" data-cost="2.45" data-flag="🇸🇬">Singapore</option>
+              <option value="JP" data-cost="2.95" data-flag="🇯🇵">Japan</option>
+              <option value="HK" data-cost="2.55" data-flag="🇭🇰">Hong Kong</option>
+              <option value="MY" data-cost="2.25" data-flag="🇲🇾">Malaysia</option>
+              <option value="TH" data-cost="2.55" data-flag="🇹🇭">Thailand</option>
+              <option value="ID" data-cost="2.75" data-flag="🇮🇩">Indonesia</option>
+              <option value="PH" data-cost="2.85" data-flag="🇵🇭">Philippines</option>
+              <option value="VN" data-cost="2.65" data-flag="🇻🇳">Vietnam</option>
+              <option value="KR" data-cost="3.15" data-flag="🇰🇷">South Korea</option>
+            </select>
+            <svg class="pf-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="pf-breakdown" id="pf-breakdown">
+            <div class="pf-row"><span class="pf-k">You pay Tapped</span><span class="pf-v" id="pf-retail">2.45% + $0.10</span></div>
+            <div class="pf-row"><span class="pf-k">Suggested merchant rate</span><span class="pf-v" id="pf-merchant">2.95–3.45%</span></div>
+          </div>
+        </div>
+
+        <a class="btn btn-brand btn-arrow" href="pages/company/contact.html?plan=platform" style="margin-top:auto; justify-content:center;">Start self-serve</a>
+        <a href="pages/company/contact.html?plan=platform-sales" style="text-align:center; font-size:13px; color:var(--fg-2); text-decoration:none; margin-top:-4px;">or <span style="color:var(--brand-cyan-700); text-decoration:underline; text-underline-offset:2px;">talk to sales</span> for &gt;USD 50M volume →</a>
+      </div>
+      <div class="price-card">
+        <span class="price-name">Enterprise</span>
+        <div class="price-num">Custom</div>
+        <div class="price-desc">For platforms processing &gt;USD 250M annually.</div>
+        <ul class="price-list"><li>Volume-tiered infrastructure fee</li><li>Dedicated BIN sponsorship</li><li>Private kernel forks &amp; HSM</li><li>Named SLA engineer</li><li>Custom scheme filings</li></ul>
+        <a class="btn btn-secondary btn-arrow" style="margin-top:auto; justify-content:center;" href="pages/company/contact.html?plan=enterprise">Talk to sales</a>
+      </div>
+    </div>
+
+    <!-- Add-on strip -->
+    <div class="addon-strip">
+      <span class="addon-tag">Add-on</span>
+      <div class="addon-body">
+        <h4>Premium support</h4>
+        <p>24/7 engineering on-call, &lt;1h P1 response, dedicated Slack, T+1 payouts, QBRs. Available on Platform &amp; Enterprise.</p>
+      </div>
+      <div class="addon-price">
+        <div class="addon-price-num" id="ps-fee">40,000<small>/year</small></div>
+        <div class="addon-price-cur">
+          <select id="ps-country-select" aria-label="Billing currency">
+            <option value="SG" data-cur="SGD" data-amt="40000" selected>SGD</option>
+            <option value="JP" data-cur="JPY" data-amt="4500000">JPY</option>
+            <option value="HK" data-cur="HKD" data-amt="235000">HKD</option>
+            <option value="MY" data-cur="MYR" data-amt="140000">MYR</option>
+            <option value="TH" data-cur="THB" data-amt="1050000">THB</option>
+            <option value="ID" data-cur="IDR" data-amt="475000000">IDR</option>
+            <option value="PH" data-cur="PHP" data-amt="1700000">PHP</option>
+            <option value="VN" data-cur="VND" data-amt="750000000">VND</option>
+            <option value="KR" data-cur="KRW" data-amt="41000000">KRW</option>
+            <option value="US" data-cur="USD" data-amt="30000">USD</option>
+          </select>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <a class="btn btn-secondary btn-arrow" href="pages/company/contact.html?plan=premium-support">Add to plan</a>
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+      <a class="btn btn-ghost btn-arrow" href="pages/pricing.html" style="font-weight:500;">Compare all features &amp; plans</a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FAQ =================== -->
+<section class="faq" id="faq">
+  <div class="container faq-grid">
+    <div>
+      <span class="eyebrow" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--brand-cyan-700);font-weight:600;display:block;margin-bottom:16px;">Common questions</span>
+      <h2 style="font-family:var(--font-display);font-size:36px;font-weight:600;letter-spacing:-0.02em;line-height:1.1;margin:0 0 16px;">The questions every vertical SaaS founder asks us in the first call.</h2>
+      <p style="font-size:16px;color:var(--fg-2);line-height:1.6;margin:0 0 24px;">Don't see yours? Our solutions team replies within four business hours.</p>
+      <a class="btn btn-secondary btn-arrow">Email solutions@tapped.dev</a>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q">Are we the merchant of record, or are you?<span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">You stay the platform; your customers stay the merchants. Tapped operates as the licensed acquirer behind the scenes — we hold the scheme licences, you hold the customer relationship. PayFac-as-a-service, without the 18-month buildout.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do we need to be PCI-certified?<span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most platforms qualify for SAQ-A scope because PAN data never touches your servers — the Tapped SDK tokenises at the secure element. We provide the scoping letter and walk your QSA through it.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What hardware do my merchants need?<span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Any NFC-capable Android 9+ phone or iPhone XS+. No dongles, no terminals, no leases. PIN-on-Glass certified for transactions above the local CVM limit.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How are disputes and chargebacks handled?<span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Tapped Disputes pulls all evidence — receipt, terminal logs, geo-fingerprint, EMV cryptogram — into one filing. We submit to the issuer on your behalf. Win-rate across our F&amp;B book in 2025 was 71%.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can we use our own pricing per merchant?<span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Tapped charges you a simple blended % fee + a nominal fixed amount per transaction. You set the price your merchants pay per merchant or group via the Pricing API.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What if our SaaS is web-only and our merchants use desktops?<span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Tap Companion: a thin native app on the merchant's phone pairs to your web checkout via QR. Web stays the source of truth; the phone is just the contactless reader. Most platforms ship this in a week.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CTA =================== -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-card ink">
+      <div class="hero-glow a"></div>
+      <div class="hero-glow b"></div>
+      <div class="hero-circuit">
+        <svg viewBox="0 0 1600 500" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 100 L400 100 L460 40 L900 40 L960 100 L1600 100"/><path d="M0 280 L300 280 L360 220 L800 220 L860 280 L1600 280" opacity=".5"/><path d="M0 420 L500 420 L560 360 L1100 360 L1160 420 L1600 420" opacity=".3"/></svg>
+      </div>
+      <div class="cta-card-inner">
+        <span class="eyebrow">Ready when you are</span>
+        <h2>Ship the payments line your <span class="g">competitors</span> are still scoping.</h2>
+        <p>Sandbox keys in 60 seconds. A real merchant taking real taps in 19 days. The sales pipeline you'll point to next quarter.</p>
+        <div class="cta-row">
+          <button class="btn btn-brand btn-arrow">Start building</button>
+          <button class="btn btn-ink">Book a 30-min walkthrough</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img class="logo-img" src="assets/tapped-logo.png" alt="Tapped">
+        <p>The embedded tap-to-pay infrastructure powering vertical SaaS platforms across APAC.</p>
+      </div>
+      <div class="footer-col"><h5>Solutions</h5><a href="pages/solutions/restaurant-pos.html">Restaurant POS</a><a href="pages/solutions/salon-wellness.html">Salon &amp; Wellness</a><a href="pages/solutions/field-services.html">Field Services</a><a href="pages/solutions/healthcare.html">Healthcare</a><a href="pages/solutions/hotels.html">Hotels</a><a href="pages/solutions/fitness.html">Fitness</a><a href="pages/solutions/auto-repair.html">Auto &amp; Repair</a></div>
+      <div class="footer-col"><h5>Product</h5><a href="pages/product/tap-core.html">Tap Core</a><a href="pages/product/tap-terminal.html">Tap Terminal</a><a href="pages/product/tapped-onboard.html">Tapped Onboard</a><a href="pages/product/tap-certify.html">Tap Certify</a><a href="pages/product/tap-ledger.html">Tap Ledger</a><a href="pages/product/markets.html">Markets</a></div>
+      <div class="footer-col"><h5>Developers</h5><a href="pages/developers/documentation.html">Documentation</a><a href="pages/developers/api-reference.html">API reference</a><a href="pages/developers/sdks.html">SDKs</a><a href="pages/developers/webhooks.html">Webhooks</a><a href="pages/developers/status.html">Status</a><a href="pages/developers/changelog.html">Changelog</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="pages/company/about.html">About</a><a href="pages/company/customers.html">Customers</a><a href="pages/company/press.html">Press</a><a href="pages/company/careers.html">Careers</a><a href="pages/company/contact.html">Contact</a><a href="pages/company/security.html">Security</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Tapped Pte Ltd · 1 Raffles Place, Singapore</div>
+      <div class="lr"><a href="pages/legal/privacy.html">Privacy</a><a href="pages/legal/terms.html">Terms</a><a href="pages/legal/pci.html">PCI</a><a href="pages/legal/licences.html">Licences</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- =================== SCRIPTS =================== -->
+<script>
+/* ---------- Nav megamenus ---------- */
+document.querySelectorAll('.nav-item[data-mega]').forEach(item => {
+  let timer;
+  item.addEventListener('mouseenter', () => { clearTimeout(timer); item.classList.add('open'); });
+  item.addEventListener('mouseleave', () => { timer = setTimeout(() => item.classList.remove('open'), 120); });
+});
+
+/* ---------- Vertical tabs ---------- */
+document.querySelectorAll('.vert-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const k = tab.dataset.tab;
+    document.querySelectorAll('.vert-tab').forEach(t => t.classList.toggle('active', t === tab));
+    document.querySelectorAll('.vert-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === k));
+  });
+});
+
+/* ---------- How-it-works steps + code panel ---------- */
+const codeSamples = {
+  ts: [
+`<span class="tok-c">// 01 — install &amp; init the server SDK</span>
+<span class="tok-k">import</span> <span class="tok-n">{ Tapped }</span> <span class="tok-k">from</span> <span class="tok-s">'@tapped/server'</span>;
+
+<span class="tok-k">const</span> <span class="tok-n">tapped</span> = <span class="tok-k">new</span> <span class="tok-n">Tapped</span>({
+  <span class="tok-n">apiKey</span>: process.env.<span class="tok-n">TAPPED_KEY</span>,
+  <span class="tok-n">platform</span>: <span class="tok-s">'your_platform'</span>,
+});
+
+<span class="tok-c">// Sandbox is live the moment you \`npm i\`.</span>
+<span class="tok-c">// 9 markets on the roadmap, 1 SDK, no waitlist.</span>`,
+`<span class="tok-c">// 02 — onboard a sub-merchant via Tapped Onboard</span>
+<span class="tok-k">const</span> <span class="tok-n">merchant</span> = <span class="tok-k">await</span> tapped.onboard.<span class="tok-f">create</span>({
+  <span class="tok-n">legal_name</span>: <span class="tok-s">'Hawker Eats Pte Ltd'</span>,
+  <span class="tok-n">country</span>: <span class="tok-s">'PH'</span>,                   <span class="tok-c">// → picks RCBC profile</span>
+  <span class="tok-n">mcc</span>: <span class="tok-s">'5812'</span>,
+  <span class="tok-n">est_monthly_volume</span>: <span class="tok-s">25000</span>,
+  <span class="tok-n">beneficial_owners</span>: [...],
+});
+
+<span class="tok-c">// KYB, ID verification, sanctions/PEP, acquirer risk rules,</span>
+<span class="tok-c">// acquirer submission — all behind one endpoint.</span>
+<span class="tok-c">// → webhook: merchant.approved</span>`,
+`<span class="tok-c">// 03 — create a tap intent</span>
+<span class="tok-k">const</span> <span class="tok-n">intent</span> = <span class="tok-k">await</span> tapped.taps.<span class="tok-f">create</span>({
+  <span class="tok-n">amount</span>: <span class="tok-s">3380</span>,            <span class="tok-c">// SGD 33.80, minor units</span>
+  <span class="tok-n">currency</span>: <span class="tok-s">'SGD'</span>,
+  <span class="tok-n">merchant</span>: merchant.<span class="tok-n">id</span>,
+  <span class="tok-n">reference</span>: <span class="tok-s">'order_4019'</span>,
+});
+
+<span class="tok-c">// Tapped picks the cheapest available rail.</span>
+<span class="tok-c">// → returns intent.client_secret for the SDK.</span>`,
+`<span class="tok-c">// 04 — collect the tap on the merchant's phone</span>
+<span class="tok-k">import</span> <span class="tok-n">{ TappedTerminal }</span> <span class="tok-k">from</span> <span class="tok-s">'@tapped/terminal'</span>;
+
+<span class="tok-k">const</span> <span class="tok-n">result</span> = <span class="tok-k">await</span> TappedTerminal.<span class="tok-f">collect</span>({
+  <span class="tok-n">clientSecret</span>: intent.<span class="tok-n">client_secret</span>,
+});
+
+<span class="tok-c">// → { id: 'tx_01HNZ9K4M7G3', status: 'approved',</span>
+<span class="tok-c">//     scheme: 'visa', cryptogram: '0xA39…' }</span>`,
+`<span class="tok-c">// 05 — listen for state changes via webhook</span>
+app.<span class="tok-f">post</span>(<span class="tok-s">'/hooks/tapped'</span>, <span class="tok-k">async</span> (req, res) =&gt; {
+  <span class="tok-k">const</span> evt = tapped.webhooks.<span class="tok-f">verify</span>(req);
+
+  <span class="tok-k">switch</span> (evt.<span class="tok-n">type</span>) {
+    <span class="tok-k">case</span> <span class="tok-s">'tap.settled'</span>:    <span class="tok-c">// money on the way</span>
+    <span class="tok-k">case</span> <span class="tok-s">'tap.refunded'</span>:
+    <span class="tok-k">case</span> <span class="tok-s">'tap.disputed'</span>:   <span class="tok-c">// chargeback opened</span>
+      <span class="tok-k">await</span> ledger.<span class="tok-f">post</span>(evt);
+  }
+  res.<span class="tok-f">sendStatus</span>(<span class="tok-s">200</span>);
+});`
+  ]
+};
+
+const codeDisplay = document.getElementById('code-display');
+let activeStep = 0;
+let activeLang = 'ts';
+
+function renderCode() {
+  codeDisplay.innerHTML = (codeSamples[activeLang] || codeSamples.ts)[activeStep];
+}
+
+document.querySelectorAll('.step').forEach(step => {
+  step.addEventListener('click', () => {
+    activeStep = parseInt(step.dataset.step);
+    document.querySelectorAll('.step').forEach(s => s.classList.toggle('active', s === step));
+    renderCode();
+  });
+});
+document.querySelectorAll('.code-tabs button').forEach(b => {
+  b.addEventListener('click', () => {
+    activeLang = b.dataset.lang;
+    document.querySelectorAll('.code-tabs button').forEach(x => x.classList.toggle('active', x === b));
+    // we only ship TS bodies; for other langs we keep the same markup
+    renderCode();
+  });
+});
+
+/* ---------- Calculator ---------- */
+const fmtSGD = n => {
+  if (n >= 1e9) return 'SGD ' + (n/1e9).toFixed(2) + 'B';
+  if (n >= 1e6) return 'SGD ' + (n/1e6).toFixed(2) + 'M';
+  if (n >= 1e3) return 'SGD ' + (n/1e3).toFixed(1) + 'K';
+  return 'SGD ' + Math.round(n).toLocaleString();
+};
+const els = {
+  atv: document.getElementById('atv'), atvV: document.getElementById('atv-v'),
+  tpd: document.getElementById('tpd'), tpdV: document.getElementById('tpd-v'),
+  spr: document.getElementById('spr'), sprV: document.getElementById('spr-v'),
+  mer: document.getElementById('mer'), merV: document.getElementById('mer-v'),
+  gmv: document.getElementById('gmv'), cost: document.getElementById('cost'), rev: document.getElementById('rev'),
+};
+function recalc() {
+  const atv = +els.atv.value;
+  const tpd = +els.tpd.value;
+  const spr = +els.spr.value / 100;
+  const mer = +els.mer.value;
+  const gmv = atv * tpd * 365 * mer;
+  const cost = gmv * 0.0015;
+  const rev = gmv * spr;
+  els.atvV.textContent = 'SGD ' + atv;
+  els.tpdV.textContent = tpd;
+  els.sprV.textContent = (+els.spr.value).toFixed(2) + '%';
+  els.merV.textContent = mer.toLocaleString();
+  els.gmv.textContent = fmtSGD(gmv);
+  els.cost.textContent = fmtSGD(cost);
+  els.rev.textContent = fmtSGD(rev);
+}
+['atv','tpd','spr','mer'].forEach(k => els[k].addEventListener('input', recalc));
+recalc();
+
+/* ---------- FAQ accordions ---------- */
+document.querySelectorAll('.faq-item .faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+
+/* ---------- Hero live-revenue ticker ---------- */
+let live = 18420.65;
+setInterval(() => {
+  const inc = +(Math.random() * 60 + 4).toFixed(2);
+  live += inc;
+  const el = document.getElementById('rev-live');
+  if (el) el.textContent = 'SGD ' + live.toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}, 1800);
+
+// Per-country platform pricing — headline shows what merchants see,
+// small print shows Tapped's wholesale cost.
+(function(){
+  const sel = document.getElementById('pf-country-select');
+  if (!sel) return;
+  const fmt = n => n.toFixed(2) + '%';
+  const fmtShort = n => (n % 1 === 0 ? n.toFixed(2) : n.toFixed(2)); // keep 2dp
+  function update(){
+    const opt = sel.options[sel.selectedIndex];
+    const cost = parseFloat(opt.dataset.cost); // what platform pays Tapped, %
+    const lo = cost + 0.50; // merchant-visible low
+    const hi = cost + 1.00; // merchant-visible high
+    const heroEl = document.getElementById('pf-hero-num');
+    if (heroEl) {
+      heroEl.innerHTML = fmtShort(lo) + '<span class="dash">–</span>' + fmtShort(hi) +
+        '<small style="font-family:var(--font-sans);font-size:18px;color:var(--fg-3);font-weight:400;margin-left:4px;">%</small>';
+    }
+    const retailEl = document.getElementById('pf-retail');
+    const merchantEl = document.getElementById('pf-merchant');
+    if (retailEl) retailEl.textContent = fmt(cost) + ' + $0.10';
+    if (merchantEl) merchantEl.textContent = fmtShort(lo) + '–' + fmtShort(hi) + '%';
+  }
+  sel.addEventListener('change', update);
+  update();
+})();
+
+// Premium support per-currency (add-on strip)
+(function(){
+  const sel = document.getElementById('ps-country-select');
+  if (!sel) return;
+  function update(){
+    const opt = sel.options[sel.selectedIndex];
+    const amt = parseFloat(opt.dataset.amt);
+    const feeEl = document.getElementById('ps-fee');
+    if (!feeEl) return;
+    feeEl.innerHTML = amt.toLocaleString('en-US') + '<small>/year</small>';
+  }
+  sel.addEventListener('change', update);
+  update();
+})();
+</script>
+
+</body>
+</html>

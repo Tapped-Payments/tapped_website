@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customers — Platforms building on Tapped | Tapped</title>
+<meta name="description" content="Vertical SaaS platforms across APAC — restaurant POS, salon booking, field-service, clinic, and hotel systems — choose Tapped to embed tap-to-pay without rebuilding payments.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://tapped.co/pages/customers.html">
+<meta property="og:title" content="Customers — Tapped">
+<meta property="og:description" content="How vertical SaaS platforms ship tap-to-pay in days, not quarters.">
+<meta property="og:url" content="https://tapped.co/pages/customers.html">
+<meta property="og:image" content="https://tapped.co/assets/tapped-logo.png">
+<link rel="icon" href="../assets/tapped-logo.png">
+<link rel="stylesheet" href="../colors_and_type.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapped.co/"},{"@type":"ListItem","position":2,"name":"Customers","item":"https://tapped.co/pages/customers.html"}]}</script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { margin: 0; background: var(--bg); color: var(--fg-1); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  .btn { font-family: var(--font-sans); font-size: 14px; font-weight: 500; padding: 9px 16px; border-radius: 8px; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 8px; transition: all 160ms var(--ease-out); white-space: nowrap; cursor: pointer; }
+  .btn-primary { background: var(--ink-900); color: white; }
+  .btn-brand { background: var(--brand-gradient); color: white; box-shadow: var(--shadow-brand); padding: 11px 18px; font-weight: 600; }
+  .btn-brand:hover { transform: translateY(-1px); }
+  .btn-secondary { background: transparent; color: var(--fg-1); border-color: var(--border); }
+  .btn-secondary:hover { background: var(--ink-25); border-color: var(--border-strong); }
+  .btn-ghost { background: transparent; color: var(--fg-1); }
+  .btn-ghost:hover { background: var(--ink-50); }
+  .btn-arrow::after { content: "→"; font-family: var(--font-mono); transition: transform 160ms var(--ease-out); }
+  .btn-arrow:hover::after { transform: translateX(3px); }
+
+  .nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); background: rgba(255,255,255,0.85); border-bottom: 1px solid var(--border-subtle); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; }
+  .brand img.logo-img { height: 34px; width: auto; display: block; }
+  .nav-center { display: flex; gap: 4px; align-items: center; }
+  .nav-item > button { background: none; border: none; color: var(--fg-2); font-size: 14px; padding: 8px 14px; border-radius: 6px; cursor: pointer; transition: color 160ms; font-family: inherit; }
+  .nav-item > button:hover { color: var(--fg-1); }
+  a.nav-item > button { pointer-events: none; }
+  .nav-item[aria-current] > button { color: var(--fg-1); font-weight: 600; }
+  .nav-cta { display: flex; gap: 6px; align-items: center; }
+
+  .breadcrumb { padding: 24px 32px 0; }
+  .breadcrumb ol { list-style: none; display: flex; gap: 8px; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 500; }
+  .breadcrumb li { display: flex; align-items: center; gap: 8px; }
+  .breadcrumb li:not(:last-child)::after { content: "/"; color: var(--fg-4); }
+  .breadcrumb a { color: var(--fg-3); }
+  .breadcrumb a:hover { color: var(--fg-1); }
+  .breadcrumb [aria-current] { color: var(--fg-1); }
+
+  /* Hero */
+  .cu-hero { padding: 72px 0 56px; background: var(--paper); position: relative; overflow: hidden; }
+  .cu-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 80% 10%, rgba(34,211,238,0.06), transparent 40%), radial-gradient(circle at 10% 90%, rgba(225,29,116,0.05), transparent 40%); pointer-events: none; }
+  .cu-hero-inner { position: relative; max-width: 860px; }
+  .cu-hero .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); margin-bottom: 18px; display: block; }
+  .cu-hero h1 { font-family: var(--font-display); font-size: 56px; font-weight: 600; letter-spacing: -0.024em; line-height: 1.04; margin: 0 0 20px; color: var(--fg-1); text-wrap: balance; }
+  .cu-hero h1 .hl { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cu-hero .lede { font-size: 19px; line-height: 1.55; color: var(--fg-2); margin: 0; max-width: 760px; }
+
+  /* Logo strip */
+  .cu-logos { padding: 40px 0 72px; background: var(--paper); border-bottom: 1px solid var(--border-subtle); }
+  .cu-logos-head { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); text-align: center; margin-bottom: 28px; font-weight: 600; }
+  .cu-logos-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; align-items: stretch; }
+  .cu-logo { background: var(--paper); border: 1px solid var(--border); border-radius: 12px; padding: 20px 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; transition: all 160ms; min-height: 98px; }
+  .cu-logo:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+  .cu-logo .wordmark { font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: -0.015em; color: var(--fg-1); }
+  .cu-logo .wordmark .g { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cu-logo .wordmark .dot { color: var(--brand); }
+  .cu-logo .region { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-4); }
+
+  /* Impact stats */
+  .cu-stats { padding: 72px 0; background: var(--ink-950); color: white; position: relative; overflow: hidden; }
+  .cu-stats::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 15% 30%, rgba(34,211,238,0.1), transparent 50%), radial-gradient(circle at 85% 70%, rgba(225,29,116,0.08), transparent 50%); pointer-events: none; }
+  .cu-stats-grid { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .cu-stat { padding: 24px; }
+  .cu-stat .v { font-family: var(--font-display); font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -0.025em; font-variant-numeric: tabular-nums; }
+  .cu-stat .v .grad { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cu-stat .v small { font-size: 22px; font-weight: 500; color: #B8C0D8; margin-left: 4px; font-family: var(--font-sans); }
+  .cu-stat .lbl { font-size: 14px; color: #B8C0D8; margin-top: 12px; line-height: 1.5; }
+
+  /* Case studies */
+  .cu-cases { padding: 96px 0; background: var(--bg); }
+  .section-head { max-width: 760px; margin: 0 auto 48px; text-align: center; }
+  .section-head .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-cyan-700); margin-bottom: 14px; display: block; }
+  .section-head h2 { font-family: var(--font-display); font-size: 42px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 14px; color: var(--fg-1); }
+  .section-head p { font-size: 16px; color: var(--fg-2); line-height: 1.6; margin: 0; }
+
+  .cu-case { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: stretch; padding: 56px; background: var(--paper); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .cu-case.rev { grid-template-columns: 1.15fr 1fr; }
+  .cu-case.rev .cu-case-meta { order: 2; }
+  .cu-case .cu-case-meta { display: flex; flex-direction: column; }
+  .cu-case .flag-row { display: flex; gap: 10px; align-items: center; margin-bottom: 18px; }
+  .cu-case .flag-row .flag { font-size: 22px; }
+  .cu-case .flag-row .region { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 600; }
+  .cu-case .who { font-family: var(--font-display); font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 8px; font-weight: 600; }
+  .cu-case h3 { font-family: var(--font-display); font-size: 32px; font-weight: 600; letter-spacing: -0.018em; line-height: 1.12; margin: 0 0 16px; color: var(--fg-1); text-wrap: balance; }
+  .cu-case p.lede { font-size: 16px; color: var(--fg-2); line-height: 1.6; margin: 0 0 22px; }
+  .cu-case blockquote { font-family: var(--font-display); font-size: 19px; line-height: 1.45; color: var(--fg-1); margin: 0 0 20px; padding-left: 16px; border-left: 3px solid var(--brand); letter-spacing: -0.01em; text-wrap: balance; }
+  .cu-case blockquote footer { font-family: var(--font-sans); font-size: 13px; color: var(--fg-3); font-weight: 500; margin-top: 10px; letter-spacing: 0; font-style: normal; }
+  .cu-case .cu-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 20px; }
+  .cu-case .cu-tags span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 999px; background: var(--ink-50); color: var(--fg-2); border: 1px solid var(--border-subtle); }
+
+  .cu-case-metrics { background: linear-gradient(180deg, var(--ink-25) 0%, var(--paper) 100%); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 18px; }
+  .cu-metric { display: flex; flex-direction: column; gap: 6px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
+  .cu-metric:last-child { border-bottom: none; padding-bottom: 0; }
+  .cu-metric .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); font-weight: 600; }
+  .cu-metric .val { font-family: var(--font-display); font-size: 34px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: var(--fg-1); font-variant-numeric: tabular-nums; }
+  .cu-metric .val .grad { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cu-metric .val small { font-size: 16px; font-weight: 500; color: var(--fg-3); margin-left: 4px; font-family: var(--font-sans); }
+  .cu-metric .sub { font-size: 13px; color: var(--fg-3); line-height: 1.45; }
+
+  /* Segments */
+  .cu-segments { padding: 96px 0; background: var(--ink-25); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+  .cu-seg-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .cu-seg { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 24px 22px; transition: all 160ms; }
+  .cu-seg:hover { border-color: var(--border-strong); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .cu-seg .ico { width: 38px; height: 38px; border-radius: 10px; background: var(--ink-50); color: var(--fg-1); display: grid; place-items: center; margin-bottom: 14px; }
+  .cu-seg h4 { font-family: var(--font-display); font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: var(--fg-1); margin: 0 0 6px; }
+  .cu-seg .count { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-cyan-700); font-weight: 600; margin-bottom: 10px; }
+  .cu-seg p { font-size: 13px; color: var(--fg-2); line-height: 1.55; margin: 0; }
+
+  /* Quotes wall */
+  .cu-quotes { padding: 96px 0; background: var(--paper); }
+  .cu-quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cu-quote { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 28px; display: flex; flex-direction: column; transition: all 160ms; }
+  .cu-quote:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+  .cu-quote .qmark { font-family: var(--font-display); font-size: 48px; line-height: 0.5; color: var(--brand); margin-bottom: 8px; height: 20px; }
+  .cu-quote p { font-size: 15px; line-height: 1.55; color: var(--fg-1); margin: 0 0 20px; flex: 1; text-wrap: pretty; }
+  .cu-quote .src { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--border-subtle); }
+  .cu-quote .ava { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-gradient); color: white; display: grid; place-items: center; font-family: var(--font-display); font-size: 15px; font-weight: 700; flex: none; }
+  .cu-quote .who .n { font-size: 13.5px; font-weight: 600; color: var(--fg-1); }
+  .cu-quote .who .t { font-size: 12px; color: var(--fg-3); }
+
+  /* CTA */
+  .cu-cta { padding: 40px 0 96px; background: var(--paper); }
+  .cu-cta-card { background: var(--ink-950); border-radius: 20px; padding: 56px; color: white; display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center; position: relative; overflow: hidden; }
+  .cu-cta-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(34,211,238,0.12), transparent 55%), radial-gradient(circle at 80% 80%, rgba(225,29,116,0.1), transparent 50%); pointer-events: none; }
+  .cu-cta-card > div { position: relative; }
+  .cu-cta-card .eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #67E8F9; display: block; margin-bottom: 14px; }
+  .cu-cta-card h2 { font-family: var(--font-display); font-size: 36px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 14px; color: white; }
+  .cu-cta-card p { font-size: 16px; color: #B8C0D8; line-height: 1.55; margin: 0; max-width: 480px; }
+  .cu-cta-actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+  .cu-cta-card .btn-secondary { background: transparent; color: white; border-color: rgba(255,255,255,0.18); }
+  .cu-cta-card .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
+
+  /* Footer */
+  .footer { background: var(--ink-950); color: #97A2BF; padding: 80px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+  .footer-col h5 { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F7FB; margin: 0 0 18px; }
+  .footer-col a { display: block; color: #97A2BF; font-size: 14px; margin-bottom: 12px; transition: color 140ms; }
+  .footer-col a:hover { color: white; }
+  .footer-col p { font-size: 13px; color: #8A94B0; line-height: 1.6; max-width: 280px; margin: 16px 0 0; }
+  .footer-col img.logo-img { height: 26px; width: auto; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: #5A6486; }
+  .footer-bottom .lr { display: flex; gap: 24px; }
+  .footer-bottom .lr a { color: #5A6486; }
+  .footer-bottom .lr a:hover { color: white; }
+
+  @media (max-width: 1024px) {
+    .container { padding: 0 24px; }
+    .nav-center { display: none; }
+    .nav-cta .btn-ghost { display: none; }
+    .cu-hero h1 { font-size: 42px; }
+    .cu-logos-grid { grid-template-columns: repeat(3, 1fr); }
+    .cu-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .cu-case, .cu-case.rev { grid-template-columns: 1fr; padding: 36px; gap: 28px; }
+    .cu-case.rev .cu-case-meta { order: 1; }
+    .cu-seg-grid { grid-template-columns: repeat(2, 1fr); }
+    .cu-quote-grid { grid-template-columns: 1fr 1fr; }
+    .section-head h2 { font-size: 32px; }
+    .cu-cta-card { padding: 40px 32px; grid-template-columns: 1fr; }
+    .cu-cta-actions { justify-content: flex-start; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 16px; }
+    .nav-inner { padding: 12px 16px; }
+    .brand img.logo-img { height: 28px; }
+    .breadcrumb { padding: 18px 16px 0; }
+    .cu-hero h1 { font-size: 32px; }
+    .cu-hero .lede { font-size: 16px; }
+    .cu-logos-grid { grid-template-columns: repeat(2, 1fr); }
+    .cu-stats-grid { grid-template-columns: 1fr; }
+    .cu-stat .v { font-size: 42px; }
+    .cu-seg-grid { grid-template-columns: 1fr; }
+    .cu-quote-grid { grid-template-columns: 1fr; }
+    .cu-case, .cu-case.rev { padding: 28px 22px; }
+    .cu-case h3 { font-size: 26px; }
+    .cu-cta-card { padding: 32px 20px; border-radius: 16px; }
+    .cu-cta-card h2 { font-size: 26px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== NAV =================== -->
+<nav class="nav" aria-label="Primary">
+  <div class="container nav-inner">
+    <a href="../Tapped Website.html" class="brand" aria-label="Tapped home"><img class="logo-img" src="../assets/tapped-logo.png" alt="Tapped"></a>
+    <div class="nav-center">
+      <a class="nav-item" href="../Tapped Website.html#verticals"><button>Solutions</button></a>
+      <a class="nav-item" href="../Tapped Website.html#onboard"><button>Product</button></a>
+      <a class="nav-item" href="markets.html"><button>Markets</button></a>
+      <a class="nav-item" href="developers.html"><button>Developers</button></a>
+      <a class="nav-item" href="pricing.html"><button>Pricing</button></a>
+      <a class="nav-item" href="customers.html" aria-current="page"><button>Customers</button></a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="developers/documentation.html">Docs</a>
+      <a class="btn btn-primary btn-arrow" href="company/contact.html">Talk to us</a>
+    </div>
+  </div>
+</nav>
+
+<nav class="breadcrumb container" aria-label="Breadcrumb">
+  <ol><li><a href="../Tapped Website.html">Home</a></li><li aria-current="page">Customers</li></ol>
+</nav>
+
+<!-- =================== HERO =================== -->
+<header class="cu-hero">
+  <div class="container cu-hero-inner">
+    <span class="eyebrow">Customers · Platforms building on Tapped</span>
+    <h1>Vertical SaaS platforms across APAC, <span class="hl">shipping tap-to-pay in days.</span></h1>
+    <p class="lede">We build infrastructure so platforms don't have to. Here's what that unlocks &mdash; told through the platforms that have actually done it.</p>
+  </div>
+</header>
+
+<!-- =================== LOGOS =================== -->
+<section class="cu-logos">
+  <div class="container">
+    <div class="cu-logos-head">Platforms processing on Tapped &mdash; selected</div>
+    <div class="cu-logos-grid">
+      <div class="cu-logo"><div class="wordmark">Kanpai<span class="dot">.</span>POS</div><div class="region">🇵🇭 F&amp;B</div></div>
+      <div class="cu-logo"><div class="wordmark"><span class="g">Orbit</span>Salon</div><div class="region">🇸🇬 Salon</div></div>
+      <div class="cu-logo"><div class="wordmark">Fieldwork<span class="dot">/</span></div><div class="region">🇭🇰 Services</div></div>
+      <div class="cu-logo"><div class="wordmark">Medika<span class="g">+</span></div><div class="region">🇲🇾 Health</div></div>
+      <div class="cu-logo"><div class="wordmark">Kapai PMS</div><div class="region">🇸🇬 Hotels</div></div>
+      <div class="cu-logo"><div class="wordmark">Tingi<span class="dot">.</span>Store</div><div class="region">🇵🇭 Retail</div></div>
+      <div class="cu-logo"><div class="wordmark">Ruang<span class="g">Kerja</span></div><div class="region">🇮🇩 Services</div></div>
+      <div class="cu-logo"><div class="wordmark">Tidy<span class="dot">·</span>Book</div><div class="region">🇲🇾 Booking</div></div>
+      <div class="cu-logo"><div class="wordmark">Sawasdee<span class="g">.co</span></div><div class="region">🇹🇭 Wellness</div></div>
+      <div class="cu-logo"><div class="wordmark">NgonPay</div><div class="region">🇻🇳 F&amp;B</div></div>
+      <div class="cu-logo"><div class="wordmark">Cove<span class="dot">·</span>Health</div><div class="region">🇸🇬 Clinic</div></div>
+      <div class="cu-logo"><div class="wordmark">Lapak<span class="g">Mart</span></div><div class="region">🇮🇩 Retail</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== STATS =================== -->
+<section class="cu-stats">
+  <div class="container cu-stats-grid">
+    <div class="cu-stat"><div class="v"><span class="grad">47</span></div><div class="lbl">Platforms processing live, beta, or in integration across APAC</div></div>
+    <div class="cu-stat"><div class="v">12<small>days</small></div><div class="lbl">Median time from sandbox key to first live tap</div></div>
+    <div class="cu-stat"><div class="v"><span class="grad">3.2×</span></div><div class="lbl">Average ARPU lift platforms see after embedding Tapped</div></div>
+    <div class="cu-stat"><div class="v">99.995<small>%</small></div><div class="lbl">Rolling 12-month uptime across all live markets</div></div>
+  </div>
+</section>
+
+<!-- =================== CASE STUDIES =================== -->
+<section class="cu-cases">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Case studies</span>
+      <h2>Three platforms. Three verticals. One integration.</h2>
+      <p>Detailed breakdowns are available under NDA &mdash; these are the numbers teams have let us share publicly.</p>
+    </div>
+
+    <!-- Case 1 -->
+    <article class="cu-case">
+      <div class="cu-case-meta">
+        <div class="flag-row"><span class="flag">🇵🇭</span><span class="region">Philippines · Live since 2025 Q4</span></div>
+        <div class="who">Kanpai.POS · Restaurant platform</div>
+        <h3>From zero terminal hardware to 4,800 stores tapping in 11 weeks.</h3>
+        <p class="lede">Kanpai.POS runs the back-of-house stack for mid-market Filipino restaurant groups. They wanted to let servers take card payments at the table &mdash; but every existing option meant leasing 3,000+ physical terminals from an acquirer, reconciling statements across two vendors, and waiting six weeks per store for hardware.</p>
+        <blockquote>
+          We replaced a six-week courier onboarding with a QR code their manager scans on day one. Tapped was live in our app before our procurement team finished the sponsor-bank evaluation.
+          <footer>— Marco Santos, CTO at Kanpai.POS</footer>
+        </blockquote>
+        <div class="cu-tags">
+          <span>Tap Terminal · PIN-on-Glass</span>
+          <span>Tapped Onboard</span>
+          <span>BSP Category D</span>
+          <span>PHP · T+1</span>
+        </div>
+      </div>
+      <div class="cu-case-metrics">
+        <div class="cu-metric"><div class="lbl">Stores live on Tapped</div><div class="val">4,800<small> in 11 weeks</small></div><div class="sub">Zero terminal hardware shipped; 100% PIN-on-Glass on the existing server phone fleet.</div></div>
+        <div class="cu-metric"><div class="lbl">ARPU lift vs. previous stack</div><div class="val"><span class="grad">+248%</span></div><div class="sub">Spread on card volume &mdash; formerly handled by a third party &mdash; now retained by Kanpai.</div></div>
+        <div class="cu-metric"><div class="lbl">Go-live time, per store</div><div class="val">&lt; 1<small> day</small></div><div class="sub">KYB decision + first tap on the same business day, for 94% of stores onboarded.</div></div>
+        <div class="cu-metric"><div class="lbl">Engineering headcount on payments</div><div class="val">2<small> engineers</small></div><div class="sub">Part-time. Prior plan required a 6-person dedicated payments team.</div></div>
+      </div>
+    </article>
+
+    <!-- Case 2 -->
+    <article class="cu-case rev">
+      <div class="cu-case-metrics">
+        <div class="cu-metric"><div class="lbl">Salons on OrbitSalon + Tapped</div><div class="val">612<small> in 6 months</small></div><div class="sub">Singapore + rolling out to Malaysia. 89% elected the Tapped payments add-on on first install.</div></div>
+        <div class="cu-metric"><div class="lbl">Average tip captured per appointment</div><div class="val"><span class="grad">+18%</span></div><div class="sub">vs. cash-out. Auto-split to stylist via Tap Ledger; no manual tip reconciliation.</div></div>
+        <div class="cu-metric"><div class="lbl">Checkout completion rate</div><div class="val">96<small>%</small></div><div class="sub">Tap-to-pay handoff happens inside the booking flow, not a separate EFTPOS device.</div></div>
+        <div class="cu-metric"><div class="lbl">Revenue per booked appointment</div><div class="val">+SGD 4.20</div><div class="sub">Net spread to OrbitSalon after Tapped's blended rate, at the 0.75% markup tier.</div></div>
+      </div>
+      <div class="cu-case-meta">
+        <div class="flag-row"><span class="flag">🇸🇬</span><span class="region">Singapore · Live since 2026 Q1</span></div>
+        <div class="who">OrbitSalon · Salon &amp; wellness booking</div>
+        <h3>Booking, service, payment — finally one app.</h3>
+        <p class="lede">OrbitSalon had a great scheduling product &mdash; but stylists were still running to a counter EFTPOS at the end of every appointment. Tips were cash, bookings didn't tie to revenue, and OrbitSalon's attach on payments was zero because integrating 47 different acquirers across a salon's 3-year replacement cycle was untenable.</p>
+        <blockquote>
+          Tapped was the first payments vendor whose API assumed we'd have 600 sub-merchants with one-stylist salons. Everybody else wanted a sales call per salon.
+          <footer>— Liyana Abdul, Head of Platform at OrbitSalon</footer>
+        </blockquote>
+        <div class="cu-tags">
+          <span>Tap Terminal · PIN-on-Glass</span>
+          <span>Tapped Onboard · self-serve</span>
+          <span>Tip-split via Tap Ledger</span>
+          <span>SGD · T+0 settlement</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 3 -->
+    <article class="cu-case">
+      <div class="cu-case-meta">
+        <div class="flag-row"><span class="flag">🇭🇰</span><span class="region">Hong Kong · Live since 2026 Q1</span></div>
+        <div class="who">Fieldwork/ · Field services platform</div>
+        <h3>Your plumber's phone is now a card reader — the day they sign up.</h3>
+        <p class="lede">Fieldwork/ is the leading dispatch stack for HK-based plumbers, electricians, and HVAC contractors. Tradespeople wanted to take card payment at the customer's door &mdash; but fleet-issuing 800 mPOS readers to independent contractors and then recovering them when someone quit was an operational dead-end.</p>
+        <blockquote>
+          Our churn problem was actually a terminal-logistics problem. Tapped made the reader something that lives on a phone &mdash; so when a contractor leaves, they just lose access.
+          <footer>— Henry Lau, COO at Fieldwork/</footer>
+        </blockquote>
+        <div class="cu-tags">
+          <span>Tap Terminal · offline tap</span>
+          <span>FPS payout</span>
+          <span>Per-tap dispute routing</span>
+          <span>HKMA SVF partnership</span>
+        </div>
+      </div>
+      <div class="cu-case-metrics">
+        <div class="cu-metric"><div class="lbl">Tradespeople accepting tap</div><div class="val">2,140<small> in 16 weeks</small></div><div class="sub">Independent contractors onboarded through Tapped Onboard. Zero hardware shipped.</div></div>
+        <div class="cu-metric"><div class="lbl">Card acceptance rate</div><div class="val"><span class="grad">78%</span></div><div class="sub">Up from 12% on the cash-only baseline. Typical job ticket went from HKD 640 to HKD 1,180.</div></div>
+        <div class="cu-metric"><div class="lbl">Late-payment recovery</div><div class="val">&minus; 82<small>%</small></div><div class="sub">Pay-at-job tap-to-pay replaced 30-day invoicing for 4 of 5 service categories.</div></div>
+        <div class="cu-metric"><div class="lbl">Payment-related support tickets</div><div class="val">&minus; 64<small>%</small></div><div class="sub">One vendor, one ledger, one reconciliation file. No more "the EFTPOS won't connect" on Sundays.</div></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- =================== SEGMENTS =================== -->
+<section class="cu-segments">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Who builds on Tapped</span>
+      <h2>Five vertical-SaaS archetypes. One infrastructure layer.</h2>
+      <p>Different industries, same problem: every platform needs payments, and no platform wants to become a payments company.</p>
+    </div>
+    <div class="cu-seg-grid">
+      <a class="cu-seg" href="solutions/restaurant-pos.html">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div>
+        <div class="count">14 platforms</div>
+        <h4>Restaurant POS</h4>
+        <p>Kanpai.POS, NgonPay, Tingi.Store — table-side, kiosk, and counter tap-to-pay without leased terminals.</p>
+      </a>
+      <a class="cu-seg" href="solutions/salon-wellness.html">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0 1 18 0"/></svg></div>
+        <div class="count">11 platforms</div>
+        <h4>Salon &amp; wellness</h4>
+        <p>OrbitSalon, Sawasdee.co, Tidy·Book — booking and checkout in one flow, with per-stylist settlement.</p>
+      </a>
+      <a class="cu-seg" href="solutions/field-services.html">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7"/></svg></div>
+        <div class="count">9 platforms</div>
+        <h4>Field services</h4>
+        <p>Fieldwork/, RuangKerja — tradespeople tapping at the customer's door, no fleet mPOS logistics.</p>
+      </a>
+      <a class="cu-seg" href="solutions/healthcare.html">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 14c1.5 0 3-1.5 3-3s-1.5-3-3-3-3 1.5-3 3M5 14c-1.5 0-3-1.5-3-3s1.5-3 3-3 3 1.5 3 3M12 19v-6m-3 3h6"/></svg></div>
+        <div class="count">7 platforms</div>
+        <h4>Healthcare</h4>
+        <p>Medika+, Cove·Health — clinic copay and consult collections, with PHI-separated payment pipelines.</p>
+      </a>
+      <a class="cu-seg" href="solutions/hotels.html">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 20h20M3 20V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12"/></svg></div>
+        <div class="count">6 platforms</div>
+        <h4>Hotels &amp; PMS</h4>
+        <p>Kapai PMS — folio-to-checkout tap, room-charge handling, and multi-currency guest payments.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== QUOTES =================== -->
+<section class="cu-quotes">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">What platform teams say</span>
+      <h2>Unvarnished from the engineering Slack channel.</h2>
+    </div>
+    <div class="cu-quote-grid">
+      <div class="cu-quote">
+        <div class="qmark">“</div>
+        <p>The webhook semantics are what sold me. I don't want to argue with a support bot about a duplicated capture at 2am &mdash; I just want idempotency keys to work. With Tapped, they do.</p>
+        <div class="src"><div class="ava">PJ</div><div class="who"><div class="n">Priya Jayaraman</div><div class="t">Staff engineer · Medika+</div></div></div>
+      </div>
+      <div class="cu-quote">
+        <div class="qmark">“</div>
+        <p>We used to need a compliance hire before we could enter Thailand. Now we need a pull request.</p>
+        <div class="src"><div class="ava">HL</div><div class="who"><div class="n">Henry Lau</div><div class="t">COO · Fieldwork/</div></div></div>
+      </div>
+      <div class="cu-quote">
+        <div class="qmark">“</div>
+        <p>Tapped Onboard gave us a clean answer to 'how do we KYB a one-stylist home salon in Penang?' Every other vendor just stared at us.</p>
+        <div class="src"><div class="ava">LA</div><div class="who"><div class="n">Liyana Abdul</div><div class="t">Head of Platform · OrbitSalon</div></div></div>
+      </div>
+      <div class="cu-quote">
+        <div class="qmark">“</div>
+        <p>The sandbox accepts the full EMV test-card set. I could build our entire tap flow on a Saturday without talking to a human.</p>
+        <div class="src"><div class="ava">DW</div><div class="who"><div class="n">Daniel Wei</div><div class="t">Founding engineer · Kapai PMS</div></div></div>
+      </div>
+      <div class="cu-quote">
+        <div class="qmark">“</div>
+        <p>We made more from the payments spread in the first quarter than from our SaaS subscription line. Tapped changed our P&amp;L shape.</p>
+        <div class="src"><div class="ava">MS</div><div class="who"><div class="n">Marco Santos</div><div class="t">CTO · Kanpai.POS</div></div></div>
+      </div>
+      <div class="cu-quote">
+        <div class="qmark">“</div>
+        <p>Their on-call engineer joined our Slack and answered an event-ordering question in four minutes. I've never had a payments vendor do that.</p>
+        <div class="src"><div class="ava">AN</div><div class="who"><div class="n">Arya Nugroho</div><div class="t">Lead platform eng · RuangKerja</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CTA =================== -->
+<section class="cu-cta">
+  <div class="container">
+    <div class="cu-cta-card">
+      <div>
+        <span class="eyebrow">Be the next one on this page</span>
+        <h2>Every platform on this page started with a sandbox key.</h2>
+        <p>No sales call required. Spin up sandbox credentials, wire up a sub-merchant, take a test tap. When you're ready to go live in your launch market, we're here.</p>
+      </div>
+      <div class="cu-cta-actions">
+        <a class="btn btn-brand btn-arrow" href="developers.html">Start building</a>
+        <a class="btn btn-secondary" href="company/contact.html?topic=case-study">Talk to a platform lead</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><img class="logo-img" src="../assets/tapped-logo.png" alt="Tapped"><p>Embedded tap-to-pay infrastructure for vertical SaaS platforms across APAC.</p></div>
+      <div class="footer-col"><h5>Solutions</h5><a href="solutions/restaurant-pos.html">Restaurant POS</a><a href="solutions/salon-wellness.html">Salon &amp; Wellness</a><a href="solutions/field-services.html">Field Services</a><a href="solutions/healthcare.html">Healthcare</a><a href="solutions/hotels.html">Hotels</a></div>
+      <div class="footer-col"><h5>Product</h5><a href="product/tap-core.html">Tap Core</a><a href="product/tap-terminal.html">Tap Terminal</a><a href="product/tapped-onboard.html">Tapped Onboard</a><a href="product/tap-certify.html">Tap Certify</a><a href="product/tap-ledger.html">Tap Ledger</a></div>
+      <div class="footer-col"><h5>Developers</h5><a href="developers.html">Overview</a><a href="developers/documentation.html">Documentation</a><a href="developers/api-reference.html">API reference</a><a href="developers/sdks.html">SDKs</a><a href="developers/status.html">Status</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="company/about.html">About</a><a href="customers.html">Customers</a><a href="company/careers.html">Careers</a><a href="company/contact.html">Contact</a><a href="company/security.html">Security</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Tapped Pte Ltd &middot; 1 Raffles Place, Singapore</div>
+      <div class="lr"><a href="legal/privacy.html">Privacy</a><a href="legal/terms.html">Terms</a><a href="legal/pci.html">PCI</a><a href="legal/licences.html">Licences</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tap Core — Certified EMV kernels &amp; scheme rails | Tapped</title>
+<meta name="description" content="EMV L1/L2/L3-certified kernels, scheme direct rails across APAC, HSM-backed cryptography. The payment engine behind Tapped — licensable standalone.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="canonical" href="https://tapped.co/pages/product/tap-core.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Tapped"><meta property="og:title" content="Tap Core — Certified EMV kernels &amp; scheme rails | Tapped"><meta property="og:description" content="EMV L1/L2/L3-certified kernels, scheme direct rails across APAC, HSM-backed cryptography. The payment engine behind Tapped — licensable standalone."><meta property="og:url" content="https://tapped.co/pages/product/tap-core.html"><meta property="og:image" content="https://tapped.co/assets/tapped-logo.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Tap Core — Certified EMV kernels &amp; scheme rails | Tapped"><meta name="twitter:description" content="EMV L1/L2/L3-certified kernels, scheme direct rails across APAC, HSM-backed cryptography. The payment engine behind Tapped — licensable standalone.">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css"><link rel="stylesheet" href="../../shared/page.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Tapped","legalName":"Tapped Pte Ltd","url":"https://tapped.co/","logo":"https://tapped.co/assets/tapped-logo.png","description":"Embedded tap-to-pay infrastructure for vertical SaaS platforms across APAC.","address":{"@type":"PostalAddress","streetAddress":"1 Raffles Place","addressCountry":"SG"},"areaServed":["SG","JP","HK","MY","TH","ID","PH","VN","KR"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Tap Core","description":"EMV L1/L2/L3-certified kernels, scheme direct rails across APAC, HSM-backed cryptography.","url":"https://tapped.co/pages/product/tap-core.html","isPartOf":{"@type":"WebSite","name":"Tapped","url":"https://tapped.co/"},"inLanguage":"en","datePublished":"2026-04-18","dateModified":"2026-04-18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapped.co/"},{"@type":"ListItem","position":2,"name":"Product","item":"https://tapped.co/pages/product/"},{"@type":"ListItem","position":3,"name":"Tap Core","item":"https://tapped.co/pages/product/tap-core.html"}]}</script>
+<style>
+  /* Tap Core hero — kernel stack visualisation */
+  .core-stack { position: relative; background: linear-gradient(180deg, #0B1225 0%, #0E1530 100%); border: 1px solid rgba(124, 58, 237, 0.25); border-radius: 16px; padding: 22px 20px 24px; overflow: hidden; }
+  .core-stack::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 80% 10%, rgba(34, 211, 238, 0.18), transparent 50%), radial-gradient(circle at 20% 90%, rgba(225, 29, 116, 0.14), transparent 55%); pointer-events: none; }
+  .cs-chrome { position: relative; display: flex; align-items: center; gap: 10px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 14px; }
+  .cs-chrome .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.12); }
+  .cs-chrome .label { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.06em; margin-left: auto; }
+  .cs-chrome .live { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #22D3EE; padding: 3px 8px; border-radius: 999px; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.3); margin-left: 10px; }
+  .cs-cryptogram { position: relative; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; padding: 0 4px 10px; }
+  .cs-cryptogram span.v { color: #22D3EE; }
+  .cs-layers { position: relative; display: flex; flex-direction: column; gap: 8px; }
+  .cs-layer { position: relative; display: grid; grid-template-columns: 72px 1fr auto; align-items: center; gap: 14px; padding: 14px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; }
+  .cs-layer .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+  .cs-layer .nm { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: #F5F7FB; }
+  .cs-layer .ds { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .cs-layer .cert { font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; border-radius: 6px; color: #22D3EE; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.25); letter-spacing: 0.06em; white-space: nowrap; }
+  .cs-layer.scheme { background: linear-gradient(90deg, rgba(34, 211, 238, 0.08), rgba(124, 58, 237, 0.08), rgba(225, 29, 116, 0.08)); border-color: rgba(124, 58, 237, 0.3); }
+  .cs-layer.scheme .tag { color: rgba(255,255,255,0.75); }
+  .cs-schemes { display: flex; gap: 6px; flex-wrap: wrap; }
+  .cs-scheme { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.06em; padding: 3px 7px; border-radius: 6px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.08); }
+  .cs-scheme.on { color: white; box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.4), 0 0 12px rgba(34, 211, 238, 0.25); border-color: rgba(34, 211, 238, 0.45); animation: cs-pulse 3.2s ease-in-out infinite; }
+  .cs-scheme.on.d2 { animation-delay: 0.4s; box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.45), 0 0 12px rgba(124, 58, 237, 0.3); border-color: rgba(124, 58, 237, 0.5); }
+  .cs-scheme.on.d3 { animation-delay: 0.8s; box-shadow: 0 0 0 1px rgba(225, 29, 116, 0.45), 0 0 12px rgba(225, 29, 116, 0.3); border-color: rgba(225, 29, 116, 0.5); }
+  @keyframes cs-pulse { 0%, 100% { opacity: 0.85; } 50% { opacity: 1; } }
+  .cs-flow { position: relative; margin-top: 12px; padding: 10px 14px; background: rgba(34, 211, 238, 0.04); border: 1px dashed rgba(34, 211, 238, 0.2); border-radius: 8px; font-family: var(--font-mono); font-size: 10.5px; color: rgba(255,255,255,0.65); letter-spacing: 0.04em; display: flex; align-items: center; gap: 10px; }
+  .cs-flow .arrow { color: #22D3EE; }
+  .cs-flow .hsm { color: #E11D74; }
+  .cs-hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 960px) { .cs-hero-grid { grid-template-columns: 1fr; } }
+
+  /* matrix table */
+  .core-matrix { margin: 8px 0 24px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--paper); }
+  .core-matrix table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .core-matrix th, .core-matrix td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-subtle); }
+  .core-matrix thead th { background: var(--surface-1); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-2); }
+  .core-matrix tbody tr:last-child td { border-bottom: none; }
+  .core-matrix td.mk { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
+  .core-matrix td.ok { color: #16A085; font-weight: 600; }
+  .core-matrix td.soon { color: var(--fg-3); }
+  @media (max-width: 700px) { .core-matrix { overflow-x: auto; } .core-matrix table { min-width: 640px; } }
+</style>
+</head><body>
+<nav class="nav" aria-label="Primary"><div class="container nav-inner">
+    <a href="../../Tapped Website.html" class="brand" aria-label="Tapped home"><img class="logo-img" src="../../assets/tapped-logo.png" alt="Tapped" width="34" height="34"></a>
+    <div class="nav-center">
+      <div class="nav-item" data-mega="solutions"><button aria-haspopup="true" aria-expanded="false">Solutions <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-mega" style="min-width:560px;">
+        <a href="../solutions/restaurant-pos.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div><div><span class="nm">Restaurant POS</span><span class="nd">Tap at the table or counter</span></div></a>
+        <a href="../solutions/salon-wellness.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0 1 18 0"/></svg></div><div><span class="nm">Salon &amp; Wellness</span><span class="nd">Embed into booking flows</span></div></a>
+        <a href="../solutions/field-services.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7"/></svg></div><div><span class="nm">Field Services</span><span class="nd">Pay at the customer's door</span></div></a>
+        <a href="../solutions/healthcare.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 19v-6m-3 3h6"/></svg></div><div><span class="nm">Healthcare</span><span class="nd">Clinic copay collections</span></div></a>
+        <a href="../solutions/hotels.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 20h20M3 20V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12"/></svg></div><div><span class="nm">Hotels</span><span class="nd">PMS folio checkout</span></div></a>
+      </div></div>
+      <div class="nav-item" data-mega="product"><button aria-haspopup="true" aria-expanded="false">Product <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-mega" style="min-width:620px;">
+        <a href="tap-core.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div><div><span class="nm">Tap Core</span><span class="nd">Certified EMV kernels &amp; rails</span></div></a>
+        <a href="tap-terminal.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2"/></svg></div><div><span class="nm">Tap Terminal</span><span class="nd">PIN-on-Glass SDK</span></div></a>
+        <a href="tapped-onboard.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div><div><span class="nm">Tapped Onboard</span><span class="nd">PSP-agnostic KYB</span></div></a>
+        <a href="tap-certify.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1"/></svg></div><div><span class="nm">Tap Certify</span><span class="nd">Scheme &amp; regulator filings</span></div></a>
+        <a href="tap-ledger.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3h18v4H3zM3 11h12v10H3zM18 11h3v10h-3z"/></svg></div><div><span class="nm">Tap Ledger</span><span class="nd">Multi-currency payouts</span></div></a>
+      </div></div>
+      <a class="nav-item" href="../markets.html"><button>Markets</button></a>
+      <a class="nav-item" href="../developers/documentation.html"><button>Developers</button></a>
+      <a class="nav-item" href="../../Tapped Website.html#pricing"><button>Pricing</button></a>
+    </div>
+    <div class="nav-cta"><a class="btn btn-ghost" href="../developers/documentation.html">Docs</a><a class="btn btn-brand btn-arrow" href="../company/contact.html">Talk to sales</a></div>
+  </div></nav>
+
+<main id="main">
+<nav class="breadcrumb container" aria-label="Breadcrumb"><ol><li><a href="../../Tapped Website.html">Home</a></li><li><a href="../../Tapped Website.html#how">Product</a></li><li aria-current="page">Tap Core</li></ol></nav>
+
+<header class="sub-hero"><div class="container"><div class="cs-hero-grid">
+  <div>
+    <span class="eyebrow">Product · Tap Core</span>
+    <h1>The <span class="portable">certified payment engine</span> that every Tapped product runs on.</h1>
+    <p class="lede">EMV L1, L2, and L3-certified kernels. Scheme direct relationships with Visa, Mastercard, JCB, UnionPay, and nine APAC domestic networks. HSM-backed cryptography, PCI-DSS Level 1 hosting, and a hardened transaction core that clears a tap in under 700 ms. Tap Core is the piece most platforms think they need to build themselves &mdash; and the one they most regret building.</p>
+    <div class="sub-hero-cta">
+      <a class="btn btn-brand btn-arrow" href="../company/contact.html">Talk to sales</a>
+      <a class="btn btn-secondary" href="../developers/documentation.html">Read the docs</a>
+    </div>
+  </div>
+  <div class="core-stack" aria-label="Illustration: Tap Core kernel stack from tap to scheme rails">
+    <div class="cs-chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">core.tapped.dev / kernel</span><span class="live">Live</span></div>
+    <div class="cs-cryptogram">
+      <span>cryptogram <span class="v">ARQC 9F26</span></span>
+      <span>rt <span class="v">612 ms</span></span>
+    </div>
+    <div class="cs-layers">
+      <div class="cs-layer">
+        <span class="tag">L1</span>
+        <div><div class="nm">Contactless Interface</div><div class="ds">ISO 14443 radio &middot; NFC Forum Type A/B</div></div>
+        <span class="cert">EMVCo L1 &middot; v3.1</span>
+      </div>
+      <div class="cs-layer">
+        <span class="tag">L2</span>
+        <div><div class="nm">EMV Kernel</div><div class="ds">Application selection &middot; PDOL &middot; DDA/CDA &middot; CVM decision</div></div>
+        <span class="cert">EMVCo L2 &middot; C-2 v2.10</span>
+      </div>
+      <div class="cs-layer">
+        <span class="tag">L3</span>
+        <div><div class="nm">Payment Application</div><div class="ds">PIN-on-Glass &middot; offline data auth &middot; risk mgmt</div></div>
+        <span class="cert">PCI MPoC v1.1</span>
+      </div>
+      <div class="cs-layer scheme">
+        <span class="tag">Scheme rails</span>
+        <div class="cs-schemes">
+          <span class="cs-scheme on">Visa</span>
+          <span class="cs-scheme on d2">Mastercard</span>
+          <span class="cs-scheme on d3">JCB</span>
+          <span class="cs-scheme on">UnionPay</span>
+          <span class="cs-scheme on d2">AmEx</span>
+          <span class="cs-scheme">NETS</span>
+          <span class="cs-scheme">PayNow</span>
+          <span class="cs-scheme">BancNet</span>
+          <span class="cs-scheme">PromptPay</span>
+        </div>
+        <span class="cert">Direct BINs</span>
+      </div>
+    </div>
+    <div class="cs-flow">
+      <span>tap</span><span class="arrow">→</span><span>kernel</span><span class="arrow">→</span><span class="hsm">HSM sign</span><span class="arrow">→</span><span>scheme</span><span class="arrow">→</span><span class="v">issuer auth</span>
+    </div>
+  </div>
+</div></div></header>
+
+<article class="sub-article container"><div class="sub-article-grid"><div class="sub-article-body">
+
+<section aria-labelledby="s0"><h2 id="s0">What you're actually buying when you buy Tap Core</h2>
+<p>"Payment processing" is a fig leaf over six distinct specialist builds: a certified EMV kernel that talks to the chip, a cryptography stack that signs every transaction against a scheme-provisioned key, scheme membership that gets your BIN ranges assigned, a clearing-and-settlement layer that reconciles against issuer netting files, a dispute pipeline that handles chargebacks within scheme SLAs, and a PCI-DSS environment that keeps all of the above audited. Each takes a year and a team of specialists. Tap Core is all six, as a single managed product.</p>
+<p><strong>You consume Tap Core as HTTP.</strong> One endpoint per transaction, one webhook per state change. Everything above — cryptogram verification, cardholder verification method (CVM) selection, clearing-file generation, scheme reporting — is handled for you and audited on your behalf.</p>
+</section>
+
+<section aria-labelledby="s1"><h2 id="s1">Certifications we hold so you don't have to</h2>
+<ul>
+  <li><strong>EMVCo Level 1 &amp; Level 2.</strong> Contactless interface and kernel, re-certified on every major kernel version.</li>
+  <li><strong>EMVCo Level 3.</strong> End-to-end payment application certified per acquirer, per scheme, per market &mdash; nineteen live L3 certificates today, another twenty-three in the pipeline through 2027.</li>
+  <li><strong>PCI MPoC v1.1.</strong> Mobile Payments on COTS &mdash; the successor framework to PCI CPoC and PCI SPoC. Authorises contactless and PIN-on-Glass on off-the-shelf phones.</li>
+  <li><strong>PCI-DSS Level 1.</strong> Annual on-site audit, quarterly ASV scans, continuous control monitoring.</li>
+  <li><strong>PCI PIN Security.</strong> Key management, HSM operations, and PIN handling across the key lifecycle.</li>
+  <li><strong>SOC 2 Type II.</strong> Security, availability, and confidentiality &mdash; report shared under NDA.</li>
+  <li><strong>ISO 27001 &amp; ISO 22301.</strong> Information security management and business continuity.</li>
+</ul>
+</section>
+
+<section aria-labelledby="s2"><h2 id="s2">Schemes and domestic networks</h2>
+<p>Tap Core holds direct principal-member relationships with the international schemes and partners with the domestic networks that actually move the money in Asia. We&rsquo;re not wrapping someone else&rsquo;s wrap.</p>
+<div class="core-matrix"><table>
+  <thead><tr><th>Market</th><th>Intl schemes</th><th>Domestic network</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td class="mk">PH</td><td>Visa · Mastercard · JCB · UnionPay</td><td>BancNet · InstaPay</td><td class="ok">Live</td></tr>
+    <tr><td class="mk">SG</td><td>Visa · Mastercard · JCB · AmEx · UnionPay</td><td>NETS · PayNow</td><td class="ok">Live</td></tr>
+    <tr><td class="mk">JP</td><td>Visa · Mastercard · JCB · AmEx</td><td>iD · QUICPay</td><td class="soon">Q2 ’27</td></tr>
+    <tr><td class="mk">HK</td><td>Visa · Mastercard · JCB · UnionPay</td><td>FPS</td><td class="soon">Q3 ’27</td></tr>
+    <tr><td class="mk">MY</td><td>Visa · Mastercard · JCB · UnionPay</td><td>MyDebit · DuitNow</td><td class="soon">Q3 ’27</td></tr>
+    <tr><td class="mk">TH</td><td>Visa · Mastercard · JCB · UnionPay</td><td>PromptPay</td><td class="soon">Q2 ’27</td></tr>
+    <tr><td class="mk">ID</td><td>Visa · Mastercard · JCB</td><td>GPN · QRIS</td><td class="soon">Q4 ’27</td></tr>
+    <tr><td class="mk">VN</td><td>Visa · Mastercard · JCB</td><td>NAPAS</td><td class="soon">Q4 ’27</td></tr>
+    <tr><td class="mk">KR</td><td>Visa · Mastercard · AmEx</td><td>BC Card</td><td class="soon">Q4 ’27</td></tr>
+  </tbody>
+</table></div>
+</section>
+
+<section aria-labelledby="s3"><h2 id="s3">Cryptography, keys, and the HSM</h2>
+<p>Every transaction Tap Core clears is signed inside a FIPS 140-2 Level 3 HSM. Keys are ceremony-generated, dual-controlled, and scope-restricted &mdash; your platform never sees a scheme key and never touches PAN data in the clear. We run redundant HSMs in each region for high availability and run an annual key-rotation ceremony with an independent QSA witness.</p>
+<ul>
+  <li><strong>DUKPT</strong> derived unique keys for every terminal and every transaction.</li>
+  <li><strong>P2PE architecture</strong> &mdash; PAN encrypted at the secure element, only decrypted inside the HSM for authorisation.</li>
+  <li><strong>3DS 2.x</strong> for the rare card-not-present flow that co-exists with in-person taps.</li>
+  <li><strong>Tokenisation</strong> for stored credentials &mdash; customer tokens the merchant can charge against without re-collecting card data.</li>
+</ul>
+</section>
+
+<section aria-labelledby="s4"><h2 id="s4">The numbers we hold ourselves to</h2>
+<p>Tap Core is measured in four places: latency, availability, authorisation rate, and dispute win rate. These numbers are posted on our status page in rolling 30-day windows and are part of every SLA we sign.</p>
+<pre><code><span class="c">// Tap Core · 30-day rolling · as of 2026-04-18</span>
+authorisation_latency_p50      = <span class="s">612 ms</span>
+authorisation_latency_p99      = <span class="s">1.14 s</span>
+availability                   = <span class="s">99.993 %</span>  <span class="c">// SLA 99.99%</span>
+scheme_authorisation_rate      = <span class="s">97.8 %</span>
+dispute_win_rate (2025 F&amp;B)    = <span class="s">71 %</span>
+key_rotation_last_ceremony     = <span class="s">2026-03-04 (witnessed)</span></code></pre>
+</section>
+
+<section aria-labelledby="s5"><h2 id="s5">Standalone licensing</h2>
+<p>Tap Core is a standalone product. Acquirers, PSPs, and processors in APAC license the kernel, the HSM layer, and the scheme-submission engine directly &mdash; without using Tapped Onboard or Tapped Terminal. If you already have merchant relationships and BINs but want to skip the EMVCo re-cert treadmill, this is the build you&rsquo;re replacing. Talk to sales for the architecture doc.</p>
+</section>
+
+<section class="page-faq"><h2>Frequently asked questions</h2>
+<div class="faq-list">
+  <details class="faq-item" open><summary class="faq-q">How long does it take to add a new scheme?<span class="plus">+</span></summary><div class="faq-a-inner"><p>For an international scheme already in our membership (Visa, Mastercard, JCB, UnionPay, AmEx), adding it in a new market is typically one to two quarters &mdash; gated by scheme review windows rather than engineering. For a new domestic network, four to six months including L3 certification.</p></div></details>
+  <details class="faq-item"><summary class="faq-q">Do you support PIN fallback for high-value transactions?<span class="plus">+</span></summary><div class="faq-a-inner"><p>Yes. PIN-on-Glass is implemented to PCI MPoC v1.1 and invoked automatically when the cardholder verification method decision requires it &mdash; typically above the local CVM limit, or when the card requests online PIN. No separate SDK, no separate certification for you.</p></div></details>
+  <details class="faq-item"><summary class="faq-q">What happens during a scheme outage?<span class="plus">+</span></summary><div class="faq-a-inner"><p>Every transaction attempt is logged with a decision code and a retry policy. Stand-in authorisation is available for pre-approved merchants and transaction types, with the transaction force-posted against the card network when it recovers. Availability during the last Visa partial-outage (Oct 2025) was 99.4% &mdash; the scheme average was 92%.</p></div></details>
+  <details class="faq-item"><summary class="faq-q">Is Tap Core open-source?<span class="plus">+</span></summary><div class="faq-a-inner"><p>The EMV kernel can&rsquo;t be open-source and remain certified &mdash; scheme rules require controlled distribution of kernel binaries. The integration SDKs (TypeScript, Swift, Kotlin) and the reference implementations are on GitHub under Apache 2.0. You own your integration code end-to-end.</p></div></details>
+  <details class="faq-item"><summary class="faq-q">Can we run Tap Core on-prem?<span class="plus">+</span></summary><div class="faq-a-inner"><p>For Enterprise customers with &gt;USD 250M annual volume: yes, as a private deployment inside your VPC with a Tapped-managed HSM cluster. You keep the regulatory surface area; we keep the operational one. Talk to sales about the private-cloud architecture.</p></div></details>
+</div>
+</section>
+
+</div></div></article>
+
+<section class="sub-cta"><div class="container"><div class="sub-cta-card">
+  <div><span class="eyebrow">Stop certifying. Start shipping.</span><h2>One kernel, nine markets, every scheme.</h2><p>The engine most platforms spend two years rebuilding &mdash; available as an API today. Sandbox is free; the production switch flips when you&rsquo;re ready.</p></div>
+  <div class="sub-cta-actions"><a class="btn btn-brand btn-arrow" href="../company/contact.html">Talk to sales</a><a class="btn btn-secondary" href="../developers/documentation.html">Explore docs</a></div>
+</div></div></section>
+</main>
+
+<footer class="footer"><div class="container"><div class="footer-grid">
+  <div class="footer-col"><img class="logo-img" src="../../assets/tapped-logo.png" alt="Tapped"><p>Embedded tap-to-pay infrastructure for vertical SaaS platforms across APAC.</p></div>
+  <div class="footer-col"><h5>Solutions</h5><a href="../solutions/restaurant-pos.html">Restaurant POS</a><a href="../solutions/salon-wellness.html">Salon &amp; Wellness</a><a href="../solutions/field-services.html">Field Services</a><a href="../solutions/healthcare.html">Healthcare</a><a href="../solutions/hotels.html">Hotels</a><a href="../solutions/fitness.html">Fitness</a><a href="../solutions/auto-repair.html">Auto &amp; Repair</a></div>
+  <div class="footer-col"><h5>Product</h5><a href="tap-core.html">Tap Core</a><a href="tap-terminal.html">Tap Terminal</a><a href="tapped-onboard.html">Tapped Onboard</a><a href="tap-certify.html">Tap Certify</a><a href="tap-ledger.html">Tap Ledger</a><a href="../markets.html">Markets</a></div>
+  <div class="footer-col"><h5>Developers</h5><a href="../developers/documentation.html">Documentation</a><a href="../developers/api-reference.html">API reference</a><a href="../developers/sdks.html">SDKs</a><a href="../developers/webhooks.html">Webhooks</a><a href="../developers/status.html">Status</a><a href="../developers/changelog.html">Changelog</a></div>
+  <div class="footer-col"><h5>Company</h5><a href="../company/about.html">About</a><a href="../customers.html">Customers</a><a href="../company/press.html">Press</a><a href="../company/careers.html">Careers</a><a href="../company/contact.html">Contact</a><a href="../company/security.html">Security</a></div>
+</div><div class="footer-bottom"><div>&copy; 2026 Tapped Pte Ltd &middot; 1 Raffles Place, Singapore</div><div class="lr"><a href="../legal/privacy.html">Privacy</a><a href="../legal/terms.html">Terms</a><a href="../legal/pci.html">PCI</a><a href="../legal/licences.html">Licences</a></div></div></div></footer>
+
+<script>document.querySelectorAll('.nav-item[data-mega]').forEach(i=>{let t;i.addEventListener('mouseenter',()=>{clearTimeout(t);i.classList.add('open');});i.addEventListener('mouseleave',()=>{t=setTimeout(()=>i.classList.remove('open'),120);});});</script>
+</body></html>

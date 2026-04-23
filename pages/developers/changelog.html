@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changelog | Tapped</title>
+<meta name="description" content="Every Tapped API change, SDK release, and market expansion — with dates, migration notes, and deprecation timelines.">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../shared/page.css">
+<style>
+.cl-hero { padding: 48px 0 32px; background: linear-gradient(180deg, #0B1225 0%, #0E1530 100%); color:white; }
+.cl-hero .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#22D3EE; margin-bottom:14px; display:inline-block; }
+.cl-hero h1 { font-family:var(--font-display); font-size:44px; font-weight:600; letter-spacing:-0.02em; line-height:1.08; margin:0 0 14px; color:white; }
+.cl-hero p { font-size:16px; color:#B8C0D8; line-height:1.55; margin:0; max-width: 620px; }
+.cl-hero .sub-nav { display:flex; gap:8px; margin-top:24px; flex-wrap:wrap; }
+.cl-hero .sub-nav a { padding: 7px 13px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em; border-radius:999px; border: 1px solid rgba(255,255,255,0.16); background:rgba(255,255,255,0.04); color:#B8C0D8; }
+.cl-hero .sub-nav a:hover, .cl-hero .sub-nav a.active { background:rgba(103,232,249,0.14); color:#67E8F9; border-color: #22D3EE; }
+
+.cl-body { padding: 64px 0; }
+.cl-list { display:flex; flex-direction:column; gap: 40px; max-width: 820px; margin: 0 auto; }
+.cl-entry { position:relative; padding-left: 132px; }
+.cl-entry .date { position:absolute; left:0; top:0; width:108px; font-family:var(--font-mono); font-size:12px; color: var(--fg-3); letter-spacing:0.02em; padding-top:6px; }
+.cl-entry .date b { display:block; color: var(--fg-1); font-weight:600; font-size:13px; margin-top:2px; }
+.cl-entry .head { display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+.cl-entry .tag { display:inline-block; padding:3px 9px; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; border-radius:999px; }
+.cl-entry .tag.new { background:#DCFCE7; color:#15803D; }
+.cl-entry .tag.improve { background:#DBEAFE; color:#1D4ED8; }
+.cl-entry .tag.break { background:#FEE2E2; color:#B91C1C; }
+.cl-entry .tag.market { background:#FEF3C7; color:#A16207; }
+.cl-entry .tag.fix { background:#F3E8FF; color:#7E22CE; }
+.cl-entry .ver { font-family:var(--font-mono); font-size:12px; color: var(--fg-3); }
+.cl-entry h3 { font-family:var(--font-display); font-size:20px; letter-spacing:-0.015em; margin:0 0 8px; font-weight:600; }
+.cl-entry p { font-size:14.5px; color: var(--fg-2); line-height:1.62; margin:0 0 10px; }
+.cl-entry ul { font-size:14px; color:var(--fg-2); line-height:1.6; padding-left:18px; margin: 0; }
+.cl-entry code { font-family:var(--font-mono); font-size:0.9em; background:var(--ink-50); padding:1px 5px; border-radius:3px; }
+
+@media (max-width: 720px) { .cl-entry { padding-left:0; } .cl-entry .date { position:static; width:auto; margin-bottom:8px; padding:0; } }
+</style>
+</head><body data-current="developers"><div data-nav-mount></div><main id="main">
+<nav class="breadcrumb container" aria-label="Breadcrumb"><ol><li><a href="../../Tapped Website.html">Home</a></li><li><a href="../developers.html">Developers</a></li><li aria-current="page">Changelog</li></ol></nav>
+
+<header class="cl-hero"><div class="container">
+  <span class="eyebrow">Changelog</span>
+  <h1>What shipped, what changed, what broke &mdash; and when.</h1>
+  <p>API, SDKs, markets, dashboard. Every breaking change gets 90 days' notice and a one-page migration guide. RSS feed below for the subscribers among us.</p>
+  <div class="sub-nav">
+    <a class="active" href="#">All</a><a href="#">API</a><a href="#">SDKs</a><a href="#">Markets</a><a href="#">Dashboard</a><a href="#" style="margin-left:auto;">RSS feed →</a>
+  </div>
+</div></header>
+
+<section class="cl-body"><div class="container">
+  <div class="cl-list">
+
+    <article class="cl-entry">
+      <div class="date">2026<br><b>Mar 14</b></div>
+      <div class="head"><span class="tag new">New</span><span class="ver">api · 2026-03-01</span></div>
+      <h3>Split payouts, one tap</h3>
+      <p>The new <code>taps.capture()</code> call accepts a <code>splits</code> array &mdash; route portions of a single tap to multiple sub-merchants in one atomic authorisation. Marketplace rent, rideshare driver splits, shared-commission retail. Available in all markets.</p>
+    </article>
+
+    <article class="cl-entry">
+      <div class="date">2026<br><b>Mar 06</b></div>
+      <div class="head"><span class="tag market">Market</span><span class="ver">Vietnam · phase 2</span></div>
+      <h3>Vietnam: VND settlement &amp; NAPAS rails live</h3>
+      <p>Sub-merchant acquiring live in Vietnam with local NAPAS domestic routing and VND settlement to VietinBank, VPBank, and Techcombank. Tap Certify carries VN MPC-001 certification for all four issuers.</p>
+    </article>
+
+    <article class="cl-entry">
+      <div class="date">2026<br><b>Feb 22</b></div>
+      <div class="head"><span class="tag improve">Improve</span><span class="ver">tap-core · 3.0.0</span></div>
+      <h3>Tap Core 3.0 &mdash; 40% lower latency</h3>
+      <p>New cryptographic pipeline cuts tap-to-auth round-trip from a median of 680 ms to 410 ms. Requires SDK update; old SDKs continue to work unchanged.</p>
+      <ul><li>Swift: <code>TappedSwift 3.0.4</code> &mdash; iOS 16+ required (up from 15)</li><li>Kotlin: <code>tapped-android 3.1.0</code> &mdash; Android 10+ required (up from 9)</li></ul>
+    </article>
+
+    <article class="cl-entry">
+      <div class="date">2026<br><b>Feb 10</b></div>
+      <div class="head"><span class="tag break">Breaking</span><span class="ver">api · 2026-03-01</span></div>
+      <h3>Sub-merchant <code>owners</code> field now required</h3>
+      <p>To comply with new APAC BSA guidance, <code>POST /v1/submerchants</code> now requires at least one entry in <code>owners</code> for any beneficial owner holding 25% or more. <strong>Effective 2026-06-01.</strong> Existing sub-merchants are unaffected; new registrations without the field will <code>400</code>.</p>
+      <p><a href="#" style="color:var(--brand-cyan-700); font-weight:600;">Read the migration guide →</a></p>
+    </article>
+
+    <article class="cl-entry">
+      <div class="date">2026<br><b>Jan 28</b></div>
+      <div class="head"><span class="tag new">New</span><span class="ver">dashboard</span></div>
+      <h3>Webhook replay, from the timeline</h3>
+      <p>Every event on a transaction timeline now has a "Replay" button. Replay pushes a fresh delivery to your endpoint with a <code>Tapped-Replayed: true</code> header. Works for events up to 30 days old.</p>
+    </article>
+
+    <article class="cl-entry">
+      <div class="date">2026<br><b>Jan 14</b></div>
+      <div class="head"><span class="tag fix">Fix</span><span class="ver">api</span></div>
+      <h3>PHP Mastercard BIN routing</h3>
+      <p>A subset of PH Mastercard cards (BINs 552245–552249) were routing to BancNet's debit rail instead of the Mastercard rail, causing ~0.3% decline lift. Corrected; schemes retroactively settled. No customer action required.</p>
+    </article>
+
+    <article class="cl-entry">
+      <div class="date">2025<br><b>Dec 20</b></div>
+      <div class="head"><span class="tag market">Market</span><span class="ver">Malaysia · phase 1</span></div>
+      <h3>Malaysia: sandbox live, GA in Q1</h3>
+      <p>Sandbox sub-merchant acquiring open in Malaysia against Maybank and CIMB rails. GA depends on final Bank Negara licence &mdash; expected Q1 2026. Submit KYB now; live activations ship in order received.</p>
+    </article>
+
+    <article class="cl-entry">
+      <div class="date">2025<br><b>Dec 05</b></div>
+      <div class="head"><span class="tag new">New</span><span class="ver">api · 2025-12-01</span></div>
+      <h3>Tap Ledger GraphQL API</h3>
+      <p>New GraphQL endpoint at <code>api.tapped.so/ledger/graphql</code>. Query ledger entries, payouts, reconciliations, and reserves with one request. Schema introspection on; explorer in the dashboard.</p>
+    </article>
+
+    <article class="cl-entry">
+      <div class="date">2025<br><b>Nov 18</b></div>
+      <div class="head"><span class="tag improve">Improve</span><span class="ver">all SDKs</span></div>
+      <h3>Idempotency keys now auto-generated by default</h3>
+      <p>All first-party SDKs now generate and attach a UUIDv7 idempotency key by default on every mutation. Override by passing your own; disable with <code>{ idempotency: false }</code>. Opted-in retroactively.</p>
+    </article>
+
+    <article class="cl-entry">
+      <div class="date">2025<br><b>Oct 30</b></div>
+      <div class="head"><span class="tag new">New</span><span class="ver">api · 2025-10-15</span></div>
+      <h3>Webhook signatures v2</h3>
+      <p>New <code>Tapped-Signature-V2</code> header with a stronger signing algorithm and explicit timestamp tolerance. V1 continues to work alongside V2 through 2026-10-15. Signing secret rotation shipped alongside; self-serve.</p>
+    </article>
+
+  </div>
+</div></section>
+</main><div data-footer-mount></div><script src="../../shared/chrome.js"></script></body></html>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+  
+  <path d="M0 80 L120 80 L160 120 L320 120 L360 80 L520 80 L560 120 L800 120" opacity=".55"></path>
+  <path d="M0 200 L80 200 L120 160 L240 160 L280 200 L440 200 L480 240 L640 240 L680 200 L800 200" opacity=".55"></path>
+  <path d="M0 320 L160 320 L200 280 L360 280 L400 320 L560 320 L600 360 L800 360" opacity=".4"></path>
+  
+  <path d="M120 0 L120 80" opacity=".4"></path>
+  <path d="M360 0 L360 80" opacity=".4"></path>
+  <path d="M560 0 L560 80" opacity=".4"></path>
+  <path d="M240 400 L240 280" opacity=".3"></path>
+  <path d="M440 400 L440 320" opacity=".3"></path>
+  <path d="M680 400 L680 240" opacity=".4"></path>
+  
+  <circle cx="120" cy="80" r="3" opacity=".8"></circle>
+  <circle cx="360" cy="80" r="3" opacity=".8"></circle>
+  <circle cx="560" cy="120" r="3" opacity=".8"></circle>
+  <circle cx="240" cy="160" r="3" opacity=".6"></circle>
+  <circle cx="480" cy="240" r="3" opacity=".7"></circle>
+  <circle cx="680" cy="240" r="3" opacity=".7"></circle>
+  <circle cx="200" cy="280" r="3" opacity=".5"></circle>
+  <circle cx="400" cy="320" r="3" opacity=".5"></circle>
+  
+  <path d="M80 40 L160 40" opacity=".25" stroke-dasharray="3 4"></path>
+  <path d="M440 360 L560 360" opacity=".25" stroke-dasharray="3 4"></path>
+</svg>

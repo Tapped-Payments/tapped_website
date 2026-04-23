@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Careers at Tapped | Tapped</title>
+<meta name="description" content="Join us. We build payments infrastructure for APAC SaaS platforms — across engineering, risk, partnerships, and design.">
+<link rel="icon" href="../../assets/tapped-logo.png">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../shared/page.css">
+<style>
+.cr-hero { padding: 72px 0 48px; background: linear-gradient(180deg, #0B1225 0%, #0E1530 100%); color: white; position: relative; overflow: hidden; }
+.cr-hero::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 85% 20%, rgba(225,29,116,0.15), transparent 50%); pointer-events:none; }
+.cr-hero .container { position: relative; max-width: 960px; }
+.cr-hero .eyebrow { font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#22D3EE; margin-bottom:16px; display:inline-block; }
+.cr-hero h1 { font-family:var(--font-display); font-size: clamp(38px, 5vw, 60px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 20px; color: white; }
+.cr-hero h1 em { font-style:normal; background: linear-gradient(135deg, #67E8F9, #E11D74); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.cr-hero .lede { font-size: 20px; color: #D4DBEE; line-height: 1.5; max-width: 720px; margin: 0 0 32px; font-weight: 300; }
+.cr-hero .meta { display:flex; gap: 28px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; color: #97A2BF; }
+.cr-hero .meta span b { color: white; font-weight: 500; }
+
+.cr-pillars { padding: 80px 0; }
+.cr-pillars h2 { font-family:var(--font-display); font-size:32px; font-weight:600; letter-spacing:-0.02em; margin:0 0 12px; }
+.cr-pillars .lede { font-size:17px; color:var(--fg-2); max-width:640px; line-height:1.55; margin:0 0 48px; }
+.cr-pillars .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cr-pillars .pil { padding: 28px; background: var(--paper); border: 1px solid var(--border); border-radius: 14px; }
+.cr-pillars .pil .ico { width: 40px; height: 40px; border-radius: 10px; background: var(--brand-gradient-soft); display:grid; place-items:center; color: var(--brand-cyan-700); margin-bottom: 18px; }
+.cr-pillars .pil h3 { font-family:var(--font-display); font-size:19px; font-weight:600; letter-spacing:-0.015em; margin:0 0 10px; }
+.cr-pillars .pil p { font-size:14px; color:var(--fg-2); line-height:1.6; margin:0; }
+
+.cr-roles { padding: 72px 0; background: var(--ink-50); border-top: 1px solid var(--border-subtle); }
+.cr-roles h2 { font-family:var(--font-display); font-size: 32px; font-weight:600; letter-spacing:-0.02em; margin:0 0 12px; }
+.cr-roles .sub { font-size:16px; color:var(--fg-2); margin:0 0 32px; max-width:620px; line-height:1.55; }
+.cr-roles .filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 32px; }
+.cr-roles .filters button { padding: 7px 14px; font-family:var(--font-mono); font-size: 11px; letter-spacing: 0.04em; border-radius: 999px; border: 1px solid var(--border); background: white; color: var(--fg-2); cursor: pointer; transition: all 140ms; }
+.cr-roles .filters button.on, .cr-roles .filters button:hover { border-color: var(--brand-cyan-700); color: var(--brand-cyan-700); background: var(--brand-gradient-soft); }
+.cr-roles .list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--border); }
+.cr-roles .role { display: grid; grid-template-columns: 1fr 180px 180px 120px 40px; align-items: center; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); transition: all 140ms; text-decoration: none; color: inherit; }
+.cr-roles .role:hover { background: var(--brand-gradient-soft); padding-left: 12px; padding-right: 12px; }
+.cr-roles .role h4 { font-family:var(--font-display); font-size: 17px; font-weight:600; margin: 0 0 4px; letter-spacing: -0.01em; }
+.cr-roles .role .dept { font-family:var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; }
+.cr-roles .role .cell { font-size: 13px; color: var(--fg-2); font-family: var(--font-mono); letter-spacing: 0.02em; }
+.cr-roles .role .arrow { color: var(--brand-magenta-500); font-size:18px; transition: transform 180ms; text-align:right; }
+.cr-roles .role:hover .arrow { transform: translateX(4px); }
+
+.cr-benefits { padding: 88px 0; }
+.cr-benefits h2 { font-family:var(--font-display); font-size:32px; font-weight:600; letter-spacing:-0.02em; margin:0 0 12px; }
+.cr-benefits .sub { font-size:17px; color:var(--fg-2); max-width:640px; line-height:1.55; margin:0 0 48px; }
+.cr-benefits .grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 24px 32px; }
+.cr-benefits .b .ico { width:32px; height:32px; border-radius:8px; background: var(--brand-gradient-soft); display:grid; place-items:center; color:var(--brand-magenta-500); margin-bottom:14px; }
+.cr-benefits .b h4 { font-family:var(--font-display); font-size:16px; font-weight:600; margin:0 0 6px; letter-spacing:-0.01em; }
+.cr-benefits .b p { font-size:13.5px; color:var(--fg-2); line-height:1.55; margin:0; }
+
+.cr-quote { padding: 80px 0; background: linear-gradient(135deg, #0B1225 0%, #111B38 100%); color: white; }
+.cr-quote .wrap { max-width: 860px; margin: 0 auto; text-align: center; }
+.cr-quote .mark { font-family:var(--font-display); font-size: 80px; color: var(--brand-magenta-500); line-height: 1; margin-bottom: 12px; }
+.cr-quote blockquote { font-family:var(--font-display); font-size: 28px; font-weight: 400; line-height: 1.35; letter-spacing: -0.015em; color: white; margin: 0 0 28px; }
+.cr-quote .cite { display: flex; align-items: center; gap: 12px; justify-content: center; }
+.cr-quote .av { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #E879F9, #F0ABFC); display: grid; place-items: center; color: white; font-family: var(--font-mono); font-weight: 600; font-size: 13px; }
+.cr-quote .who b { font-family:var(--font-display); color: white; font-weight: 600; display: block; font-size: 15px; }
+.cr-quote .who span { font-family: var(--font-mono); font-size: 11px; color: #97A2BF; letter-spacing: 0.04em; }
+
+@media (max-width: 860px) {
+  .cr-pillars .grid, .cr-benefits .grid { grid-template-columns: 1fr 1fr; }
+  .cr-roles .role { grid-template-columns: 1fr auto; gap: 6px; }
+  .cr-roles .role .cell { font-size: 11.5px; }
+  .cr-roles .role > .cell:nth-child(2), .cr-roles .role > .cell:nth-child(3) { display: none; }
+}
+@media (max-width: 540px) { .cr-pillars .grid, .cr-benefits .grid { grid-template-columns: 1fr; } .cr-quote blockquote { font-size: 22px; } }
+</style>
+</head><body data-current="company"><div data-nav-mount></div><main id="main">
+
+<header class="cr-hero"><div class="container">
+  <span class="eyebrow">Careers</span>
+  <h1>Build the payments network <em>APAC</em> actually needed.</h1>
+  <p class="lede">We're 142 people across six offices, building the platform that vertical SaaS companies in this region plug into when they need to grow up. If you want hard problems in a region that global payments tourists still get wrong &mdash; keep reading.</p>
+  <div class="meta">
+    <span>Team: <b>142</b></span>
+    <span>Offices: <b>Singapore · Manila · Jakarta · Bangkok · HCMC · Taipei</b></span>
+    <span>Hiring in: <b>28 open roles</b></span>
+    <span>Remote-first for: <b>Eng, Design, Support</b></span>
+  </div>
+</div></header>
+
+<section class="cr-pillars"><div class="container">
+  <h2>What it feels like to work here.</h2>
+  <p class="lede">Three things we try to be honest about up front. If any of them sound like a bad fit, that's useful information for both of us.</p>
+
+  <div class="grid">
+    <div class="pil">
+      <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m14.7 6.3-1 .7L13 6l-.7.7L11 6l-.7.7L9 6l-.7 1-1-.7L6 8l-1-.3L4.5 9 3 10v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V10l-1.5-1-.5-1.3-1-.4-1.3-1.3Z"/><path d="M12 10v8M8 14h8"/></svg></div>
+      <h3>The work is load-bearing.</h3>
+      <p>Kernels that pass scheme audits. Acquirer contracts in a new market. Ledger entries that don't lose a cent. You're not making a ninth internal dashboard &mdash; you're shipping the boring, hard, expensive things most companies pay someone else for.</p>
+    </div>
+    <div class="pil">
+      <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/><path d="M12 2a15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10"/><path d="M2 12h20"/></svg></div>
+      <h3>APAC first, not APAC-also.</h3>
+      <p>Our product, our customers, our rails, and our conversations are APAC-native. No English-only all-hands. No "global" architecture bolted onto this region as an afterthought. The default cultural, regulatory, and linguistic assumption is this region.</p>
+    </div>
+    <div class="pil">
+      <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></div>
+      <h3>We're earnestly in the weeds.</h3>
+      <p>Engineers read scheme bulletins. Sales people know what a chargeback reason code 10.4 means. Designers understand interchange. This isn't a company where "I don't do payments" is a viable stance for anyone after week three.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="cr-roles"><div class="container">
+  <h2>Open roles.</h2>
+  <p class="sub">Twenty-eight at the moment, across engineering, risk, partnerships, design, and operations. Every role lists the office it's based in &mdash; remote considered within APAC timezones.</p>
+
+  <div class="filters">
+    <button class="on">All (28)</button>
+    <button>Engineering (11)</button>
+    <button>Risk &amp; Compliance (5)</button>
+    <button>Partnerships (4)</button>
+    <button>Design (2)</button>
+    <button>Operations (3)</button>
+    <button>G&amp;A (3)</button>
+  </div>
+
+  <div class="list">
+    <a class="role" href="#">
+      <div><h4>Staff Engineer, Tap Core Kernel</h4><div class="dept">Engineering</div></div>
+      <div class="cell">Singapore</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Senior iOS Engineer, Tap Terminal</h4><div class="dept">Engineering</div></div>
+      <div class="cell">Remote · APAC</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Senior Android Engineer, Tap Terminal</h4><div class="dept">Engineering</div></div>
+      <div class="cell">Remote · APAC</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Engineering Manager, Tap Ledger</h4><div class="dept">Engineering</div></div>
+      <div class="cell">Singapore</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Backend Engineer, Tap Onboard</h4><div class="dept">Engineering</div></div>
+      <div class="cell">Jakarta · Manila</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>SRE / Platform Engineer</h4><div class="dept">Engineering</div></div>
+      <div class="cell">Singapore</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Security Engineer, Cryptography</h4><div class="dept">Engineering</div></div>
+      <div class="cell">Singapore</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Head of Risk, Philippines</h4><div class="dept">Risk &amp; Compliance</div></div>
+      <div class="cell">Manila</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Senior Compliance Officer, Indonesia</h4><div class="dept">Risk &amp; Compliance</div></div>
+      <div class="cell">Jakarta</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Fraud Ops Analyst</h4><div class="dept">Risk &amp; Compliance</div></div>
+      <div class="cell">Remote · APAC</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Head of Partnerships, Vietnam</h4><div class="dept">Partnerships</div></div>
+      <div class="cell">HCMC</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Partnership Manager, Malaysia</h4><div class="dept">Partnerships</div></div>
+      <div class="cell">Kuala Lumpur</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Senior Product Designer, Dashboard</h4><div class="dept">Design</div></div>
+      <div class="cell">Singapore · Remote</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Content Designer, Developer Platform</h4><div class="dept">Design</div></div>
+      <div class="cell">Remote · APAC</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Technical Writer, Developer Platform</h4><div class="dept">Operations</div></div>
+      <div class="cell">Remote · APAC</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Head of Treasury Operations</h4><div class="dept">Operations</div></div>
+      <div class="cell">Singapore</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Revenue Operations Lead</h4><div class="dept">G&amp;A</div></div>
+      <div class="cell">Singapore</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="role" href="#">
+      <div><h4>Product Manager, Developer Platform</h4><div class="dept">Engineering</div></div>
+      <div class="cell">Singapore · Remote</div>
+      <div class="cell">Full-time</div>
+      <div class="cell" style="text-align:right;">Open</div>
+      <div class="arrow">→</div>
+    </a></div>
+</div></section>
+
+<section class="cr-benefits"><div class="container">
+  <h2>Benefits, in plain English.</h2>
+  <p class="sub">No "unlimited"-anything theatre. Concrete numbers, honest policies.</p>
+
+  <div class="grid">
+    <div class="b"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><h4>Equity, vested quarterly.</h4><p>Cliff at 12 months, then every 3 months for 3 years. Refreshers for senior staff; transparent formula on the wiki.</p></div>
+    <div class="b"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M2 12h4M18 12h4M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"/></svg></div><h4>28 days off &mdash; no-questions.</h4><p>On top of local public holidays. We track it because unlimited PTO encourages the opposite.</p></div>
+    <div class="b"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6M12 9v6M7.5 4.27 12 7l4.5-2.73M4 7l8 5 8-5M4 7v10l8 5 8-5V7"/></svg></div><h4>Home office stipend.</h4><p>SGD 2,800 at signing, SGD 800 annually after that. Keys, chairs, monitors &mdash; you choose.</p></div>
+    <div class="b"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div><h4>Healthcare, top tier.</h4><p>Private medical + dental for you and dependents. Plus SGD 1,200/yr for mental health, no questions asked.</p></div>
+    <div class="b"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h4>Learning budget.</h4><p>USD 2,000/yr for conferences, courses, books, certifications. Pre-approval for anything under budget is a formality.</p></div>
+    <div class="b"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8M4.93 10.93 12 18l7.07-7.07M12 18v4"/></svg></div><h4>Parental leave.</h4><p>20 weeks fully paid, any parent, any gender, up to a year after birth or adoption. Three weeks of transition back at part-time.</p></div>
+    <div class="b"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h4>Twice-yearly offsites.</h4><p>Everyone in one place, two weekends a year. Last two were Bali and Taipei. The one after that is Siem Reap.</p></div>
+    <div class="b"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Relocation, if you need it.</h4><p>We've moved eighteen people across countries. Full package: flights, shipping, three months of housing, visa counsel.</p></div>
+  </div>
+</div></section>
+
+<section class="cr-quote"><div class="container"><div class="wrap">
+  <div class="mark">&ldquo;</div>
+  <blockquote>I'd spent seven years shipping payment products that were "global" but really meant "American." At Tapped, the question on day one wasn't "how do we extend this to Indonesia" &mdash; it was "does this even make sense in Indonesia."</blockquote>
+  <div class="cite">
+    <div class="av">PH</div>
+    <div class="who"><b>Priya Handoko</b><span>Head of Design · joined 2023</span></div>
+  </div>
+</div></div></section>
+
+</main><div data-footer-mount></div><script src="../../shared/chrome.js"></script></body></html>
