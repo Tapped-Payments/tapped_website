@@ -23,7 +23,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What's the commercial relationship with Stripe, Adyen, and Airwallex?","acceptedAnswer":{"@type":"Answer","text":"There isn't one required. Your platform holds the contract with each PSP directly. Tapped is a data-processing and submission layer on your behalf &mdash; we don't take a cut of the PSP's take rate. If you choose Tapped as the acquirer in an APAC market, that's a normal merchant agreement with us."}},{"@type":"Question","name":"Who owns the sub-merchant data?","acceptedAnswer":{"@type":"Answer","text":"You do, as the platform. The sub-merchant has rights under GDPR / PDPA / APPI which we honour on your behalf. Tapped is a processor; you are the controller. The full DPA is on our privacy page."}},{"@type":"Question","name":"Can a merchant be live on two PSPs at once?","acceptedAnswer":{"@type":"Answer","text":"Yes &mdash; a common pattern. Route card-present to Tapped in APAC and card-not-present to Stripe globally from the same sub-merchant record. Tap Ledger consolidates settlement across both."}},{"@type":"Question","name":"What if we want to leave Tapped?","acceptedAnswer":{"@type":"Answer","text":"You export. The sub-merchant records &mdash; including every evidence document, every PSP-destination binding, and the audit log &mdash; are delivered in an open JSON schema we document publicly. No hostage data."}},{"@type":"Question","name":"How is this different from a vault like Basis Theory or Skyflow?","acceptedAnswer":{"@type":"Answer","text":"Data vaults store PII; we store and operationalise it. Tapped Onboard knows the shape of Stripe's Connect payload, the shape of Adyen's onboarding API, the shape of Airwallex's platform endpoint, and how to translate your canonical record to each. A vault gets you the field; we get the merchant live."}}]}</script>
 </head><body>
 <nav class="nav" aria-label="Primary"><div class="container nav-inner">
-    <a href="../../Tapped Website.html" class="brand" aria-label="Tapped home"><img class="logo-img" src="../../assets/tapped-logo.png" alt="Tapped" width="34" height="34"></a>
+    <a href="/" class="brand" aria-label="Tapped home"><img class="logo-img" src="../../assets/tapped-logo.png" alt="Tapped" width="34" height="34"></a>
     <div class="nav-center">
       <div class="nav-item" data-mega="solutions"><button aria-haspopup="true" aria-expanded="false">Solutions <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="nav-mega" style="min-width:560px;">
         <a href="../../pages/solutions/restaurant-pos.html"><div class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div><div><span class="nm">Restaurant POS</span><span class="nd">Tap at the table or counter</span></div></a>
@@ -41,12 +41,12 @@
       </div></div>
       <a class="nav-item" href="../../pages/product/markets.html"><button>Markets</button></a>
       <a class="nav-item" href="../../pages/developers/documentation.html"><button>Developers</button></a>
-      <a class="nav-item" href="../../Tapped Website.html#pricing"><button>Pricing</button></a>
+      <a class="nav-item" href="/#pricing"><button>Pricing</button></a>
     </div>
     <div class="nav-cta"><a class="btn btn-ghost" href="../../pages/developers/documentation.html">Docs</a><a class="btn btn-brand btn-arrow" href="../../pages/company/contact.html">Talk to sales</a></div>
   </div></nav>
 <main id="main">
-<nav class="breadcrumb container" aria-label="Breadcrumb"><ol><li><a href="../../Tapped Website.html">Home</a></li><li><a href="../../Tapped Website.html#onboard">Product</a></li><li aria-current="page">One KYB. Every PSP. Portable by design.</li></ol></nav>
+<nav class="breadcrumb container" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/#onboard">Product</a></li><li aria-current="page">One KYB. Every PSP. Portable by design.</li></ol></nav>
 <header class="sub-hero onboard-hero"><div class="container"><div class="onboard-hero-grid">
   <div>
     <span class="eyebrow">Product · Tapped Onboard</span>
