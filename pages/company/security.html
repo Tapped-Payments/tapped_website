@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5PJ64BELXV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PJ64BELXV');
+</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Security at Tapped — Certifications, infrastructure &amp; disclosure | Tapped</title>
 <meta name="description" content="How Tapped protects platform and merchant data. PCI-DSS Level 1, SOC 2 Type II, ISO 27001, EMV Level 3, per-tenant encryption, and a published vulnerability-disclosure program.">
 <link rel="icon" href="../../assets/tapped-logo.png">
@@ -110,7 +119,7 @@
 
 <section class="sc-certs"><div class="container">
   <h2>Certifications &amp; attestations</h2>
-  <p class="sub">Every certification here is held by Tapped directly &mdash; not by an upstream processor we resell. AoCs are available to prospects and customers under NDA; ask your account team or email <a href="mailto:security@tapped.co" style="color:var(--brand-cyan-700);">security@tapped.co</a>.</p>
+  <p class="sub">Every certification here is held by Tapped directly &mdash; not by an upstream processor we resell. AoCs are available to prospects and customers under NDA; ask your account team or email <a href="mailto:security@tapped.cc" style="color:var(--brand-cyan-700);">security@tapped.cc</a>.</p>
 
   <div class="sc-certs-grid">
     <div class="cert">
@@ -205,7 +214,7 @@
       <ul>
         <li>99.995% target on card-present authorisation</li>
         <li>Automated region failover in &lt; 90 seconds</li>
-        <li>Public status page at <a href="../developers/status.html" style="color:var(--brand-cyan-700);">status.tapped.co</a> with component granularity</li>
+        <li>Public status page at <a href="../developers/status.html" style="color:var(--brand-cyan-700);">status.tapped.cc</a> with component granularity</li>
         <li>Subscription to signed incident emails + RSS feed</li>
       </ul>
     </div>
@@ -246,15 +255,15 @@
 <section class="sc-disclosure"><div class="container">
   <h2>Report a vulnerability.</h2>
   <p>We publish and practise a coordinated-disclosure policy. Security researchers who act in good faith &mdash; respecting user privacy, avoiding data destruction, and not monetising findings before we&rsquo;ve shipped a fix &mdash; will not face legal action from Tapped. We&rsquo;ll work with you on timing, credit, and where applicable a bounty.</p>
-  <p><strong>Scope:</strong> the Tapped platform API (<code>api.tapped.co</code>), the merchant dashboard (<code>dashboard.tapped.co</code>), developer documentation (<code>developers.tapped.co</code>), and the Tap Terminal SDK for iOS and Android. Out of scope: social-engineering attempts against staff, denial-of-service, physical attacks against offices, and testing against any other domain we operate.</p>
+  <p><strong>Scope:</strong> the Tapped platform API (<code>api.tapped.cc</code>), the merchant dashboard (<code>dashboard.tapped.cc</code>), developer documentation (<code>developers.tapped.cc</code>), and the Tap Terminal SDK for iOS and Android. Out of scope: social-engineering attempts against staff, denial-of-service, physical attacks against offices, and testing against any other domain we operate.</p>
   <p><strong>Default timeline:</strong> 90 days from the date of first valid report; we may request an extension for kernel-level issues that require scheme re-certification and will communicate a target publication date.</p>
 
   <div class="panel">
     <h3>How to reach us</h3>
     <dl>
-      <dt>Email</dt><dd><a href="mailto:security@tapped.co">security@tapped.co</a></dd>
-      <dt>PGP key</dt><dd><a href="mailto:security@tapped.co">0xAB12 CD34 EF56 7890</a></dd>
-      <dt>security.txt</dt><dd><a href="mailto:security@tapped.co">/.well-known/security.txt</a></dd>
+      <dt>Email</dt><dd><a href="mailto:security@tapped.cc">security@tapped.cc</a></dd>
+      <dt>PGP key</dt><dd><a href="mailto:security@tapped.cc">0xAB12 CD34 EF56 7890</a></dd>
+      <dt>security.txt</dt><dd><a href="mailto:security@tapped.cc">/.well-known/security.txt</a></dd>
       <dt>Response time</dt><dd>&lt; 24 hours, 7 days a week</dd>
       <dt>Bounty programme</dt><dd>Invite-only; ask in first email</dd>
     </dl>

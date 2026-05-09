@@ -2,18 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5PJ64BELXV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5PJ64BELXV');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Developers — SDKs, API reference &amp; quickstarts | Tapped</title>
 <meta name="description" content="Start building with Tapped in minutes. One SDK covers tap-to-pay, sub-merchant onboarding, and multi-currency settlement across 9 APAC markets. iOS, Android, Node, Go, Python.">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
-<link rel="canonical" href="https://tapped.co/pages/developers.html">
+<link rel="canonical" href="https://tapped.cc/pages/developers.html">
 <meta property="og:title" content="Developers — Tapped">
 <meta property="og:description" content="SDKs, API reference, quickstarts. Sandbox in minutes.">
-<meta property="og:url" content="https://tapped.co/pages/developers.html">
-<meta property="og:image" content="https://tapped.co/assets/tapped-logo.png">
+<meta property="og:url" content="https://tapped.cc/pages/developers.html">
+<meta property="og:image" content="https://tapped.cc/assets/tapped-logo.png">
 <link rel="icon" href="../assets/tapped-logo.png">
 <link rel="stylesheet" href="../colors_and_type.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapped.co/"},{"@type":"ListItem","position":2,"name":"Developers","item":"https://tapped.co/pages/developers.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapped.cc/"},{"@type":"ListItem","position":2,"name":"Developers","item":"https://tapped.cc/pages/developers.html"}]}</script>
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -290,7 +299,7 @@ a.nav-mobile-aux, .nav-item.nav-mobile-aux { display: none; }
         <span class="dot" aria-hidden="true"></span>
         <span>All systems operational</span>
         <span class="sep"></span>
-        <a href="developers/status.html">status.tapped.co →</a>
+        <a href="developers/status.html">status.tapped.cc →</a>
       </div>
     </div>
 
@@ -362,7 +371,7 @@ pod <span class="tok-s">'TappedTerminal'</span>, <span class="tok-s">'~&gt; 3.4'
       <a class="dv-sdk android" href="developers/sdks.html"><div class="sdk-ico">AND</div><div class="sdk-meta"><h4>Tapped Terminal · Android</h4><div class="ver">Kotlin · v3.4.1 · API 24+</div><code><span class="tok-c">// build.gradle.kts</span>
 implementation(<span class="tok-s">"co.tapped:terminal:3.4.1"</span>)</code></div></a>
       <a class="dv-sdk node" href="developers/sdks.html"><div class="sdk-ico">JS</div><div class="sdk-meta"><h4>Node.js</h4><div class="ver">TypeScript · v4.2.0</div><code><span class="tok-k">npm</span> install @tapped/node</code></div></a>
-      <a class="dv-sdk go" href="developers/sdks.html"><div class="sdk-ico">GO</div><div class="sdk-meta"><h4>Go</h4><div class="ver">v1.9.0 · go 1.21+</div><code><span class="tok-k">go</span> get tapped.co/go-tapped</code></div></a>
+      <a class="dv-sdk go" href="developers/sdks.html"><div class="sdk-ico">GO</div><div class="sdk-meta"><h4>Go</h4><div class="ver">v1.9.0 · go 1.21+</div><code><span class="tok-k">go</span> get tapped.cc/go-tapped</code></div></a>
       <a class="dv-sdk python" href="developers/sdks.html"><div class="sdk-ico">PY</div><div class="sdk-meta"><h4>Python</h4><div class="ver">v2.7.3 · py 3.10+</div><code><span class="tok-k">pip</span> install tapped</code></div></a>
       <a class="dv-sdk ruby" href="developers/sdks.html"><div class="sdk-ico">RB</div><div class="sdk-meta"><h4>Ruby</h4><div class="ver">v1.5.2 · ruby 3.0+</div><code><span class="tok-k">gem</span> install tapped</code></div></a>
     </div>
@@ -548,7 +557,7 @@ app.<span class="tok-f">post</span>(<span class="tok-s">'/webhooks/tapped'</span
     curl: {
       file: 'charge.sh',
       html: `<span class="tok-c"># 1. create the sub-merchant session</span>
-<span class="tok-k">curl</span> https://api.tapped.co/v1/terminals/sessions \\
+<span class="tok-k">curl</span> https://api.tapped.cc/v1/terminals/sessions \\
   -u sk_live_<span class="tok-n">***</span>: \\
   -H <span class="tok-s">'Idempotency-Key: order_4019'</span> \\
   -d merchant=mer_01HS... \\
