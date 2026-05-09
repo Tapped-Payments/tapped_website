@@ -10,7 +10,7 @@
 
   gtag('config', 'G-5PJ64BELXV');
 </script><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Security at Tapped — Certifications, infrastructure &amp; disclosure | Tapped</title>
+<title>Security at Tapped: Certifications, infrastructure &amp; disclosure | Tapped</title>
 <meta name="description" content="How Tapped protects platform and merchant data. PCI-DSS Level 1, SOC 2 Type II, ISO 27001, EMV Level 3, per-tenant encryption, and a published vulnerability-disclosure program.">
 <link rel="icon" href="../../assets/tapped-logo.png">
 <link rel="stylesheet" href="../../colors_and_type.css">
@@ -111,7 +111,7 @@
 <header class="sc-hero"><div class="container">
   <span class="eyebrow">Company · Security</span>
   <h1>We handle money. That buys us one excuse for a <em>security incident</em>: none.</h1>
-  <p class="lede">Tapped runs on certified kernels, per-tenant key isolation, and a pipeline of independent audits. This page is the long version &mdash; certifications, architecture, disclosure terms, and how to reach us if you find something.</p>
+  <p class="lede">Tapped runs on certified kernels, per-tenant key isolation, and a pipeline of independent audits. This page is the long version, certifications, architecture, disclosure terms, and how to reach us if you find something.</p>
   <div class="bar">
     <span>PCI-DSS L1</span><span>SOC 2 Type II</span><span>ISO/IEC 27001</span><span>EMV L3</span><span>PCI PIN</span><span>PCI 3DS</span>
   </div>
@@ -119,7 +119,7 @@
 
 <section class="sc-certs"><div class="container">
   <h2>Certifications &amp; attestations</h2>
-  <p class="sub">Every certification here is held by Tapped directly &mdash; not by an upstream processor we resell. AoCs are available to prospects and customers under NDA; ask your account team or email <a href="mailto:security@tapped.cc" style="color:var(--brand-cyan-700);">security@tapped.cc</a>.</p>
+  <p class="sub">Every certification here is held by Tapped directly, not by an upstream processor we resell. AoCs are available to prospects and customers under NDA; ask your account team or email <a href="mailto:security@tapped.cc" style="color:var(--brand-cyan-700);">security@tapped.cc</a>.</p>
 
   <div class="sc-certs-grid">
     <div class="cert">
@@ -204,7 +204,7 @@
         <li>Request signing on every platform API call (HMAC-SHA256)</li>
         <li>Webhook signatures with rotating secrets + replay windows</li>
         <li>Audit log stream exposed to customers via Tap Ledger export</li>
-        <li>Zero-standing-access posture for engineers &mdash; JIT elevation only</li>
+        <li>Zero-standing-access posture for engineers, JIT elevation only</li>
       </ul>
     </div>
     <div class="pillar">
@@ -234,7 +234,7 @@
 
 <section class="sc-infra"><div class="container">
   <h2>Controls reference.</h2>
-  <p class="sub">The short version of what a security-review questionnaire will ask. Full control matrix is in the <strong>Tapped Trust Centre</strong> &mdash; available under NDA.</p>
+  <p class="sub">The short version of what a security-review questionnaire will ask. Full control matrix is in the <strong>Tapped Trust Centre</strong>, available under NDA.</p>
   <table>
     <thead><tr><th>Control area</th><th>How Tapped implements it</th></tr></thead>
     <tbody>
@@ -245,7 +245,7 @@
       <tr><td class="area">Network</td><td class="control">Private VPC per environment, no public service endpoints, WAF + L7 rate-limiting in front of every edge, quarterly firewall rule review.</td></tr>
       <tr><td class="area">Monitoring &amp; detection</td><td class="control">Centralised log pipeline with a 13-month retention minimum; SIEM correlation rules tuned for card-data anomaly detection; on-call rotation answers within 5 minutes.</td></tr>
       <tr><td class="area">Backup &amp; recovery</td><td class="control">Continuous backup with point-in-time recovery to 5-minute granularity. RPO &lt; 5 minutes, RTO &lt; 30 minutes, tested quarterly.</td></tr>
-      <tr><td class="area">Vendor security</td><td class="control">Tiered third-party review &mdash; Tier-1 vendors reviewed annually with SOC 2 / ISO 27001 required, sub-processor list published.</td></tr>
+      <tr><td class="area">Vendor security</td><td class="control">Tiered third-party review, Tier-1 vendors reviewed annually with SOC 2 / ISO 27001 required, sub-processor list published.</td></tr>
       <tr><td class="area">Personnel security</td><td class="control">Pre-employment background checks (where legally permitted) and annual security training; separation of duties enforced via role-based access.</td></tr>
       <tr><td class="area">Data deletion</td><td class="control">Customer-initiated deletion completes within 30 days across production and backups; tombstones prevent accidental re-creation.</td></tr>
     </tbody>
@@ -254,7 +254,7 @@
 
 <section class="sc-disclosure"><div class="container">
   <h2>Report a vulnerability.</h2>
-  <p>We publish and practise a coordinated-disclosure policy. Security researchers who act in good faith &mdash; respecting user privacy, avoiding data destruction, and not monetising findings before we&rsquo;ve shipped a fix &mdash; will not face legal action from Tapped. We&rsquo;ll work with you on timing, credit, and where applicable a bounty.</p>
+  <p>We publish and practise a coordinated-disclosure policy. Security researchers who act in good faith, respecting user privacy, avoiding data destruction, and not monetising findings before we&rsquo;ve shipped a fix, will not face legal action from Tapped. We&rsquo;ll work with you on timing, credit, and where applicable a bounty.</p>
   <p><strong>Scope:</strong> the Tapped platform API (<code>api.tapped.cc</code>), the merchant dashboard (<code>dashboard.tapped.cc</code>), developer documentation (<code>developers.tapped.cc</code>), and the Tap Terminal SDK for iOS and Android. Out of scope: social-engineering attempts against staff, denial-of-service, physical attacks against offices, and testing against any other domain we operate.</p>
   <p><strong>Default timeline:</strong> 90 days from the date of first valid report; we may request an extension for kernel-level issues that require scheme re-certification and will communicate a target publication date.</p>
 
@@ -275,7 +275,7 @@
     <div>
       <span class="eyebrow">Security &amp; trust</span>
       <h2>Need a deeper dive?</h2>
-      <p>Architecture diagrams, penetration-test executive summaries, SOC 2 reports, and the control matrix are all available to prospects and customers under NDA &mdash; ask your account team or email security directly.</p>
+      <p>Architecture diagrams, penetration-test executive summaries, SOC 2 reports, and the control matrix are all available to prospects and customers under NDA, ask your account team or email security directly.</p>
     </div>
     <div class="sub-cta-actions">
       <a class="btn btn-brand btn-arrow" href="contact.html">Talk to security</a>
