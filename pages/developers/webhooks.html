@@ -11,7 +11,7 @@
   gtag('config', 'G-5PJ64BELXV');
 </script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Webhooks | Tapped</title>
-<meta name="description" content="Every Tapped state transition as a signed, idempotent webhook — tap approved, dispute opened, payout settled, KYB completed. Exponential retries for 72h.">
+<meta name="description" content="Every Tapped state transition as a signed, idempotent webhook, tap approved, dispute opened, payout settled, KYB completed. Exponential retries for 72h.">
 <link rel="icon" href="../../assets/tapped-logo.png">
 <link rel="stylesheet" href="../../colors_and_type.css">
 <link rel="stylesheet" href="../../shared/page.css">
@@ -50,7 +50,7 @@
 <header class="wh-hero"><div class="container">
   <span class="eyebrow">Webhooks</span>
   <h1>Every state change, pushed to you. Signed, retried, idempotent.</h1>
-  <p>Tapped emits webhooks the moment a transaction transitions state. Sign them, verify them, act on them &mdash; or walk away and we'll retry for 72 hours. Replay any event from the dashboard.</p>
+  <p>Tapped emits webhooks the moment a transaction transitions state. Sign them, verify them, act on them, or walk away and we'll retry for 72 hours. Replay any event from the dashboard.</p>
 </div></header>
 
 <section class="wh-grid container">
@@ -72,13 +72,13 @@
     <section id="overview">
       <h2>How webhooks work</h2>
       <p>You register an endpoint URL in the dashboard (or via API). When a subscribed event fires, Tapped delivers a <code>POST</code> to your URL with a JSON body and a set of signing headers. Respond with <code>2xx</code> within 5 seconds to acknowledge. Any other response (or a timeout) triggers a retry.</p>
-      <div class="wh-callout"><h4>One event, one delivery</h4><p>Every event has a unique <code>id</code>. Use it to deduplicate &mdash; if your handler crashes mid-processing, retries may deliver the same event up to ~20 times.</p></div>
+      <div class="wh-callout"><h4>One event, one delivery</h4><p>Every event has a unique <code>id</code>. Use it to deduplicate, if your handler crashes mid-processing, retries may deliver the same event up to ~20 times.</p></div>
     </section>
 
     <section id="signing">
       <h2>Signature verification</h2>
       <p>Every delivery includes a <code>Tapped-Signature</code> header. The signature is an HMAC-SHA256 of the raw request body with your endpoint's signing secret. Use the SDK helper; if you're on REST, the verification is eight lines of code.</p>
-<pre><span class="c">// Node — manual verification</span>
+<pre><span class="c">// Node, manual verification</span>
 <span class="k">import</span> { createHmac } <span class="k">from</span> <span class="s">"crypto"</span>;
 
 <span class="k">function</span> <span class="f">verify</span>(rawBody, header, secret) {
@@ -92,7 +92,7 @@
 
     <section id="retries">
       <h2>Retries &amp; deduplication</h2>
-      <p>Failed deliveries retry on an exponential backoff: 10s, 1m, 5m, 30m, 2h, 6h, 12h, 24h, 48h, 72h. After 72 hours of failures we mark the event <code>failed</code> in the dashboard. You can replay any event &mdash; failed or succeeded &mdash; with one click.</p>
+      <p>Failed deliveries retry on an exponential backoff: 10s, 1m, 5m, 30m, 2h, 6h, 12h, 24h, 48h, 72h. After 72 hours of failures we mark the event <code>failed</code> in the dashboard. You can replay any event, failed or succeeded, with one click.</p>
       <p>Order is not guaranteed. Two events with adjacent timestamps may arrive in either order. Design your handler around <code>id</code>, not arrival time.</p>
     </section>
 
@@ -132,7 +132,7 @@
       <h2>dispute.* events</h2>
       <table><thead><tr><th>Event</th><th>When it fires</th></tr></thead><tbody>
         <tr><td><code>dispute.opened</code></td><td>Chargeback received. Includes scheme deadline.</td></tr>
-        <tr><td><code>dispute.evidence_required</code></td><td>48h before scheme deadline &mdash; last call.</td></tr>
+        <tr><td><code>dispute.evidence_required</code></td><td>48h before scheme deadline, last call.</td></tr>
         <tr><td><code>dispute.closed</code></td><td>Won, lost, or withdrawn. Final state.</td></tr>
       </tbody></table>
     </section>

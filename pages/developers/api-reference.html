@@ -11,7 +11,7 @@
   gtag('config', 'G-5PJ64BELXV');
 </script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>API reference | Tapped</title>
-<meta name="description" content="Complete reference for the Tapped REST API. Every resource, every endpoint, every field — with request and response examples for charges, authorisations, sub-merchants, payouts, disputes, and webhooks.">
+<meta name="description" content="Complete reference for the Tapped REST API. Every resource, every endpoint, every field, with request and response examples for charges, authorisations, sub-merchants, payouts, disputes, and webhooks.">
 <link rel="icon" href="../../assets/tapped-logo.png">
 <link rel="stylesheet" href="../../colors_and_type.css">
 <link rel="stylesheet" href="../../shared/page.css">
@@ -97,7 +97,7 @@ pre.ex .k { color:#A78BFA; } pre.ex .s { color:#67E8F9; } pre.ex .n { color:#FBB
   <div class="api-doc">
     <section id="charges-create">
       <h2>Create a charge</h2>
-      <p class="sub">Authorises and captures a charge in one call. For tap transactions, use the <code>/v1/taps</code> endpoint &mdash; it includes the EMV cryptogram envelope.</p>
+      <p class="sub">Authorises and captures a charge in one call. For tap transactions, use the <code>/v1/taps</code> endpoint, it includes the EMV cryptogram envelope.</p>
       <h3><span class="m post">POST</span> /v1/charges</h3>
       <p class="ex-label">Request body</p>
       <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Notes</th></tr></thead><tbody>
@@ -113,7 +113,7 @@ pre.ex .k { color:#A78BFA; } pre.ex .s { color:#67E8F9; } pre.ex .n { color:#FBB
       <h2>Retrieve a charge</h2>
       <p class="sub">Fetches a charge by its canonical ID. Returns the full object including the latest authorisation, capture, and settlement references.</p>
       <h3><span class="m get">GET</span> /v1/charges/:id</h3>
-      <p class="sub">Path parameter: <code>id</code> &mdash; the charge ID (begins with <code>ch_</code>).</p>
+      <p class="sub">Path parameter: <code>id</code>, the charge ID (begins with <code>ch_</code>).</p>
     </section>
 
     <section id="charges-list">
@@ -201,7 +201,7 @@ pre.ex .k { color:#A78BFA; } pre.ex .s { color:#67E8F9; } pre.ex .n { color:#FBB
   <span class="s">"tip"</span>: <span class="n">485</span>,
   <span class="s">"reference"</span>: <span class="s">"order_8823"</span>
 }</pre>
-      <p class="ex-label">Example response &mdash; 200 OK</p>
+      <p class="ex-label">Example response, 200 OK</p>
 <pre class="ex">{
   <span class="s">"id"</span>: <span class="s">"tap_3K2..."</span>,
   <span class="s">"object"</span>: <span class="s">"tap"</span>,

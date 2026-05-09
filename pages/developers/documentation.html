@@ -11,7 +11,7 @@
   gtag('config', 'G-5PJ64BELXV');
 </script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Documentation | Tapped</title>
-<meta name="description" content="Tapped developer documentation — guides, tutorials, SDK references, and API patterns for embedding tap-to-pay in vertical SaaS platforms across APAC.">
+<meta name="description" content="Tapped developer documentation, guides, tutorials, SDK references, and API patterns for embedding tap-to-pay in vertical SaaS platforms across APAC.">
 <link rel="icon" href="../../assets/tapped-logo.png">
 <link rel="stylesheet" href="../../colors_and_type.css">
 <link rel="stylesheet" href="../../shared/page.css">
@@ -63,7 +63,7 @@
   <span class="eyebrow">Documentation</span>
   <h1>Ship tap-to-pay in 12 days. These docs tell you how.</h1>
   <p>Guides, quickstarts, integration patterns, and the full API reference. Start with the 15-minute quickstart; the rest is here when you need it.</p>
-  <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Search docs &mdash; authorisations, sub-merchants, payouts, webhooks&hellip;<span class="kbd">⌘ K</span></div>
+  <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Search docs, authorisations, sub-merchants, payouts, webhooks&hellip;<span class="kbd">⌘ K</span></div>
 </div></header>
 
 <section class="doc-body"><div class="container doc-grid">
@@ -103,14 +103,14 @@
         </a>
         <a class="guide-card" href="#submerchants">
           <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M19 8v6M22 11h-6"/></svg></div>
-          <h3>Onboard sub-merchants</h3><p>KYB, risk, and rails — one call, every market we cover.</p><span class="tag">Step 3</span>
+          <h3>Onboard sub-merchants</h3><p>KYB, risk, and rails, one call, every market we cover.</p><span class="tag">Step 3</span>
         </a>
       </div>
     </section>
 
     <section id="sdk-install">
       <h2>Install the SDK</h2>
-      <p>Tapped SDKs are available on the native package managers for each platform. All SDKs use the same object model and call the same underlying API &mdash; pick whichever fits your stack.</p>
+      <p>Tapped SDKs are available on the native package managers for each platform. All SDKs use the same object model and call the same underlying API, pick whichever fits your stack.</p>
       <h3>Node &amp; TypeScript</h3>
 <pre><code><span class="c"># Install via npm, pnpm, or yarn</span>
 <span class="k">npm install</span> <span class="s">@tapped/node</span> <span class="c"># or pnpm add, yarn add</span>
@@ -143,18 +143,18 @@
 
     <section id="model">
       <h2>The transaction model</h2>
-      <p>Every interaction with Tapped resolves to a <strong>transaction</strong> — one immutable record with a scheme-traceable chain from tap to payout. Transactions own their own disputes, refunds, and settlement references.</p>
+      <p>Every interaction with Tapped resolves to a <strong>transaction</strong>, one immutable record with a scheme-traceable chain from tap to payout. Transactions own their own disputes, refunds, and settlement references.</p>
       <ul>
-        <li><code>tap</code> &mdash; the NFC contact moment, with cryptogram, BIN, and risk decision</li>
-        <li><code>authorisation</code> &mdash; what the scheme approved or declined, with reason code</li>
-        <li><code>capture</code> &mdash; money moved from issuer; locks in the FX if cross-currency</li>
-        <li><code>settlement</code> &mdash; the entry in the merchant's Tap Ledger; pays out on a schedule</li>
+        <li><code>tap</code>, the NFC contact moment, with cryptogram, BIN, and risk decision</li>
+        <li><code>authorisation</code>, what the scheme approved or declined, with reason code</li>
+        <li><code>capture</code>, money moved from issuer; locks in the FX if cross-currency</li>
+        <li><code>settlement</code>, the entry in the merchant's Tap Ledger; pays out on a schedule</li>
       </ul>
     </section>
 
     <section id="submerchants">
       <h2>Sub-merchants</h2>
-      <p>A <strong>sub-merchant</strong> is one of your platform's customers &mdash; a restaurant, a salon, a clinic. Tapped Onboard collects the KYB data, runs sanction and risk screens, registers the merchant with the appropriate acquirer, and returns a handle you use on every charge.</p>
+      <p>A <strong>sub-merchant</strong> is one of your platform's customers, a restaurant, a salon, a clinic. Tapped Onboard collects the KYB data, runs sanction and risk screens, registers the merchant with the appropriate acquirer, and returns a handle you use on every charge.</p>
 <pre><code><span class="k">const</span> sm = <span class="k">await</span> tapped.submerchants.create({
   display_name: <span class="s">"Kanpai Makati"</span>,
   country: <span class="s">"PH"</span>,
@@ -177,7 +177,7 @@
 
     <section id="webhooks">
       <h2>Webhooks</h2>
-      <p>Tapped emits webhooks for every state transition that matters to a platform — tap approved, dispute opened, payout settled, sub-merchant KYB completed. Webhooks are signed with HMAC-SHA256 and retried with exponential backoff for up to 72 hours.</p>
+      <p>Tapped emits webhooks for every state transition that matters to a platform, tap approved, dispute opened, payout settled, sub-merchant KYB completed. Webhooks are signed with HMAC-SHA256 and retried with exponential backoff for up to 72 hours.</p>
       <p>Full reference: <a href="../developers/webhooks.html">Webhooks →</a></p>
     </section>
 
@@ -193,7 +193,7 @@
 
     <section id="pattern-folio">
       <h2>Pattern: the hotel folio</h2>
-      <p>One <code>authorisation</code> at check-in holds the incidentals cap. Nightly room charges post against the authorisation without capturing. At check-out, the consolidated folio captures in a single call; unused portion of the incidentals auth releases. The entire stay sits under one <code>authorisation_chain_id</code> &mdash; a single rail for disputes.</p>
+      <p>One <code>authorisation</code> at check-in holds the incidentals cap. Nightly room charges post against the authorisation without capturing. At check-out, the consolidated folio captures in a single call; unused portion of the incidentals auth releases. The entire stay sits under one <code>authorisation_chain_id</code>, a single rail for disputes.</p>
     </section>
   </div>
 </div></section>
