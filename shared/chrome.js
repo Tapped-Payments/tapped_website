@@ -22,7 +22,7 @@
 
   const nav = `
 <nav class="nav" aria-label="Primary"><div class="container nav-inner">
-  <a href="${ROOT}Tapped Website.html" class="brand" aria-label="Tapped home">
+  <a href="/" class="brand" aria-label="Tapped home">
     <img class="logo-img" src="${ROOT}assets/tapped-logo.png" alt="Tapped" width="34" height="34">
   </a>
   <div class="nav-center">
