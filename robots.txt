@@ -44,7 +44,7 @@ Allow: /
 # Listed individually so each token is recognised by the bot.
 # ---------------------------------------------------------------
 
-# OpenAI — ChatGPT, search, training
+# OpenAI: ChatGPT, search, training
 User-agent: GPTBot
 Allow: /
 
@@ -54,7 +54,7 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
-# Anthropic — Claude
+# Anthropic: Claude
 User-agent: ClaudeBot
 Allow: /
 
@@ -70,11 +70,11 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-# Google AI (Gemini, Vertex, AI Overviews) — opt-in token
+# Google AI (Gemini, Vertex, AI Overviews): opt-in token
 User-agent: Google-Extended
 Allow: /
 
-# Apple Intelligence — opt-in token
+# Apple Intelligence: opt-in token
 User-agent: Applebot-Extended
 Allow: /
 

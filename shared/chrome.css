@@ -1,4 +1,4 @@
-/* ========== Tapped — Shared chrome (nav, footer, breadcrumb, buttons) ==========
+/* ========== Tapped: Shared chrome (nav, footer, breadcrumb, buttons) ==========
    Used by all sub-pages under /pages/. Include AFTER colors_and_type.css. */
 
 * { box-sizing: border-box; }
