@@ -1,5 +1,5 @@
 /* =============================================================
-   Tapped — shared nav + footer injector
+   Tapped: shared nav + footer injector
    Include on any sub-page under /pages/<dir>/<name>.html
    Set <body data-section="..." data-current="..."> to indicate
    the active section. All links are absolute-from-root style

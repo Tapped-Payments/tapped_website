@@ -1,15 +1,15 @@
 /* =========================================================================
-   Tapped Design System — Colors & Type
+   Tapped Design System: Colors & Type
    Light-first B2B fintech with cyan→magenta signature gradient.
    Mono-forward technical typography (JetBrains Mono) with clean sans body.
    ========================================================================= */
 
 /* ---------- FONTS ---------- */
-/* Primary body/UI sans — Inter (neutral, readable, fintech-safe) */
+/* Primary body/UI sans: Inter (neutral, readable, fintech-safe) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-/* Technical/mono — JetBrains Mono (signature type for Tapped) */
+/* Technical/mono: JetBrains Mono (signature type for Tapped) */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
-/* Display — Space Grotesk for large, confident headlines where mono feels too dense */
+/* Display: Space Grotesk for large, confident headlines where mono feels too dense */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
@@ -26,7 +26,7 @@
   --brand-indigo: #3730A3;       /* mid-point anchor seen in logo core */
   --brand-violet: #7C3AED;
 
-  /* Signature gradient — cyan → violet → magenta, matching the logo */
+  /* Signature gradient, cyan → violet → magenta, matching the logo */
   --brand-gradient: linear-gradient(92deg, #22D3EE 0%, #7C3AED 52%, #E11D74 100%);
   --brand-gradient-soft: linear-gradient(92deg, rgba(34,211,238,.12) 0%, rgba(124,58,237,.10) 52%, rgba(225,29,116,.12) 100%);
   --brand-gradient-vertical: linear-gradient(180deg, #22D3EE 0%, #7C3AED 55%, #E11D74 100%);
@@ -47,7 +47,7 @@
   --ink-25:  #FAFBFD;
   --paper:   #FFFFFF;
 
-  /* ========== SEMANTIC — SURFACES ========== */
+  /* ========== SEMANTIC: SURFACES ========== */
   --bg:         var(--paper);
   --bg-subtle:  var(--ink-25);
   --bg-muted:   var(--ink-50);
@@ -58,7 +58,7 @@
   --surface-muted:  var(--ink-50);
   --surface-sunken: var(--ink-25);
 
-  /* ========== SEMANTIC — FOREGROUNDS ========== */
+  /* ========== SEMANTIC: FOREGROUNDS ========== */
   --fg-1: var(--ink-900);   /* primary text */
   --fg-2: var(--ink-600);   /* secondary text */
   --fg-3: var(--ink-400);   /* tertiary / captions */
@@ -67,13 +67,13 @@
   --fg-on-brand: var(--paper);
   --fg-link: var(--brand-cyan-700);
 
-  /* ========== SEMANTIC — BORDERS ========== */
+  /* ========== SEMANTIC: BORDERS ========== */
   --border-subtle: var(--ink-100);
   --border:        var(--ink-150);
   --border-strong: var(--ink-200);
   --border-brand:  var(--brand-cyan);
 
-  /* ========== SEMANTIC — STATUS ========== */
+  /* ========== SEMANTIC: STATUS ========== */
   --success:    #0E9F6E;
   --success-bg: #E6F7F0;
   --success-fg: #076048;
@@ -128,12 +128,12 @@
   --space-20: 80px;
   --space-24: 96px;
 
-  /* ========== TYPE — FAMILIES ========== */
+  /* ========== TYPE: FAMILIES ========== */
   --font-sans:    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-  /* ========== TYPE — SIZES ========== */
+  /* ========== TYPE: SIZES ========== */
   --text-xs:   12px;
   --text-sm:   14px;
   --text-md:   16px;
@@ -176,7 +176,7 @@
 }
 
 /* =========================================================================
-   DARK SURFACES — not the default, but used for hero sections, code
+   DARK SURFACES, not the default, but used for hero sections, code
    viewers, terminals, and the "ink" panels that echo the logo's energy.
    Scope via `.ink` or `[data-theme="ink"]`.
    ========================================================================= */
@@ -266,7 +266,7 @@ p, .t-body {
   line-height: var(--leading-normal);
 }
 
-/* Eyebrow / all-caps kicker — the signature Tapped label style */
+/* Eyebrow / all-caps kicker: the signature Tapped label style */
 .t-eyebrow, .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -276,7 +276,7 @@ p, .t-body {
   color: var(--fg-2);
 }
 
-/* Mono code / numbers — signature technical feel */
+/* Mono code / numbers: signature technical feel */
 code, kbd, samp, pre, .t-mono {
   font-family: var(--font-mono);
   font-size: 0.95em;
@@ -287,7 +287,7 @@ code, kbd, samp, pre, .t-mono {
   font-feature-settings: "tnum";
 }
 
-/* Gradient text — use sparingly for hero moments & key words */
+/* Gradient text: use sparingly for hero moments & key words */
 .t-gradient {
   background: var(--brand-gradient);
   -webkit-background-clip: text;
