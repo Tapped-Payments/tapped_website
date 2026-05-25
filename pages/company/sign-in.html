@@ -44,7 +44,8 @@
     padding: 48px 40px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 36px;
     overflow: hidden;
   }
   .auth-side::before {
@@ -295,16 +296,15 @@
         <img src="../../assets/tapped-logo.png" class="logo" alt="Tapped" style="filter: brightness(0) invert(1);">
       </div>
       <div>
-        <p class="pitch">The payments network APAC platforms <em>actually needed.</em></p>
+        <p class="pitch">Offer in-person payments to sub-merchants <em>without upfront costs</em></p>
         <p class="lede">One dashboard for merchant onboarding, tap-to-pay acceptance, ledger reconciliation, and payouts, across nine live markets.</p>
         <div class="quote">
           &ldquo;Went from signing with Tapped to first live tap in sixteen days. The sub-merchant onboarding alone saved us a roadmap quarter.&rdquo;
           <b>Priya Handoko <span>Head of Product · Kanpai POS</span></b>
         </div>
         <div class="stats">
-          <div class="stat"><span class="n">150k+</span><span class="l">Sub-merchants live</span></div>
-          <div class="stat"><span class="n">9</span><span class="l">APAC markets</span></div>
-          <div class="stat"><span class="n">99.995%</span><span class="l">Uptime SLA</span></div>
+          <div class="stat"><span class="n">12</span><span class="l">APAC markets</span></div>
+          <div class="stat"><span class="n">99.95%</span><span class="l">Uptime SLA</span></div>
         </div>
       </div>
     </aside>
@@ -366,44 +366,27 @@
 
         <div class="auth-hr">or sign up with email</div>
 
-        <div class="auth-field-row">
-          <div class="auth-field">
-            <label for="su-first">First name</label>
-            <input id="su-first" name="first_name" type="text" autocomplete="given-name" placeholder="Maya">
-          </div>
-          <div class="auth-field">
-            <label for="su-last">Last name</label>
-            <input id="su-last" name="last_name" type="text" autocomplete="family-name" placeholder="Tanaka">
-          </div>
-        </div>
-
         <div class="auth-field">
           <label for="su-email">Work email</label>
           <input id="su-email" name="email" type="email" autocomplete="email" placeholder="you@yourplatform.com" required>
         </div>
 
-        <div class="auth-field-row">
-          <div class="auth-field">
-            <label for="su-company">Company</label>
-            <input id="su-company" name="company" type="text" autocomplete="organization" placeholder="Kanpai POS" required>
-          </div>
-          <div class="auth-field">
-            <label for="su-market">Launch market</label>
-            <select id="su-market" name="market">
-              <option value="SG">🇸🇬 Singapore</option>
-              <option value="JP">🇯🇵 Japan</option>
-              <option value="HK">🇭🇰 Hong Kong</option>
-              <option value="MY">🇲🇾 Malaysia</option>
-              <option value="TH">🇹🇭 Thailand</option>
-              <option value="ID">🇮🇩 Indonesia</option>
-              <option value="PH">🇵🇭 Philippines</option>
-              <option value="VN">🇻🇳 Vietnam</option>
-              <option value="KR">🇰🇷 South Korea</option>
-              <option value="AU">🇦🇺 Australia</option>
-              <option value="NZ">🇳🇿 New Zealand</option>
-              <option value="XX">Multi-market / unsure</option>
-            </select>
-          </div>
+        <div class="auth-field">
+          <label for="su-market">Launch market</label>
+          <select id="su-market" name="market">
+            <option value="SG">🇸🇬 Singapore</option>
+            <option value="JP">🇯🇵 Japan</option>
+            <option value="HK">🇭🇰 Hong Kong</option>
+            <option value="MY">🇲🇾 Malaysia</option>
+            <option value="TH">🇹🇭 Thailand</option>
+            <option value="ID">🇮🇩 Indonesia</option>
+            <option value="PH">🇵🇭 Philippines</option>
+            <option value="VN">🇻🇳 Vietnam</option>
+            <option value="KR">🇰🇷 South Korea</option>
+            <option value="AU">🇦🇺 Australia</option>
+            <option value="NZ">🇳🇿 New Zealand</option>
+            <option value="XX">Multi-market / unsure</option>
+          </select>
         </div>
 
         <div class="auth-field">
