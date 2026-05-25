@@ -211,3 +211,35 @@
     });
   }
 })();
+
+/* =============================================================
+   GA4: track clicks on the "Book a walkthrough" CTAs.
+   CTAs are tagged in markup with data-ga-cta="book-walkthrough".
+   Fires the custom event `book_walkthrough_click` via gtag() when
+   present, otherwise pushes a GTM-style dataLayer event, so it
+   works whichever way GA is wired up. Uses event delegation (so it
+   covers CTAs present at load or injected later) and never calls
+   preventDefault, so the link's normal navigation is not blocked;
+   transport_type:'beacon' lets the hit complete during unload.
+   ============================================================= */
+(function(){
+  function sendEvent(name, params){
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', name, params);
+    } else if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push(Object.assign({ event: name }, params));
+    }
+  }
+  document.addEventListener('click', function(e){
+    const start = e.target;
+    if (!start || typeof start.closest !== 'function') return;
+    const el = start.closest('[data-ga-cta="book-walkthrough"]');
+    if (!el) return;
+    sendEvent('book_walkthrough_click', {
+      link_text: (el.textContent || '').trim(),
+      link_url: el.href || el.getAttribute('data-href') || '',
+      page_location: window.location.href,
+      transport_type: 'beacon'
+    });
+  }, true);
+})();
