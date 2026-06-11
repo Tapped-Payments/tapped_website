@@ -93,9 +93,11 @@
 
 <section class="ct-grid"><div class="container">
   <div class="inner">
-    <form class="ct-form" onsubmit="event.preventDefault(); alert('Thanks, we\'ll be in touch within one business day.');">
+    <form class="ct-form" id="ct-form" novalidate>
       <h2>Tell us what you&rsquo;re building.</h2>
       <p class="hint">The more specific, the faster we can route you. If you&rsquo;d rather email, <a href="mailto:hello@tapped.cc" style="color:var(--brand-cyan-700);border-bottom:1px solid rgba(34,211,238,0.3);">hello@tapped.cc</a> is watched by the same people.</p>
+
+      <div id="ct-form-error" style="display:none;background:var(--danger-bg);color:var(--danger-fg);border:1px solid var(--danger);border-radius:8px;padding:12px 16px;font-size:13.5px;margin-bottom:16px;line-height:1.5;"></div>
 
       <div class="row">
         <div><label for="fn">First name</label><input id="fn" name="first_name" type="text" required autocomplete="given-name"></div>
@@ -160,11 +162,81 @@
       </div>
 
       <div class="actions">
-        <button class="btn btn-brand btn-arrow" type="submit">Send to the team</button>
+        <button class="btn btn-brand btn-arrow" type="submit" id="ct-submit">Send to the team</button>
         <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:var(--fg-3); text-transform:uppercase;">&lt;24 hr response · Mon&ndash;Fri</span>
       </div>
       <p class="fineprint">By submitting you agree to our <a href="../legal/privacy.html">privacy notice</a>. We use your details to respond to this request and to contact you about Tapped products; we don&rsquo;t sell your data or add you to a marketing list without your consent.</p>
     </form>
+
+    <div id="ct-success" style="display:none;background:var(--paper);border:1px solid var(--border);border-radius:16px;padding:48px 36px;box-shadow:var(--shadow-sm);text-align:center;">
+      <div style="width:48px;height:48px;border-radius:50%;background:var(--success-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 style="font-family:var(--font-display);font-size:22px;font-weight:600;margin:0 0 10px;letter-spacing:-0.01em;">Message sent.</h2>
+      <p style="font-size:15px;color:var(--fg-2);line-height:1.6;margin:0;max-width:380px;margin:0 auto;">We'll route this to the right person and reply within one business day. Check your inbox — a copy is on its way.</p>
+    </div>
+
+    <script>
+    (function () {
+      var FN_URL = 'https://eilsuoecgrzecarxgcqu.supabase.co/functions/v1/submit-contact';
+      var form   = document.getElementById('ct-form');
+      var btn    = document.getElementById('ct-submit');
+      var errBox = document.getElementById('ct-form-error');
+      var success = document.getElementById('ct-success');
+
+      function showError(msg) {
+        errBox.textContent = msg;
+        errBox.style.display = 'block';
+        errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      function clearError() { errBox.style.display = 'none'; errBox.textContent = ''; }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        clearError();
+
+        var data = {
+          first_name: form.first_name.value.trim(),
+          last_name:  form.last_name.value.trim(),
+          email:      form.email.value.trim(),
+          company:    form.company.value.trim(),
+          role:       form.role.value,
+          region:     form.region.value,
+          volume:     form.volume.value,
+          need:       form.need.value,
+          message:    form.message.value.trim(),
+        };
+
+        if (!data.first_name || !data.last_name || !data.email || !data.company) {
+          showError('Please fill in your first name, last name, work email, and company before submitting.');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        try {
+          var res = await fetch(FN_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+
+          if (!res.ok) {
+            var err = await res.json().catch(function () { return {}; });
+            throw new Error(err.error || ('Server error ' + res.status));
+          }
+
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } catch (ex) {
+          showError('Something went wrong — ' + ex.message + '. Please try emailing hello@tapped.cc directly.');
+          btn.disabled = false;
+          btn.textContent = 'Send to the team';
+        }
+      });
+    })();
+    </script>
 
     <aside class="ct-aside">
       <div class="ct-card">
@@ -207,10 +279,10 @@
 
 <section class="ct-offices"><div class="container">
   <h2>Where the team sits.</h2>
-  <p class="sub">Eight offices across APAC, plus a small London desk for European platform partners. The regulator relationship in each market is held locally, not through a New York holding company.</p>
+  <p class="sub">Eight offices across APAC, plus a desk in Amsterdam for European platform partners.</p>
   <div class="ct-offices-grid">
-    <div class="office"><div class="flag">SG · Headquarters</div><h4>Singapore</h4><p>1 Raffles Place, Level 24<br>Singapore 048616</p><span class="hq">MAS MPI holder</span></div>
-    <div class="office"><div class="flag">PH</div><h4>Manila</h4><p>BGC, One Ayala Tower<br>Taguig 1634</p><span class="hq">BSP OPS holder</span></div>
+    <div class="office"><div class="flag">SG · Headquarters</div><h4>Singapore</h4><p>1 Raffles Place, Level 24<br>Singapore 048616</p></div>
+    <div class="office"><div class="flag">PH</div><h4>Manila</h4><p>BGC, One Ayala Tower<br>Taguig 1634</p></div>
     <div class="office"><div class="flag">MY</div><h4>Kuala Lumpur</h4><p>The Exchange 106<br>KL 55188</p></div>
     <div class="office"><div class="flag">ID</div><h4>Jakarta</h4><p>Sudirman Central<br>Jakarta 12190</p></div>
     <div class="office"><div class="flag">TH</div><h4>Bangkok</h4><p>One Bangkok Tower 4<br>Bangkok 10330</p></div>
