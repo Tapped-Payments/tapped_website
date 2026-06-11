@@ -229,6 +229,13 @@
 
           form.style.display = 'none';
           success.style.display = 'block';
+          if (typeof gtag === 'function') {
+            gtag('event', 'form_submit', {
+              form_id: 'ct-form',
+              form_name: 'Contact form',
+              page_location: window.location.href,
+            });
+          }
         } catch (ex) {
           showError('Something went wrong — ' + ex.message + '. Please try emailing hello@tapped.cc directly.');
           btn.disabled = false;
