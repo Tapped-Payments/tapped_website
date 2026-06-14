@@ -44,6 +44,13 @@
 .doc-content code { font-family: var(--font-mono); font-size:0.92em; background: var(--ink-50); padding:2px 6px; border-radius:4px; }
 .doc-content pre { background: #0B1225; color:#E8ECF7; padding:20px; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:13px; line-height:1.65; }
 .doc-content pre .k { color:#A78BFA; } .doc-content pre .s { color:#67E8F9; } .doc-content pre .c { color:#6B7499; font-style:italic; } .doc-content pre .f { color:#F472B6; } .doc-content pre .n { color:#FBBF24; }
+.doc-content table { width:100%; border-collapse:collapse; font-size:14px; margin:6px 0 18px; }
+.doc-content table th, .doc-content table td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--border-subtle); vertical-align:top; line-height:1.5; }
+.doc-content table th { font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-3); font-weight:600; }
+.doc-content table td code { background: var(--ink-50); }
+.doc-content .api-step { font-family:var(--font-mono); font-size:13px; font-weight:600; color:var(--fg-1); display:flex; align-items:center; gap:10px; margin:24px 0 10px; }
+.doc-content .api-step .m { font-size:10px; padding:3px 7px; border-radius:4px; font-weight:700; letter-spacing:0.04em; }
+.doc-content .api-step .m.post { background:#DCFCE7; color:#15803D; } .doc-content .api-step .m.get { background:#DBEAFE; color:#1D4ED8; } .doc-content .api-step .m.patch { background:#FEF3C7; color:#A16207; }
 
 .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
 .guide-card { padding: 24px; background: var(--paper); border: 1px solid var(--border); border-radius: 12px; transition: all 180ms; }
@@ -70,8 +77,8 @@
   <aside class="doc-sidebar" aria-label="Docs navigation">
     <h4>Start here</h4>
     <a href="#quickstart" class="active">15-min quickstart</a>
-    <a href="#sdk-install">Install the SDK</a>
-    <a href="#first-tap">Your first live tap</a>
+    <a href="#sdk-install">REST quickstart</a>
+    <a href="#first-tap">Your first sub-merchant</a>
     <h4>Core concepts</h4>
     <a href="#model">Transaction object</a>
     <a href="#submerchants">Sub-merchants</a>
@@ -90,55 +97,59 @@
   <div class="doc-content">
     <section id="quickstart">
       <h2>15-minute quickstart</h2>
-      <p>This quickstart takes you from zero to a live sandbox tap in fifteen minutes. You'll create a Tapped account, install an SDK, register a sub-merchant, and charge a test card. Everything in sandbox is free and idempotent.</p>
+      <p>This quickstart takes you from zero to a submitted, requirements-tracked sub-merchant in fifteen minutes. You'll get an API key, submit a sub-merchant over REST, and watch Tapped Onboard provision a Stripe Connect Custom account and report back what's still required. Tapped Onboard v1 is a REST API; language SDKs are planned. Everything in sandbox is free and idempotent.</p>
 
       <div class="guide-grid">
         <a class="guide-card" href="#sdk-install">
           <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/><path d="m7 11 5 5 5-5M12 4v12"/></svg></div>
-          <h3>Install the SDK</h3><p>Node, Swift, Kotlin, and a REST baseline if you roll your own.</p><span class="tag">Step 1</span>
+          <h3>REST quickstart</h3><p>Get a key and make your first authenticated call. No SDK required in v1.</p><span class="tag">Step 1</span>
         </a>
         <a class="guide-card" href="#first-tap">
           <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="2"/><path d="M6 12a6 6 0 0 1 12 0"/><path d="M3 12a9 9 0 0 1 18 0"/></svg></div>
-          <h3>Your first live tap</h3><p>Charge a sandbox card and watch it flow through the ledger.</p><span class="tag">Step 2</span>
+          <h3>Your first sub-merchant</h3><p>Submit one and watch Tapped provision a Stripe Connect account.</p><span class="tag">Step 2</span>
         </a>
         <a class="guide-card" href="#submerchants">
           <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M19 8v6M22 11h-6"/></svg></div>
-          <h3>Onboard sub-merchants</h3><p>KYB, risk, and rails, one call, every market we cover.</p><span class="tag">Step 3</span>
+          <h3>Onboard sub-merchants</h3><p>Read requirements, patch missing data, and go live.</p><span class="tag">Step 3</span>
         </a>
       </div>
     </section>
 
     <section id="sdk-install">
-      <h2>Install the SDK</h2>
-      <p>Tapped SDKs are available on the native package managers for each platform. All SDKs use the same object model and call the same underlying API, pick whichever fits your stack.</p>
-      <h3>Node &amp; TypeScript</h3>
-<pre><code><span class="c"># Install via npm, pnpm, or yarn</span>
-<span class="k">npm install</span> <span class="s">@tapped/node</span> <span class="c"># or pnpm add, yarn add</span>
+      <h2>REST quickstart</h2>
+      <p>Tapped Onboard v1 is a REST API — there's nothing to install. Every request carries a static API key as a bearer token; your integration manager issues one key per environment. Keep keys server-side; never ship them in client code. Language SDKs are planned and will wrap this same API.</p>
+      <h3>Pick an environment</h3>
+      <ul>
+        <li><strong>Test</strong> — <code>https://onboard.sandbox.tapped.cc</code></li>
+        <li><strong>Production</strong> — <code>https://onboard.tapped.cc</code></li>
+      </ul>
+      <h3>Authenticate</h3>
+<pre><code><span class="c"># Send the key as a bearer token on every call except</span>
+<span class="c"># /healthz and the Stripe webhook endpoint.</span>
+<span class="k">export</span> TAPPED_API_KEY=<span class="s">"sk_test_..."</span>
 
-<span class="c"># Minimal usage</span>
-<span class="k">import</span> { <span class="f">Tapped</span> } <span class="k">from</span> <span class="s">"@tapped/node"</span>;
+<span class="c"># Liveness — no auth required</span>
+<span class="k">curl</span> <span class="s">https://onboard.sandbox.tapped.cc/healthz</span>
 
-<span class="k">const</span> tapped = <span class="k">new</span> <span class="f">Tapped</span>({ apiKey: process.env.<span class="n">TAPPED_API_KEY</span> });
-<span class="k">const</span> charge = <span class="k">await</span> tapped.charges.create({
-  amount: <span class="n">4850</span>,          <span class="c">// minor units (cents)</span>
-  currency: <span class="s">"SGD"</span>,
-  submerchant: <span class="s">"sm_9T3..."</span>,
-  capture_mode: <span class="s">"tap"</span>   <span class="c">// "tap" | "pre-auth" | "manual"</span>
-});</code></pre>
+<span class="c"># Any real call — authenticated</span>
+<span class="k">curl</span> <span class="s">https://onboard.sandbox.tapped.cc/sub-merchants/acme-coffee</span> \
+  -H <span class="s">"Authorization: Bearer $TAPPED_API_KEY"</span></code></pre>
+      <p>The authoritative, always-current field list and error shapes live in the <a href="../developers/api-reference.html">API reference →</a>, rendered straight from the service's OpenAPI spec.</p>
     </section>
 
     <section id="first-tap">
-      <h2>Your first live tap</h2>
-      <p>In sandbox, every charge returns a mock EMV cryptogram and a fully-formed ledger entry. Charge a test card with <code>4242 4242 4242 4242</code> (Visa sandbox PAN) at any amount; the SDK returns a transaction record within ~400ms.</p>
-<pre><code><span class="k">const</span> tap = <span class="k">await</span> tapped.taps.capture({
-  amount: <span class="n">4850</span>, currency: <span class="s">"SGD"</span>,
-  submerchant: <span class="s">"sm_9T3..."</span>,
-  device: <span class="s">"dev_ios_a81..."</span>    <span class="c">// provisioned phone</span>
-});
-
-<span class="c">// tap.status === "approved"</span>
-<span class="c">// tap.cryptogram === "9F2608..."</span>
-<span class="c">// tap.latency_ms === 612</span></code></pre>
+      <h2>Your first sub-merchant</h2>
+      <p>Create a sub-merchant with a single <code>POST /sub-merchants</code>. The <code>externalRef</code> you choose is your stable handle <em>and</em> the idempotency key — re-send the same value to update, never to duplicate. Tapped provisions a Stripe Connect Custom account and returns a <code>status</code> plus a <code>RequirementsProfile</code> describing what's still needed.</p>
+<pre><code><span class="k">curl</span> -X POST <span class="s">https://onboard.sandbox.tapped.cc/sub-merchants</span> \
+  -H <span class="s">"Authorization: Bearer $TAPPED_API_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "externalRef": "acme-coffee",
+    "businessType": "individual",
+    "country": "AU",
+    "email": "owner@acme.example"
+  }'</span></code></pre>
+      <p>In sandbox you can drive an account all the way to <code>enabled</code> using Stripe's published Connect test values (test identity numbers, a <code>1901-01-01</code> date of birth, and Stripe's test bank account/routing numbers). Read the response's <code>requirements.currentlyDue</code>, <code>PATCH</code> the missing fields, then poll until <code>charges_enabled</code> and <code>payouts_enabled</code> are <code>true</code>. The full flow is in <a href="#submerchants">Sub-merchants</a> below.</p>
     </section>
 
     <section id="model">
@@ -154,19 +165,69 @@
 
     <section id="submerchants">
       <h2>Sub-merchants</h2>
-      <p>A <strong>sub-merchant</strong> is one of your platform's customers, a restaurant, a salon, a clinic. Tapped Onboard collects the KYB data, runs sanction and risk screens, registers the merchant with the appropriate acquirer, and returns a handle you use on every charge.</p>
-<pre><code><span class="k">const</span> sm = <span class="k">await</span> tapped.submerchants.create({
-  display_name: <span class="s">"Kanpai Makati"</span>,
-  country: <span class="s">"PH"</span>,
-  mcc: <span class="s">"5812"</span>,              <span class="c">// eating places</span>
-  business: {
-    legal_name: <span class="s">"Kanpai Foods Inc."</span>,
-    tax_id: <span class="s">"009-283-112-000"</span>,
-    incorporation_country: <span class="s">"PH"</span>
-  },
-  owners: [{ name: <span class="s">"R. Del Mundo"</span>, ownership_pct: <span class="n">52</span> }]
-});
-<span class="c">// sm.status === "pending_review"   (usually ~35 min)</span></code></pre>
+      <p>A <strong>sub-merchant</strong> is one of your platform's customers — a restaurant, a salon, a clinic. Tapped Onboard accepts their data, provisions a <strong>Stripe Connect Custom</strong> account, and reports back exactly what is still required before the account can charge and get paid. v1 is a REST API; language SDKs are planned, so the flow below uses <code>curl</code>. The full, authoritative field list is in the <a href="../developers/api-reference.html">API reference →</a>.</p>
+
+      <div class="api-step"><span class="m post">POST</span> /sub-merchants &nbsp;·&nbsp; 1. Submit</div>
+      <p>Send neutral business fields plus an <code>externalRef</code> you choose. That ref is your permanent handle <em>and</em> the idempotency key: re-sending the same ref updates the record instead of creating a duplicate. A company submission carries additional company and representative fields — see the API reference for the complete set.</p>
+<pre><code><span class="c"># Individual</span>
+<span class="k">curl</span> -X POST <span class="s">https://onboard.sandbox.tapped.cc/sub-merchants</span> \
+  -H <span class="s">"Authorization: Bearer $TAPPED_API_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{ "externalRef": "acme-coffee", "businessType": "individual",
+       "country": "AU", "email": "owner@acme.example" }'</span>
+
+<span class="c"># Company</span>
+<span class="k">curl</span> -X POST <span class="s">https://onboard.sandbox.tapped.cc/sub-merchants</span> \
+  -H <span class="s">"Authorization: Bearer $TAPPED_API_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{ "externalRef": "kanpai-makati", "businessType": "company",
+       "country": "PH", "email": "ap@kanpai.example" }'</span></code></pre>
+      <p>Every response — from <code>POST</code>, <code>GET</code>, and <code>PATCH</code> — has the same shape: the account <code>status</code>, the two capability flags, and a <code>RequirementsProfile</code>.</p>
+<pre><code>{
+  <span class="s">"externalRef"</span>: <span class="s">"acme-coffee"</span>,
+  <span class="s">"status"</span>: <span class="s">"pending_requirements"</span>,
+  <span class="s">"charges_enabled"</span>: <span class="k">false</span>,
+  <span class="s">"payouts_enabled"</span>: <span class="k">false</span>,
+  <span class="s">"requirements"</span>: {
+    <span class="s">"currentlyDue"</span>: [<span class="s">"individual.id_number"</span>, <span class="s">"external_account"</span>],
+    <span class="s">"eventuallyDue"</span>: [<span class="s">"individual.verification.document"</span>],
+    <span class="s">"pastDue"</span>: [],
+    <span class="s">"disabledReason"</span>: <span class="k">null</span>
+  }
+}</code></pre>
+
+      <h3>Account status</h3>
+      <p>Drive your integration off <code>status</code> and the requirements — never off timing.</p>
+      <table><thead><tr><th>Status</th><th>Meaning</th><th>What to do</th></tr></thead><tbody>
+        <tr><td><code>received</code></td><td>Submission accepted and queued.</td><td>Wait; poll for the next state.</td></tr>
+        <tr><td><code>creating</code></td><td>Provisioning the Stripe Connect Custom account.</td><td>Wait.</td></tr>
+        <tr><td><code>pending_requirements</code></td><td>The account needs more information before it can transact.</td><td>Read <code>currentlyDue</code> and <code>PATCH</code> the missing fields.</td></tr>
+        <tr><td><code>enabled</code></td><td>Fully onboarded. Check the capability flags for what it can do.</td><td>Start transacting once <code>charges_enabled</code>/<code>payouts_enabled</code> are <code>true</code>.</td></tr>
+        <tr><td><code>rejected</code></td><td>The PSP declined the account.</td><td>Inspect <code>disabledReason</code>; this is terminal.</td></tr>
+        <tr><td><code>errored</code></td><td>Provisioning hit an unexpected error.</td><td>Retry the submission or contact support.</td></tr>
+      </tbody></table>
+
+      <h3>The RequirementsProfile</h3>
+      <p>The <code>requirements</code> object mirrors Stripe's requirements and tells you what to collect and how urgent it is.</p>
+      <table><thead><tr><th>Field</th><th>Meaning</th><th>Action</th></tr></thead><tbody>
+        <tr><td><code>currentlyDue</code></td><td>Needed now to keep the account enabled.</td><td>Collect and <code>PATCH</code> immediately.</td></tr>
+        <tr><td><code>eventuallyDue</code></td><td>Will be required later (e.g. at a volume threshold).</td><td>Gather ahead of time to avoid interruption.</td></tr>
+        <tr><td><code>pastDue</code></td><td><code>currentlyDue</code> items whose deadline passed; capability may be suspended.</td><td>Submit urgently to restore the account.</td></tr>
+        <tr><td><code>disabledReason</code></td><td>Why charges/payouts are disabled, if they are (<code>null</code> when not).</td><td>Resolve the underlying requirement, or treat as terminal if the status is <code>rejected</code>.</td></tr>
+      </tbody></table>
+
+      <div class="api-step"><span class="m patch">PATCH</span> /sub-merchants/:externalRef &nbsp;·&nbsp; 2. Send missing data</div>
+      <p>As you gather what's in <code>currentlyDue</code>, PATCH it back. The response returns the updated profile; keep going until <code>currentlyDue</code> is empty.</p>
+<pre><code><span class="k">curl</span> -X PATCH <span class="s">https://onboard.sandbox.tapped.cc/sub-merchants/acme-coffee</span> \
+  -H <span class="s">"Authorization: Bearer $TAPPED_API_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{ /* the fields named in currentlyDue — see the API reference */ }'</span></code></pre>
+
+      <div class="api-step"><span class="m get">GET</span> /sub-merchants/:externalRef &nbsp;·&nbsp; 3. Poll status</div>
+      <p>Poll until <code>status</code> is <code>enabled</code> and both <code>charges_enabled</code> and <code>payouts_enabled</code> are <code>true</code>. Integrator-facing onboarding webhooks are planned; until they ship, polling is the supported path (<a href="../developers/webhooks.html">details →</a>).</p>
+<pre><code><span class="k">curl</span> <span class="s">https://onboard.sandbox.tapped.cc/sub-merchants/acme-coffee</span> \
+  -H <span class="s">"Authorization: Bearer $TAPPED_API_KEY"</span></code></pre>
+      <p>For the complete, always-current field list and error shapes, see the <a href="../developers/api-reference.html">API reference →</a>, rendered live from the service's OpenAPI spec.</p>
     </section>
 
     <section id="payouts">

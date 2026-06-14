@@ -139,10 +139,13 @@
 
     <section id="ev-submerchant">
       <h2>submerchant.* events</h2>
-      <table><thead><tr><th>Event</th><th>When it fires</th></tr></thead><tbody>
-        <tr><td><code>submerchant.kyb.approved</code></td><td>KYB complete, merchant live. Median ~35 min.</td></tr>
-        <tr><td><code>submerchant.kyb.rejected</code></td><td>KYB failed. Includes specific reason codes.</td></tr>
-        <tr><td><code>submerchant.risk_flagged</code></td><td>Ongoing monitoring surfaced a concern.</td></tr>
+      <div class="wh-callout"><h4>Tapped Onboard v1 — poll, don't subscribe</h4><p>The <strong>Tapped Onboard</strong> API (sub-merchant provisioning) does <strong>not</strong> emit integrator-facing webhooks in v1. Stripe webhooks are consumed internally; to track onboarding, poll <code>GET /sub-merchants/:externalRef</code> and read <code>status</code> plus the <code>RequirementsProfile</code>. See the <a href="../developers/documentation.html#submerchants">onboarding flow</a> and the <a href="../developers/api-reference.html">API reference</a>.</p></div>
+      <p>The events below are <strong>planned</strong>. When integrator-facing onboarding webhooks ship, they'll carry the same <code>status</code> values the REST API returns (<code>received</code>, <code>creating</code>, <code>pending_requirements</code>, <code>enabled</code>, <code>rejected</code>, <code>errored</code>).</p>
+      <table><thead><tr><th>Event</th><th>When it fires</th><th>Status</th></tr></thead><tbody>
+        <tr><td><code>submerchant.status.updated</code></td><td><em>Planned.</em> The account moved to a new onboarding state.</td><td>any</td></tr>
+        <tr><td><code>submerchant.requirements.updated</code></td><td><em>Planned.</em> <code>currentlyDue</code>/<code>pastDue</code> changed; more data is needed.</td><td><code>pending_requirements</code></td></tr>
+        <tr><td><code>submerchant.enabled</code></td><td><em>Planned.</em> Onboarding complete; check <code>charges_enabled</code>/<code>payouts_enabled</code>.</td><td><code>enabled</code></td></tr>
+        <tr><td><code>submerchant.rejected</code></td><td><em>Planned.</em> The PSP declined the account; see <code>disabledReason</code>.</td><td><code>rejected</code></td></tr>
       </tbody></table>
     </section>
   </div>
