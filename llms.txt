@@ -1,0 +1,22 @@
+# Tapped
+
+> Embedded tap-to-pay infrastructure for vertical SaaS platforms across APAC. Tapped lets platforms accept in-person card payments, onboard sub-merchants once and route them to any PSP, and reconcile multi-currency settlement — from a single integration.
+
+Tapped Pte Ltd is based at 1 Raffles Place, Singapore, and operates as a licensed acquirer across eight APAC markets: Singapore, Philippines, Malaysia, Indonesia, Thailand, Hong Kong, Vietnam, and Japan.
+
+## Products
+
+- [Tap Core](https://tapped.cc/pages/product/tap-core.html): Certified EMV kernels and acquiring rails for in-person card payments.
+- [Tap Terminal](https://tapped.cc/pages/product/tap-terminal.html): PIN-on-Glass SDK for accepting cards on commodity mobile devices.
+- [Tapped Onboard](https://tapped.cc/pages/product/tapped-onboard.html): PSP-agnostic KYB for sub-merchants. Collect each business record once and route it to Stripe, Adyen, Airwallex, or Tapped's own APAC acquiring without re-collecting data.
+- [Tap Certify](https://tapped.cc/pages/product/tap-certify.html): Payment scheme and regulator certification filings.
+- [Tap Ledger](https://tapped.cc/pages/product/tap-ledger.html): Multi-currency payouts and multi-PSP settlement reconciliation.
+- [Markets](https://tapped.cc/pages/product/markets.html): Where Tapped is live as its own acquiring destination.
+
+## Developers
+
+- [Documentation](https://tapped.cc/pages/developers/documentation.html): Integration guides, API concepts, and SDK references for building on Tapped.
+
+## More
+
+- [Home](https://tapped.cc/): Platform overview and positioning.
