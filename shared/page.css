@@ -121,7 +121,7 @@ a.nav-item > button { pointer-events: none; }
 
 .footer { background: var(--ink-950); color: #97A2BF; padding: 80px 0 32px; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
-.footer-col h5 { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F7FB; margin: 0 0 18px; }
+.footer-col h3 { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #F5F7FB; margin: 0 0 18px; line-height: inherit; }
 .footer-col a { display: block; color: #97A2BF; font-size: 14px; margin-bottom: 12px; transition: color 140ms; }
 .footer-col a:hover { color: white; }
 .footer-col p { font-size: 13px; color: #8A94B0; line-height: 1.6; max-width: 280px; margin: 16px 0 0; }
