@@ -234,6 +234,7 @@
   /* ---------- HOW IT WORKS ---------- */
   .how { padding: 120px 0; background: var(--paper); }
   .how-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: flex-start; }
+  .how-grid > * { min-width: 0; } /* allow grid items to shrink so the code panel can scroll instead of overflowing */
   .steps { display: flex; flex-direction: column; gap: 4px; }
   .step { padding: 20px; border-radius: 12px; border: 1px solid transparent; cursor: pointer; transition: all 180ms; }
   .step:hover { background: var(--ink-25); }
